@@ -3,6 +3,11 @@ import App from './App'
 
 Vue.config.productionTip = false
 
+const misRequest = url => {
+	
+}
+
+
 App.mpType = 'app'
 
 const app = new Vue({

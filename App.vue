@@ -1,6 +1,13 @@
 <script>
 	export default {
+		methods:{
+			...mapMutations(['login'])
+		},
 		onLaunch: function() {
+			var userInfo = uni.getStorageSync('userInfo') || '';
+			if(userInfo.id){
+				this.login(userInfo);
+			}
 			console.log('App Launch')
 		},
 		onShow: function() {
