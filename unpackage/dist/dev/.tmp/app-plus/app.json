@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/account/login"
+    "pages/account/login",
+    "pages/index/home"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -15,7 +16,7 @@
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
-  "appname": "mis-app",
-  "compilerVersion": "2.4.1",
+  "appname": "开远事务局APP",
+  "compilerVersion": "2.4.2",
   "usingComponents": {}
 }

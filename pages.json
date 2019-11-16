@@ -12,6 +12,10 @@
 				"navigationBarTitleText": "登录"
 			}
         }
+        ,{
+            "path" : "pages/index/home",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

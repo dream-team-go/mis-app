@@ -34,7 +34,9 @@ export const config = {
  */
 globalInterceptor.request.use(
 	config => {
-		getToken() && (config.header.cookie = getToken());
+		if(getToken());{
+			config.header.cookie = getToken();
+		}
 		return config;
 	},
 	err => {
@@ -57,26 +59,25 @@ globalInterceptor.request.use(
  */
 globalInterceptor.response.use(
 	(res, config) => {
+		if(res.header["Set-Cookie"]){
+			uni.setStorageSync(res.header["Set-Cookie"]);
+		}
 		// 跳过 `request().download()` 这个拦截
 		if (typeof res.tempFilePath !== 'undefined') {
 		    return res;
 		}
 		const {
 		    data,
-		    data: { code }
+		    statusCode
 		} = res;
 		try {
-		    return handleCode({ data, code, config });
+		    return handleCode({ data, statusCode, config });
 		} catch (err) {
 		    return Promise.reject(err);
 		}
 		return res;
 	},
 	(err, config) => {
-		console.error("is global response fail interceptor");
-		console.error("err: ", err);
-		console.error("config: ", config);
-
 		return Promise.reject(err);
 	}
 );
@@ -93,40 +94,37 @@ function getToken() {
  * @param {object} o
  * @param {object} o.data 请求返回的数据
  * @param {object} o.config 本次请求的config数据
- * @param {string|number} o.code http状态码
+ * @param {string|number} o.statusCode http状态码
  * @return {object|Promise<reject>}
  */
-function handleCode({ data, code, config }) {
+function handleCode({ data, statusCode, config }) {
     const STATUS = {
         '200'() {
             return data;
         },
         '400'() {
-            // return { code, msg: '请求错误' };
-            return Promise.reject({ code, msg: '请求错误' });
+            // return { statusCode, msg: '请求错误' };
+            return Promise.reject({ statusCode, message: '请求错误' });
         },
         '401'() {
-            // 只让这个实例发送一次请求，如果code还是401则抛出错误
-            if (config.count === 1) {
-                return Promise.reject({ code, msg: '请求未授权' });
-            }
-
-            config.count++; // count字段自增，可以用来判断请求次数，避免多次发送重复的请求
-            config.url = config.instanceURL; // 重置 config的相对地址，避免 `params` 多次添加
-
-            return getApiToken(2460392754)
-                .then(saveToken)
-                .then(() => Request().request(config));
+			uni.removeStorage("userInfo");
+			this.$store.login();
+			uni.reLaunch({
+				url: "/page/index/index"
+			})
         },
         '403'() {
-            return Promise.reject({ code, msg: '拒绝请求' });
+            return Promise.reject({ statusCode, message: '拒绝请求' });
         },
+		'404'() {
+		    return Promise.reject({ statusCode, message: '路径错误' });
+		},
         '500'() {
-            return Promise.reject({ code, msg: '服务器错误' });
+            return Promise.reject({ statusCode, message: '服务器错误' });
         }
     };
 
-    return STATUS[code] ? STATUS[code]() : Promise.reject(data, config); // 有状态码但不在这个封装的配置里，就直接进入 `fail`
+    return STATUS[statusCode] ? STATUS[statusCode]() : Promise.reject(data, config); // 有状态码但不在这个封装的配置里，就直接进入 `fail`
 }
 
 // 显示消息提示框
