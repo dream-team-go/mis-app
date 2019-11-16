@@ -6,12 +6,23 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		userInfo: {},
-		hasLogion: false
+		hasLogin: false
 	},
 	mutations: {
-		login(state, userInfo) {
-			state.hasLogion = true;
-			state.userInfo = userInfo;
+		login(state) {
+			var userInfo = uni.getStorageSync('userInfo') || '';
+			if(userInfo && userInfo.id){
+				state.hasLogin = true;
+				state.userInfo = userInfo;
+				return;
+			}
+			var userIdentity = uni.getStorageSync('userIdentity') || '';
+			if(userIdentity && userIdentity.username){
+				var res = global.$http.post('"/core/login/doLogin"', {params: userIdentity});
+			}
+			uni.reLaunch({
+				url:"pages/account/login"
+			})
 			//缓存用户登陆状态
 			uni.setStorage({
 				key: 'userInfo',
@@ -19,7 +30,7 @@ const store = new Vuex.Store({
 			});
 		},
 		logout(state) {
-			state.hasLogion = false;
+			state.hasLogin = false;
 			state.userInfo = {};
 			uni.removeStorage({
 				key: 'userInfo'
@@ -27,3 +38,5 @@ const store = new Vuex.Store({
 		}
 	}
 })
+
+export default store

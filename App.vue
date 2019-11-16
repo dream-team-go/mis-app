@@ -1,13 +1,13 @@
 <script>
+	import {
+		mapMutations
+	} from 'vuex';
 	export default {
 		methods:{
 			...mapMutations(['login'])
 		},
 		onLaunch: function() {
-			var userInfo = uni.getStorageSync('userInfo') || '';
-			if(userInfo.id){
-				this.login(userInfo);
-			}
+			this.login();
 			console.log('App Launch')
 		},
 		onShow: function() {
@@ -21,4 +21,6 @@
 
 <style>
 	/*每个页面公共css */
+	@import "colorui/main.css";
+	@import "colorui/icon.css";
 </style>
