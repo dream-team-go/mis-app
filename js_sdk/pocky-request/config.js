@@ -34,8 +34,8 @@ export const config = {
  */
 globalInterceptor.request.use(
 	config => {
-		if(getToken());{
-			config.header.cookie = getToken();
+		if(getToken()){
+			//config.header.cookie = getToken();
 		}
 		return config;
 	},
@@ -83,7 +83,7 @@ globalInterceptor.response.use(
 );
 
 /**
- * 获取本地村相互cookie
+ * 获取本地cookie
  */
 function getToken() {
 	return uni.getStorageSync('cookie');
@@ -100,18 +100,20 @@ function getToken() {
 function handleCode({ data, statusCode, config }) {
     const STATUS = {
         '200'() {
-            return data;
+			if(data.status === "401"){
+				uni.removeStorage("userInfo");
+				this.$store.login();
+				uni.reLaunch({
+					url: "/page/index/index"
+				})
+				return Promise.reject({ statusCode, message: '未登录' });
+			}else{
+				return data;
+			}
         },
         '400'() {
             // return { statusCode, msg: '请求错误' };
             return Promise.reject({ statusCode, message: '请求错误' });
-        },
-        '401'() {
-			uni.removeStorage("userInfo");
-			this.$store.login();
-			uni.reLaunch({
-				url: "/page/index/index"
-			})
         },
         '403'() {
             return Promise.reject({ statusCode, message: '拒绝请求' });

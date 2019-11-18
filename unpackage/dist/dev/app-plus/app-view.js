@@ -1099,7 +1099,7 @@ Z([3,'logo'])
 Z([3,'/static/logo.png'])
 Z([3,'text-area'])
 Z([3,'title'])
-Z([3,'测试首页哈哈哈哈哈'])
+Z([a,[[7],[3,'data']]])
 })(__WXML_GLOBAL__.ops_cached.$gwx_2);return __WXML_GLOBAL__.ops_cached.$gwx_2
 }
 function gz$gwx_3(){

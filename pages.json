@@ -5,17 +5,17 @@
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
-		}
+		},{
+            "path" : "pages/index/home",
+            "style" : {}
+        }
 	    ,{
             "path" : "pages/account/login",
             "style" : {
 				"navigationBarTitleText": "登录"
 			}
         }
-        ,{
-            "path" : "pages/index/home",
-            "style" : {}
-        }
+        
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
