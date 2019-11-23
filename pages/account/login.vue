@@ -67,6 +67,7 @@
 						password: this.password
 					},
 				}).then(res => {
+					uni.hideLoading();
 					if (res.status === "0") {
 						global.$http.post('/core/func/getUserAndMenu')
 							.then(res => {
@@ -90,7 +91,6 @@
 							});
 						});
 					} else {
-						uni.hideLoading();
 						uni.showToast({
 							title: res.msg,
 							icon: 'none'
@@ -103,6 +103,9 @@
 						icon: 'none'
 					});
 				});
+			},
+			toRegist(){
+				
 			}
 		},
 

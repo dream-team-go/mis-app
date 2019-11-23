@@ -11,7 +11,7 @@ const store = new Vuex.Store({
 	mutations: {
 		setLoginInfo(state){
 			var userInfo = uni.getStorageSync('userInfo') || '';
-			if (userInfo && userInfo.id) {
+			if (userInfo && userInfo.user) {
 				state.hasLogin = true;
 				state.userInfo = userInfo;
 			}

@@ -3,6 +3,21 @@ import App from './App'
 import store from './store'
 import Request from './js_sdk/pocky-request/index.js'
 
+import cuCustom from './colorui/components/cu-custom.vue'
+Vue.component('cu-custom',cuCustom)
+
+import car from './pages/car/index.vue'
+Vue.component('car',car)
+
+import meeting from './pages/meeting/index.vue'
+Vue.component('meeting',meeting)
+
+import food from './pages/food/index.vue'
+Vue.component('food',food)
+
+import user from './pages/user/index.vue'
+Vue.component('user',user)
+
 global.$http = Request();
 Vue.prototype.$store = store
 

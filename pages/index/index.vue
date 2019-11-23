@@ -9,9 +9,8 @@
 
 <script>
 	import {
-	    mapState,
 	    mapMutations
-	} from 'vuex'
+	} from 'vuex';
 	export default {
 		methods: {
 			...mapMutations(['setLoginInfo', 'setLogoutInfo'])
