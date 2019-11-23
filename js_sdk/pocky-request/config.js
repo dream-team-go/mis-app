@@ -35,7 +35,7 @@ export const config = {
 globalInterceptor.request.use(
 	config => {
 		if(getToken()){
-			//config.header.cookie = getToken();
+			config.header.cookie = getToken();
 		}
 		return config;
 	},
@@ -59,8 +59,8 @@ globalInterceptor.request.use(
  */
 globalInterceptor.response.use(
 	(res, config) => {
-		if(res.header["Set-Cookie"]){
-			uni.setStorageSync(res.header["Set-Cookie"]);
+		if(res.header["Set-Cookie"] && res.header["Set-Cookie"].indexOf("JSESSIONID") != -1){
+			uni.setStorageSync("cookie", res.header["Set-Cookie"]);
 		}
 		// 跳过 `request().download()` 这个拦截
 		if (typeof res.tempFilePath !== 'undefined') {
@@ -100,13 +100,16 @@ function getToken() {
 function handleCode({ data, statusCode, config }) {
     const STATUS = {
         '200'() {
-			if(data.status === "401"){
-				uni.removeStorage("userInfo");
-				this.$store.login();
-				uni.reLaunch({
-					url: "/page/index/index"
-				})
-				return Promise.reject({ statusCode, message: '未登录' });
+			if(data.code){
+				if(data.code === "401")
+				{
+					uni.reLaunch({
+						url: "../index/index"
+					})
+					return Promise.reject({ statusCode, message: '未登录' });
+				}else if(data.code === "403"){
+					return Promise.reject({ statusCode, message: '未授权' });
+				}
 			}else{
 				return data;
 			}

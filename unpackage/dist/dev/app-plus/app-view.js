@@ -1324,9 +1324,9 @@ style.childNodes[0].nodeValue = css;
 }
 return rewritor;
 }
-setCssToHead([])();setCssToHead([[2,0]],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./app.wxss:3958:1)",{path:"./app.wxss"})();
+setCssToHead([])();setCssToHead([[2,0]],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./app.wxss:3952:1)",{path:"./app.wxss"})();
 
-__wxAppCode__['app.wxss']=setCssToHead([[2,0]],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./app.wxss:3958:1)",{path:"./app.wxss"});    
+__wxAppCode__['app.wxss']=setCssToHead([[2,0]],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./app.wxss:3952:1)",{path:"./app.wxss"});    
 __wxAppCode__['app.wxml']=$gwx('./app.wxml');
 
 __wxAppCode__['pages/account/login.wxss']=setCssToHead(["@charset \x22UTF-8\x22;\n.",[1],"container { padding-top: 115px; position: relative; width: 100vw; height: 100vh; overflow: hidden; background: #fff; }\n.",[1],"password-inut { border-bottom: ",[0,1]," solid #eee; }\n.",[1],"confirm-btn { width: ",[0,630],"; height: ",[0,76],"; line-height: ",[0,76],"; border-radius: 50px; margin-top: ",[0,70],"; background: #fa436a; color: #fff; font-size: ",[0,32],"; }\n.",[1],"confirm-btn:after { border-radius: 100px; }\n.",[1],"forget-section { font-size: ",[0,26],"; color: #4399fc; text-align: center; margin-top: ",[0,40],"; }\n.",[1],"register-section { position: absolute; left: 0; bottom: ",[0,50],"; width: 100%; font-size: ",[0,26],"; color: #606266; text-align: center; }\n.",[1],"register-section wx-text { color: #4399fc; margin-left: ",[0,10],"; }\n",],undefined,{path:"./pages/account/login.wxss"});    

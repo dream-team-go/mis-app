@@ -27,7 +27,6 @@
 						});
 					}
 				}).catch(err=>{
-					uni.hideLoading();
 					uni.showToast({
 						title: err.message,
 						icon: 'none'

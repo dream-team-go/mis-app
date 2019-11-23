@@ -41,7 +41,7 @@
 			}
 		},
 		methods: {
-			...mapMutations(['getUserInfo']),
+			...mapMutations(['setLoginInfo']),
 			toLogin() {
 				if (this.username.length < 5) {
 					uni.showToast({
@@ -68,7 +68,27 @@
 					},
 				}).then(res => {
 					if (res.status === "0") {
-						this.getUserInfo();
+						global.$http.post('/core/func/getUserAndMenu')
+							.then(res => {
+								if (res.status === "0") {
+									uni.setStorageSync("userIdentity", {username: this.username, password: this.password});
+									uni.setStorageSync("userInfo", res.data);
+									this.setLoginInfo();
+									uni.reLaunch({
+										url: "/pages/index/home"
+									});
+								} else {
+									uni.showToast({
+										title: res.msg,
+										icon: 'none'
+									});
+								}
+							}).catch(err => {
+								uni.showToast({
+									title: err.message,
+									icon: 'none'
+							});
+						});
 					} else {
 						uni.hideLoading();
 						uni.showToast({

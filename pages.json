@@ -8,14 +8,13 @@
 		},{
             "path" : "pages/index/home",
             "style" : {}
-        }
-	    ,{
-            "path" : "pages/account/login",
-            "style" : {
+        },
+		{
+		    "path" : "pages/account/login",
+		    "style" : {
 				"navigationBarTitleText": "登录"
 			}
-        }
-        
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
