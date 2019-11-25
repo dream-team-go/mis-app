@@ -3,6 +3,7 @@
     "car": "/pages/car/index",
     "meeting": "/pages/meeting/index",
     "food": "/pages/food/index",
-    "user": "/pages/user/index"
+    "user": "/pages/user/index",
+    "work": "/pages/work/index"
   }
 }

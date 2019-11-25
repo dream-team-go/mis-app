@@ -6,12 +6,10 @@
 		},{
             "path" : "pages/index/home",
             "style" : {}
-        },
-		{
+        },{
 		    "path" : "pages/account/login",
 		    "style" : {}
-		}
-        ,{
+		},{
             "path" : "pages/account/register",
             "style" : {}
         }

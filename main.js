@@ -15,6 +15,9 @@ Vue.component('meeting',meeting)
 import food from './pages/food/index.vue'
 Vue.component('food',food)
 
+import work from './pages/work/index.vue'
+Vue.component('work',work)
+
 import user from './pages/user/index.vue'
 Vue.component('user',user)
 
