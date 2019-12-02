@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/account/register",
     "pages/index/index",
     "pages/index/home",
-    "pages/account/login",
-    "pages/account/register"
+    "pages/account/login"
   ],
   "window": {
     "navigationStyle": "custom"

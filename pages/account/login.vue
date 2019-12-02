@@ -105,7 +105,9 @@
 				});
 			},
 			toRegist(){
-				
+				uni.navigateTo({
+					url: "register"
+				});
 			}
 		},
 
