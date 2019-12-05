@@ -2,7 +2,7 @@
 	<view class="container">
 		<form>
 			<view class="cu-form-group">
-				<view class="title">手机号码</view>
+				<view class="title">手机号</view>
 				<input name="input" v-model="username"></input>
 			</view>
 			<view class="cu-form-group password-inut">

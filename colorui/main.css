@@ -263,14 +263,14 @@ radio.radio .uni-radio-input-checked::after {
 	content: "\e71a";
 }
 
-.switch-sex .wx-switch-input,
-.switch-sex .uni-switch-input {
+switch.switch-sex .wx-switch-input,
+switch.switch-sex .uni-switch-input {
 	background: #e54d42 !important;
 	border-color: #e54d42 !important;
 }
 
-.switch-sex[checked] .wx-switch-input,
-.switch-sex.checked .uni-switch-input {
+switch.switch-sex[checked] .wx-switch-input,
+switch.switch-sex.checked .uni-switch-input {
 	background: #0081ff !important;
 	border-color: #0081ff !important;
 }

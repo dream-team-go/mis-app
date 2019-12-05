@@ -1,0 +1,5 @@
+
+uni-switch .wx-switch-input:not([class*="bg-"]) {
+    background: #e54d42 !important;
+}
+

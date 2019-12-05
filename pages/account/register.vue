@@ -21,7 +21,7 @@
 					</view>
 				</picker>
 			</view>
-			
+
 			<view class="cu-form-group" v-show="para.org_id.length > 0">
 				<view class="title">所属部门</view>
 				<picker @change="DepartmentChange" :value="dIndex" :range="departments" range-key="name">
@@ -39,7 +39,57 @@
 					</view>
 				</picker>
 			</view>
+			
+			<view class="cu-form-group">
+				<view class="title">是否司机</view>
+				<switch @change="ChangeIsDriver" :class="isDriver?'checked':''" :checked="isDriver?true:false"></switch>
+			</view>
+			
+			<view class="cu-form-group" v-show="isDriver">
+				<view class="title">驾龄</view>
+				<picker @change="ChangeDriveAge" :value="para.drive_age" :range="driveAges">
+					<view class="picker">
+						{{para.drive_age>-1?driveAges[para.drive_age] + "年" : "请选择"}}
+					</view>
+				</picker>
+			</view>
+			
+			<view class="cu-form-group" v-show="isDriver">
+				<view class="title">性别</view>
+				<switch @change="ChangeDriverSex" class='switch-sex' :class="driverSex?'checked':''" :checked="driverSex?true:false"></switch>
+			</view>
+			
+			<view class="cu-form-group" v-show="isDriver">
+				<view class="title">身份证号</view>
+				<input name="input" v-model="para.id_card"></input>
+			</view>
+			
+			
 
+			<view class="cu-form-group">
+				<view class="title">手机号</view>
+				<input name="input" v-model="para.username"></input>
+			</view>
+
+			<view class="cu-form-group password-inut">
+				<view class="title">密码</view>
+				<input type="password" name="input" v-model="para.password"></input>
+			</view>
+
+			<view class="cu-form-group password-inut">
+				<view class="title">重复密码</view>
+				<input type="password" name="input" v-model="para.rPassword"></input>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">验证码</view>
+				<input name="input" v-model="para.code"></input>
+				<button class='cu-btn bg-green shadow' @click="SendCode" :disabled="disabled">验证码{{authCode}}</button>
+			</view>
+			
+			<view class="padding flex flex-direction">
+				<button class="cu-btn bg-orange margin-tb-sm lg" @click="Submit">提交</button>
+			</view>
 		</form>
 	</view>
 </template>
@@ -51,23 +101,45 @@
 				sysIndex: 0,
 				sysOrganizations: [],
 				oIndex: 0,
-				organizations: [{org_name: "请选择", org_id: ""}],
+				organizations: [{
+					org_name: "请选择",
+					org_id: ""
+				}],
 				dIndex: 0,
-				departments:[{name: "请选择", id: 0}],
+				departments: [{
+					name: "请选择",
+					id: 0
+				}],
 				sIndex: 0,
-				sections: [{name: "请选择", id: 0}],
-				para:{
+				sections: [{
+					name: "请选择",
+					id: 0
+				}],
+				para: {
 					org_id: "",
 					department_id: 0,
-					section_id: 0
-				}
+					section_id: 0,
+					username: "",
+					password: "",
+					rPassword: "",
+					code: "",
+					is_driver: 0,
+					sex: 0,
+					drive_age: 0,
+					id_card: ""
+				},
+				authCode: "",
+				disabled: false,
+				isDriver: false,
+				driverSex: false,
+				ageIndex: 0,
+				driveAges: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50]
 			}
 		},
 		onLoad() {
 			//获取开通系统单位
 			global.$http.post('/core/orgRole/getOrgList', {
-				params: {
-				},
+				params: {},
 			}).then(res => {
 				if (res.status === "0") {
 					this.sysOrganizations = res.data;
@@ -110,16 +182,18 @@
 			});
 		},
 		methods: {
-			OrganizationChange: function(e){
+			OrganizationChange: function(e) {
 				this.para.org_id = this.organizations[e.detail.value].org_id;
-				if(this.oIndex != e.detail.value)
-				{
+				if (this.oIndex != e.detail.value) {
 					this.para.department_id = 0;
 					this.para.section_id = 0;
 					this.oIndex = e.detail.value;
-					this.departments = [{name: "请选择", id: 0}];
+					this.departments = [{
+						name: "请选择",
+						id: 0
+					}];
 					this.dIndex = 0;
-					if(e.detail.value > 0){
+					if (e.detail.value > 0) {
 						//获取部门数据
 						global.$http.post('/core/department/departmentPage', {
 							params: {
@@ -146,20 +220,22 @@
 								icon: 'none'
 							});
 						});
-					}
-					else{
-						
+					} else {
+
 					}
 				}
 			},
-			DepartmentChange: function(e){
+			DepartmentChange: function(e) {
 				this.para.department_id = this.departments[e.detail.value].id;
-				if(this.dIndex != e.detail.value){
+				if (this.dIndex != e.detail.value) {
 					this.dIndex = e.detail.value;
 					this.para.section_id = 0;
-					this.sections = [{name: "请选择", id: 0}];
+					this.sections = [{
+						name: "请选择",
+						id: 0
+					}];
 					this.sIndex = 0;
-					if(e.detail.value > 0){
+					if (e.detail.value > 0) {
 						//获取部门数据
 						global.$http.post('/core/department/departmentPage', {
 							params: {
@@ -188,14 +264,70 @@
 					}
 				}
 			},
-			SectionChange: function(e){
+			SectionChange: function(e) {
 				this.para.section_id = this.sections[e.detail.value].id;
 				this.sIndex = e.detail.value;
+			},
+			SendCode: function(e) {
+				this.disabled = true;
+				if (this.para.username.length <= 0) {
+					uni.showModal({
+						content: '请填写手机号',
+						showCancel: false
+					});
+					this.disabled = false;
+					return;
+				}
+				global.$http.post('/core/login/sendRegSms', {
+					params: {
+						tel: this.para.username
+					},
+				}).then(res => {
+					if (res.status === "0") {
+						this.authCode = 60;
+						//定时器
+						var inteval = setInterval(this.SetAuthCode, 1000);
+						setTimeout(function(){ clearInterval(inteval); }, 60000);
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+			},
+			SetAuthCode: function(){
+				this.authCode -= 1;
+				if(this.authCode == 0){
+					this.authCode = "";
+					this.disabled = false;
+				}
+			},
+			ChangeDriveAge: function(e){
+				this.para.drive_age = e.detail.value;
+			},
+			ChangeIsDriver: function(e){
+				this.isDriver =  e.detail.value;
+				this.para.is_driver = e.detail.value ? 1 : 0;
+			},
+			ChangeDriverSex: function(e){
+				this.driverSex = e.detail.value;
+				this.para.sex = e.detail.value ? 2 : 1;
+			},
+			Submit: function(e){
+				//验证数据
+				
+				//提交数据
 			}
 		}
 	}
 </script>
 
 <style>
-
 </style>
