@@ -5,9 +5,9 @@
 			<block slot="content">注册</block>
 		</cu-custom>
 		<form>
-			<view class="cu-form-group margin-top">
+			<view class="cu-form-group">
 				<view class="title">机关事务局</view>
-				<picker @change="OrganizationChange" :value="sysIndex" :range="sysOrganizations" range-key="org_name">
+				<picker @change="SysOrganizationChange" :value="sysIndex" :range="sysOrganizations" range-key="org_name">
 					<view class="picker">
 						{{sysIndex>-1?sysOrganizations[sysIndex].org_name:'请选择'}}
 					</view>
@@ -43,6 +43,15 @@
 			<view class="cu-form-group">
 				<view class="title">是否司机</view>
 				<switch @change="ChangeIsDriver" :class="isDriver?'checked':''" :checked="isDriver?true:false"></switch>
+			</view>
+			
+			<view class="cu-form-group" v-show="isDriver">
+				<view class="title">驾照类型</view>
+				<picker @change="ChangeDriverType" :value="dtIndex" :range="driverTypes">
+					<view class="picker">
+						{{dtIndex>-1?driverTypes[dtIndex] : "请选择"}}
+					</view>
+				</picker>
 			</view>
 			
 			<view class="cu-form-group" v-show="isDriver">
@@ -116,6 +125,7 @@
 					id: 0
 				}],
 				para: {
+					system_org_id: "",
 					org_id: "",
 					department_id: 0,
 					section_id: 0,
@@ -126,14 +136,17 @@
 					is_driver: 0,
 					sex: 0,
 					drive_age: 0,
-					id_card: ""
+					id_card: "",
+					license_type: 0
 				},
 				authCode: "",
 				disabled: false,
 				isDriver: false,
 				driverSex: false,
 				ageIndex: 0,
-				driveAges: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50]
+				driveAges: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],
+				dtIndex: 0,
+				driverTypes:["请选择"]
 			}
 		},
 		onLoad() {
@@ -143,6 +156,10 @@
 			}).then(res => {
 				if (res.status === "0") {
 					this.sysOrganizations = res.data;
+					if(this.sysOrganizations.length > 0)
+					{
+						this.para.system_org_id = this.sysOrganizations[0].org_id;
+					}
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -180,8 +197,32 @@
 					icon: 'none'
 				});
 			});
+			//获取驾照类型数据
+			global.$http.post('/car/driver/getLicenseType', {
+				params: {},
+			}).then(res => {
+				if (res.status === "0") {
+					for (var i = 0; i < res.data.length; i++) {
+						this.driverTypes.push(res.data[i].name);
+					}
+				} else {
+					uni.showToast({
+						title: res.msg,
+						icon: 'none'
+					});
+				}
+			}).catch(err => {
+				uni.hideLoading();
+				uni.showToast({
+					title: err.message,
+					icon: 'none'
+				});
+			});
 		},
 		methods: {
+			SysOrganizationChange: function(e){
+				this.para.system_org_id = this.sysOrganizations[e.detail.value].org_id;
+			},
 			OrganizationChange: function(e) {
 				this.para.org_id = this.organizations[e.detail.value].org_id;
 				if (this.oIndex != e.detail.value) {
@@ -318,12 +359,119 @@
 			},
 			ChangeDriverSex: function(e){
 				this.driverSex = e.detail.value;
-				this.para.sex = e.detail.value ? 2 : 1;
+				this.para.sex = e.detail.value ? 1 : 2;
+			},
+			ChangeDriverType: function(e){
+				this.dtIndex = e.detail.value;
+				this.para.license_type = this.driverTypes[e.detail.value];
 			},
 			Submit: function(e){
 				//验证数据
+				if(this.para.system_org_id.length <= 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请选择机关事务局'
+					});
+					return;
+				}
+				if(this.para.org_id.length <= 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请选择所属单位'
+					});
+					return;
+				}
+				if(this.para.department_id <= 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请选择所属部门'
+					});
+					return;
+				}
+				if(this.para.section_id<=0){
+					uni.showToast({
+						icon: 'none',
+						title: '请选择所属科室'
+					});
+					return;
+				}
+				//验证司机数据
+				if(this.isDriver){
+					if(this.dtIndex <= 0){
+						uni.showToast({
+							icon: 'none',
+							title: '请选择驾照类型'
+						});
+						return;
+					}
+					if(this.para.drive_age <= 0){
+						uni.showToast({
+							icon: 'none',
+							title: '请选择驾龄'
+						});
+						return;
+					}
+					if(this.para.id_card.length <= 0){
+						uni.showToast({
+							icon: 'none',
+							title: '请填写身份证号'
+						});
+						return;
+					}
+				}
 				
+				if(this.para.username.length <= 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请填写手机号'
+					});
+					return;
+				}
+				if(this.para.password.length < 6){
+					uni.showToast({
+						icon: 'none',
+						title: '密码最短为 6 个字符'
+					});
+					return;
+				}
+				if(this.para.password !== this.para.rPassword){
+					uni.showToast({
+						icon: 'none',
+						title: '重复密码不一致'
+					});
+					return;
+				}
+				if(this.para.code.length <= 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请填写验证码'
+					});
+					return;
+				}
 				//提交数据
+				uni.showLoading({
+					title: '提交中',
+					mask: false
+				});
+				global.$http.post('/core/login/registe', {
+					params: this.para,
+				}).then(res => {
+					uni.hideLoading();
+					if (res.status === "0") {
+						uni.navigateBack();
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
 			}
 		}
 	}

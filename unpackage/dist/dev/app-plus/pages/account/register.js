@@ -1,2 +1,1 @@
-setCssToHead(["wx-uni-switch .",[1],"wx-switch-input:not([class*\x3d\x22bg-\x22]) { background: #e54d42 !important; }\n",],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./pages/account/register.wxss:2:1)",{path:"./pages/account/register.wxss"})();
 document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/account/register.wxml') } }));
