@@ -134,7 +134,7 @@
 					rPassword: "",
 					code: "",
 					is_driver: 0,
-					sex: 0,
+					sex: 2,
 					drive_age: 0,
 					id_card: "",
 					license_type: 0
@@ -330,12 +330,14 @@
 						var inteval = setInterval(this.SetAuthCode, 1000);
 						setTimeout(function(){ clearInterval(inteval); }, 60000);
 					} else {
+						this.disabled = false;
 						uni.showToast({
 							title: res.msg,
 							icon: 'none'
 						});
 					}
 				}).catch(err => {
+					this.disabled = false;
 					uni.hideLoading();
 					uni.showToast({
 						title: err.message,
