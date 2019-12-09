@@ -90,6 +90,15 @@ function getToken() {
 }
 
 /**
+ * 获取本地cookie
+ */
+function clearToken() {
+	return uni.removeStorage({
+		key:'cookie'
+	});
+}
+
+/**
  * 处理 http状态码
  * @param {object} o
  * @param {object} o.data 请求返回的数据
@@ -103,10 +112,14 @@ function handleCode({ data, statusCode, config }) {
 			if(data.code){
 				if(data.code === "401")
 				{
-					uni.reLaunch({
-						url: "../index/index"
-					})
-					return Promise.reject({ statusCode, message: '未登录' });
+					if(getToken()){
+						clearToken();
+						uni.reLaunch({
+							url: "../index/index"
+						});
+						return Promise.reject({ statusCode, message: '未登录' });
+					}
+					return Promise.reject();
 				}else if(data.code === "403"){
 					return Promise.reject({ statusCode, message: '未授权' });
 				}
@@ -130,13 +143,4 @@ function handleCode({ data, statusCode, config }) {
     };
 
     return STATUS[statusCode] ? STATUS[statusCode]() : Promise.reject(data, config); // 有状态码但不在这个封装的配置里，就直接进入 `fail`
-}
-
-// 显示消息提示框
-function showToast(data) {
-    uni.showToast({
-        title: JSON.stringify(data),
-        icon: 'none',
-        duration: 5000
-    });
 }

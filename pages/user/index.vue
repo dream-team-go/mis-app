@@ -28,16 +28,16 @@
 						<text class="text-grey">消息管理</text>
 					</navigator>
 				</view>
-				<view class="cu-item arrow">
-					<navigator class="content" hover-class="none" url="../user/editPassword" open-type="navigate">
+				<navigator class="cu-item arrow" hover-class="none" url="../user/editPassword" open-type="navigate">
+					<view class="content">
 						<text class="cuIcon-discoverfill text-orange"></text>
 						<text class="text-grey">修改密码</text>
-					</navigator>
-				</view>
-				<view class="cu-item arrow">
+					</view>
+				</navigator>
+				<view class="cu-item arrow"  @click="logout">
 					<view class="content">
 						<text class="cuIcon-btn text-green"></text>
-						<text class="text-grey" @click="logout">退出登录</text>
+						<text class="text-grey">退出登录</text>
 					</view>
 				</view>
 			</view>
@@ -79,6 +79,7 @@
 					cancelText: '取消',
 					confirmText: '确定',
 					success: res => {
+						if(res.cancel) return;
 						uni.showLoading({
 							title: '退出登录中',
 							mask: false
@@ -88,10 +89,6 @@
 						}).then(res => {
 							uni.hideLoading();
 							if (res.status === "0") {
-								uni.showToast({
-									icon: 'none',
-									title: '提交成功'
-								});
 								//清除密码
 								this.setLogoutInfo();
 								//跳转登陆页
