@@ -11,7 +11,7 @@
 			</view>
 			<button class="confirm-btn" @click="toLogin">登录</button>
 			<view class="forget-section">
-				忘记密码?
+				<text @click="findPassword">忘记密码?</text>
 			</view>
 		</form>
 		<view class="register-section">
@@ -108,6 +108,11 @@
 				uni.navigateTo({
 					url: "register"
 				});
+			},
+			findPassword(){
+				uni.navigateTo({
+					url:"findPassword"
+				})
 			}
 		},
 

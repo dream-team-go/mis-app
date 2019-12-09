@@ -1,9 +1,11 @@
 {
   "pages": [
-    "pages/account/register",
     "pages/index/index",
     "pages/index/home",
-    "pages/account/login"
+    "pages/account/login",
+    "pages/account/register",
+    "pages/account/findPassword",
+    "pages/user/editPassword"
   ],
   "window": {
     "navigationStyle": "custom"

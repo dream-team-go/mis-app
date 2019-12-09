@@ -4,7 +4,7 @@
 			<cu-custom bgColor="bg-gradual-pink">
 				<block slot="content">我的</block>
 			</cu-custom>
-			<view class="cu-list menu card-menu margin-top">
+			<view class="cu-list menu">
 				<view class="cu-item" :class="arrow">
 					<view class="content padding-tb-sm">
 						<view>
@@ -20,7 +20,28 @@
 					</view>
 				</view>
 			</view>
-			
+
+			<view class="cu-list menu margin-top">
+				<view class="cu-item arrow">
+					<navigator class="content" hover-class="none" url="..//" open-type="navigate">
+						<text class="cuIcon-discoverfill text-orange"></text>
+						<text class="text-grey">消息管理</text>
+					</navigator>
+				</view>
+				<view class="cu-item arrow">
+					<navigator class="content" hover-class="none" url="../user/editPassword" open-type="navigate">
+						<text class="cuIcon-discoverfill text-orange"></text>
+						<text class="text-grey">修改密码</text>
+					</navigator>
+				</view>
+				<view class="cu-item arrow">
+					<navigator class="content" hover-class="none" url="../list/list" open-type="navigate">
+						<text class="cuIcon-discoverfill text-orange"></text>
+						<text class="text-grey">退出登录</text>
+					</navigator>
+				</view>
+			</view>
+
 			<view class="cu-tabbar-height"></view>
 		</scroll-view>
 	</view>

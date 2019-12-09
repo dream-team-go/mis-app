@@ -460,6 +460,10 @@
 				}).then(res => {
 					uni.hideLoading();
 					if (res.status === "0") {
+						uni.showToast({
+							icon: 'none',
+							title: '提交成功'
+						});
 						uni.navigateBack();
 					} else {
 						uni.showToast({
