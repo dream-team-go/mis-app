@@ -35,10 +35,10 @@
 					</navigator>
 				</view>
 				<view class="cu-item arrow">
-					<navigator class="content" hover-class="none" url="../list/list" open-type="navigate">
-						<text class="cuIcon-discoverfill text-orange"></text>
-						<text class="text-grey">退出登录</text>
-					</navigator>
+					<view class="content">
+						<text class="cuIcon-btn text-green"></text>
+						<text class="text-grey" @click="logout">退出登录</text>
+					</view>
 				</view>
 			</view>
 
@@ -49,7 +49,8 @@
 
 <script>
 	import {
-		mapState
+		mapState,
+		mapMutations
 	} from 'vuex';
 	export default {
 		name: "user",
@@ -64,11 +65,58 @@
 		},
 		computed: mapState(['userInfo']),
 		methods: {
+			...mapMutations(['setLogoutInfo']),
 			toChild(e) {
 				uni.navigateTo({
 					url: e.currentTarget.dataset.url
 				})
 			},
+			logout(){
+				uni.showModal({
+					title: '提示',
+					content: '确定退出登录？',
+					showCancel: true,
+					cancelText: '取消',
+					confirmText: '确定',
+					success: res => {
+						uni.showLoading({
+							title: '退出登录中',
+							mask: false
+						});
+						global.$http.post('/core/login/logout', {
+							params: {},
+						}).then(res => {
+							uni.hideLoading();
+							if (res.status === "0") {
+								uni.showToast({
+									icon: 'none',
+									title: '提交成功'
+								});
+								//清除密码
+								this.setLogoutInfo();
+								//跳转登陆页
+								uni.reLaunch({
+									url:"../account/login"
+								});
+							} else {
+								uni.showToast({
+									title: res.msg,
+									icon: 'none'
+								});
+							}
+						}).catch(err => {
+							uni.hideLoading();
+							uni.showToast({
+								title: err.message,
+								icon: 'none'
+							});
+						});
+					},
+					fail: () => {},
+					complete: () => {}
+				});
+				
+			}
 		},
 	}
 </script>
