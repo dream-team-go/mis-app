@@ -5,7 +5,10 @@
     "pages/account/login",
     "pages/account/register",
     "pages/account/findPassword",
-    "pages/user/editPassword"
+    "pages/user/editPassword",
+    "pages/meeting/myMeetingRecordList",
+    "pages/meeting/meetingList",
+    "pages/meeting/bookMeeting"
   ],
   "window": {
     "navigationStyle": "custom"

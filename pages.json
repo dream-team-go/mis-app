@@ -20,6 +20,18 @@
             "path" : "pages/user/editPassword",
             "style" : {}
         }
+        ,{
+            "path" : "pages/meeting/myMeetingRecordList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/meeting/meetingList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/meeting/bookMeeting",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

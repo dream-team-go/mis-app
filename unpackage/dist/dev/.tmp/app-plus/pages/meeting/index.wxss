@@ -1,0 +1,8 @@
+
+.cu-list.grid>.cu-item .text-orange{
+	color: #f37b1d;
+}
+.cu-list.grid>.cu-item .text-lg{
+	font-size: 32rpx;
+}
+
