@@ -2,13 +2,13 @@
 #meeting-list-modal {
 	z-index: 10000;
 }
-#meeting-list-modal .cu-dialog{
+#meeting-list-modal .cu-dialog {
 	height: 100vh;
 }
-#meeting-list-modal.cu-modal.show .cu-list{
+#meeting-list-modal.cu-modal.show #list-view {
 	overflow-x: hidden;
-	    overflow-y: scroll;
-	    pointer-events: auto;
+	overflow-y: scroll;
+	pointer-events: auto;
 }
 .cu-form-group .modal-group {
 	-webkit-box-flex: 1;

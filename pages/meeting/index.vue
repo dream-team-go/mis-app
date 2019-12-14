@@ -49,7 +49,7 @@
 			
 			<view class="cu-bar bg-white solid-bottom margin-top">
 				<view class="action">
-					<text class="cuIcon-title text-orange"></text> 最近预定 （{{status}}）
+					<text class="cuIcon-title text-orange"></text> 最近预定 {{status.length > 0 ? '('+status+')' : ''}}
 				</view>
 			</view>
 			<view class="cu-list menu">
@@ -59,7 +59,9 @@
 						<text class="text-grey">会议室</text>
 					</view>
 					<view class="action">
-						<view class="cu-tag round bg-orange light">{{building_name}}（{{room_number}}）</view>
+						<view class="cu-tag round bg-orange light">
+							{{status.length > 0 ? building_name + '('+room_number+')' : '无'}}
+						</view>
 					</view>
 				</navigator>
 				<navigator class="cu-item">
@@ -68,7 +70,7 @@
 						<text class="text-grey">会议时间</text>
 					</view>
 					<view class="action">
-						<view class="cu-tag round bg-orange light">{{start_time}} — {{end_time}}</view>
+						<view class="cu-tag round bg-orange light">{{status.length > 0 ? start_time + '—' + end_time : '无'}}</view>
 					</view>
 				</navigator>
 				<navigator class="cu-item">
@@ -77,7 +79,7 @@
 						<text class="text-grey">预定时间</text>
 					</view>
 					<view class="action">
-						<view class="cu-tag round bg-orange light">{{create_time}}</view>
+						<view class="cu-tag round bg-orange light">{{status.length > 0 ? create_time : '无'}}</view>
 					</view>
 				</navigator>
 			</view>
@@ -90,18 +92,83 @@
 	export default {
 		data() {
 			return {
-				totalCount: 22,
-				successCount: 12,
-				cancleCount: 10,
-				failCount: 11,
-				waitCheckCount: 13,
-				building_name: "华夏大厦",
-				room_number: "2007",
-				status: "预定成功",
-				start_time: "2019-10-1 19:20",
-				end_time: "2019-10-1 21:20",
-				create_time: "2019-10-1 19:32:32"
+				totalCount: 0,
+				successCount: 0,
+				cancleCount: 0,
+				failCount: 0,
+				waitCheckCount: 0,
+				building_name: "",
+				room_number: "",
+				status: "",
+				start_time: "",
+				end_time: "",
+				create_time: ""
 			}
+		},
+		onLoad() {
+			//获取会务概览
+			global.$http.post('/meeting/record/myCountByStatus', {
+				params: {},
+			}).then(res => {
+				if (res.status === "0") {
+					var totalCount = 0;
+					for (var i = 0; i < res.data.length; i++) {
+						if(res.data[i].status === -2){
+							this.cancleCount = res.data[i].total;
+						}else if(res.data[i].status === -1){
+							this.failCount = res.data[i].total;
+						}else if(res.data[i].status === 0){
+							this.waitCheckCount = res.data[i].total;
+						}else if(res.data[i].status === 1){
+							this.successCount = res.data[i].total;
+						}
+						totalCount += res.data[i].total;
+					}
+					this.totalCount = totalCount;
+				} else {
+					uni.showToast({
+						title: res.msg,
+						icon: 'none'
+					});
+				}
+			}).catch(err => {
+				uni.hideLoading();
+				uni.showToast({
+					title: err.message,
+					icon: 'none'
+				});
+			});
+			//获取最近预定
+			global.$http.post('/meeting/record/myLatelyRecord', {
+				params: {},
+			}).then(res => {
+				if (res.status === "0") {
+					if(res.data){
+						this.building_name = res.data.building_name;
+						this.room_number = res.data.room_number;
+						if(res.data.status === -2){
+							this.status = '取消预定';
+						}else if(res.data.status === -1){
+							this.status = '预定失败';
+						}else if(res.data.status === 0){
+							this.status = '待审批';
+						}else if(res.data.status === 1){
+							this.status = '预定成功';
+						}
+					}
+				} else {
+					uni.showToast({
+						title: res.msg,
+						icon: 'none'
+					});
+				}
+			}).catch(err => {
+				uni.hideLoading();
+				uni.showToast({
+					title: err.message,
+					icon: 'none'
+				});
+			});
 		},
 		methods: {
 			toBookMeeting: function(){

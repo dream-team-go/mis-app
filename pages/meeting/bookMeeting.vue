@@ -1,10 +1,10 @@
 <template>
-	<view>
+	<view style="overflow: hidden;">
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">预定会议室</block>
 		</cu-custom>
-		<form  v-show="isShowBottomModal == false">
+		<form v-show="isShowBottomModal == false">
 			<view class="cu-form-group">
 				<view class="title">姓名</view>
 				<input name="input" v-model="para.user_name"></input>
@@ -49,7 +49,7 @@
 				<view class="title">会议室</view>
 				<view class="modal-group" @tap="showBottomModal" data-target="Modal">
 					<view class="picker">
-						会议室
+						{{ para.room_number.length > 0 ? (para.room_number + '('+para.building_name+')') : '请选择' }}
 					</view>
 				</view>
 			</view>
@@ -61,8 +61,12 @@
 				<view class="title">备注</view>
 				<input name="input" v-model="para.desc"></input>
 			</view>
+			
+			<view class="padding flex flex-direction">
+				<button class="cu-btn bg-orange margin-tb-sm lg" @click="Submit">提交</button>
+			</view>
 		</form>
-		
+
 		<view id="meeting-list-modal" class="cu-modal bottom-modal" :class="isShowBottomModal?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-gradual-blue" :style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
@@ -70,11 +74,26 @@
 					<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择会议室</view>
 					<view class="action"></view>
 				</view>
-					<list class="cu-list menu text-left" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
-					    <cell class="cu-item arrow" v-for="(item,index) in 100" :key="index">
-					      <view>Item {{index +1}}</view>
-					    </cell>
-					</list>
+				
+				<view id="list-view" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
+					<view class="cu-list menu text-left">
+						<view class="cu-item arrow" v-for="meeting in meetings" :key="meeting.id" @click="getMeeting(meeting)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
+							<view class="content">
+								<view class="text-grey">{{meeting.number}}({{meeting.name}})</view>
+								<view class="text-gray text-sm flex">
+									<view class="text-cut">
+										{{meeting.address}}
+									</view>
+								</view>
+							</view>
+							<view class="action">
+								<view class="text-grey text-xs">容纳{{meeting.capacity}}人</view>
+								<view class="cu-tag round bg-orange sm">{{meeting.num > 0 ? '已被预定' : '可预订'}}</view>
+							</view>
+						</view>
+					</view>
+					<uni-load-more :status="status" :content-text="contentText" />
+				</view>
 			</view>
 		</view>
 	</view>
@@ -84,6 +103,7 @@
 	import {
 		mapState
 	} from 'vuex';
+	import uniLoadMore from '@/colorui/components/uni-load-more.vue';
 
 	function getDate(addDay) {
 		const date = new Date();
@@ -99,13 +119,17 @@
 		return `${year}-${month}-${day}`;
 	}
 
-	function getTime() {
+	function getTime(addMinute) {
 		const date = new Date();
 		var tmpMinute = date.getMinutes();
 		if (tmpMinute < 30) {
 			date.setMinutes(30);
 		} else if (tmpMinute > 30 && tmpMinute <= 59) {
 			date.setMinutes(60);
+		}
+
+		if (addMinute > 0) {
+			date.setMinutes(date.getMinutes() + addMinute);
 		}
 
 		let hour = date.getHours();
@@ -116,7 +140,28 @@
 
 		return `${hour}:${minute}`;
 	}
+
+	function getEndTime(startTime, addHour) {
+		var date = new Date(startTime);
+		date.setHours(date.getHours() + addHour);
+		let year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let day = date.getDate();
+		let hour = date.getHours();
+		let minute = date.getMinutes();
+
+		month = month > 9 ? month : '0' + month;;
+		day = day > 9 ? day : '0' + day;
+		hour = hour > 9 ? hour : '0' + hour;;
+		minute = minute > 9 ? minute : '0' + minute;
+
+		return `${year}-${month}-${day} ${hour}:${minute}`;
+	}
+
 	export default {
+		components: {
+			uniLoadMore
+		},
 		data() {
 			return {
 				StatusBar: this.StatusBar,
@@ -134,12 +179,21 @@
 					30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50
 				],
 				isShowBottomModal: false,
+				meetings: [],
+				status: 'more',
+				contentText: {
+					contentdown: '上拉加载更多',
+					contentrefresh: '加载中',
+					contentnomore: '没有更多'
+				},
+				page: 1,
+				pageSize: 100,
 				para: {
 					user_name: "",
 					user_tel: "",
 					people_num: 1,
 					start_time: getDate() + " " + getTime(),
-					end_time: "",
+					end_time: getEndTime(getDate() + " " + getTime(), 1),
 					desc: "",
 					attend_leader: "",
 					meeting_id: "",
@@ -153,6 +207,14 @@
 			this.para.user_name = this.userInfo.user.userCnName;
 			this.para.user_tel = this.userInfo.user.username;
 		},
+		onPullDownRefresh() {
+			
+		},
+		onReachBottom() {
+			this.status = 'more';
+			this.page += 1;
+			this.getMeetingListData();
+		},
 		methods: {
 			DateChange: function(e) {
 				this.date = e.detail.value
@@ -162,16 +224,101 @@
 			},
 			ChangePeoples: function(e) {
 				this.peopleIndex = e.detail.value;
-				this.para.people_num = peoples[e.detail.value];
+				this.para.people_num = this.peoples[e.detail.value];
 			},
 			showBottomModal: function(e) {
+				this.page = 1;
+				this.meetings = [];
 				this.isShowBottomModal = true;
+				this.getMeetingListData();
 			},
 			hideBottomModal: function(e) {
 				this.isShowBottomModal = false;
 			},
-			itemTap: function(e){
-				console.log(e);
+			getMeetingListData: function() {
+				this.status = 'loading';
+				global.$http.post('/meeting/info/meetingList', {
+					params: {
+						start_time: this.para.start_time,
+						end_time: this.para.end_time,
+						page: this.page,
+						pageSize: this.pageSize
+					},
+				}).then(res => {
+					if (res.status === "0") {
+						this.status = 'noMore';
+						this.meetings = res.data.list;
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+			},
+			getMeeting: function(e) {
+				this.para.meeting_id = e.id;
+				this.para.building_name = e.name;
+				this.para.room_number = e.number;
+				this.isShowBottomModal = false;
+			},
+			Submit: function(e){
+				//验证数据
+				if(this.para.user_name.length <= 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请填写姓名'
+					});
+					return;
+				}
+				if(this.para.user_tel.length <= 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请填写手机号'
+					});
+					return;
+				}
+				if(this.para.meeting_id <= 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请选择会议室'
+					});
+					return;
+				}
+				
+				//提交数据
+				uni.showLoading({
+					title: '提交中',
+					mask: false
+				});
+				global.$http.post('/meeting/record/saveRecord', {
+					params: this.para,
+				}).then(res => {
+					uni.hideLoading();
+					if (res.status === "0") {
+						uni.showToast({
+							icon: 'none',
+							title: '提交成功'
+						});
+						uni.navigateBack();
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
 			}
 		}
 	}
@@ -181,15 +328,15 @@
 	#meeting-list-modal {
 		z-index: 10000;
 	}
-	
-	#meeting-list-modal .cu-dialog{
+
+	#meeting-list-modal .cu-dialog {
 		height: 100vh;
 	}
-	
-	#meeting-list-modal.cu-modal.show .cu-list{
+
+	#meeting-list-modal.cu-modal.show #list-view {
 		overflow-x: hidden;
-		    overflow-y: scroll;
-		    pointer-events: auto;
+		overflow-y: scroll;
+		pointer-events: auto;
 	}
 
 	.cu-form-group .modal-group {
