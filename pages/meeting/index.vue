@@ -53,7 +53,7 @@
 				</view>
 			</view>
 			<view class="cu-list menu">
-				<navigator class="cu-item">
+				<view class="cu-item">
 					<view class="content">
 						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
 						<text class="text-grey">会议室</text>
@@ -63,8 +63,8 @@
 							{{status.length > 0 ? building_name + '('+room_number+')' : '无'}}
 						</view>
 					</view>
-				</navigator>
-				<navigator class="cu-item">
+				</view>
+				<view class="cu-item">
 					<view class="content">
 						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
 						<text class="text-grey">会议时间</text>
@@ -72,8 +72,8 @@
 					<view class="action">
 						<view class="cu-tag round bg-orange light">{{status.length > 0 ? start_time + '—' + end_time : '无'}}</view>
 					</view>
-				</navigator>
-				<navigator class="cu-item">
+				</view>
+				<view class="cu-item">
 					<view class="content">
 						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
 						<text class="text-grey">预定时间</text>
@@ -81,7 +81,7 @@
 					<view class="action">
 						<view class="cu-tag round bg-orange light">{{status.length > 0 ? create_time : '无'}}</view>
 					</view>
-				</navigator>
+				</view>
 			</view>
 			<view class="cu-tabbar-height"></view>
 		</scroll-view>
