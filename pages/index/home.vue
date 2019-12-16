@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<car v-if="PageCur=='car'"></car>
-		<meeting v-if="PageCur=='meeting'"></meeting>
+		<meeting v-if="PageCur=='meeting'" :meetingData="meetingData"></meeting>
 		<food v-if="PageCur=='food'"></food>
 		<user v-if="PageCur=='user'"></user>
 		<work v-if="PageCur=='work'"></work>
@@ -43,13 +43,115 @@
 <script>
 	export default {
 		data() {
-		return {
-				PageCur: 'car'
+			return {
+				PageCur: 'car',
+				meetingData: {
+					totalCount: "",
+					successCount: "",
+					cancleCount: "",
+					failCount: "",
+					waitCheckCount: "",
+					desc: "",
+					building_name: "",
+					room_number: "",
+					status: "",
+					start_time: "",
+					end_time: "",
+					create_time: ""
+				}
 			}
 		},
+		onLoad() {
+
+		},
+		onShow() {
+			this.loadData();
+		},
 		methods: {
+			loadData() {
+				if (this.PageCur === "meeting") {
+					uni.showLoading({
+						title: '加载中',
+						mask: false
+					});
+					//获取会务概览
+					global.$http.post('/meeting/record/myCountByStatus', {
+						params: {},
+					}).then(res => {
+						if (res.status === "0") {
+							this.meetingData.totalCount = 0;
+							this.meetingData.successCount = 0;
+							this.meetingData.cancleCount = 0;
+							this.meetingData.failCount = 0;
+							this.meetingData.waitCheckCount = 0;
+							var totalCount = 0;
+							for (var i = 0; i < res.data.length; i++) {
+								if (res.data[i].status === -2) {
+									this.meetingData.cancleCount = res.data[i].total;
+								} else if (res.data[i].status === -1) {
+									this.meetingData.failCount = res.data[i].total;
+								} else if (res.data[i].status === 0) {
+									this.meetingData.waitCheckCount = res.data[i].total;
+								} else if (res.data[i].status === 1) {
+									this.meetingData.successCount = res.data[i].total;
+								}
+								totalCount += res.data[i].total;
+							}
+							this.meetingData.totalCount = totalCount;
+							uni.hideLoading();
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
+					//获取最近预定
+					global.$http.post('/meeting/record/myLatelyRecord', {
+						params: {},
+					}).then(res => {
+						if (res.status === "0") {
+							if (res.data) {
+								this.meetingData.desc = res.data.desc;
+								this.meetingData.building_name = res.data.building_name;
+								this.meetingData.room_number = res.data.room_number;
+								if (res.data.status === -2) {
+									this.meetingData.status = '取消预定';
+								} else if (res.data.status === -1) {
+									this.meetingData.status = '预定失败';
+								} else if (res.data.status === 0) {
+									this.meetingData.status = '待审批';
+								} else if (res.data.status === 1) {
+									this.meetingData.status = '预定成功';
+								}
+								this.meetingData.start_time = res.data.start_time;
+								this.meetingData.end_time = res.data.end_time;
+								this.meetingData.create_time = res.data.create_time;
+							}
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
+				}
+			},
 			NavChange: function(e) {
-				this.PageCur = e.currentTarget.dataset.cur
+				this.PageCur = e.currentTarget.dataset.cur;
+				this.loadData();
 			}
 		}
 	}

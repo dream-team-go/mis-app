@@ -17,31 +17,31 @@
 			<view class="cu-list grid no-border col-3">
 				<view class="cu-item">
 					<navigator hover-class="none" url="../meeting/myMeetingRecordList" open-type="navigate">
-						<text class="text-orange text-lg">{{totalCount}}</text>
+						<text class="text-orange text-lg">{{meetingData.totalCount}}</text>
 						<text>共预定</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="none" url="../meeting/myMeetingRecordList?status=1" open-type="navigate">
-						<text class="text-orange text-lg">{{successCount}}</text>
+						<text class="text-orange text-lg">{{meetingData.successCount}}</text>
 						<text>预定成功</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="none" url="../meeting/myMeetingRecordList?status=-1" open-type="navigate">
-						<text class="text-orange text-lg">{{failCount}}</text>
+						<text class="text-orange text-lg">{{meetingData.failCount}}</text>
 						<text>预定失败</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="none" url="../meeting/myMeetingRecordList?status=-2" open-type="navigate">
-						<text class="text-orange text-lg">{{cancleCount}}</text>
+						<text class="text-orange text-lg">{{meetingData.cancleCount}}</text>
 						<text>取消预定</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="none" url="../meeting/myMeetingRecordList?status=0" open-type="navigate">
-						<text class="text-orange text-lg">{{waitCheckCount}}</text>
+						<text class="text-orange text-lg">{{meetingData.waitCheckCount}}</text>
 						<text>待审批</text>
 					</navigator>
 				</view>
@@ -49,10 +49,21 @@
 			
 			<view class="cu-bar bg-white solid-bottom margin-top">
 				<view class="action">
-					<text class="cuIcon-title text-orange"></text> 最近预定 {{status.length > 0 ? '('+status+')' : ''}}
+					<text class="cuIcon-title text-orange"></text> 最近预定
 				</view>
 			</view>
 			<view class="cu-list menu">
+				<view class="cu-item">
+					<view class="content">
+						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
+						<text class="text-grey">会议主题</text>
+					</view>
+					<view class="action">
+						<view class="cu-tag round bg-orange light">
+							{{meetingData.status.length > 0 ? meetingData.desc : '无'}}
+						</view>
+					</view>
+				</view>
 				<view class="cu-item">
 					<view class="content">
 						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
@@ -60,7 +71,7 @@
 					</view>
 					<view class="action">
 						<view class="cu-tag round bg-orange light">
-							{{status.length > 0 ? building_name + '('+room_number+')' : '无'}}
+							{{meetingData.status.length > 0 ? meetingData.building_name + '('+meetingData.room_number+')' : '无'}}
 						</view>
 					</view>
 				</view>
@@ -70,7 +81,7 @@
 						<text class="text-grey">会议时间</text>
 					</view>
 					<view class="action">
-						<view class="cu-tag round bg-orange light">{{status.length > 0 ? start_time + '—' + end_time : '无'}}</view>
+						<view class="cu-tag round bg-orange light">{{meetingData.status.length > 0 ? meetingData.start_time + '—' + meetingData.end_time : '无'}}</view>
 					</view>
 				</view>
 				<view class="cu-item">
@@ -79,7 +90,18 @@
 						<text class="text-grey">预定时间</text>
 					</view>
 					<view class="action">
-						<view class="cu-tag round bg-orange light">{{status.length > 0 ? create_time : '无'}}</view>
+						<view class="cu-tag round bg-orange light">{{meetingData.status.length > 0 ? meetingData.create_time : '无'}}</view>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">
+						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
+						<text class="text-grey">状态</text>
+					</view>
+					<view class="action">
+						<view class="cu-tag round bg-orange light">
+							{{meetingData.status.length > 0 ? meetingData.status : '无'}}
+						</view>
 					</view>
 				</view>
 			</view>
@@ -90,85 +112,11 @@
 
 <script>
 	export default {
+		props:['meetingData'],
 		data() {
 			return {
-				totalCount: 0,
-				successCount: 0,
-				cancleCount: 0,
-				failCount: 0,
-				waitCheckCount: 0,
-				building_name: "",
-				room_number: "",
-				status: "",
-				start_time: "",
-				end_time: "",
-				create_time: ""
+				
 			}
-		},
-		onLoad() {
-			//获取会务概览
-			global.$http.post('/meeting/record/myCountByStatus', {
-				params: {},
-			}).then(res => {
-				if (res.status === "0") {
-					var totalCount = 0;
-					for (var i = 0; i < res.data.length; i++) {
-						if(res.data[i].status === -2){
-							this.cancleCount = res.data[i].total;
-						}else if(res.data[i].status === -1){
-							this.failCount = res.data[i].total;
-						}else if(res.data[i].status === 0){
-							this.waitCheckCount = res.data[i].total;
-						}else if(res.data[i].status === 1){
-							this.successCount = res.data[i].total;
-						}
-						totalCount += res.data[i].total;
-					}
-					this.totalCount = totalCount;
-				} else {
-					uni.showToast({
-						title: res.msg,
-						icon: 'none'
-					});
-				}
-			}).catch(err => {
-				uni.hideLoading();
-				uni.showToast({
-					title: err.message,
-					icon: 'none'
-				});
-			});
-			//获取最近预定
-			global.$http.post('/meeting/record/myLatelyRecord', {
-				params: {},
-			}).then(res => {
-				if (res.status === "0") {
-					if(res.data){
-						this.building_name = res.data.building_name;
-						this.room_number = res.data.room_number;
-						if(res.data.status === -2){
-							this.status = '取消预定';
-						}else if(res.data.status === -1){
-							this.status = '预定失败';
-						}else if(res.data.status === 0){
-							this.status = '待审批';
-						}else if(res.data.status === 1){
-							this.status = '预定成功';
-						}
-					}
-				} else {
-					uni.showToast({
-						title: res.msg,
-						icon: 'none'
-					});
-				}
-			}).catch(err => {
-				uni.hideLoading();
-				uni.showToast({
-					title: err.message,
-					icon: 'none'
-				});
-			});
 		},
 		methods: {
 			toBookMeeting: function(){

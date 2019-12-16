@@ -1,12 +1,17 @@
 <template>
-	<view style="overflow: hidden;">
+	<view>
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">预定会议室</block>
 		</cu-custom>
 		<form v-show="isShowBottomModal == false">
 			<view class="cu-form-group">
-				<view class="title">姓名</view>
+				<view class="title">会议主题</view>
+				<input name="input" v-model="para.desc"></input>
+			</view>
+			
+			<view class="cu-form-group">
+				<view class="title">预定人</view>
 				<input name="input" v-model="para.user_name"></input>
 			</view>
 			<view class="cu-form-group">
@@ -56,10 +61,6 @@
 			<view class="cu-form-group">
 				<view class="title">参会领导</view>
 				<input name="input" v-model="para.attend_leader"></input>
-			</view>
-			<view class="cu-form-group">
-				<view class="title">备注</view>
-				<input name="input" v-model="para.desc"></input>
 			</view>
 			
 			<view class="padding flex flex-direction">
@@ -142,6 +143,8 @@
 	}
 
 	function getEndTime(startTime, addHour) {
+		//特殊处理IOS日期，用‘/’代替‘-’
+		startTime = startTime.replace(/-/g, '/');
 		var date = new Date(startTime);
 		date.setHours(date.getHours() + addHour);
 		let year = date.getFullYear();
@@ -192,8 +195,6 @@
 					user_name: "",
 					user_tel: "",
 					people_num: 1,
-					start_time: getDate() + " " + getTime(),
-					end_time: getEndTime(getDate() + " " + getTime(), 1),
 					desc: "",
 					attend_leader: "",
 					meeting_id: "",
@@ -202,7 +203,15 @@
 				}
 			}
 		},
-		computed: mapState(['userInfo']),
+		computed: {
+			...mapState(['userInfo']),
+			start_time: function(){
+				return this.date + " " + this.time;
+			},
+			end_time: function(){
+				return getEndTime(this.start_time, this.hours[this.hourIndex]);
+			}
+		},
 		onLoad() {
 			this.para.user_name = this.userInfo.user.userCnName;
 			this.para.user_tel = this.userInfo.user.username;
@@ -217,7 +226,10 @@
 		},
 		methods: {
 			DateChange: function(e) {
-				this.date = e.detail.value
+				this.date = e.detail.value;
+			},
+			TimeChange: function(e){
+				this.time = e.detail.value;
 			},
 			ChangeHours: function(e) {
 				this.hourIndex = e.detail.value;
@@ -268,7 +280,23 @@
 				this.isShowBottomModal = false;
 			},
 			Submit: function(e){
+				this.para.start_time = this.start_time;
+				this.para.end_time = this.end_time;
 				//验证数据
+				if(this.para.desc.length <= 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请填写会议主题'
+					});
+					return;
+				}
+				if(this.para.desc.length > 15){
+					uni.showToast({
+						icon: 'none',
+						title: '会议主题不超过15字'
+					});
+					return;
+				}
 				if(this.para.user_name.length <= 0){
 					uni.showToast({
 						icon: 'none',

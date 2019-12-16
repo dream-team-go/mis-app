@@ -25,11 +25,15 @@
             "style" : {}
         }
         ,{
-            "path" : "pages/meeting/meetingList",
+            "path" : "pages/meeting/bookMeeting",
             "style" : {}
         }
         ,{
-            "path" : "pages/meeting/bookMeeting",
+            "path" : "pages/work/meetingList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/meeting/meetingRecordDetail",
             "style" : {}
         }
     ],

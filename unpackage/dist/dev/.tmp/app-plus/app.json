@@ -7,8 +7,9 @@
     "pages/account/findPassword",
     "pages/user/editPassword",
     "pages/meeting/myMeetingRecordList",
-    "pages/meeting/meetingList",
-    "pages/meeting/bookMeeting"
+    "pages/meeting/bookMeeting",
+    "pages/work/meetingList",
+    "pages/meeting/meetingRecordDetail"
   ],
   "window": {
     "navigationStyle": "custom"
