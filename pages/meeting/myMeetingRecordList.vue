@@ -11,14 +11,14 @@
 			</view>
 		</scroll-view> -->
 		<scroll-view scroll-x class="bg-red nav text-center">
-			<view class="cu-item":class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length" :key="index" @tap="recordStatusTab(index)">
+			<view class="cu-item" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length" :key="index" @tap="recordStatusTab(index)">
 				{{Array.from(StatusEnumMap.values())[index]}}
 			</view>
 		</scroll-view>
 		
 		
 		<view class="cu-list menu text-left">
-			<view class="cu-item arrow" v-for="record in records" :key="record.id" @click="getrecord(record)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
+			<view class="cu-item arrow" v-for="record in records" :key="record.id" @click="recordDetail(record)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
 				<view class="content">
 					<view>{{record.desc}}</view>
 					<view class="text-gray text-sm flex">
@@ -134,6 +134,11 @@
 				this.page = 1;
 				this.records = [];
 				this.loadData();
+			},
+			recordDetail: function(e){
+				uni.navigateTo({
+					url: "../meeting/meetingRecordDetail",
+				});
 			}
 		}
 	}
