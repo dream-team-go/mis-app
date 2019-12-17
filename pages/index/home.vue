@@ -41,6 +41,7 @@
 </template>
 
 <script>
+	import misEnum from '../../common/mis-enum.js'; 
 	export default {
 		data() {
 			return {
@@ -121,15 +122,7 @@
 								this.meetingData.desc = res.data.desc;
 								this.meetingData.building_name = res.data.building_name;
 								this.meetingData.room_number = res.data.room_number;
-								if (res.data.status === -2) {
-									this.meetingData.status = '取消预定';
-								} else if (res.data.status === -1) {
-									this.meetingData.status = '预定失败';
-								} else if (res.data.status === 0) {
-									this.meetingData.status = '待审批';
-								} else if (res.data.status === 1) {
-									this.meetingData.status = '预定成功';
-								}
+								this.meetingData.status = misEnum.MeetingRecordEnumMap.get(res.data.status);
 								this.meetingData.start_time = res.data.start_time;
 								this.meetingData.end_time = res.data.end_time;
 								this.meetingData.create_time = res.data.create_time;

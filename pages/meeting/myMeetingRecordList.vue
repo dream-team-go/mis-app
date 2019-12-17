@@ -4,11 +4,23 @@
 			<block slot="backText">返回</block>
 			<block slot="content">会议预定记录</block>
 		</cu-custom>
+		
+		<!-- <scroll-view scroll-x class="bg-red nav text-center">
+			<view class="cu-item" :class="key==TabCur?'text-white cur':''" v-for="(value, key) in StatusEnumMap" :key="key" @tap="recordStatusTab(key)">
+				{{value}}
+			</view>
+		</scroll-view> -->
+		<scroll-view scroll-x class="bg-red nav text-center">
+			<view class="cu-item":class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length" :key="index" @tap="recordStatusTab(index)">
+				{{Array.from(StatusEnumMap.values())[index]}}
+			</view>
+		</scroll-view>
+		
+		
 		<view class="cu-list menu text-left">
 			<view class="cu-item arrow" v-for="record in records" :key="record.id" @click="getrecord(record)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
 				<view class="content">
-					<!-- <view>{{record.desc}}</view> -->
-					<view>会议主题</view>
+					<view>{{record.desc}}</view>
 					<view class="text-gray text-sm flex">
 						<view class="text-cut">
 							{{record.room_number}}({{record.building_name}})
@@ -32,13 +44,25 @@
 
 <script>
 	import uniLoadMore from '@/colorui/components/uni-load-more.vue';
+	import misEnum from '../../common/mis-enum.js';  
 	export default {
 		components: {
 			uniLoadMore
 		},
 		onLoad(option) {
 			if(option.status){
+				var index = 0;
+				misEnum.MeetingRecordEnumMap.forEach((value, key, map)=>{
+					if(key == option.status)
+					{
+						this.TabCur = index;
+						return;
+					}
+					index++;
+				});
 				this.recordStatus = option.status;
+			}else{
+				this.recordStatus = Array.from(misEnum.MeetingRecordEnumMap.keys())[0];
 			}
 			this.loadData();
 		},
@@ -48,6 +72,8 @@
 				pageSize: 10,
 				recordStatus: "",
 				status: 'more',
+				StatusEnumMap: misEnum.MeetingRecordEnumMap,
+				TabCur: 0,
 				contentText: {
 					contentdown: '上拉加载更多',
 					contentrefresh: '加载中',
@@ -100,17 +126,14 @@
 				});
 			},
 			getStatusStr(status){
-				var statusStr = status;
-				if (status === -2) {
-					statusStr = '取消预定';
-				} else if (status === -1) {
-					statusStr = '预定失败';
-				} else if (status === 0) {
-					statusStr = '待审批';
-				} else if (status === 1) {
-					statusStr = '预定成功';
-				}
-				return statusStr;
+				return misEnum.MeetingRecordEnumMap.get(status);
+			},
+			recordStatusTab: function(index){
+				this.TabCur = index;
+				this.recordStatus = Array.from(this.StatusEnumMap.keys())[index];
+				this.page = 1;
+				this.records = [];
+				this.loadData();
 			}
 		}
 	}
