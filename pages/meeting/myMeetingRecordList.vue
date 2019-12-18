@@ -135,9 +135,9 @@
 				this.records = [];
 				this.loadData();
 			},
-			recordDetail: function(e){
+			recordDetail: function(record){
 				uni.navigateTo({
-					url: "../meeting/meetingRecordDetail",
+					url: "../meeting/meetingRecordDetail?id=" + record.id,
 				});
 			}
 		}

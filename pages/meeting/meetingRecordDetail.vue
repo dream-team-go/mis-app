@@ -16,6 +16,54 @@
 				</view>
 			</view>
 		</view>
+		<view class="cu-bar bg-white solid-bottom" v-if="info.status == -1">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 失败原因：
+				<text class="text-red">{{info.fail_reason}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 会议主题：
+				<text class="text-bold">{{info.desc}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 会议室：
+				<text class="text-bold">{{info.room_number}}({{info.building_name}})</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 会议时间：
+				<text class="text-bold">{{info.start_time}} — {{info.end_time}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 参会人数：
+				<text class="text-bold">{{info.people_num}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom" v-if="info.attend_leader != null">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 参会领导：
+				<text class="text-bold">{{info.attend_leader}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 预定人：
+				<text class="text-bold">{{info.user_name}}({{info.user_tel}})</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 预定时间：
+				<text class="text-bold">{{info.create_time}}</text>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -30,12 +78,10 @@
 				info: {}
 			}
 		},
-		onLoad() {
+		onLoad(option) {
 			global.$http.post('/meeting/record/recordInfo', {
 				params: {
-					status: this.recordStatus,
-					page: this.page,
-					pageSize: this.pageSize
+					record_id: option.id
 				},
 			}).then(res => {
 				if (res.status === "0") {
@@ -54,7 +100,7 @@
 					misEnum.MeetingRecordEnumMap.forEach((value, key, map) => {
 						var cuIcon = '';
 						var color = '';
-						if(!isFind && key != this.info.status){
+						if(!isFind || key == this.info.status){
 							color = this.color;
 						}
 						if(key == this.info.status){
