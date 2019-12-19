@@ -9,7 +9,9 @@
     "pages/meeting/myMeetingRecordList",
     "pages/meeting/bookMeeting",
     "pages/work/meetingList",
-    "pages/meeting/meetingRecordDetail"
+    "pages/meeting/meetingRecordDetail",
+    "pages/work/MeetingRecordList",
+    "pages/work/meetingRecordDetail"
   ],
   "window": {
     "navigationStyle": "custom"

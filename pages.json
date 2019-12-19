@@ -36,6 +36,14 @@
             "path" : "pages/meeting/meetingRecordDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/work/MeetingRecordList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/meetingRecordDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

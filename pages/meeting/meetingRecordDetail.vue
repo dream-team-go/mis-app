@@ -64,6 +64,10 @@
 				<text class="text-bold">{{info.create_time}}</text>
 			</view>
 		</view>
+		
+		<view class="padding flex flex-direction" v-if="info.status == 0">
+			<button class="cu-btn bg-red margin-tb-sm lg" @click="cancleBook">取消预定</button>
+		</view>
 	</view>
 </template>
 
@@ -137,7 +141,39 @@
 			});
 		},
 		methods: {
-
+			cancleBook: function(){
+				uni.showLoading({
+					title: '提交中',
+					mask: false
+				});
+				global.$http.post('/meeting/record/cancelMyRecord', {
+					params: {
+						record_id: this.info.id
+					},
+				}).then(res => {
+					uni.hideLoading();
+					if (res.status === "0") {
+						uni.showToast({
+							title: "取消成功",
+							icon: 'none'
+						});
+						this.info.status = -2;
+						this.steps[0].color = 'text-orange';
+						this.steps[1].color = 'text-orange';
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+			}
 		}
 	}
 </script>

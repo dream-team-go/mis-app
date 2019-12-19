@@ -4,19 +4,20 @@
 			<block slot="backText">返回</block>
 			<block slot="content">会议预定记录</block>
 		</cu-custom>
-		
+
 		<!-- <scroll-view scroll-x class="bg-red nav text-center">
 			<view class="cu-item" :class="key==TabCur?'text-white cur':''" v-for="(value, key) in StatusEnumMap" :key="key" @tap="recordStatusTab(key)">
 				{{value}}
 			</view>
 		</scroll-view> -->
 		<scroll-view scroll-x class="bg-red nav text-center">
-			<view class="cu-item" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length" :key="index" @tap="recordStatusTab(index)">
+			<view class="cu-item" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length"
+			 :key="index" @tap="recordStatusTab(index)">
 				{{Array.from(StatusEnumMap.values())[index]}}
 			</view>
 		</scroll-view>
-		
-		
+
+
 		<view class="cu-list menu text-left">
 			<view class="cu-item arrow" v-for="record in records" :key="record.id" @click="recordDetail(record)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
 				<view class="content">
@@ -44,27 +45,28 @@
 
 <script>
 	import uniLoadMore from '@/colorui/components/uni-load-more.vue';
-	import misEnum from '../../common/mis-enum.js';  
+	import misEnum from '../../common/mis-enum.js';
 	export default {
 		components: {
 			uniLoadMore
 		},
 		onLoad(option) {
-			if(option.status){
+			if (option.status) {
 				var index = 0;
-				misEnum.MeetingRecordEnumMap.forEach((value, key, map)=>{
-					if(key == option.status)
-					{
+				misEnum.MeetingRecordEnumMap.forEach((value, key, map) => {
+					if (key == option.status) {
 						this.TabCur = index;
 						return;
 					}
 					index++;
 				});
 				this.recordStatus = option.status;
-			}else{
+			} else {
 				this.recordStatus = Array.from(misEnum.MeetingRecordEnumMap.keys())[0];
 			}
-			this.loadData();
+		},
+		onShow() {
+			this.recordStatusTab(this.TabCur);
 		},
 		data() {
 			return {
@@ -83,13 +85,13 @@
 			}
 		},
 		onReachBottom() {
-			if(this.status !== "noMore"){
+			if (this.status !== "noMore") {
 				this.status = 'more';
 				this.loadData();
 			}
 		},
 		methods: {
-			loadData(){
+			loadData() {
 				this.status = 'loading';
 				global.$http.post('/meeting/record/myRecordList', {
 					params: {
@@ -99,15 +101,15 @@
 					},
 				}).then(res => {
 					if (res.status === "0") {
-						if(res.data.totlePage <= this.page){
+						if (res.data.totlePage <= this.page) {
 							this.status = 'noMore';
-						}else{
+						} else {
 							this.status = "more";
 						}
-						if(this.page === 1){
+						if (this.page === 1) {
 							this.records = res.data.list;
-						}else{
-							res.data.list.forEach(c=>{
+						} else {
+							res.data.list.forEach(c => {
 								this.records.push(c);
 							});
 						}
@@ -125,17 +127,17 @@
 					});
 				});
 			},
-			getStatusStr(status){
+			getStatusStr(status) {
 				return misEnum.MeetingRecordEnumMap.get(status);
 			},
-			recordStatusTab: function(index){
+			recordStatusTab: function(index) {
 				this.TabCur = index;
 				this.recordStatus = Array.from(this.StatusEnumMap.keys())[index];
 				this.page = 1;
 				this.records = [];
 				this.loadData();
 			},
-			recordDetail: function(record){
+			recordDetail: function(record) {
 				uni.navigateTo({
 					url: "../meeting/meetingRecordDetail?id=" + record.id,
 				});
