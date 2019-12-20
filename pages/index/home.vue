@@ -2,7 +2,7 @@
 	<view>
 		<car v-if="PageCur=='car'"></car>
 		<meeting v-if="PageCur=='meeting'" :meetingData="meetingData"></meeting>
-		<food v-if="PageCur=='food'"></food>
+		<food v-if="PageCur=='food'" :foodData="foodData"></food>
 		<user v-if="PageCur=='user'"></user>
 		<work v-if="PageCur=='work'"></work>
 		<view class="cu-bar tabbar bg-white shadow foot">
@@ -53,6 +53,20 @@
 					failCount: "",
 					waitCheckCount: "",
 					desc: "",
+					building_name: "",
+					room_number: "",
+					status: "",
+					start_time: "",
+					end_time: "",
+					create_time: ""
+				},
+				foodData: {
+					totalCount: "",
+					successCount: "",
+					cancleCount: "",
+					failCount: "",
+					waitCheckCount: "",
+					receive_people: "",
 					building_name: "",
 					room_number: "",
 					status: "",
@@ -126,6 +140,76 @@
 								this.meetingData.start_time = res.data.start_time;
 								this.meetingData.end_time = res.data.end_time;
 								this.meetingData.create_time = res.data.create_time;
+							}
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
+				}else if (this.PageCur === "food") {
+					uni.showLoading({
+						title: '加载中',
+						mask: false
+					});
+					//获取会务概览
+					global.$http.post('/dining/record/myCountByStatus', {
+						params: {},
+					}).then(res => {
+						if (res.status === "0") {
+							this.foodData.totalCount = 0;
+							this.foodData.successCount = 0;
+							this.foodData.cancleCount = 0;
+							this.foodData.failCount = 0;
+							this.foodData.waitCheckCount = 0;
+							var totalCount = 0;
+							for (var i = 0; i < res.data.length; i++) {
+								if (res.data[i].status === -2) {
+									this.foodData.cancleCount = res.data[i].total;
+								} else if (res.data[i].status === -1) {
+									this.foodData.failCount = res.data[i].total;
+								} else if (res.data[i].status === 0) {
+									this.foodData.waitCheckCount = res.data[i].total;
+								} else if (res.data[i].status === 1) {
+									this.foodData.successCount = res.data[i].total;
+								}
+								totalCount += res.data[i].total;
+							}
+							this.foodData.totalCount = totalCount;
+							uni.hideLoading();
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
+					//获取最近预定
+					global.$http.post('/dining/record/myLatelyRecord', {
+						params: {},
+					}).then(res => {
+						if (res.status === "0") {
+							if (res.data) {
+								this.foodData.receive_people = res.data.receive_people;
+								this.foodData.building_name = res.data.building_name;
+								this.foodData.room_number = res.data.room_number;
+								this.foodData.status = misEnum.FoodRecordEnumMap.get(res.data.status);
+								this.foodData.start_time = res.data.start_time;
+								this.foodData.end_time = res.data.end_time;
+								this.foodData.create_time = res.data.create_time;
 							}
 						} else {
 							uni.showToast({

@@ -102,7 +102,7 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"pages/meeting/index":1,"pages/user/index":1,"pages/work/index":1,"colorui/components/uni-load-more":1};
+/******/ 		var cssChunks = {"pages/food/index":1,"pages/meeting/index":1,"pages/user/index":1,"pages/work/index":1,"colorui/components/uni-load-more":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {

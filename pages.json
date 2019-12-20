@@ -44,6 +44,18 @@
             "path" : "pages/work/meetingRecordDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/food/bookFood",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/food/myFoodRecordList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/food/foodRecordDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

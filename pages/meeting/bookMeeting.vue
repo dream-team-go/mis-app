@@ -290,10 +290,10 @@
 					});
 					return;
 				}
-				if(this.para.desc.length > 15){
+				if(this.para.desc.length > 20){
 					uni.showToast({
 						icon: 'none',
-						title: '会议主题不超过15字'
+						title: '会议主题不超过20字'
 					});
 					return;
 				}
