@@ -43,7 +43,7 @@
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
-				<view class="cu-item" v-for="(item,index) in foodCuIconList" :key="index">
+				<view hover-class="navigator-hover" class="cu-item" v-for="(item,index) in foodCuIconList" :key="index" @tap="navigateTo(item.url)">
 					<view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]">
 						<view class="cu-tag badge" v-if="item.badge!=0">
 							<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
@@ -122,13 +122,13 @@
 					color: 'red',
 					badge: 120,
 					name: '会议室信息',
-					url: "../work/MeetingRecordList"
+					url: ""
 				}, {
 					cuIcon: 'cardboardfill',
 					color: 'red',
 					badge: 120,
 					name: '会议记录',
-					url: "../work/MeetingRecordList"
+					url: "../work/meetingRecordList"
 				}, {
 					cuIcon: 'picfill',
 					color: 'yellow',
@@ -144,7 +144,8 @@
 					cuIcon: 'cardboardfill',
 					color: 'red',
 					badge: 120,
-					name: '订餐记录'
+					name: '订餐记录',
+					url: "../work/foodRecordList"
 				}, {
 					cuIcon: 'picfill',
 					color: 'yellow',

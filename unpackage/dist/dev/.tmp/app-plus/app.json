@@ -10,11 +10,13 @@
     "pages/meeting/bookMeeting",
     "pages/work/meetingList",
     "pages/meeting/meetingRecordDetail",
-    "pages/work/MeetingRecordList",
+    "pages/work/meetingRecordList",
     "pages/work/meetingRecordDetail",
     "pages/food/bookFood",
     "pages/food/myFoodRecordList",
-    "pages/food/foodRecordDetail"
+    "pages/food/foodRecordDetail",
+    "pages/work/foodRecordList",
+    "pages/work/foodRecordDetail"
   ],
   "window": {
     "navigationStyle": "custom"

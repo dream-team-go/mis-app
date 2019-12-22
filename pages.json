@@ -37,7 +37,7 @@
             "style" : {}
         }
         ,{
-            "path" : "pages/work/MeetingRecordList",
+            "path" : "pages/work/meetingRecordList",
             "style" : {}
         }
         ,{
@@ -54,6 +54,14 @@
         }
         ,{
             "path" : "pages/food/foodRecordDetail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/foodRecordList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/foodRecordDetail",
             "style" : {}
         }
     ],
