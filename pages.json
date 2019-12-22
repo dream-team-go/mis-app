@@ -72,6 +72,18 @@
             "path" : "pages/work/meetingDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/work/saveFood",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/foodList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/foodDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

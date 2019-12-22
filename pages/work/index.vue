@@ -139,7 +139,8 @@
 					cuIcon: 'cardboardfill',
 					color: 'red',
 					badge: 120,
-					name: '包房信息'
+					name: '包房信息',
+					url: "../work/foodList"
 				}, {
 					cuIcon: 'cardboardfill',
 					color: 'red',

@@ -18,7 +18,10 @@
     "pages/work/foodRecordList",
     "pages/work/foodRecordDetail",
     "pages/work/saveMeeting",
-    "pages/work/meetingDetail"
+    "pages/work/meetingDetail",
+    "pages/work/saveFood",
+    "pages/work/foodList",
+    "pages/work/foodDetail"
   ],
   "window": {
     "navigationStyle": "custom"
