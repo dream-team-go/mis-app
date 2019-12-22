@@ -1,0 +1,30 @@
+<template>
+	<view>
+		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+			<block slot="backText">返回</block>
+			<block slot="content">包房</block>
+			<block slot="right" @tap="toAdd">新增</block>
+		</cu-custom>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				
+			}
+		},
+		methods: {
+			toAdd: function(e){
+				uni.navigateTo({
+					url:'../work/saveFood'
+				});
+			}
+		}
+	}
+</script>
+
+<style>
+
+</style>
