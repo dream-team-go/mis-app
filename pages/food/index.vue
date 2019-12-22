@@ -24,13 +24,13 @@
 				<view class="cu-item">
 					<navigator hover-class="none" url="../food/myFoodRecordList?status=1" open-type="navigate">
 						<text class="text-orange text-lg">{{foodData.successCount}}</text>
-						<text>预定成功</text>
+						<text>已确认</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="none" url="../food/myFoodRecordList?status=-1" open-type="navigate">
 						<text class="text-orange text-lg">{{foodData.failCount}}</text>
-						<text>预定失败</text>
+						<text>驳回</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
@@ -42,7 +42,7 @@
 				<view class="cu-item">
 					<navigator hover-class="none" url="../food/myFoodRecordList?status=0" open-type="navigate">
 						<text class="text-orange text-lg">{{foodData.waitCheckCount}}</text>
-						<text>待审批</text>
+						<text>待确认</text>
 					</navigator>
 				</view>
 			</view>

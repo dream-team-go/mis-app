@@ -64,6 +64,14 @@
             "path" : "pages/work/foodRecordDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/work/saveMeeting",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/meetingDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

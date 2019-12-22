@@ -9,7 +9,9 @@
 				<view class="content" :style="[{top:StatusBar + 'px'}]">
 					<slot name="content"></slot>
 				</view>
-				<slot name="right"></slot>
+				<view class="right" style="margin-right: 30upx;">
+					<slot name="right"></slot>
+				</view>
 			</view>
 		</view>
 	</view>

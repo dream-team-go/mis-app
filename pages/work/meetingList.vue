@@ -1,6 +1,10 @@
 <template>
 	<view>
-		
+		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+			<block slot="backText">返回</block>
+			<block slot="content">会议室</block>
+			<block slot="right" @tap="toAdd">新增</block>
+		</cu-custom>
 	</view>
 </template>
 
@@ -12,7 +16,11 @@
 			}
 		},
 		methods: {
-			
+			toAdd: function(e){
+				uni.navigateTo({
+					url:'../work/saveMeeting'
+				});
+			}
 		}
 	}
 </script>

@@ -122,7 +122,7 @@
 					color: 'red',
 					badge: 120,
 					name: '会议室信息',
-					url: ""
+					url: "../work/meetingList"
 				}, {
 					cuIcon: 'cardboardfill',
 					color: 'red',
