@@ -21,7 +21,12 @@
     "pages/work/meetingDetail",
     "pages/work/saveFood",
     "pages/work/foodList",
-    "pages/work/foodDetail"
+    "pages/work/foodDetail",
+    "pages/work/carList",
+    "pages/work/saveCar",
+    "pages/work/driverList",
+    "pages/work/driverDetail",
+    "pages/work/useCarList"
   ],
   "window": {
     "navigationStyle": "custom"

@@ -84,6 +84,26 @@
             "path" : "pages/work/foodDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/work/carList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/saveCar",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/driverList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/driverDetail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/useCarList",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

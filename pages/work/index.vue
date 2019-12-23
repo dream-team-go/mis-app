@@ -11,7 +11,7 @@
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
-				<view class="cu-item" v-for="(item,index) in carCuIconList" :key="index">
+				<view hover-class="navigator-hover" class="cu-item" v-for="(item,index) in carCuIconList" :key="index" @tap="navigateTo(item.url)">
 					<view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]">
 						<view class="cu-tag badge" v-if="item.badge!=0">
 							<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
@@ -75,12 +75,15 @@
 					cuIcon: 'cardboardfill',
 					color: 'red',
 					badge: 120,
-					name: '车辆信息'
+					name: '车辆信息',
+					url: "../work/carList"
+					
 				}, {
 					cuIcon: 'picfill',
 					color: 'yellow',
 					badge: 0,
-					name: '司机信息'
+					name: '司机信息',
+					url: "../work/driverList"
 				}, {
 					cuIcon: 'noticefill',
 					color: 'olive',
