@@ -59,7 +59,7 @@ globalInterceptor.request.use(
  */
 globalInterceptor.response.use(
 	(res, config) => {
-		if(res.header["Set-Cookie"] && res.header["Set-Cookie"].indexOf("JSESSIONID") != -1){
+		if(res.header && res.header["Set-Cookie"] && res.header["Set-Cookie"].indexOf("JSESSIONID") != -1){
 			uni.setStorageSync("cookie", res.header["Set-Cookie"]);
 		}
 		// 跳过 `request().download()` 这个拦截
