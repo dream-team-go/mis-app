@@ -104,6 +104,10 @@
             "path" : "pages/work/useCarList",
             "style" : {}
         }
+        ,{
+            "path" : "pages/work/carDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

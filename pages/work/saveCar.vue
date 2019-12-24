@@ -30,6 +30,15 @@
 			</view>
 
 			<view class="cu-form-group">
+				<view class="title">车辆使用性质</view>
+				<picker @change="ChangeNature" :value="natureIndex" :range="natures">
+					<view class="picker">
+						{{natures[natureIndex]}}
+					</view>
+				</picker>
+			</view>
+
+			<view class="cu-form-group">
 				<view class="title">品牌</view>
 				<input name="input" v-model="para.brand"></input>
 			</view>
@@ -58,17 +67,113 @@
 
 			<view class="cu-form-group">
 				<view class="title">排量</view>
-				<input name="input" v-model="para.volume"></input>
+				<input name="input" type="number" v-model="para.volume"></input>
 			</view>
 
 			<view class="cu-form-group">
 				<view class="title">功率</view>
-				<input name="input" v-model="para.power"></input>
+				<input name="input" type="number" v-model="para.power"></input>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">车架号</view>
+				<input name="input" v-model="para.vin_no"></input>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">发动机号</view>
+				<input name="input" v-model="para.motor_no"></input>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">变速箱类型</view>
+				<picker @change="ChangeAtType" :value="atTypeIndex" :range="atTypes">
+					<view class="picker">
+						{{atTypes[atTypeIndex]}}
+					</view>
+				</picker>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">车长</view>
+				<input name="input" type="number" v-model="para.car_length"></input>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">车宽</view>
+				<input name="input" type="number" v-model="para.car_width"></input>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">车高</view>
+				<input name="input" type="number" v-model="para.car_height"></input>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">是否城乡车辆</view>
+				<switch @change="ChangeIsTown" :class="isTown?'checked':''" :checked="isTown?true:false"></switch>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">是否运营车辆</view>
+				<switch @change="ChangeIsOperate" :class="isOperate?'checked':''" :checked="isOperate?true:false"></switch>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">是否监管</view>
+				<switch @change="ChangeIsSupervise" :class="isSupervise?'checked':''" :checked="isSupervise?true:false"></switch>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">有无倒车雷达</view>
+				<switch @change="ChangeIsPdc" :class="isPdc?'checked':''" :checked="isPdc?true:false"></switch>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">有无真皮座椅</view>
+				<switch @change="ChangeIsLeatherSeat" :class="isLeatherSeat?'checked':''" :checked="isLeatherSeat?true:false"></switch>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">有无CD</view>
+				<switch @change="ChangeIsCd" :class="isCd?'checked':''" :checked="isCd?true:false"></switch>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">购置价格（万元）</view>
+				<input name="input" type="number" v-model="para.price"></input>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">车辆GPS</view>
+				<input name="input" v-model="para.car_gps"></input>
+			</view>
+
+			<view class="cu-bar bg-white">
+				<view class="action">
+					车辆照片上传
+				</view>
+				<view class="action">
+					{{imgList.length}}/1
+				</view>
+			</view>
+			<view class="cu-form-group">
+				<view class="grid col-4 grid-square flex-sub">
+					<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
+						<image :src="imgList[index]" mode="aspectFill"></image>
+						<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
+							<text class='cuIcon-close'></text>
+						</view>
+					</view>
+					<view class="solids" @tap="ChooseImage" v-if="imgList.length<1">
+						<text class='cuIcon-cameraadd'></text>
+					</view>
+				</view>
 			</view>
 
 			<view class="cu-form-group">
 				<view class="title">重量</view>
-				<input name="input" v-model="para.quality"></input>
+				<input name="input" type="number" v-model="para.quality"></input>
 			</view>
 
 			<view class="cu-form-group">
@@ -95,101 +200,14 @@
 			</view>
 
 			<view class="cu-form-group">
-				<view class="title">车架号</view>
-				<input name="input" v-model="para.vin_no"></input>
-			</view>
-
-			<view class="cu-form-group">
-				<view class="title">发动机号</view>
-				<input name="input" v-model="para.motor_no"></input>
-			</view>
-
-			<view class="cu-form-group">
-				<view class="title">变速箱类型</view>
-				<picker @change="ChangeAtType" :value="atTypeIndex" :range="atTypes">
-					<view class="picker">
-						{{atTypes[atTypeIndex]}}
-					</view>
-				</picker>
-			</view>
-			
-			<view class="cu-form-group">
-				<view class="title">车长</view>
-				<input name="input" v-model="para.car_length"></input>
-			</view>
-			
-			<view class="cu-form-group">
-				<view class="title">车宽</view>
-				<input name="input" v-model="para.car_width"></input>
-			</view>
-			
-			<view class="cu-form-group">
-				<view class="title">车高</view>
-				<input name="input" v-model="para.car_height"></input>
-			</view>
-			
-			<view class="cu-form-group">
 				<view class="title">轴距</view>
-				<input name="input" v-model="para.wheel_base"></input>
-			</view>
-			
-			<view class="cu-form-group">
-				<view class="title">是否城乡车辆</view>
-				<switch @change="ChangeIsTown" :class="isTown?'checked':''" :checked="isTown?true:false"></switch>
-			</view>
-			
-			<view class="cu-form-group">
-				<view class="title">是否运营车辆</view>
-				<switch @change="ChangeIsOperate" :class="isOperate?'checked':''" :checked="isOperate?true:false"></switch>
-			</view>
-			
-			<view class="cu-form-group">
-				<view class="title">是否监管</view>
-				<switch @change="ChangeIsSupervise" :class="isSupervise?'checked':''" :checked="isSupervise?true:false"></switch>
-			</view>
-			
-			<view class="cu-form-group">
-				<view class="title">有无倒车雷达</view>
-				<switch @change="ChangeIsPdc" :class="isPdc?'checked':''" :checked="isPdc?true:false"></switch>
-			</view>
-			
-			<view class="cu-form-group">
-				<view class="title">有无真皮座椅</view>
-				<switch @change="ChangeIsLeatherSeat" :class="isLeatherSeat?'checked':''" :checked="isLeatherSeat?true:false"></switch>
-			</view>
-			
-			<view class="cu-form-group">
-				<view class="title">有无CD</view>
-				<switch @change="ChangeIsCd" :class="isCd?'checked':''" :checked="isCd?true:false"></switch>
-			</view>
-			
-			<view class="cu-form-group">
-				<view class="title">购置价格（万元）</view>
-				<input name="input" type="number" v-model="para.price"></input>
+				<input name="input" type="number" v-model="para.wheel_base"></input>
 			</view>
 
-			<view class="cu-bar bg-white margin-top">
-				<view class="action">
-					车辆照片上传
-				</view>
-				<view class="action">
-					{{imgList.length}}/1
-				</view>
-			</view>
 			<view class="cu-form-group">
-				<view class="grid col-4 grid-square flex-sub">
-					<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
-						<image :src="imgList[index]" mode="aspectFill"></image>
-						<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
-							<text class='cuIcon-close'></text>
-						</view>
-					</view>
-					<view class="solids" @tap="ChooseImage" v-if="imgList.length<1">
-						<text class='cuIcon-cameraadd'></text>
-					</view>
-				</view>
+				<view class="title">备注</view>
+				<input name="input" v-model="para.remark"></input>
 			</view>
-
 			<view class="padding flex flex-direction">
 				<button class="cu-btn bg-orange margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
@@ -215,16 +233,91 @@
 	}
 	export default {
 		onLoad(option) {
+			//编辑车辆
+			if (option.para) {
+				this.isAdd = false;
+				var info = JSON.parse(decodeURIComponent(option.para));
+				this.para.id = info.id;
+				this.para.car_number = info.car_number;
+				this.para.car_type = info.car_type;
+				this.para.plate_color = info.plate_color;
+				this.para.seat_num = info.seat_num;
+				this.para.color = info.color;
+				this.para.brand = info.brand;
+				this.para.volume = info.volume;
+				this.para.power = info.power;
+				this.para.fuel_type = info.fuel_type;
+				this.para.quality = info.quality;
+				if(info.produce_time && info.produce_time.length > 0){
+					this.para.produce_time = info.produce_time.substring(0,10);
+				}
+				if(info.license_time && info.license_time.length > 0){
+					this.para.license_time = info.license_time.substring(0,10);
+				}
+				this.para.nature = info.nature;
+				this.para.model = info.model;
+				this.para.vin_no = info.vin_no;
+				this.para.motor_no = info.motor_no;
+				this.para.at_type = info.at_type;
+				this.para.car_length = info.car_length;
+				this.para.car_width = info.car_width;
+				this.para.car_height = info.car_height;
+				this.para.wheel_base = info.wheel_base;
+				this.para.price = info.price;
+				this.para.is_town = info.is_town;
+				this.para.is_operate = info.is_operate;
+				this.para.is_supervise = info.is_supervise;
+				this.para.is_pdc = info.is_pdc;
+				this.para.is_leather_seat = info.is_leather_seat;
+				this.para.is_cd = info.is_cd;
+				this.para.remark = info.remark;
+				this.para.img = info.img;
+				this.para.car_gps = info.car_gps;
+				//设置辅助参数
+				this.imgList.push(this.para.img);
+				this.isTown = info.is_town == 1;
+				this.isOperate = info.is_operate == 1;
+				this.isSupervise = info.is_supervise == 1;
+				this.isPdc = info.is_pdc == 1;
+				this.isLeatherSeat = info.is_leather_seat == 1;
+				this.isCd = info.is_cd == 1;
+			}
 			//获取车辆相关枚举
-			global.$http.post('/car/info/enumsInfo', {
-
-			}).then(res => {
+			global.$http.post('/car/info/enumsInfo', {}).then(res => {
 				if (res.status === "0") {
 					res.data.car_type.forEach(c => this.carTypes.push(c));
 					res.data.plate_color.forEach(c => this.colors.push(c));
 					res.data.fuel_type.forEach(c => this.fuelTypes.push(c));
 					res.data.nature.forEach(c => this.natures.push(c));
 					res.data.at_type.forEach(c => this.atTypes.push(c));
+					//编辑时设置枚举数据
+					if (option.para) {
+						for (var i = 0; i < this.carTypes.length; i++) {
+							if(this.para.car_type ==  this.carTypes[i]){
+								this.carTypeIndex = i;
+							}
+						}
+						for (var i = 0; i < this.colors.length; i++) {
+							if(this.para.plate_color ==  this.colors[i]){
+								this.colorIndex = i;
+							}
+						}
+						for (var i = 0; i < this.fuelTypes.length; i++) {
+							if(this.para.fuel_type ==  this.fuelTypes[i]){
+								this.fuelTypeIndex = i;
+							}
+						}
+						for (var i = 0; i < this.natures.length; i++) {
+							if(this.para.nature ==  this.natures[i]){
+								this.natureIndex = i;
+							}
+						}
+						for (var i = 0; i < this.atTypes.length; i++) {
+							if(this.para.at_type ==  this.atTypes[i]){
+								this.atTypeIndex = i;
+							}
+						}
+					}
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -265,7 +358,7 @@
 				isLeatherSeat: false,
 				isCd: false,
 				para: {
-					id: 0,
+					id: "",
 					car_number: "",
 					car_type: "",
 					plate_color: "",
@@ -293,7 +386,10 @@
 					is_supervise: 0,
 					is_pdc: 0,
 					is_leather_seat: 0,
-					is_cd: 0
+					is_cd: 0,
+					remark: "",
+					img: "",
+					car_gps: ""
 				}
 			}
 		},
@@ -315,6 +411,7 @@
 							uni.hideLoading();
 							if (res.status === "0") {
 								this.imgList.push(res.data);
+								this.para.img = res.data;
 								uni.showToast({
 									icon: 'none',
 									title: '上传成功'
@@ -337,6 +434,7 @@
 			},
 			DelImg: function(e) {
 				this.imgList.splice(e.currentTarget.dataset.index, 1);
+				this.para.img = "";
 			},
 			ChangeCarType: function(e) {
 				this.carTypeIndex = e.detail.value;
@@ -344,14 +442,14 @@
 			},
 			ChangeColor: function(e) {
 				this.colorIndex = e.detail.value;
-				this.para.plate_color = colors[e.detail.value];
+				this.para.plate_color = this.colors[e.detail.value];
 			},
 			ChangeSeatNum: function(e) {
 				this.para.seat_num = Number(e.detail.value);
 			},
 			ChangeFuelType: function(e) {
 				this.fuelTypeIndex = e.detail.value;
-				this.para.fuel_type = fuelTypes[e.detail.value];
+				this.para.fuel_type = this.fuelTypes[e.detail.value];
 			},
 			ProduceTimeChange: function(e) {
 				this.para.produce_time = e.detail.value;
@@ -361,59 +459,177 @@
 			},
 			ChangeNature: function(e) {
 				this.natureIndex = e.detail.value;
-				this.para.nature = natures[e.detail.value];
+				this.para.nature = this.natures[e.detail.value];
 			},
-			ChangeAtType: function(e){
+			ChangeAtType: function(e) {
 				this.atTypeIndex = e.detail.value;
-				this.para.at_type = atTypes[e.detail.value];
+				this.para.at_type = this.atTypes[e.detail.value];
 			},
-			ChangeIsTown: function(e){
-				this.isTown =  e.detail.value;
+			ChangeIsTown: function(e) {
+				this.isTown = e.detail.value;
 				this.para.is_town = e.detail.value ? 1 : 0;
 			},
-			ChangeIsOperate: function(e){
-				this.isOperate =  e.detail.value;
+			ChangeIsOperate: function(e) {
+				this.isOperate = e.detail.value;
 				this.para.is_operate = e.detail.value ? 1 : 0;
 			},
-			ChangeIsSupervise: function(e){
-				this.isSupervise =  e.detail.value;
+			ChangeIsSupervise: function(e) {
+				this.isSupervise = e.detail.value;
 				this.para.is_supervise = e.detail.value ? 1 : 0;
 			},
-			ChangeIsPdc: function(e){
-				this.isPdc =  e.detail.value;
+			ChangeIsPdc: function(e) {
+				this.isPdc = e.detail.value;
 				this.para.is_pdc = e.detail.value ? 1 : 0;
 			},
-			ChangeIsLeatherSeat: function(e){
-				this.isLeatherSeat =  e.detail.value;
+			ChangeIsLeatherSeat: function(e) {
+				this.isLeatherSeat = e.detail.value;
 				this.para.is_leather_seat = e.detail.value ? 1 : 0;
 			},
-			ChangeIsCd: function(e){
-				this.isCd =  e.detail.value;
+			ChangeIsCd: function(e) {
+				this.isCd = e.detail.value;
 				this.para.is_cd = e.detail.value ? 1 : 0;
 			},
 			Submit: function(e) {
 				//验证数据
-				if (this.building_id <= 0) {
+				if (this.para.car_number.length <= 0) {
 					uni.showToast({
 						icon: 'none',
-						title: '请选择办公楼房'
+						title: '请填写车牌号'
 					});
 					return;
 				}
-				if (this.para.office_room_id <= 0) {
+				if (this.para.plate_color.length <= 0) {
 					uni.showToast({
 						icon: 'none',
-						title: '请选择办公房间'
+						title: '请选择车牌颜色'
 					});
 					return;
 				}
-
+				if (this.para.car_type.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请选择车辆类型'
+					});
+					return;
+				}
+				if (this.para.nature.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请选择车辆使用性质'
+					});
+					return;
+				}
+				if (this.para.brand.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写品牌'
+					});
+					return;
+				}
+				if (this.para.seat_num <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请选择座位数'
+					});
+					return;
+				}
+				if (this.para.color.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写车身颜色'
+					});
+					return;
+				}
+				if (this.para.fuel_type.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请选择燃料类型'
+					});
+					return;
+				}
+				if (this.para.volume.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写排量'
+					});
+					return;
+				}
+				if (this.para.power.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写功率'
+					});
+					return;
+				}
+				if (this.para.vin_no.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写车架号'
+					});
+					return;
+				}
+				if (this.para.motor_no.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写发动机号'
+					});
+					return;
+				}
+				if (this.para.at_type.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请选择变速箱类型'
+					});
+					return;
+				}
+				if (this.para.car_length.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写车长'
+					});
+					return;
+				}
+				if (this.para.car_width.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写车宽'
+					});
+					return;
+				}
+				if (this.para.car_height.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写车高'
+					});
+					return;
+				}
+				if (this.para.price.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写购置价格'
+					});
+					return;
+				}
+				if (this.para.car_gps.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写车辆GPS'
+					});
+					return;
+				}
+				if (this.para.img.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请选择图片'
+					});
+					return;
+				}
 				//提交数据
 				uni.showLoading({
 					title: '提交中',
 					mask: false
 				});
-				global.$http.post('/meeting/info/save', {
+				global.$http.post('/car/info/save', {
 					params: this.para,
 				}).then(res => {
 					uni.hideLoading();

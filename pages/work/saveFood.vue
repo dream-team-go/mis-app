@@ -143,7 +143,7 @@
 					contentnomore: '没有更多'
 				},
 				para: {
-					id: 0,
+					id: "",
 					vr: "",
 					capacity: 1,
 					office_room_id: 0

@@ -18,7 +18,8 @@
 		methods: {
 			toAdd: function(e){
 				uni.navigateTo({
-					url:'../work/saveCar'
+					//url:'../work/saveCar'
+					url:'../work/carDetail?id=5'
 				});
 			}
 		}

@@ -54,10 +54,6 @@
 			</view>
 		</view>
 		
-		<view class="padding flex flex-direction">
-			<button class="cu-btn bg-orange margin-tb-sm lg" @click="bindCar">关联车辆</button>
-		</view>
-		
 	</view>
 </template>
 
@@ -90,17 +86,6 @@
 			});
 		},
 		methods: {
-			toEdit: function(e){
-				uni.navigateTo({
-					url: '../work/saveMeeting?para=' + encodeURIComponent(JSON.stringify(this.info))
-				});
-			},
-			bindCar: function(e){
-				uni.showModal({
-					content: '待开发',
-					showCancel: false
-				});
-			}
 		}
 	}
 </script>
