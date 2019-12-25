@@ -108,6 +108,10 @@
             "path" : "pages/work/carDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/car/bookCar",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

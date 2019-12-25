@@ -28,7 +28,7 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">时间</view>
-				<picker mode="time" :value="time" start="startTime" @change="TimeChange">
+				<picker mode="time" :value="time" @change="TimeChange">
 					<view class="picker">
 						{{time}}
 					</view>
@@ -53,7 +53,7 @@
 			
 			<view class="cu-form-group">
 				<view class="title">上菜时间</view>
-				<picker mode="time" :value="mealTime" start="startTime" @change="MealTimeChange">
+				<picker mode="time" :value="mealTime" @change="MealTimeChange">
 					<view class="picker">
 						{{mealTime}}
 					</view>
@@ -201,7 +201,6 @@
 				endDate: getDate(30),
 				time: getTime(),
 				mealTime: getTime(),
-				startTime: getTime(),
 				hourIndex: 0,
 				hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
 				peopleIndex: 0,

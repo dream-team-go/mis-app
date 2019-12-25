@@ -27,7 +27,8 @@
     "pages/work/driverList",
     "pages/work/driverDetail",
     "pages/work/useCarList",
-    "pages/work/carDetail"
+    "pages/work/carDetail",
+    "pages/car/bookCar"
   ],
   "window": {
     "navigationStyle": "custom"

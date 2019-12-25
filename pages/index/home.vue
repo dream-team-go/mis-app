@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<car v-if="PageCur=='car'"></car>
+		<car v-if="PageCur=='car'" :carData="carData"></car>
 		<meeting v-if="PageCur=='meeting'" :meetingData="meetingData"></meeting>
 		<food v-if="PageCur=='food'" :foodData="foodData"></food>
 		<user v-if="PageCur=='user'"></user>
@@ -73,6 +73,17 @@
 					start_time: "",
 					end_time: "",
 					create_time: ""
+				},
+				carData:{
+					totalCount: "",
+					approveCount: "",
+					cancleCount: "",
+					failCount: "",
+					waitCheckCount: "",
+					finishDispatchCount: "",
+					centerCancleCount: "",
+					underwayCount: "",
+					successCount: "",
 				}
 			}
 		},
@@ -84,7 +95,18 @@
 		},
 		methods: {
 			loadData() {
-				if (this.PageCur === "meeting") {
+				if(this.PageCur === "car"){
+					this.carData.totalCount = 0;
+					this.carData.approveCount = 0;
+					this.carData.cancleCount = 0;
+					this.carData.failCount = 0;
+					this.carData.waitCheckCount = 0;
+					this.carData.finishDispatchCount = 0;
+					this.carData.centerCancleCount = 0;
+					this.carData.underwayCount = 0;
+					this.carData.successCount = 0;
+				}
+				else if (this.PageCur === "meeting") {
 					uni.showLoading({
 						title: '加载中',
 						mask: false
