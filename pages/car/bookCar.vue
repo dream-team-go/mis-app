@@ -2,7 +2,7 @@
 	<view>
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">预定用车</block>
+			<block slot="content">{{isAdd ? '预定用车' : '编辑预定用车'}}</block>
 		</cu-custom>
 		<form>
 			<view class="cu-form-group">
@@ -167,6 +167,7 @@
 	export default {
 		data() {
 			return {
+				isAdd: true,
 				StatusBar: this.StatusBar,
 				CustomBar: this.CustomBar,
 				ScreenHeight: this.ScreenHeight,
@@ -189,6 +190,7 @@
 				multiIndex: [0, 0],
 				regions:[],
 				para: {
+					id: "",
 					car_user: "",
 					phone: "",
 					people_num: 1,
@@ -213,9 +215,34 @@
 				return  this.backDate + " " + this.backTime;
 			}
 		},
-		onLoad() {
-			this.para.car_user = this.userInfo.user.userCnName;
-			this.para.phone = this.userInfo.user.username;
+		onLoad(option) {
+			if(option.para){
+				this.isAdd = false;
+				var info = JSON.parse(decodeURIComponent(option.para));
+				this.para.id = info.id;
+				this.para.car_user = info.car_user;
+				this.para.phone = info.phone;
+				this.para.people_num = info.people_num;
+				this.peopleIndex = info.people_num - 1;
+				this.para.reason = info.reason;
+				this.areaIndex = info.area == "市内" ? 1 : 2;
+				this.para.area = info.area;
+				this.para.start_place = info.start_place;
+				this.para.end_place = info.end_place;
+				this.date = info.predict_start_time.substring(0,10);
+				this.time = info.predict_start_time.substring(11,16);
+				this.backDate = info.predict_end_time.substring(0,10);
+				this.backTime = info.predict_end_time.substring(11,16);
+				this.para.end_city = info.end_city;
+				this.para.end_area = info.end_area;
+				this.typeIndex = info.type;
+				this.para.type = info.type;
+			}
+			else
+			{
+				this.para.car_user = this.userInfo.user.userCnName;
+				this.para.phone = this.userInfo.user.username;
+			}
 			//获取市/县数据
 			global.$http.post('/core/organization/getAreaListYn', {
 				params: {},
@@ -225,9 +252,27 @@
 					this.regions.forEach(c=>{
 						this.multiArray[0].push(c.name);
 					})
-					this.regions[0].subs.forEach(c=>{
-						this.multiArray[1].push(c.name);
-					});
+					if(option.para){
+						//选中市区
+						for (var i = 0; i < this.multiArray[0].length; i++) {
+							if(this.para.end_city == this.multiArray[0][i]){
+								this.multiIndex[0] = i;
+							}
+						}
+						//选中县份
+						this.regions[this.multiIndex[0]].subs.forEach(c=>{
+							this.multiArray[1].push(c.name);
+						});
+						for (var i = 0; i < this.multiArray[1].length; i++) {
+							if(this.para.end_area == this.multiArray[1][i]){
+								this.multiIndex[1] = i;
+							}
+						}
+					}else{
+						this.regions[0].subs.forEach(c=>{
+							this.multiArray[1].push(c.name);
+						});
+					}
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -343,7 +388,7 @@
 					title: '提交中',
 					mask: false
 				});
-				global.$http.post('/car/apply/create', {
+				global.$http.post('/car/apply/' + (this.isAdd ? 'create' : 'update'), {
 					params: this.para,
 				}).then(res => {
 					uni.hideLoading();

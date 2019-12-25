@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">车辆预约详情</block>
-			<block v-show="info.status == 0" slot="right" @tap="toEdit">修改</block>
+			<block v-show="info.status > 0" slot="right" @tap="toEdit">派车</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -83,8 +83,8 @@
 				<text class="text-bold">{{info.type == 1 ? "公务用车" : "网约车"}}</text>
 			</view>
 		</view>
-		<view class="padding flex flex-direction" v-if="info.status == 0">
-			<button class="cu-btn bg-red margin-tb-sm lg" @click="cancleBook">取消预定</button>
+		<view class="padding flex flex-direction" v-if="info.status == 1">
+			<button class="cu-btn bg-red margin-tb-sm lg" @click="cancleBook">取消订单</button>
 		</view>
 	</view>
 </template>
@@ -299,14 +299,14 @@
 					title: '提交中',
 					mask: false
 				});
-				global.$http.post('/car/apply/myCancel', {
+				global.$http.post('/car/apply/cancel', {
 					params: {
 						apply_id: this.info.id
 					},
 				}).then(res => {
 					uni.hideLoading();
 					if (res.status === "0") {
-						this.info.status = -3;
+						this.info.status = -2;
 						uni.showToast({
 							title: "取消成功",
 							icon: 'none'
@@ -324,11 +324,6 @@
 						title: err.message,
 						icon: 'none'
 					});
-				});
-			},
-			toEdit: function(e){
-				uni.navigateTo({
-					url: '../car/bookCar?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			}
 		}

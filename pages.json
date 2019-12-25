@@ -120,6 +120,10 @@
             "path" : "pages/car/carRecordDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/work/useCarRecordDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

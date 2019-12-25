@@ -30,7 +30,8 @@
     "pages/work/carDetail",
     "pages/car/bookCar",
     "pages/car/myCarRecordList",
-    "pages/car/carRecordDetail"
+    "pages/car/carRecordDetail",
+    "pages/work/useCarRecordDetail"
   ],
   "window": {
     "navigationStyle": "custom"

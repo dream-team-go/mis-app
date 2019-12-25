@@ -88,6 +88,12 @@
 					cuIcon: 'noticefill',
 					color: 'olive',
 					badge: 22,
+					name: '用车记录',
+					url: "../work/useCarList"
+				}, {
+					cuIcon: 'noticefill',
+					color: 'olive',
+					badge: 22,
 					name: '用车审批'
 				}, {
 					cuIcon: 'upstagefill',

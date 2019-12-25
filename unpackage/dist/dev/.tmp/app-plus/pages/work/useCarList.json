@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom",
+    "uni-load-more": "/colorui/components/uni-load-more"
+  }
 }
