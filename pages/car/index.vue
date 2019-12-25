@@ -10,7 +10,7 @@
 					<text class="cuIcon-title text-orange"></text> 用车概况
 				</view>
 				<view class="action">
-					<button class="cu-btn bg-green shadow" @tap="toBookcar">预定</button>
+					<button class="cu-btn bg-green shadow" @tap="toBookcar">预约</button>
 				</view>
 			</view>
 			
@@ -18,7 +18,7 @@
 				<view class="cu-item">
 					<navigator hover-class="none" url="../car/myCarRecordList" open-type="navigate">
 						<text class="text-orange text-lg">{{carData.totalCount}}</text>
-						<text>共预定</text>
+						<text>共预约</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
@@ -73,7 +73,7 @@
 			
 			<view class="cu-bar bg-white solid-bottom margin-top">
 				<view class="action">
-					<text class="cuIcon-title text-orange"></text> 最近预定
+					<text class="cuIcon-title text-orange"></text> 最近预约
 				</view>
 			</view>
 			<view class="cu-list menu">

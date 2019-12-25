@@ -35,5 +35,6 @@ const BuildingStatusEnumMap = new Map([
 export default { 
     MeetingRecordEnumMap,
 	FoodRecordEnumMap,
-	BuildingStatusEnumMap
+	BuildingStatusEnumMap,
+	UseCarRecordEnumMap
 }

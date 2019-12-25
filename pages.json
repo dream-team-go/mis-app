@@ -112,6 +112,14 @@
             "path" : "pages/car/bookCar",
             "style" : {}
         }
+        ,{
+            "path" : "pages/car/myCarRecordList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/car/carRecordDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"
