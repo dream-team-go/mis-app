@@ -95,12 +95,13 @@
 					color: 'olive',
 					badge: 22,
 					name: '用车审批',
-					url:"../work/checkUserCarRecordList"
+					url:"../work/checkUseCarRecordList"
 				}, {
 					cuIcon: 'upstagefill',
 					color: 'cyan',
 					badge: 0,
-					name: '用车调度'
+					name: '用车调度',
+					url:"../work/dispatchUseCarRecordList"
 				}, {
 					cuIcon: 'clothesfill',
 					color: 'blue',

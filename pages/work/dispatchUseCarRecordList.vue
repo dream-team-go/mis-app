@@ -2,7 +2,7 @@
 	<view>
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">审核用车记录</block>
+			<block slot="content">用车调度记录</block>
 		</cu-custom>
 
 		<scroll-view scroll-x class="bg-red nav text-center">
@@ -47,7 +47,7 @@
 		},
 		onLoad(option) {
 			misEnum.UseCarRecordEnumMap.forEach((value, key, map) => {
-				if(key == 0 || key == 1 || key == -1)
+				if(key == 1 || key == 2 || key == -2 || key == 3 || key == 4)
 				{
 					this.StatusEnumMap.set(key, value);
 				}
@@ -63,7 +63,7 @@
 				});
 				this.recordStatus = option.status;
 			} else {
-				this.recordStatus = Array.from(misEnum.UseCarRecordEnumMap.keys())[0];
+				this.recordStatus = Array.from(this.StatusEnumMap.keys())[0];
 			}
 		},
 		onShow() {
@@ -94,7 +94,7 @@
 		methods: {
 			loadData() {
 				this.status = 'loading';
-				global.$http.post('/car/apply/spList', {
+				global.$http.post('/car/apply/ddList', {
 					params: {
 						status: this.recordStatus,
 						page: this.page,
@@ -140,7 +140,7 @@
 			},
 			recordDetail: function(record) {
 				uni.navigateTo({
-					url: "../work/checkUserCarRecordDetail?id=" + record.id,
+					url: "../work/dispatchUseCarRecordDetail?id=" + record.id,
 				});
 			}
 		}

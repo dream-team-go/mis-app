@@ -32,8 +32,12 @@
     "pages/car/myCarRecordList",
     "pages/car/carRecordDetail",
     "pages/work/useCarRecordDetail",
-    "pages/work/checkUserCarRecordList",
-    "pages/work/checkUserCarRecordDetail"
+    "pages/work/checkUseCarRecordList",
+    "pages/work/checkUseCarRecordDetail",
+    "pages/work/dispatchUseCarRecordList",
+    "pages/work/dispatchUseCarRecordDetail",
+    "pages/work/dispatchUseCar",
+    "pages/work/dispatchUseCarDetail"
   ],
   "window": {
     "navigationStyle": "custom"

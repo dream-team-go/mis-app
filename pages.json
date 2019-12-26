@@ -125,11 +125,23 @@
             "style" : {}
         }
         ,{
-            "path" : "pages/work/checkUserCarRecordList",
+            "path" : "pages/work/checkUseCarRecordList",
             "style" : {}
         }
         ,{
-            "path" : "pages/work/checkUserCarRecordDetail",
+            "path" : "pages/work/checkUseCarRecordDetail",
+            "style" : {}
+        },{
+            "path" : "pages/work/dispatchUseCarRecordList",
+            "style" : {}
+        },{
+            "path" : "pages/work/dispatchUseCarRecordDetail",
+            "style" : {}
+        },{
+            "path" : "pages/work/dispatchUseCar",
+            "style" : {}
+        },{
+            "path" : "pages/work/dispatchUseCarDetail",
             "style" : {}
         }
     ],
