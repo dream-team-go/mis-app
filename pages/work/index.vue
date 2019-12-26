@@ -94,7 +94,8 @@
 					cuIcon: 'noticefill',
 					color: 'olive',
 					badge: 22,
-					name: '用车审批'
+					name: '用车审批',
+					url:"../work/checkUserCarRecordList"
 				}, {
 					cuIcon: 'upstagefill',
 					color: 'cyan',

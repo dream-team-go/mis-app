@@ -124,6 +124,14 @@
             "path" : "pages/work/useCarRecordDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/work/checkUserCarRecordList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/checkUserCarRecordDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

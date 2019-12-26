@@ -31,7 +31,9 @@
     "pages/car/bookCar",
     "pages/car/myCarRecordList",
     "pages/car/carRecordDetail",
-    "pages/work/useCarRecordDetail"
+    "pages/work/useCarRecordDetail",
+    "pages/work/checkUserCarRecordList",
+    "pages/work/checkUserCarRecordDetail"
   ],
   "window": {
     "navigationStyle": "custom"
