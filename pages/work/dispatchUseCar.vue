@@ -27,7 +27,7 @@
 				</view>
 				<view class="cu-form-group">
 					<view class="title">乘车人数</view>
-					<picker @change="ChangePeopleNum" :value="peopleNumIndex" :range="peopleNums" @tap="tapPeopleNumPicker">
+					<picker @change="ChangePeopleNum" :id="index" :value="dispatchOrder.people_num" :range="peopleNums">
 						<view class="picker">
 							{{dispatchOrder.people_num}}
 						</view>
@@ -35,7 +35,7 @@
 				</view>
 				<view class="cu-form-group">
 					<view class="title">车辆</view>
-					<view class="modal-group" @tap="showCarModal" data-target="Modal">
+					<view class="modal-group" @tap="showCarModal(index)" data-target="Modal">
 						<view class="picker">
 							{{ dispatchOrder.car_id > 0 ? dispatchOrder.car_number + "("+dispatchOrder.car_seat_num+"座)": '请选择' }}
 						</view>
@@ -43,12 +43,15 @@
 				</view>
 				<view class="cu-form-group">
 					<view class="title">司机</view>
-					<view class="modal-group" @tap="showDriverModal" data-target="Modal">
+					<view class="modal-group" @tap="showDriverModal(index)" data-target="Modal">
 						<view class="picker">
-							{{ dispatchOrder.driver_id > 0 ? dispatchOrder.driver_name + "("+ dispatchOrder.driver_phone +")" : '请选择' }}
+							{{ dispatchOrder.driver_id.length > 0 ? dispatchOrder.driver_name + "("+ dispatchOrder.driver_phone +")" : '请选择' }}
 						</view>
 					</view>
 				</view>
+			</view>
+			<view class="padding flex flex-direction">
+				<button class="cu-btn bg-orange margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
 		</form>
 		
@@ -101,7 +104,7 @@
 								</view>
 							</view>
 							<view class="action">
-								<view class="text-grey text-xs">{{driver.drive_age}}年</view>
+								<view class="text-grey text-xs">驾龄{{driver.drive_age}}年</view>
 								<view class="cu-tag round bg-orange sm">{{driver.is_clash > 0 ? "已被调度" : "可调度"}}</view>
 							</view>
 						</view>
@@ -122,6 +125,7 @@
 				ScreenHeight: this.ScreenHeight,
 				numberIndex: 0,
 				numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+				peopleNums: [0, 1, 2, 3, 4, 5, 6, 7, 8],
 				info:{},
 				isShowCarModal: false,
 				isShowDriverModal: false,
@@ -135,14 +139,15 @@
 					contentrefresh: '加载中',
 					contentnomore: '没有更多'
 				},
+				editIndex: 0,
 				para: {
 					order_code: "",
 					list: [{
 						car_id: 0,
 						car_number: "",
 						car_seat_num: "",
-						people_num: "",
-						driver_id: 0,
+						people_num: 0,
+						driver_id: "",
 						driver_name: "",
 						driver_phone: ""
 					}]
@@ -153,6 +158,40 @@
 			var info = JSON.parse(decodeURIComponent(option.para));
 			this.info = info;
 			this.para.order_code = info.order_code;
+			//获取派车单
+			if(this.info.status >= 2){
+				global.$http.post('/car/dispatch/getListByDispatch', {
+					params: {
+						order_code: this.info.order_code
+					},
+				}).then(res => {
+					if (res.status === "0") {
+						this.para.list.length = 0;
+						res.data.forEach(c=>{
+							this.para.list.push({
+								car_id: c.car_id,
+								car_number: c.car_number,
+								car_seat_num: c.seat_num,
+								people_num: c.people_num,
+								driver_id: c.driver_id,
+								driver_name: c.driver_name,
+								driver_phone: c.driver_phone
+							});
+						});
+						this.numberIndex = res.data.length - 1;
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+			}
 		},
 		methods: {
 			getCarListData() {
@@ -166,7 +205,7 @@
 				}).then(res => {
 					if (res.status === "0") {
 						this.status = 'noMore';
-						this.cars = res.data.list;
+						this.cars = res.data;
 					} else {
 						uni.showToast({
 							title: res.msg,
@@ -191,7 +230,7 @@
 				}).then(res => {
 					if (res.status === "0") {
 						this.status = 'noMore';
-						this.cars = res.data.list;
+						this.drivers = res.data;
 					} else {
 						uni.showToast({
 							title: res.msg,
@@ -215,7 +254,9 @@
 						this.para.list.push({
 							car_id: 0,
 							car_number: "",
-							driver_id: 0,
+							car_seat_num: "",
+							people_num: 0,
+							driver_id: "",
 							driver_name: "",
 							driver_phone: ""
 						});
@@ -223,6 +264,7 @@
 				}
 			},
 			showCarModal: function(e) {
+				this.editIndex = e;
 				this.page = 1;
 				this.cars = [];
 				this.isShowCarModal = true;
@@ -232,16 +274,13 @@
 				this.isShowCarModal = false;
 			},
 			getCar: function(e) {
-				if (this.car_id != e.id) {
-					this.car_id = e.id;
-					this.car_name = e.name;
-					//清除房间选择
-					this.para.office_driver_id = 0;
-					this.driver_name = "";
-				}
+				this.para.list[this.editIndex].car_id = e.id;
+				this.para.list[this.editIndex].car_number = e.car_number;
+				this.para.list[this.editIndex].car_seat_num = e.seat_num;
 				this.isShowCarModal = false;
 			},
 			showDriverModal: function(e) {
+				this.editIndex = e;
 				this.page = 1;
 				this.cars = [];
 				this.isShowDriverModal = true;
@@ -251,17 +290,78 @@
 				this.isShowDriverModal = false;
 			},
 			getDriver: function(e) {
-				if (this.car_id != e.id) {
-					this.car_id = e.id;
-					this.car_name = e.name;
-					//清除房间选择
-					this.para.office_driver_id = 0;
-					this.driver_name = "";
-				}
+				this.para.list[this.editIndex].driver_id = e.id;
+				this.para.list[this.editIndex].driver_name = e.user_cn_name;
+				this.para.list[this.editIndex].driver_phone = e.tel_no;
 				this.isShowDriverModal = false;
 			},
-			tapPeopleNumPicker: function(e){
-				var tmp = e.detail;
+			ChangePeopleNum: function(e){
+				this.para.list[Number(e.target.id)].people_num = e.target.value;
+			},
+			Submit: function(e){
+				var totalCount = 0;
+				//验证数据
+				for (var i = 0; i < this.para.list.length; i++) {
+					var dispatch = this.para.list[i];
+					if(dispatch.people_num <= 0){
+						uni.showToast({
+							icon: 'none',
+							title: '派车单' + (i+1) + '：乘车人数必须大于0'
+						});
+						return;
+					}
+					if(dispatch.car_id <= 0){
+						uni.showToast({
+							icon: 'none',
+							title: '派车单' + (i+1) + '：请选择车辆'
+						});
+						return;
+					}
+					if(dispatch.driver_id.length <= 0){
+						uni.showToast({
+							icon: 'none',
+							title: '派车单' + (i+1) + '：请选择司机'
+						});
+						return;
+					}
+					totalCount+=Number(dispatch.people_num);
+				}
+				
+				if(totalCount != this.info.people_num){
+					uni.showToast({
+						icon: 'none',
+						title: '乘车总人数不等于用车人数'
+					});
+					return;
+				}
+				//提交数据
+				uni.showLoading({
+					title: '提交中',
+					mask: false
+				});
+				global.$http.post('/car/dispatch/save', {
+					params: this.para,
+				}).then(res => {
+					uni.hideLoading();
+					if (res.status === "0") {
+						uni.showToast({
+							icon: 'none',
+							title: '提交成功'
+						});
+						uni.navigateBack();
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
 			}
 		}
 	}

@@ -3,7 +3,6 @@
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">车辆预约详情</block>
-			<block v-show="info.status > 0" slot="right" @tap="toEdit">派车</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">

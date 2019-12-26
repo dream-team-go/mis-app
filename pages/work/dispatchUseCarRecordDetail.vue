@@ -327,7 +327,7 @@
 				});
 			},
 			toDispatch: function(e){
-				if(this.info.status == 1){
+				if(this.info.status == 1 || this.info.status == 2){
 					uni.navigateTo({
 						url: '../work/dispatchUseCar?para=' + encodeURIComponent(JSON.stringify(this.info))
 					});
