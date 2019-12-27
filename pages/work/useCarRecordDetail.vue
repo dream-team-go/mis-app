@@ -3,6 +3,7 @@
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">车辆预约详情</block>
+			<block v-show="info.status > 1" slot="right" @tap="toDispatch">派车单</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -323,6 +324,11 @@
 						title: err.message,
 						icon: 'none'
 					});
+				});
+			},
+			toDispatch: function(e){
+				uni.navigateTo({
+					url: '../work/dispatchUseCarDetail?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			}
 		}

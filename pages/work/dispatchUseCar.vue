@@ -15,7 +15,7 @@
 				<view class="title">派车数量</view>
 				<picker @change="ChangeNumber" :value="numberIndex" :range="numbers">
 					<view class="picker">
-						{{numbers[numberIndex]}}
+						{{numbers[numberIndex]}}辆
 					</view>
 				</picker>
 			</view>
