@@ -156,6 +156,14 @@
             "path" : "pages/work/settleDispatchCar",
             "style" : {}
         }
+        ,{
+            "path" : "pages/car/useCarAppraise",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/car/dispatchUseCarDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

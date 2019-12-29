@@ -4,6 +4,7 @@
 			<block slot="backText">返回</block>
 			<block slot="content">车辆预约详情</block>
 			<block v-show="info.status == 0" slot="right" @tap="toEdit">修改</block>
+			<block v-show="info.status != 4" slot="right" @tap="toAppraise">评价</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -326,9 +327,14 @@
 					});
 				});
 			},
-			toEdit: function(e){
+			toEdit: function(e) {
 				uni.navigateTo({
 					url: '../car/bookCar?para=' + encodeURIComponent(JSON.stringify(this.info))
+				});
+			},
+			toAppraise: function(e) {
+				uni.navigateTo({
+					url: '../car/useCarAppraise?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			}
 		}

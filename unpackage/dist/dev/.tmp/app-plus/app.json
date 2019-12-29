@@ -40,7 +40,8 @@
     "pages/work/dispatchUseCarDetail",
     "pages/work/dispatchCarOrderList",
     "pages/work/dispatchCarOrderDetail",
-    "pages/work/settleDispatchCar"
+    "pages/work/settleDispatchCar",
+    "pages/car/useCarAppraise"
   ],
   "window": {
     "navigationStyle": "custom"

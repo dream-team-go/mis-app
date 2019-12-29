@@ -61,7 +61,7 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 司机：
+				<text class="cuIcon-title text-orange"></text> 申请人：
 				<text class="text-bold">{{info.car_user}}（{{info.phone}}）</text>
 			</view>
 		</view>

@@ -60,6 +60,7 @@
 		data() {
 			return {
 				isAdd: true,
+				info: {},
 				stop_num: 0,
 				stop_price: 0,
 				para: {
@@ -78,6 +79,7 @@
 		},
 		onLoad(option) {
 			var info = JSON.parse(decodeURIComponent(option.para));
+			this.info = info;
 			//获取里程费用
 			global.$http.post('/car/dispatch/getStop', {
 				params: {
