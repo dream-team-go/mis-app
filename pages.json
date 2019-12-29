@@ -144,6 +144,18 @@
             "path" : "pages/work/dispatchUseCarDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/work/dispatchCarOrderList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/dispatchCarOrderDetail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/settleDispatchCar",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

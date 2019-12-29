@@ -14,6 +14,7 @@ export const globalInterceptor = {
  */
 export const config = {
 	baseURL: "http://39.108.218.29:8080/mis",
+	//baseURL: "http://192.168.0.131:8080/mis",
 	header: {
 		// 'X-Auth-Token': 'xxxx',
 		contentType: "application/x-www-form-urlencoded"

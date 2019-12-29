@@ -37,7 +37,10 @@
     "pages/work/dispatchUseCarRecordList",
     "pages/work/dispatchUseCarRecordDetail",
     "pages/work/dispatchUseCar",
-    "pages/work/dispatchUseCarDetail"
+    "pages/work/dispatchUseCarDetail",
+    "pages/work/dispatchCarOrderList",
+    "pages/work/dispatchCarOrderDetail",
+    "pages/work/settleDispatchCar"
   ],
   "window": {
     "navigationStyle": "custom"

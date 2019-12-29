@@ -23,6 +23,22 @@
 			
 			<view class="cu-bar bg-white solid-bottom margin-top">
 				<view class="action">
+					<text class="cuIcon-title text-orange "></text> 车辆维修
+				</view>
+			</view>
+			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
+				<view hover-class="navigator-hover" class="cu-item" v-for="(item,index) in maintainCuIconList" :key="index" @tap="navigateTo(item.url)">
+					<view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]">
+						<view class="cu-tag badge" v-if="item.badge!=0">
+							<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
+						</view>
+					</view>
+					<text>{{item.name}}</text>
+				</view>
+			</view>
+			
+			<view class="cu-bar bg-white solid-bottom margin-top">
+				<view class="action">
 					<text class="cuIcon-title text-orange "></text> 会务管理
 				</view>
 			</view>
@@ -102,7 +118,14 @@
 					badge: 0,
 					name: '用车调度',
 					url:"../work/dispatchUseCarRecordList"
-				}, {
+				},{
+					cuIcon: 'upstagefill',
+					color: 'cyan',
+					badge: 0,
+					name: '我的派车单',
+					url:"../work/dispatchCarOrderList"
+				}],
+				maintainCuIconList:[{
 					cuIcon: 'clothesfill',
 					color: 'blue',
 					badge: 0,

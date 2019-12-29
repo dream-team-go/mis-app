@@ -84,6 +84,13 @@
 					centerCancleCount: "",
 					underwayCount: "",
 					successCount: "",
+					reason: "",
+					people_num: "",
+					predict_start_time: "",
+					predict_end_time: "",
+					start_place: "",
+					end_place: "",
+					status: ""
 				}
 			}
 		},
@@ -96,15 +103,87 @@
 		methods: {
 			loadData() {
 				if(this.PageCur === "car"){
-					this.carData.totalCount = 0;
-					this.carData.approveCount = 0;
-					this.carData.cancleCount = 0;
-					this.carData.failCount = 0;
-					this.carData.waitCheckCount = 0;
-					this.carData.finishDispatchCount = 0;
-					this.carData.centerCancleCount = 0;
-					this.carData.underwayCount = 0;
-					this.carData.successCount = 0;
+					uni.showLoading({
+						title: '加载中',
+						mask: false
+					});
+					//获取车辆概览
+					global.$http.post('/car/apply/myCountByStatus', {
+						params: {},
+					}).then(res => {
+						if (res.status === "0") {
+							this.carData.totalCount = 0;
+							this.carData.waitCheckCount = 0;
+							this.carData.cancleCount = 0;
+							this.carData.approveCount = 0;
+							this.carData.failCount = 0;
+							this.carData.finishDispatchCount = 0;
+							this.carData.centerCancleCount = 0;
+							this.carData.underwayCount = 0;
+							this.carData.successCount = 0;
+							var totalCount = 0;
+							for (var i = 0; i < res.data.length; i++) {
+								if (res.data[i].status === 0) {
+									this.carData.waitCheckCount = res.data[i].total;
+								} else if (res.data[i].status === -3) {
+									this.carData.cancleCount = res.data[i].total;
+								} else if (res.data[i].status === 1) {
+									this.carData.approveCount = res.data[i].total;
+								} else if (res.data[i].status === -1) {
+									this.carData.failCount = res.data[i].total;
+								}else if (res.data[i].status ===2) {
+									this.carData.finishDispatchCount = res.data[i].total;
+								}else if (res.data[i].status === -2) {
+									this.carData.centerCancleCount = res.data[i].total;
+								}else if (res.data[i].status === 3) {
+									this.carData.underwayCount = res.data[i].total;
+								}else if (res.data[i].status === 4) {
+									this.carData.successCount = res.data[i].total;
+								}
+								totalCount += res.data[i].total;
+							}
+							this.carData.totalCount = totalCount;
+							uni.hideLoading();
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
+					//获取最近预定
+					global.$http.post('/car/apply/myLatelyRecord', {
+						params: {},
+					}).then(res => {
+						if (res.status === "0") {
+							if (res.data) {
+								this.carData.reason = res.data.reason;
+								this.carData.people_num = res.data.people_num;
+								this.carData.predict_start_time = res.data.predict_start_time;
+								this.carData.status = misEnum.UseCarRecordEnumMap.get(res.data.status);
+								this.carData.start_place = res.data.start_place;
+								this.carData.end_place = res.data.end_place;
+								this.carData.predict_end_time = res.data.predict_end_time;
+							}
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
 				}
 				else if (this.PageCur === "meeting") {
 					uni.showLoading({

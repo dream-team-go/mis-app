@@ -272,6 +272,8 @@
 						this.regions[0].subs.forEach(c=>{
 							this.multiArray[1].push(c.name);
 						});
+						this.para.end_city = this.multiArray[0][this.multiIndex[0]];
+						this.para.end_area = this.multiArray[1][this.multiIndex[1]];
 					}
 				} else {
 					uni.showToast({

@@ -340,7 +340,10 @@
 					mask: false
 				});
 				global.$http.post('/car/dispatch/save', {
-					params: this.para,
+					header:{
+						ContentType: 'text/plain'
+					},
+					data: JSON.stringify(this.para)
 				}).then(res => {
 					uni.hideLoading();
 					if (res.status === "0") {

@@ -16,31 +16,31 @@
 			
 			<view class="cu-list grid no-border col-3">
 				<view class="cu-item">
-					<navigator hover-class="none" url="../food/myFoodRecordList" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList" open-type="navigate">
 						<text class="text-orange text-lg">{{foodData.totalCount}}</text>
 						<text>共预定</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="none" url="../food/myFoodRecordList?status=1" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=1" open-type="navigate">
 						<text class="text-orange text-lg">{{foodData.successCount}}</text>
 						<text>已确认</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="none" url="../food/myFoodRecordList?status=-1" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=-1" open-type="navigate">
 						<text class="text-orange text-lg">{{foodData.failCount}}</text>
 						<text>驳回</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="none" url="../food/myFoodRecordList?status=-2" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=-2" open-type="navigate">
 						<text class="text-orange text-lg">{{foodData.cancleCount}}</text>
 						<text>取消预定</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="none" url="../food/myFoodRecordList?status=0" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=0" open-type="navigate">
 						<text class="text-orange text-lg">{{foodData.waitCheckCount}}</text>
 						<text>待确认</text>
 					</navigator>

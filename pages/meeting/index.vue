@@ -16,31 +16,31 @@
 			
 			<view class="cu-list grid no-border col-3">
 				<view class="cu-item">
-					<navigator hover-class="none" url="../meeting/myMeetingRecordList" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList" open-type="navigate">
 						<text class="text-orange text-lg">{{meetingData.totalCount}}</text>
 						<text>共预定</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="none" url="../meeting/myMeetingRecordList?status=1" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=1" open-type="navigate">
 						<text class="text-orange text-lg">{{meetingData.successCount}}</text>
 						<text>预定成功</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="none" url="../meeting/myMeetingRecordList?status=-1" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=-1" open-type="navigate">
 						<text class="text-orange text-lg">{{meetingData.failCount}}</text>
 						<text>预定失败</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="none" url="../meeting/myMeetingRecordList?status=-2" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=-2" open-type="navigate">
 						<text class="text-orange text-lg">{{meetingData.cancleCount}}</text>
 						<text>取消预定</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="none" url="../meeting/myMeetingRecordList?status=0" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=0" open-type="navigate">
 						<text class="text-orange text-lg">{{meetingData.waitCheckCount}}</text>
 						<text>待审批</text>
 					</navigator>
