@@ -19,6 +19,11 @@
 					<view>{{record.order_code}}</view>
 					<view class="text-gray text-sm flex">
 						<view class="text-cut">
+							乘车人：{{record.car_user}}（{{record.phone}}）
+						</view>
+					</view>
+					<view class="text-gray text-sm flex">
+						<view class="text-cut">
 							上车点：{{record.start_place}}
 						</view>
 					</view>
@@ -29,7 +34,12 @@
 					</view>
 					<view class="text-gray text-sm flex">
 						<view class="text-cut">
-							{{record.predict_start_time}} - {{record.predict_end_time}}
+							乘车时间：{{record.predict_start_time}}
+						</view>
+					</view>
+					<view class="text-gray text-sm flex">
+						<view class="text-cut">
+							返程时间：{{record.predict_end_time}}
 						</view>
 					</view>
 				</view>
