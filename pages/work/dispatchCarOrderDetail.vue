@@ -71,12 +71,70 @@
 				<text class="text-bold">{{info.bak}}</text>
 			</view>
 		</view>
+		<uni-collapse v-if="info.status > 2">
+			<uni-collapse-item :title="getTitle(info.total_fee)">
+				<view class="cu-bar bg-white solid-bottom">
+					<view class="action">
+						<text class="cuIcon-title text-orange"></text> 里程费(元)：
+						<text class="text-bold">{{info.stop_price}}/公里 x {{info.stop_num}}公里 = {{info.stop_price * info.stop_num}}</text>
+					</view>
+				</view>
+				<view class="cu-bar bg-white solid-bottom" v-if="info.zs_fee > 0">
+					<view class="action">
+						<text class="cuIcon-title text-orange"></text> 住宿费(元)：
+						<text class="text-bold">{{info.zs_fee}}</text>
+					</view>
+				</view>
+				<view class="cu-bar bg-white solid-bottom" v-if="info.tc_fee > 0">
+					<view class="action">
+						<text class="cuIcon-title text-orange"></text> 停车费(元)：
+						<text class="text-bold">{{info.tc_fee}}</text>
+					</view>
+				</view>
+				<view class="cu-bar bg-white solid-bottom" v-if="info.hs_fee > 0">
+					<view class="action">
+						<text class="cuIcon-title text-orange"></text> 伙食费(元)：
+						<text class="text-bold">{{info.hs_fee}}</text>
+					</view>
+				</view>
+				<view class="cu-bar bg-white solid-bottom" v-if="info.jy_fee > 0">
+					<view class="action">
+						<text class="cuIcon-title text-orange"></text> 加油费(元)：
+						<text class="text-bold">{{info.jy_fee}}</text>
+					</view>
+				</view>
+				<view class="cu-bar bg-white solid-bottom" v-if="info.xc_fee > 0">
+					<view class="action">
+						<text class="cuIcon-title text-orange"></text> 洗车费(元)：
+						<text class="text-bold">{{info.xc_fee}}</text>
+					</view>
+				</view>
+				<view class="cu-bar bg-white solid-bottom" v-if="info.clzy_fee > 0">
+					<view class="action">
+						<text class="cuIcon-title text-orange"></text> 车辆占用费(元)：
+						<text class="text-bold">{{info.clzy_fee}}</text>
+					</view>
+				</view>
+				<view class="cu-bar bg-white solid-bottom" v-if="info.other_fee > 0">
+					<view class="action">
+						<text class="cuIcon-title text-orange"></text> 其它费用(元)：
+						<text class="text-bold">{{info.other_fee}}</text>
+					</view>
+				</view>
+			</uni-collapse-item>
+		</uni-collapse>
 	</view>
 </template>
 
 <script>
+	import uniCollapse from '@/colorui/components/uni-collapse.vue'
+	import uniCollapseItem from '@/colorui/components/uni-collapse-item.vue'
 	import misEnum from '../../common/mis-enum.js';
 	export default {
+		components: {
+			uniCollapse,
+			uniCollapseItem
+		},
 		data() {
 			return {
 				StatusEnumMap: [],
@@ -84,11 +142,13 @@
 				color: '',
 				info: {},
 				id: "",
+				order_code: "",
 				applyInfo: {}
 			}
 		},
 		onLoad(option) {
 			this.id = option.id;
+			this.order_code = option.order_code;
 		},
 		onShow(){
 			//获取派车单信息
@@ -101,28 +161,26 @@
 					this.info = res.data;
 					this.StatusEnumMap = misEnum.DispatchRecordEnumMap;
 					this.showSteps();
-					
-					//获取申请单信息
-					global.$http.post('/car/apply/getInfo', {
-						params: {
-							apply_id: 14
-						},
-					}).then(res => {
-						if (res.status === "0") {
-							this.applyInfo = res.data;
-						} else {
-							uni.showToast({
-								title: res.msg,
-								icon: 'none'
-							});
-						}
-					}).catch(err => {
-						uni.showToast({
-							title: err.message,
-							icon: 'none'
-						});
+				} else {
+					uni.showToast({
+						title: res.msg,
+						icon: 'none'
 					});
-					
+				}
+			}).catch(err => {
+				uni.showToast({
+					title: err.message,
+					icon: 'none'
+				});
+			});
+			//获取申请单信息
+			global.$http.post('/car/apply/getInfoByOrderCode', {
+				params: {
+					order_code: this.order_code
+				},
+			}).then(res => {
+				if (res.status === "0") {
+					this.applyInfo = res.data;
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -153,6 +211,9 @@
 						});
 					}
 				});
+			},
+			getTitle: function(totalFee) {
+				return "总费用(元)：" + totalFee;
 			},
 			sureBack: function(e) {
 				uni.navigateTo({

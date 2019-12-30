@@ -149,7 +149,7 @@
 			},
 			recordDetail: function(record) {
 				uni.navigateTo({
-					url: "../work/dispatchCarOrderDetail?id=" + record.id,
+					url: "../work/dispatchCarOrderDetail?id=" + record.id + "&order_code=" + record.order_code,
 				});
 			}
 		}

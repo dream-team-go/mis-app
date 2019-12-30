@@ -60,7 +60,7 @@
 				stop_num: 0,
 				stop_price: 0,
 				para: {
-					dispatch_id: 0,
+					id: 0,
 					zs_fee: 0,
 					tc_fee: 0,
 					hs_fee: 0,
@@ -75,12 +75,12 @@
 		onLoad(option) {
 			var info = JSON.parse(decodeURIComponent(option.para));
 			this.info = info;
-			this.para.dispatch_id = info.id;
+			this.para.id = info.id;
 			if (info.status > 2) {
 				this.isAdd = false;
 				this.para.zs_fee = info.zs_fee;
 				this.para.tc_fee = info.tc_fee;
-				this.para.hs_fee = info.zs_fee;
+				this.para.hs_fee = info.hs_fee;
 				this.para.jy_fee = info.jy_fee;
 				this.para.xc_fee = info.xc_fee;
 				this.para.clzy_fee = info.clzy_fee;
