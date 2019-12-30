@@ -2,7 +2,7 @@
 	<view>
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">车辆调度</block>
+			<block slot="content">派车单</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -33,7 +33,7 @@
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
 					<text class="cuIcon-title text-orange"></text> 车辆：
-					<text class="text-bold">{{dispatchOrder.brand + " " + dispatchOrder.color + " " + dispatchOrder.car_seat_num + "座)"}}</text>
+					<text class="text-bold">{{dispatchOrder.brand + " " + dispatchOrder.color + " " + dispatchOrder.car_seat_num + "座"}}</text>
 				</view>
 			</view>
 			<view class="cu-bar bg-white solid-bottom">
@@ -46,6 +46,12 @@
 				<view class="action">
 					<text class="cuIcon-title text-orange"></text> 司机：
 					<text class="text-bold">{{dispatchOrder.driver_name + "("+ dispatchOrder.driver_phone +")"}}</text>
+				</view>
+			</view>
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action">
+					<text class="cuIcon-title text-orange"></text> 备注：
+					<text class="text-bold">{{dispatchOrder.bak}}</text>
 				</view>
 			</view>
 		</view>

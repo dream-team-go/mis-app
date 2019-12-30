@@ -66,7 +66,7 @@
 					cancleCount: "",
 					failCount: "",
 					waitCheckCount: "",
-					receive_people: "",
+					desc: "",
 					building_name: "",
 					room_number: "",
 					status: "",
@@ -304,7 +304,7 @@
 					}).then(res => {
 						if (res.status === "0") {
 							if (res.data) {
-								this.foodData.receive_people = res.data.receive_people;
+								this.foodData.desc = res.data.desc;
 								this.foodData.building_name = res.data.building_name;
 								this.foodData.room_number = res.data.room_number;
 								this.foodData.status = misEnum.FoodRecordEnumMap.get(res.data.status);

@@ -4,6 +4,7 @@
 			<block slot="backText">返回</block>
 			<block slot="content">车辆预约详情</block>
 			<block v-show="info.status == 0" slot="right" @tap="toEdit">修改</block>
+			<block v-show="info.status > 1" slot="right" @tap="toDispatch">派车单</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -337,9 +338,9 @@
 					url: '../car/bookCar?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			},
-			toAppraise: function(e) {
+			toDispatch: function(e){
 				uni.navigateTo({
-					url: '../car/useCarAppraise?para=' + encodeURIComponent(JSON.stringify(this.info))
+					url: '../car/dispatchUseCarDetail?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			}
 		}

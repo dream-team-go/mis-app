@@ -6,10 +6,9 @@
 		</cu-custom>
 		<form v-show="isShowBottomModal == false">
 			<view class="cu-form-group">
-				<view class="title">接待对象</view>
-				<input name="input" v-model="para.receive_people"></input>
+				<view class="title">订餐原由</view>
+				<input name="input" v-model="para.desc"></input>
 			</view>
-			
 			<view class="cu-form-group">
 				<view class="title">预定人</view>
 				<input name="input" v-model="para.user_name"></input>
@@ -77,6 +76,11 @@
 			<view class="cu-form-group">
 				<view class="title">用餐标准</view>
 				<input name="input" v-model="para.meal_spec"></input>
+			</view>
+			
+			<view class="cu-form-group">
+				<view class="title">接待对象</view>
+				<input name="input" v-model="para.receive_people"></input>
 			</view>
 			
 			<view class="cu-form-group">
@@ -219,6 +223,7 @@
 				page: 1,
 				pageSize: 100,
 				para: {
+					desc: "",
 					user_name: "",
 					user_tel: "",
 					people_num: 1,
@@ -323,17 +328,17 @@
 				this.para.end_time = this.end_time;
 				this.para.meal_time = this.meal_time;
 				//验证数据
-				if(this.para.receive_people.length <= 0){
+				if(this.para.desc.length <= 0){
 					uni.showToast({
 						icon: 'none',
-						title: '请填写接待对象'
+						title: '请填写订餐原由'
 					});
 					return;
 				}
-				if(this.para.receive_people.length > 20){
+				if(this.para.desc.length > 20){
 					uni.showToast({
 						icon: 'none',
-						title: '接待对象不超过20字'
+						title: '订餐原由不超过20字'
 					});
 					return;
 				}

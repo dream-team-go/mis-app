@@ -16,7 +16,7 @@
 		<view class="cu-list menu text-left">
 			<view class="cu-item arrow" v-for="record in records" :key="record.id" @click="recordDetail(record)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
 				<view class="content">
-					<view>{{record.receive_people}}</view>
+					<view>{{record.desc}}</view>
 					<view class="text-gray text-sm flex">
 						<view class="text-cut">
 							{{record.room_number}}({{record.building_name}})

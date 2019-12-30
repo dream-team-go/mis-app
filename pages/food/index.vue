@@ -56,11 +56,11 @@
 				<view class="cu-item">
 					<view class="content">
 						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">接待对象</text>
+						<text class="text-grey">订餐原由</text>
 					</view>
 					<view class="action">
 						<view class="cu-tag round bg-orange light">
-							{{foodData.status.length > 0 ? foodData.receive_people : '无'}}
+							{{foodData.status.length > 0 ? foodData.desc : '无'}}
 						</view>
 					</view>
 				</view>

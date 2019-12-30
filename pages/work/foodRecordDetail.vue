@@ -24,8 +24,8 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 接待对象：
-				<text class="text-bold">{{info.receive_people}}</text>
+				<text class="cuIcon-title text-orange"></text> 订餐原由：
+				<text class="text-bold">{{info.desc}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
@@ -62,6 +62,12 @@
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 用餐标准：
 				<text class="text-bold">{{info.meal_spec}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 接待对象：
+				<text class="text-bold">{{info.receive_people}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.lender != null">
