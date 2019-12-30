@@ -218,8 +218,10 @@
 							title: '提交中',
 							mask: false
 						});
-						global.$http.post('', {
-							params: {},
+						global.$http.post('/car/dispatch/sureAccount', {
+							params: {
+								dispatch_id: order.id
+							},
 						}).then(res => {
 							uni.hideLoading();
 							if (res.status === "0") {
