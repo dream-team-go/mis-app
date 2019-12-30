@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "uni-icon": "/colorui/components/uni-icon"
+  },
+  "component": true
+}

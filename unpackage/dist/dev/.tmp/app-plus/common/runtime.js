@@ -102,11 +102,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"pages/car/index":1,"pages/food/index":1,"pages/meeting/index":1,"pages/user/index":1,"pages/work/index":1,"colorui/components/uni-load-more":1};
+/******/ 		var cssChunks = {"pages/car/index":1,"pages/food/index":1,"pages/meeting/index":1,"pages/user/index":1,"pages/work/index":1,"colorui/components/uni-load-more":1,"colorui/components/uni-collapse":1,"colorui/components/uni-collapse-item":1,"colorui/components/uni-icon":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"colorui/components/cu-custom":"colorui/components/cu-custom","pages/car/index":"pages/car/index","pages/food/index":"pages/food/index","pages/meeting/index":"pages/meeting/index","pages/user/index":"pages/user/index","pages/work/index":"pages/work/index","colorui/components/uni-load-more":"colorui/components/uni-load-more"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"colorui/components/cu-custom":"colorui/components/cu-custom","pages/car/index":"pages/car/index","pages/food/index":"pages/food/index","pages/meeting/index":"pages/meeting/index","pages/user/index":"pages/user/index","pages/work/index":"pages/work/index","colorui/components/uni-load-more":"colorui/components/uni-load-more","colorui/components/uni-collapse":"colorui/components/uni-collapse","colorui/components/uni-collapse-item":"colorui/components/uni-collapse-item","colorui/components/uni-icon":"colorui/components/uni-icon"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

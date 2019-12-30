@@ -24,7 +24,7 @@
 					</view>
 					<view class="text-gray text-sm flex">
 						<view class="text-cut">
-							上车点：{{record.start_place}}
+							乘车地：{{record.start_place}}
 						</view>
 					</view>
 					<view class="text-gray text-sm flex">

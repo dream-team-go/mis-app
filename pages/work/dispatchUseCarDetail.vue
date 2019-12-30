@@ -2,7 +2,7 @@
 	<view>
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">车辆调度</block>
+			<block slot="content">派车单</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -16,30 +16,24 @@
 				<text class="text-bold">{{list.length}}辆</text>
 			</view>
 		</view>
-		
+
 		<view class="cu-item arrow margin-top" v-for="(dispatchOrder,index) in list" :key="dispatchOrder.id">
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
-					<text class="cuIcon-title text-orange"></text> 派车单{{index+1}}
+					<text class="cuIcon-title text-orange"></text> 派车单{{index+1}} <text class="text-orange text-bold margin-left">{{getStatusStr(dispatchOrder.status)}}</text>
 				</view>
 			</view>
-			
+
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
 					<text class="cuIcon-title text-orange"></text> 乘车人数：
-					<text class="text-bold">{{list.length}}</text>
+					<text class="text-bold">{{dispatchOrder.people_num}}</text>
 				</view>
 			</view>
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
 					<text class="cuIcon-title text-orange"></text> 车辆：
-					<text class="text-bold">{{dispatchOrder.brand + " " + dispatchOrder.color + " " + dispatchOrder.car_seat_num + "座"}}</text>
-				</view>
-			</view>
-			<view class="cu-bar bg-white solid-bottom">
-				<view class="action">
-					<text class="cuIcon-title text-orange"></text> 车牌：
-					<text class="text-bold">{{dispatchOrder.car_number}}</text>
+					<text class="text-bold">{{dispatchOrder.brand + " " + dispatchOrder.color + " " + dispatchOrder.seat_num + "座" + " " + dispatchOrder.car_number}}</text>
 				</view>
 			</view>
 			<view class="cu-bar bg-white solid-bottom">
@@ -48,29 +42,88 @@
 					<text class="text-bold">{{dispatchOrder.driver_name + "("+ dispatchOrder.driver_phone +")"}}</text>
 				</view>
 			</view>
-			<view class="cu-bar bg-white solid-bottom">
+			<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.bak.length > 0">
 				<view class="action">
 					<text class="cuIcon-title text-orange"></text> 备注：
 					<text class="text-bold">{{dispatchOrder.bak}}</text>
 				</view>
 			</view>
+			<uni-collapse v-if="dispatchOrder.status > 2">
+				<uni-collapse-item :title="getTitle(dispatchOrder.total_fee)">
+					<view class="cu-bar bg-white solid-bottom">
+						<view class="action">
+							<text class="cuIcon-title text-orange"></text> 里程费(元)：
+							<text class="text-bold">{{dispatchOrder.stop_price}}/公里 x {{dispatchOrder.stop_num}}公里 = {{dispatchOrder.stop_price * dispatchOrder.stop_num}}</text>
+						</view>
+					</view>
+					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.zs_fee > 0">
+						<view class="action">
+							<text class="cuIcon-title text-orange"></text> 住宿费(元)：
+							<text class="text-bold">{{dispatchOrder.zs_fee}}</text>
+						</view>
+					</view>
+					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.tc_fee > 0">
+						<view class="action">
+							<text class="cuIcon-title text-orange"></text> 停车费(元)：
+							<text class="text-bold">{{dispatchOrder.tc_fee}}</text>
+						</view>
+					</view>
+					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.hs_fee > 0">
+						<view class="action">
+							<text class="cuIcon-title text-orange"></text> 伙食费(元)：
+							<text class="text-bold">{{dispatchOrder.hs_fee}}</text>
+						</view>
+					</view>
+					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.jy_fee > 0">
+						<view class="action">
+							<text class="cuIcon-title text-orange"></text> 加油费(元)：
+							<text class="text-bold">{{dispatchOrder.jy_fee}}</text>
+						</view>
+					</view>
+					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.xc_fee > 0">
+						<view class="action">
+							<text class="cuIcon-title text-orange"></text> 洗车费(元)：
+							<text class="text-bold">{{dispatchOrder.xc_fee}}</text>
+						</view>
+					</view>
+					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.clzy_fee > 0">
+						<view class="action">
+							<text class="cuIcon-title text-orange"></text> 车辆占用费(元)：
+							<text class="text-bold">{{dispatchOrder.clzy_fee}}</text>
+						</view>
+					</view>
+					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.other_fee > 0">
+						<view class="action">
+							<text class="cuIcon-title text-orange"></text> 其它费用(元)：
+							<text class="text-bold">{{dispatchOrder.other_fee}}</text>
+						</view>
+					</view>
+				</uni-collapse-item>
+			</uni-collapse>
 		</view>
 	</view>
 </template>
 
 <script>
+	import uniCollapse from '@/colorui/components/uni-collapse.vue'
+	import uniCollapseItem from '@/colorui/components/uni-collapse-item.vue'
+	import misEnum from '../../common/mis-enum.js';
 	export default {
+		components: {
+			uniCollapse,
+			uniCollapseItem
+		},
 		data() {
 			return {
-				info:{},
-				list:[]
+				info: {},
+				list: []
 			}
 		},
-		onLoad(option){
+		onLoad(option) {
 			var info = JSON.parse(decodeURIComponent(option.para));
 			this.info = info;
 			//获取派车单
-			if(this.info.status >= 2){
+			if (this.info.status >= 2) {
 				global.$http.post('/car/dispatch/getListByDispatch', {
 					params: {
 						order_code: this.info.order_code
@@ -142,6 +195,12 @@
 						icon: 'none'
 					});
 				});
+			},
+			getTitle: function(totalFee) {
+				return "总费用(元)：" + totalFee;
+			},
+			getStatusStr: function(status) {
+				return misEnum.DispatchRecordEnumMap.get(status);
 			}
 		}
 	}

@@ -19,50 +19,56 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 乘车人：
+				<text class="text-bold">{{applyInfo.car_user}}（{{applyInfo.phone}}）</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 乘车人数：
 				<text class="text-bold">{{info.people_num}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 乘车地址：
-				<text class="text-bold">{{info.start_place}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 乘车时间：
-				<text class="text-bold">{{info.predict_start_time}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 用车区域：
-				<text class="text-bold">{{info.area}}</text>
+				<text class="cuIcon-title text-orange"></text> 乘车地：
+				<text class="text-bold">{{applyInfo.start_place}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 目的地：
-				<text class="text-bold">{{info.end_place}}</text>
+				<text class="text-bold">{{applyInfo.end_place}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 返回时间：
-				<text class="text-bold">{{info.predict_end_time}}</text>
+				<text class="cuIcon-title text-orange"></text> 乘车时间：
+				<text class="text-bold">{{applyInfo.predict_start_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 用车人：
-				<text class="text-bold">{{info.apply_user_name}}（{{info.apply_user_phone}}）</text>
+				<text class="cuIcon-title text-orange"></text> 返程时间：
+				<text class="text-bold">{{applyInfo.predict_end_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 申请人：
-				<text class="text-bold">{{info.car_user}}（{{info.phone}}）</text>
+				<text class="cuIcon-title text-orange"></text> 车辆：
+				<text class="text-bold">{{info.brand + " " + info.color + " " + info.seat_num + "座" + " " + info.car_number}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 司机：
+				<text class="text-bold">{{info.driver_name + "("+ info.driver_phone +")"}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom" v-if="info.bak.length > 0">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 备注：
+				<text class="text-bold">{{info.bak}}</text>
 			</view>
 		</view>
 	</view>
@@ -76,19 +82,47 @@
 				StatusEnumMap: [],
 				steps: [],
 				color: '',
-				info: {}
+				info: {},
+				id: "",
+				applyInfo: {}
 			}
 		},
 		onLoad(option) {
+			this.id = option.id;
+		},
+		onShow(){
+			//获取派车单信息
 			global.$http.post('/car/dispatch/dispatchInfo', {
 				params: {
-					dispatch_id: option.id
+					dispatch_id: this.id
 				},
 			}).then(res => {
 				if (res.status === "0") {
 					this.info = res.data;
 					this.StatusEnumMap = misEnum.DispatchRecordEnumMap;
 					this.showSteps();
+					
+					//获取申请单信息
+					global.$http.post('/car/apply/getInfo', {
+						params: {
+							apply_id: 14
+						},
+					}).then(res => {
+						if (res.status === "0") {
+							this.applyInfo = res.data;
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
+					
 				} else {
 					uni.showToast({
 						title: res.msg,
