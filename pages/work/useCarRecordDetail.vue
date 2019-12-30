@@ -83,8 +83,11 @@
 				<text class="text-bold">{{info.type == 1 ? "公务用车" : "网约车"}}</text>
 			</view>
 		</view>
-		<view class="padding flex flex-direction" v-if="info.status == 1">
-			<button class="cu-btn bg-red margin-tb-sm lg" @click="cancleBook">取消订单</button>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 预约人：
+				<text class="text-bold">{{info.apply_user_name}}({{info.apply_user_phone}})</text>
+			</view>
 		</view>
 	</view>
 </template>
@@ -293,38 +296,6 @@
 						});
 						break;
 				}
-			},
-			cancleBook: function() {
-				uni.showLoading({
-					title: '提交中',
-					mask: false
-				});
-				global.$http.post('/car/apply/cancel', {
-					params: {
-						apply_id: this.info.id
-					},
-				}).then(res => {
-					uni.hideLoading();
-					if (res.status === "0") {
-						this.info.status = -2;
-						uni.showToast({
-							title: "取消成功",
-							icon: 'none'
-						});
-						this.showSteps();
-					} else {
-						uni.showToast({
-							title: res.msg,
-							icon: 'none'
-						});
-					}
-				}).catch(err => {
-					uni.hideLoading();
-					uni.showToast({
-						title: err.message,
-						icon: 'none'
-					});
-				});
 			},
 			toDispatch: function(e){
 				uni.navigateTo({

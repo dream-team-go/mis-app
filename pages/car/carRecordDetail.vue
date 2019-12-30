@@ -4,7 +4,6 @@
 			<block slot="backText">返回</block>
 			<block slot="content">车辆预约详情</block>
 			<block v-show="info.status == 0" slot="right" @tap="toEdit">修改</block>
-			<block v-show="info.status != 4" slot="right" @tap="toAppraise">评价</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -82,6 +81,12 @@
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 用车类型：
 				<text class="text-bold">{{info.type == 1 ? "公务用车" : "网约车"}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 预约人：
+				<text class="text-bold">{{info.apply_user_name}}({{info.apply_user_phone}})</text>
 			</view>
 		</view>
 		<view class="padding flex flex-direction" v-if="info.status == 0">

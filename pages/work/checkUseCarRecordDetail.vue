@@ -76,6 +76,12 @@
 				<text class="text-bold">{{info.type == 1 ? "公务用车" : "网约车"}}</text>
 			</view>
 		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 预约人：
+				<text class="text-bold">{{info.apply_user_name}}({{info.apply_user_phone}})</text>
+			</view>
+		</view>
 		<view class="padding" v-if="info.status == 0" style="display: inline-flex;">
 			<button class="cu-btn bg-red lg" @click="verifyFail">审批不通过</button>
 		</view>

@@ -49,6 +49,10 @@
 						</view>
 					</view>
 				</view>
+				<view class="cu-form-group">
+					<view class="title">备注</view>
+					<input name="input" v-model="para.list[index].bak"></input>
+				</view>
 			</view>
 			<view class="padding flex flex-direction">
 				<button class="cu-btn bg-orange margin-tb-sm lg" @click="Submit">提交</button>
@@ -149,7 +153,8 @@
 						people_num: 0,
 						driver_id: "",
 						driver_name: "",
-						driver_phone: ""
+						driver_phone: "",
+						bak: ""
 					}]
 				}
 			}
@@ -175,7 +180,8 @@
 								people_num: c.people_num,
 								driver_id: c.driver_id,
 								driver_name: c.driver_name,
-								driver_phone: c.driver_phone
+								driver_phone: c.driver_phone,
+								bak: c.bak
 							});
 						});
 						this.numberIndex = res.data.length - 1;
@@ -258,7 +264,8 @@
 							people_num: 0,
 							driver_id: "",
 							driver_name: "",
-							driver_phone: ""
+							driver_phone: "",
+							bak: ""
 						});
 					}
 				}
