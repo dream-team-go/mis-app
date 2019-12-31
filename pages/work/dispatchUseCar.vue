@@ -37,7 +37,7 @@
 					<view class="title">车辆</view>
 					<view class="modal-group" @tap="showCarModal(index)" data-target="Modal">
 						<view class="picker">
-							{{ dispatchOrder.car_id > 0 ? dispatchOrder.car_number + "("+dispatchOrder.car_seat_num+"座)": '请选择' }}
+							{{ dispatchOrder.car_id > 0 ? dispatchOrder.brand + " " + dispatchOrder.color + " " + dispatchOrder.seat_num + "座" + " " + dispatchOrder.car_number: '请选择' }}
 						</view>
 					</view>
 				</view>
@@ -149,7 +149,9 @@
 					list: [{
 						car_id: 0,
 						car_number: "",
-						car_seat_num: "",
+						brand: "",
+						color: "",
+						seat_num: "",
 						people_num: 0,
 						driver_id: "",
 						driver_name: "",
@@ -176,7 +178,9 @@
 							this.para.list.push({
 								car_id: c.car_id,
 								car_number: c.car_number,
-								car_seat_num: c.seat_num,
+								brand: c.brand,
+								color: c.color,
+								seat_num: c.seat_num,
 								people_num: c.people_num,
 								driver_id: c.driver_id,
 								driver_name: c.driver_name,
@@ -260,7 +264,9 @@
 						this.para.list.push({
 							car_id: 0,
 							car_number: "",
-							car_seat_num: "",
+							brand: "",
+							color: "",
+							seat_num: "",
 							people_num: 0,
 							driver_id: "",
 							driver_name: "",
@@ -283,7 +289,9 @@
 			getCar: function(e) {
 				this.para.list[this.editIndex].car_id = e.id;
 				this.para.list[this.editIndex].car_number = e.car_number;
-				this.para.list[this.editIndex].car_seat_num = e.seat_num;
+				this.para.list[this.editIndex].seat_num = e.seat_num;
+				this.para.list[this.editIndex].brand = e.brand;
+				this.para.list[this.editIndex].color = e.color;
 				this.isShowCarModal = false;
 			},
 			showDriverModal: function(e) {
