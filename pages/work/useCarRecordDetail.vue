@@ -299,7 +299,7 @@
 			},
 			toDispatch: function(e){
 				uni.navigateTo({
-					url: '../work/dispatchUseCarDetail?para=' + encodeURIComponent(JSON.stringify(this.info))
+					url: '../work/useCarDispatchDetail?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			}
 		}

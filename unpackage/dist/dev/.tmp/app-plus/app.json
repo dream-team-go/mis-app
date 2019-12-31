@@ -42,7 +42,8 @@
     "pages/work/dispatchCarOrderDetail",
     "pages/work/settleDispatchCar",
     "pages/car/useCarAppraise",
-    "pages/car/dispatchUseCarDetail"
+    "pages/car/dispatchUseCarDetail",
+    "pages/work/useCarDispatchDetail"
   ],
   "window": {
     "navigationStyle": "custom"

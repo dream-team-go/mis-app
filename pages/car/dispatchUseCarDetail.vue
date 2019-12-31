@@ -22,6 +22,9 @@
 				<view class="action">
 					<text class="cuIcon-title text-orange"></text> 派车单{{index+1}} <text class="text-orange text-bold margin-left">{{getStatusStr(dispatchOrder.status)}}</text>
 				</view>
+				<view class="action" v-if="dispatchOrder.status == 4 && dispatchOrder.is_appraise == 0">
+					<button class="cu-btn bg-orange shadow" @tap="appraise(dispatchOrder)">评价</button>
+				</view>
 			</view>
 
 			<view class="cu-bar bg-white solid-bottom">
@@ -45,6 +48,18 @@
 			<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.bak.length > 0">
 				<view class="action">
 					<text class="cuIcon-title text-orange"></text> 备注：
+					<text class="text-bold">{{dispatchOrder.bak}}</text>
+				</view>
+			</view>
+			<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.is_appraise == 1">
+				<view class="action">
+					<text class="cuIcon-title text-orange"></text> 评分：
+					<text v-for="(value,key) in stars" :key="key" :class="key < dispatchOrder.appraise_grade ? 'cuIcon-favorfill text-yellow' : 'cuIcon-favor text-gray'"></text>
+				</view>
+			</view>
+			<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.is_appraise == 1 && dispatchOrder.appraise_contnet.length > 0">
+				<view class="action">
+					<text class="cuIcon-title text-orange"></text> 评价内容：
 					<text class="text-bold">{{dispatchOrder.bak}}</text>
 				</view>
 			</view>
@@ -101,6 +116,34 @@
 				</uni-collapse-item>
 			</uni-collapse>
 		</view>
+		
+		<view class="cu-modal" :class="showModal?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">评价</view>
+					<view class="action" @tap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view>
+					<view class="cu-form-group" style="text-align: left;">
+						<text v-for="(value,key) in stars" :key="key" :class="key < para.appraise_grade ? 'cuIcon-favorfill text-yellow' : 'cuIcon-favor text-gray'" @tap="chooseStar(value)"></text>
+					</view>
+				</view>
+				<view>
+					<view class="cu-form-group" style="text-align: left;">
+						<textarea maxlength="100" @input="fillAppraise" placeholder="评价内容"></textarea>
+					</view>
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action">
+						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
+						<button class="cu-btn bg-green margin-left" @tap="sureModal">确定</button>
+		
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -116,7 +159,14 @@
 		data() {
 			return {
 				info: {},
-				list: []
+				list: [],
+				showModal: false,
+				stars: [1, 2, 3, 4, 5],
+				para:{
+					dispatch_id: 0,
+					appraise_grade: 0,
+					appraise_contnet: ""
+				}
 			}
 		},
 		onLoad(option) {
@@ -201,6 +251,66 @@
 			},
 			getStatusStr: function(status) {
 				return misEnum.DispatchRecordEnumMap.get(status);
+			},
+			appraise: function(order){
+				this.para.dispatch_id = order.id;
+				this.para.appraise_grade = 0;
+				this.para.appraise_contnet = "";
+				this.showModal = true;
+			},
+			hideModal: function(){
+				this.showModal = false;
+			},
+			fillAppraise: function(e){
+				this.para.appraise_contnet = e.detail.value;
+			},
+			chooseStar: function(e) { //点击评星
+			    this.para.appraise_grade = e;
+			},
+			sureModal:function(){
+				if(this.para.appraise_grade <= 0){
+					uni.showToast({
+						title: "请评分",
+						icon: 'none'
+					});
+					return;
+				}
+				this.showModal = false;
+				//提交评分内容
+				uni.showLoading({
+					title: '提交中',
+					mask: false
+				});
+				global.$http.post('/car/dispatch/saveAppraise', {
+					params: this.para,
+				}).then(res => {
+					uni.hideLoading();
+					if (res.status === "0") {
+						uni.showToast({
+							icon: 'none',
+							title: '提交成功'
+						});
+						//设置评价状态
+						this.list.forEach(c=>{
+							if(c.id == this.para.dispatch_id){
+								c.is_appraise = 1;
+								c.appraise_grade = this.para.appraise_grade;
+								c.appraise_contnet = this.para.appraise_contnet;
+							}
+						})
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
 			}
 		}
 	}

@@ -22,9 +22,6 @@
 				<view class="action">
 					<text class="cuIcon-title text-orange"></text> 派车单{{index+1}} <text class="text-orange text-bold margin-left">{{getStatusStr(dispatchOrder.status)}}</text>
 				</view>
-				<view class="action" v-if="dispatchOrder.status == 3">
-					<button class="cu-btn bg-green shadow" @tap="sureSettle(dispatchOrder)">确认结算</button>
-				</view>
 			</view>
 
 			<view class="cu-bar bg-white solid-bottom">
@@ -217,55 +214,6 @@
 			},
 			getStatusStr: function(status) {
 				return misEnum.DispatchRecordEnumMap.get(status);
-			},
-			sureSettle: function(order){
-				uni.showModal({
-					title: '提示',
-					content: '确认结算该派车单？',
-					showCancel: true,
-					cancelText: '取消',
-					confirmText: '确定',
-					success: res => {
-						if(res.cancel) return;
-						uni.showLoading({
-							title: '提交中',
-							mask: false
-						});
-						global.$http.post('/car/dispatch/sureAccount', {
-							params: {
-								dispatch_id: order.id
-							},
-						}).then(res => {
-							uni.hideLoading();
-							if (res.status === "0") {
-								uni.showToast({
-									title: "提交成功",
-									icon: 'none'
-								});
-								//设置状态
-								this.list.forEach(c=>{
-									if(c.id == order.id){
-										c.status = 4;
-										return;
-									}
-								});
-							} else {
-								uni.showToast({
-									title: res.msg,
-									icon: 'none'
-								});
-							}
-						}).catch(err => {
-							uni.hideLoading();
-							uni.showToast({
-								title: err.message,
-								icon: 'none'
-							});
-						});
-					},
-					fail: () => {},
-					complete: () => {}
-				});
 			}
 		}
 	}
