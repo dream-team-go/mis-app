@@ -37,6 +37,15 @@
 					</view>
 				</picker>
 			</view>
+			
+			<view class="cu-form-group">
+				<view class="title">产权单位</view>
+				<view class="modal-group" @tap="showBottomModal" data-target="Modal">
+					<view class="picker">
+						{{ para.property_org.length > 0 ? propertyOrgName : '请选择' }}
+					</view>
+				</view>
+			</view>
 
 			<view class="cu-form-group">
 				<view class="title">品牌</view>
@@ -357,12 +366,14 @@
 				isPdc: false,
 				isLeatherSeat: false,
 				isCd: false,
+				propertyOrgName: "",
 				para: {
 					id: "",
 					car_number: "",
 					car_type: "",
 					plate_color: "",
 					seat_num: 0,
+					property_org: "",
 					color: "",
 					brand: "",
 					volume: "",
