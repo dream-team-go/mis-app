@@ -121,7 +121,11 @@
 </template>
 
 <script>
+	import uniLoadMore from '@/colorui/components/uni-load-more.vue';
 	export default {
+		components: {
+			uniLoadMore
+		},
 		data() {
 			return {
 				StatusBar: this.StatusBar,

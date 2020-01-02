@@ -263,6 +263,7 @@
 </template>
 
 <script>
+	import uniLoadMore from '@/colorui/components/uni-load-more.vue';
 	import misEnum from '../../common/mis-enum.js';
 
 	function getDate(addDay) {
@@ -279,6 +280,9 @@
 		return `${year}-${month}-${day}`;
 	}
 	export default {
+		components: {
+			uniLoadMore
+		},
 		onLoad(option) {
 			//编辑车辆
 			if (option.para) {
