@@ -40,11 +40,11 @@
 			
 			<view class="cu-form-group">
 				<view class="title">产权单位</view>
-				<view class="modal-group" @tap="showBottomModal" data-target="Modal">
+				<picker @change="OrganizationChange" :value="oIndex" :range="organizations" range-key="org_name">
 					<view class="picker">
-						{{ para.property_org.length > 0 ? propertyOrgName : '请选择' }}
+						{{oIndex>-1?organizations[oIndex].org_name:'请选择'}}
 					</view>
-				</view>
+				</picker>
 			</view>
 
 			<view class="cu-form-group">
@@ -282,6 +282,7 @@
 				this.para.remark = info.remark;
 				this.para.img = info.img;
 				this.para.car_gps = info.car_gps;
+				this.para.property_org = info.property_org;
 				//设置辅助参数
 				this.imgList.push(this.para.img);
 				this.isTown = info.is_town == 1;
@@ -339,6 +340,33 @@
 					icon: 'none'
 				});
 			});
+			//获取组织数据
+			global.$http.post('/core/organization/organizationPage', {
+				params: {
+					page: 1,
+					size: 10000
+				},
+			}).then(res => {
+				if (res.status === "0") {
+					for (var i = 0; i < res.data.list.length; i++) {
+						if(this.para.property_org.length > 0 && this.para.property_org == res.data.list[i].property_org){
+							this.oIndex = i + 1;
+						}
+						this.organizations.push(res.data.list[i]);
+					}
+				} else {
+					uni.showToast({
+						title: res.msg,
+						icon: 'none'
+					});
+				}
+			}).catch(err => {
+				uni.hideLoading();
+				uni.showToast({
+					title: err.message,
+					icon: 'none'
+				});
+			});
 		},
 		data() {
 			return {
@@ -366,7 +394,11 @@
 				isPdc: false,
 				isLeatherSeat: false,
 				isCd: false,
-				propertyOrgName: "",
+				oIndex: 0,
+				organizations: [{
+					org_name: "请选择",
+					org_id: ""
+				}],
 				para: {
 					id: "",
 					car_number: "",
@@ -499,6 +531,12 @@
 			ChangeIsCd: function(e) {
 				this.isCd = e.detail.value;
 				this.para.is_cd = e.detail.value ? 1 : 0;
+			},
+			OrganizationChange: function(e) {
+				this.para.property_org = this.organizations[e.detail.value].org_id;
+				if (this.oIndex != e.detail.value) {
+					this.oIndex = e.detail.value;
+				}
 			},
 			Submit: function(e) {
 				//验证数据
