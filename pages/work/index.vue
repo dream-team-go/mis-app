@@ -105,7 +105,7 @@
 					color: 'olive',
 					badge: 22,
 					name: '用车记录',
-					url: "../work/useCarList"
+					url: "../work/useCarRecordList"
 				}, {
 					cuIcon: 'noticefill',
 					color: 'olive',
@@ -129,7 +129,14 @@
 					cuIcon: 'clothesfill',
 					color: 'blue',
 					badge: 0,
-					name: '维修申请'
+					name: '维修记录',
+					url:"../work/repairRecordList"
+				},{
+					cuIcon: 'clothesfill',
+					color: 'blue',
+					badge: 0,
+					name: '维修申请',
+					url:"../work/myRepairRecordList"
 				}, {
 					cuIcon: 'discoverfill',
 					color: 'purple',

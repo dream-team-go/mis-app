@@ -101,7 +101,7 @@
             "style" : {}
         }
         ,{
-            "path" : "pages/work/useCarList",
+            "path" : "pages/work/useCarRecordList",
             "style" : {}
         }
         ,{
@@ -166,6 +166,34 @@
         }
         ,{
             "path" : "pages/work/useCarDispatchDetail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/repairRecordList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/repairRecordDetail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/saveApplyRepair",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/myRepairRecordList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/myRepairRecordDetail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/repairOrderDetail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/saveRepairOrder",
             "style" : {}
         }
     ],

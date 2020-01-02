@@ -26,7 +26,7 @@
     "pages/work/saveCar",
     "pages/work/driverList",
     "pages/work/driverDetail",
-    "pages/work/useCarList",
+    "pages/work/useCarRecordList",
     "pages/work/carDetail",
     "pages/car/bookCar",
     "pages/car/myCarRecordList",
@@ -43,7 +43,14 @@
     "pages/work/settleDispatchCar",
     "pages/car/useCarAppraise",
     "pages/car/dispatchUseCarDetail",
-    "pages/work/useCarDispatchDetail"
+    "pages/work/useCarDispatchDetail",
+    "pages/work/repairRecordList",
+    "pages/work/repairRecordDetail",
+    "pages/work/saveApplyRepair",
+    "pages/work/myRepairRecordList",
+    "pages/work/myRepairRecordDetail",
+    "pages/work/repairOrderDetail",
+    "pages/work/saveRepairOrder"
   ],
   "window": {
     "navigationStyle": "custom"

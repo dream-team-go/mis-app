@@ -40,10 +40,24 @@ const BuildingStatusEnumMap = new Map([
 	[1, "在使用"]
 ]);
 
+//维修记录枚举
+const RepairRecordEnumMap = new Map([
+	[1, "待审批"],
+	[0, "取消申请"],
+	[-1, "组长未通过"],
+	[2, "组长通过"],
+	[3, "维修出单"],
+	[-2, "主任未通过"],
+	[4, "主任通过"],
+	[-3, "局长未通过"],
+	[5, "局长通过"]
+]);
+
 export default { 
     MeetingRecordEnumMap,
 	FoodRecordEnumMap,
 	BuildingStatusEnumMap,
 	UseCarRecordEnumMap,
-	DispatchRecordEnumMap
+	DispatchRecordEnumMap,
+	RepairRecordEnumMap
 }
