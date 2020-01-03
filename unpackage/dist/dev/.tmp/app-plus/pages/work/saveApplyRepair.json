@@ -1,3 +1,10 @@
 {
+<<<<<<< HEAD
   "usingComponents": {}
+=======
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom",
+    "uni-load-more": "/colorui/components/uni-load-more"
+  }
+>>>>>>> 6151777a9254fe3e239489aee3cd097c8db48e26
 }

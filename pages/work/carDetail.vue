@@ -181,10 +181,6 @@
 				<text class="text-bold">{{info.remark}}</text>
 			</view>
 		</view>
-		
-		<view class="padding flex flex-direction">
-			<button class="cu-btn bg-orange margin-tb-sm lg" @click="bindDriver">关联司机</button>
-		</view>
 	</view>
 </template>
 
@@ -224,12 +220,6 @@
 			toEdit: function(e){
 				uni.navigateTo({
 					url: '../work/saveCar?para=' + encodeURIComponent(JSON.stringify(this.info))
-				});
-			},
-			bindDriver: function(e){
-				uni.showModal({
-					content: '待开发',
-					showCancel: false
 				});
 			}
 		}

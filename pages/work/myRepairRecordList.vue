@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">我的维修申请记录</block>
-			<block slot="right" @tap="toSaveRepairOrder">维修单</block>
+			<block slot="right" @tap="toSaveApplyRepair">申请维修</block>
 		</cu-custom>
 
 		<scroll-view scroll-x class="bg-red nav text-center">
@@ -94,7 +94,7 @@
 		methods: {
 			loadData() {
 				this.status = 'loading';
-				global.$http.post('/car/repair/list', {
+				global.$http.post('/car/repair/myApply', {
 					params: {
 						status: this.recordStatus,
 						sp_type: 0,
@@ -141,12 +141,12 @@
 			},
 			recordDetail: function(record) {
 				uni.navigateTo({
-					url: "../work/repairRecordDetail?id=" + record.id,
+					url: "../work/myRepairRecordDetail?id=" + record.id,
 				});
 			},
-			toSaveRepairOrder: function(){
+			toSaveApplyRepair: function(){
 				uni.navigateTo({
-					url: "../work/saveRepairOrder",
+					url: "../work/saveApplyRepair",
 				});
 			}
 		}

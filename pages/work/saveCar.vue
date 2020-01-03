@@ -157,7 +157,16 @@
 				<view class="title">车辆GPS</view>
 				<input name="input" v-model="para.car_gps"></input>
 			</view>
-
+			
+			<view class="cu-form-group">
+				<view class="title">司机</view>
+				<view class="modal-group" @tap="showDriverModal(index)" data-target="Modal">
+					<view class="picker">
+						{{ para.driver_id.length > 0 ? driver_name + "("+ driver_phone +")" : '请选择' }}
+					</view>
+				</view>
+			</view>
+			
 			<view class="cu-bar bg-white">
 				<view class="action">
 					车辆照片上传
@@ -166,6 +175,7 @@
 					{{imgList.length}}/1
 				</view>
 			</view>
+			
 			<view class="cu-form-group">
 				<view class="grid col-4 grid-square flex-sub">
 					<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
@@ -221,10 +231,39 @@
 				<button class="cu-btn bg-orange margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
 		</form>
+		<view class="list-modal cu-modal bottom-modal" :class="isShowDriverModal?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-gradual-blue" :style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
+					<view class="action text-white" @tap="hideDriverModal">取消</view>
+					<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择司机</view>
+					<view class="action"></view>
+				</view>
+		
+				<view id="list-view" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
+					<view class="cu-list menu text-left">
+						<view class="cu-item arrow" v-for="driver in drivers" :key="driver.id" @click="getDriver(driver)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
+							<view class="content">
+								<view>{{driver.user_cn_name}}({{driver.sex == 1 ? '男' : '女'}})</view>
+								<view class="text-gray text-sm flex">
+									<view class="text-cut">
+										{{driver.tel_no}}
+									</view>
+								</view>
+							</view>
+							<view class="action">
+								<view class="text-grey text-xs">驾龄{{driver.drive_age}}年</view>
+							</view>
+						</view>
+					</view>
+					<uni-load-more :status="status" :content-text="contentText" />
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
+	import uniLoadMore from '@/colorui/components/uni-load-more.vue';
 	import misEnum from '../../common/mis-enum.js';
 
 	function getDate(addDay) {
@@ -241,6 +280,9 @@
 		return `${year}-${month}-${day}`;
 	}
 	export default {
+		components: {
+			uniLoadMore
+		},
 		onLoad(option) {
 			//编辑车辆
 			if (option.para) {
@@ -283,6 +325,7 @@
 				this.para.img = info.img;
 				this.para.car_gps = info.car_gps;
 				this.para.property_org = info.property_org;
+				this.para.driver_id = info.driver_id;
 				//设置辅助参数
 				this.imgList.push(this.para.img);
 				this.isTown = info.is_town == 1;
@@ -291,6 +334,30 @@
 				this.isPdc = info.is_pdc == 1;
 				this.isLeatherSeat = info.is_leather_seat == 1;
 				this.isCd = info.is_cd == 1;
+				//获取司机信息
+				if(this.para.driver_id.length > 0){
+					global.$http.post('/car/driver/getInfo', {
+						params: {
+							driver_id: this.para.driver_id
+						},
+					}).then(res => {
+						if (res.status === "0") {
+							this.driver_name = res.data.user_cn_name;
+							this.driver_phone = res.data.tel_no;
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
+				}
 			}
 			//获取车辆相关枚举
 			global.$http.post('/car/info/enumsInfo', {}).then(res => {
@@ -399,6 +466,18 @@
 					org_name: "请选择",
 					org_id: ""
 				}],
+				page: 1,
+				pageSize: 100,
+				isShowDriverModal: false,
+				drivers: [],
+				driver_name: "",
+				driver_phone: "",
+				status: 'more',
+				contentText: {
+					contentdown: '上拉加载更多',
+					contentrefresh: '加载中',
+					contentnomore: '没有更多'
+				},
 				para: {
 					id: "",
 					car_number: "",
@@ -432,11 +511,36 @@
 					is_cd: 0,
 					remark: "",
 					img: "",
-					car_gps: ""
+					car_gps: "",
+					driver_id: ""
 				}
 			}
 		},
 		methods: {
+			getDriverListData() {
+				this.status = 'loading';
+				global.$http.post('/car/driver/driverList', {
+					params: {
+						page: this.page,
+						pageSize: this.pageSize
+					},
+				}).then(res => {
+					if (res.status === "0") {
+						this.status = 'noMore';
+						this.drivers = res.data.list;
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+			},
 			ChooseImage: function() {
 				uni.chooseImage({
 					count: 1, //默认9
@@ -537,6 +641,21 @@
 				if (this.oIndex != e.detail.value) {
 					this.oIndex = e.detail.value;
 				}
+			},
+			showDriverModal: function(e) {
+				this.page = 1;
+				this.cars = [];
+				this.isShowDriverModal = true;
+				this.getDriverListData();
+			},
+			hideDriverModal: function(e){
+				this.isShowDriverModal = false;
+			},
+			getDriver: function(e) {
+				this.para.driver_id = e.id;
+				this.driver_name = e.user_cn_name;
+				this.driver_phone = e.tel_no;
+				this.isShowDriverModal = false;
 			},
 			Submit: function(e) {
 				//验证数据
@@ -708,5 +827,50 @@
 
 
 <style>
+.list-modal {
+		z-index: 10000;
+	}
 
+	.list-modal .cu-dialog {
+		height: 100vh;
+	}
+
+	.list-modal.cu-modal.show #list-view {
+		overflow-x: hidden;
+		overflow-y: scroll;
+		pointer-events: auto;
+	}
+
+	.cu-form-group .modal-group {
+		flex: 1;
+		padding-right: 40upx;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.cu-form-group .modal-group .picker {
+		line-height: 100upx;
+		font-size: 28upx;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		width: 100%;
+		text-align: right;
+	}
+
+	.cu-form-group .modal-group::after {
+		font-family: cuIcon;
+		display: block;
+		content: "\e6a3";
+		position: absolute;
+		font-size: 34upx;
+		color: #8799a3;
+		line-height: 100upx;
+		width: 60upx;
+		text-align: center;
+		top: 0;
+		bottom: 0;
+		right: -20upx;
+		margin: auto;
+	}
 </style>

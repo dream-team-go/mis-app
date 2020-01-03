@@ -1,6 +1,13 @@
 {
+<<<<<<< HEAD
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom"
   },
   "component": true
+=======
+  "component": true,
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  }
+>>>>>>> 6151777a9254fe3e239489aee3cd097c8db48e26
 }

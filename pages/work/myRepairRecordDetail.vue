@@ -3,7 +3,8 @@
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">车辆维修申请详情</block>
-			<block v-show="info.status >= 3 " slot="right" @tap="toRepairOrder">维修单</block>
+			<block v-show="info.status >= 3" slot="right" @tap="toRepairOrder">维修单</block>
+			<block v-show="info.status == 1" slot="right" @tap="toEdit">修改</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -31,6 +32,12 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 维修原由：
+				<text class="text-bold">{{info.desc}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 车辆：
 				<text class="text-bold">{{info.brand}} {{info.car_number}}</text>
 			</view>
@@ -51,12 +58,6 @@
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 申请时间：
 				<text class="text-bold">{{info.create_time}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 备注：
-				<text class="text-bold">{{info.desc}}</text>
 			</view>
 		</view>
 
@@ -84,6 +85,10 @@
 				<text class="text-bold">{{info.jz_name}} {{info.jzsp_time}}</text>
 			</view>
 		</view>
+		
+		<view class="padding flex flex-direction" v-if="info.status == 1">
+			<button class="cu-btn bg-red margin-tb-sm lg" @click="cancleBook">取消申请</button>
+		</view>
 	</view>
 </template>
 
@@ -98,7 +103,7 @@
 			}
 		},
 		onLoad(option) {
-			global.$http.post('/car/apply/getInfo', {
+			global.$http.post('/car/repair/getInfo', {
 				params: {
 					apply_id: option.id
 				},
@@ -313,9 +318,46 @@
 						break;
 				}
 			},
+			cancleBook: function() {
+				uni.showLoading({
+					title: '提交中',
+					mask: false
+				});
+				global.$http.post('/car/repair/cancel', {
+					params: {
+						apply_id: this.info.id
+					},
+				}).then(res => {
+					uni.hideLoading();
+					if (res.status === "0") {
+						this.info.status = 0;
+						uni.showToast({
+							title: "取消成功",
+							icon: 'none'
+						});
+						this.showSteps();
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+			},
 			toEdit: function(e) {
 				uni.navigateTo({
 					url: '../work/saveApplyRepair?para=' + encodeURIComponent(JSON.stringify(this.info))
+				});
+			},
+			toRepairOrder: function(e){
+				uni.navigateTo({
+					url: '../work/repairOrderDetail?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			}
 		}

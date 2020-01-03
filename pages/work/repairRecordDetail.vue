@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">车辆维修申请详情</block>
-			<block v-show="info.status >= 3 " slot="right" @tap="toRepairOrder">维修单</block>
+			<block v-show="info.status >= 3 || info.status <= -2" slot="right" @tap="toRepairOrder">维修单</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -98,7 +98,7 @@
 			}
 		},
 		onLoad(option) {
-			global.$http.post('/car/apply/getInfo', {
+			global.$http.post('/car/repair/getInfo', {
 				params: {
 					apply_id: option.id
 				},
