@@ -1,0 +1,1 @@
+<view><cu-custom vue-id="1" bgColor="bg-gradual-pink" isBack="{{true}}" bind:__l="__l" vue-slots="{{['backText','content','right']}}"><view slot="backText">返回</view><view slot="content">车辆</view><view slot="right" data-event-opts="{{[['tap',[['toAdd',['$event']]]]]}}" bindtap="__e">新增</view></cu-custom></view>
