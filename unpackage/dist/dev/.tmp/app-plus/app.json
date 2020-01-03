@@ -41,7 +41,6 @@
     "pages/work/dispatchCarOrderList",
     "pages/work/dispatchCarOrderDetail",
     "pages/work/settleDispatchCar",
-    "pages/car/useCarAppraise",
     "pages/car/dispatchUseCarDetail",
     "pages/work/useCarDispatchDetail",
     "pages/work/repairRecordList",
@@ -50,7 +49,13 @@
     "pages/work/myRepairRecordList",
     "pages/work/myRepairRecordDetail",
     "pages/work/repairOrderDetail",
-    "pages/work/saveRepairOrder"
+    "pages/work/saveRepairOrder",
+    "pages/work/foremanRepairRecordList",
+    "pages/work/foremanRepairRecordDetail",
+    "pages/work/directorRepairRecordList",
+    "pages/work/directorRepairRecordDetail",
+    "pages/work/secretaryRepairRecordList",
+    "pages/work/secretaryRepairRecordDetail"
   ],
   "window": {
     "navigationStyle": "custom"

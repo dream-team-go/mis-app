@@ -157,10 +157,6 @@
             "style" : {}
         }
         ,{
-            "path" : "pages/car/useCarAppraise",
-            "style" : {}
-        }
-        ,{
             "path" : "pages/car/dispatchUseCarDetail",
             "style" : {}
         }
@@ -194,6 +190,30 @@
         }
         ,{
             "path" : "pages/work/saveRepairOrder",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/foremanRepairRecordList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/foremanRepairRecordDetail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/directorRepairRecordList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/directorRepairRecordDetail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/secretaryRepairRecordList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/secretaryRepairRecordDetail",
             "style" : {}
         }
     ],

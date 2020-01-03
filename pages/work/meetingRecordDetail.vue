@@ -216,7 +216,19 @@
 				});
 			},
 			verifySuccess: function(){
-				this.verify(1, "");
+				uni.showModal({
+					title: '提示',
+					content: '确定审批通过？',
+					showCancel: true,
+					cancelText: '取消',
+					confirmText: '确定',
+					success: res => {
+						if(res.cancel) return;
+						this.verify(1, "");
+					},
+					fail: () => {},
+					complete: () => {}
+				});
 			},
 			verifyFail:function(){
 				this.showModal = true;

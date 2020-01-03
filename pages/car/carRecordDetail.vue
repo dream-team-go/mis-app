@@ -302,35 +302,47 @@
 				}
 			},
 			cancleBook: function() {
-				uni.showLoading({
-					title: '提交中',
-					mask: false
-				});
-				global.$http.post('/car/apply/myCancel', {
-					params: {
-						apply_id: this.info.id
+				uni.showModal({
+					title: '提示',
+					content: '确定取消预定？',
+					showCancel: true,
+					cancelText: '取消',
+					confirmText: '确定',
+					success: res => {
+						if(res.cancel) return;
+						uni.showLoading({
+							title: '提交中',
+							mask: false
+						});
+						global.$http.post('/car/apply/myCancel', {
+							params: {
+								apply_id: this.info.id
+							},
+						}).then(res => {
+							uni.hideLoading();
+							if (res.status === "0") {
+								this.info.status = -3;
+								uni.showToast({
+									title: "取消成功",
+									icon: 'none'
+								});
+								this.showSteps();
+							} else {
+								uni.showToast({
+									title: res.msg,
+									icon: 'none'
+								});
+							}
+						}).catch(err => {
+							uni.hideLoading();
+							uni.showToast({
+								title: err.message,
+								icon: 'none'
+							});
+						});
 					},
-				}).then(res => {
-					uni.hideLoading();
-					if (res.status === "0") {
-						this.info.status = -3;
-						uni.showToast({
-							title: "取消成功",
-							icon: 'none'
-						});
-						this.showSteps();
-					} else {
-						uni.showToast({
-							title: res.msg,
-							icon: 'none'
-						});
-					}
-				}).catch(err => {
-					uni.hideLoading();
-					uni.showToast({
-						title: err.message,
-						icon: 'none'
-					});
+					fail: () => {},
+					complete: () => {}
 				});
 			},
 			toEdit: function(e) {

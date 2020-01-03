@@ -141,7 +141,8 @@
 					cuIcon: 'discoverfill',
 					color: 'purple',
 					badge: 0,
-					name: '组长审批'
+					name: '组长审批',
+					url:"../work/foremanRepairRecordList"
 				}, {
 					cuIcon: 'questionfill',
 					color: 'mauve',
@@ -151,12 +152,14 @@
 					cuIcon: 'questionfill',
 					color: 'mauve',
 					badge: 0,
-					name: '主任审批'
+					name: '主任审批',
+					url:"../work/directorRepairRecordList"
 				}, {
 					cuIcon: 'questionfill',
 					color: 'mauve',
 					badge: 0,
-					name: '局长审批'
+					name: '局长审批',
+					url:"../work/secretaryRepairRecordList"
 				}],
 				meetingCuIconList: [{
 					cuIcon: 'cardboardfill',

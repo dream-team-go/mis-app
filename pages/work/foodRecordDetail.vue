@@ -94,15 +94,15 @@
 				<text class="text-bold">{{info.create_time}}</text>
 			</view>
 		</view>
-		
+
 		<view class="padding" v-if="info.status == 0" style="display: inline-flex;">
 			<button class="cu-btn bg-red lg" @click="verifyFail">驳回</button>
 		</view>
-		
+
 		<view class="padding" v-if="info.status == 0" style="display: inline-flex;float: right;">
-			<button class="cu-btn bg-green lg" @click="verifySuccess">确认</button>
+			<button class="cu-btn bg-green lg" @click="verifySuccess">确认预定</button>
 		</view>
-		
+
 		<view class="cu-modal" :class="showModal?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
@@ -120,7 +120,7 @@
 					<view class="action">
 						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
 						<button class="cu-btn bg-green margin-left" @tap="sureModal">确定</button>
-		
+
 					</view>
 				</view>
 			</view>
@@ -163,10 +163,10 @@
 					misEnum.FoodRecordEnumMap.forEach((value, key, map) => {
 						var cuIcon = '';
 						var color = '';
-						if(!isFind || key == this.info.status){
+						if (!isFind || key == this.info.status) {
 							color = this.color;
 						}
-						if(key == this.info.status){
+						if (key == this.info.status) {
 							isFind = true;
 						}
 						if (key === 0) {
@@ -185,7 +185,7 @@
 							color: color
 						})
 					});
-					
+
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -200,7 +200,7 @@
 			});
 		},
 		methods: {
-			verify(status,  failReason) {
+			verify(status, failReason) {
 				uni.showLoading({
 					title: '提交中',
 					mask: false
@@ -219,17 +219,17 @@
 							icon: 'none'
 						});
 						this.info.status = status;
-						if(status == 1){
+						if (status == 1) {
 							this.steps[0].color = 'text-green';
 							this.steps[1].color = 'text-green';
 							this.steps[2].color = 'text-green';
 							this.steps[3].color = 'text-green';
-						}else{
+						} else {
 							this.steps[0].color = 'text-red';
 							this.steps[1].color = 'text-red';
 							this.steps[2].color = 'text-red';
 						}
-						
+
 					} else {
 						uni.showToast({
 							title: res.msg,
@@ -244,20 +244,32 @@
 					});
 				});
 			},
-			verifySuccess: function(){
-				this.verify(1, "");
+			verifySuccess: function() {
+				uni.showModal({
+					title: '提示',
+					content: '确定确认预定？',
+					showCancel: true,
+					cancelText: '取消',
+					confirmText: '确定',
+					success: res => {
+						if (res.cancel) return;
+						this.verify(1, "");
+					},
+					fail: () => {},
+					complete: () => {}
+				});
 			},
-			verifyFail:function(){
+			verifyFail: function() {
 				this.showModal = true;
 			},
-			hideModal: function(){
+			hideModal: function() {
 				this.showModal = false;
 			},
-			fillFailReason: function(e){
+			fillFailReason: function(e) {
 				this.failReason = e.detail.value;
 			},
-			sureModal:function(){
-				if(this.failReason.length <= 0){
+			sureModal: function() {
+				if (this.failReason.length <= 0) {
 					uni.showToast({
 						title: "请填写不通过原因",
 						icon: 'none'

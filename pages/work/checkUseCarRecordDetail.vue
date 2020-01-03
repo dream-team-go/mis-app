@@ -85,7 +85,7 @@
 		<view class="padding" v-if="info.status == 0" style="display: inline-flex;">
 			<button class="cu-btn bg-red lg" @click="verifyFail">审批不通过</button>
 		</view>
-		
+
 		<view class="padding" v-if="info.status == 0" style="display: inline-flex;float: right;">
 			<button class="cu-btn bg-green lg" @click="verifySuccess">审批通过</button>
 		</view>
@@ -297,7 +297,7 @@
 						break;
 				}
 			},
-			verify(status,  failReason) {
+			verify(status, failReason) {
 				uni.showLoading({
 					title: '提交中',
 					mask: false
@@ -331,10 +331,22 @@
 					});
 				});
 			},
-			verifySuccess: function(){
-				this.verify(1, "");
+			verifySuccess: function() {
+				uni.showModal({
+					title: '提示',
+					content: '确定审批通过？',
+					showCancel: true,
+					cancelText: '取消',
+					confirmText: '确定',
+					success: res => {
+						if (res.cancel) return;
+						this.verify(1, "");
+					},
+					fail: () => {},
+					complete: () => {}
+				});
 			},
-			verifyFail:function(){
+			verifyFail: function() {
 				this.verify(-1, "");
 			}
 		}

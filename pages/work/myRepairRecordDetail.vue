@@ -85,7 +85,7 @@
 				<text class="text-bold">{{info.jz_name}} {{info.jzsp_time}}</text>
 			</view>
 		</view>
-		
+
 		<view class="padding flex flex-direction" v-if="info.status == 1">
 			<button class="cu-btn bg-red margin-tb-sm lg" @click="cancleBook">取消申请</button>
 		</view>
@@ -319,35 +319,47 @@
 				}
 			},
 			cancleBook: function() {
-				uni.showLoading({
-					title: '提交中',
-					mask: false
-				});
-				global.$http.post('/car/repair/cancel', {
-					params: {
-						apply_id: this.info.id
+				uni.showModal({
+					title: '提示',
+					content: '确定取消申请？',
+					showCancel: true,
+					cancelText: '取消',
+					confirmText: '确定',
+					success: res => {
+						if (res.cancel) return;
+						uni.showLoading({
+							title: '提交中',
+							mask: false
+						});
+						global.$http.post('/car/repair/cancel', {
+							params: {
+								apply_id: this.info.id
+							},
+						}).then(res => {
+							uni.hideLoading();
+							if (res.status === "0") {
+								this.info.status = 0;
+								uni.showToast({
+									title: "取消成功",
+									icon: 'none'
+								});
+								this.showSteps();
+							} else {
+								uni.showToast({
+									title: res.msg,
+									icon: 'none'
+								});
+							}
+						}).catch(err => {
+							uni.hideLoading();
+							uni.showToast({
+								title: err.message,
+								icon: 'none'
+							});
+						});
 					},
-				}).then(res => {
-					uni.hideLoading();
-					if (res.status === "0") {
-						this.info.status = 0;
-						uni.showToast({
-							title: "取消成功",
-							icon: 'none'
-						});
-						this.showSteps();
-					} else {
-						uni.showToast({
-							title: res.msg,
-							icon: 'none'
-						});
-					}
-				}).catch(err => {
-					uni.hideLoading();
-					uni.showToast({
-						title: err.message,
-						icon: 'none'
-					});
+					fail: () => {},
+					complete: () => {}
 				});
 			},
 			toEdit: function(e) {
@@ -355,7 +367,7 @@
 					url: '../work/saveApplyRepair?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			},
-			toRepairOrder: function(e){
+			toRepairOrder: function(e) {
 				uni.navigateTo({
 					url: '../work/repairOrderDetail?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
