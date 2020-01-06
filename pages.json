@@ -216,6 +216,14 @@
             "path" : "pages/work/secretaryRepairRecordDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/work/wxcRepairRecordList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/wxcRepairRecordDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

@@ -11,7 +11,7 @@ var __WXML_GLOBAL__ = {
 };
 var $gwx;
 
-/*v0.5vv_20190703_syb_scopedata*/window.__wcc_version__='v0.5vv_20190703_syb_scopedata';window.__wcc_version_info__={"customComponents":true,"fixZeroRpx":true,"propValueDeepCopy":false};
+/*v0.5vv_20190312_syb_scopedata*/window.__wcc_version__='v0.5vv_20190312_syb_scopedata';window.__wcc_version_info__={"customComponents":true,"fixZeroRpx":true,"propValueDeepCopy":false};
 var $gwxc
 var $gaic={}
 $gwx=function(path,global){
@@ -1014,9 +1014,8 @@ var t=JSON.parse(o);
 return $gdc(t,'nv_');
 }
 
-function _af(p, a, r, c){
-p.extraAttr = {"t_action": a, "t_rawid": r };
-if ( typeof(c) != 'undefined' ) p.extraAttr.t_cid = c;
+function _af(p, a, c){
+p.extraAttr = {"t_action": a, "t_cid": c};
 }
 
 function _gv( )
@@ -6783,11 +6782,17 @@ Z([[7],[3,'status']])
 Z([3,'2'])
 })(__WXML_GLOBAL__.ops_cached.$gwx_66);return __WXML_GLOBAL__.ops_cached.$gwx_66
 }
+function gz$gwx_67(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_67)return __WXML_GLOBAL__.ops_cached.$gwx_67
+__WXML_GLOBAL__.ops_cached.$gwx_67=[];
+(function(z){var a=11;function Z(ops){z.push(ops)}
+})(__WXML_GLOBAL__.ops_cached.$gwx_67);return __WXML_GLOBAL__.ops_cached.$gwx_67
+}
 __WXML_GLOBAL__.ops_set.$gwx=z;
 __WXML_GLOBAL__.ops_init.$gwx=true;
 var nv_require=function(){var nnm={};var nom={};return function(n){return function(){if(!nnm[n]) return undefined;try{if(!nom[n])nom[n]=nnm[n]();return nom[n];}catch(e){e.message=e.message.replace(/nv_/g,'');var tmp = e.stack.substring(0,e.stack.lastIndexOf(n));e.stack = tmp.substring(0,tmp.lastIndexOf('\n'));e.stack = e.stack.replace(/\snv_/g,' ');e.stack = $gstack(e.stack);e.stack += '\n    at ' + n.substring(2);console.error(e);}
 }}}()
-var x=['./colorui/components/cu-custom.wxml','./colorui/components/uni-collapse-item.wxml','./colorui/components/uni-collapse.wxml','./colorui/components/uni-icon.wxml','./colorui/components/uni-load-more.wxml','./pages/account/findPassword.wxml','./pages/account/login.wxml','./pages/account/register.wxml','./pages/car/bookCar.wxml','./pages/car/carRecordDetail.wxml','./pages/car/dispatchUseCarDetail.wxml','./pages/car/index.wxml','./pages/car/myCarRecordList.wxml','./pages/food/bookFood.wxml','./pages/food/foodRecordDetail.wxml','./pages/food/index.wxml','./pages/food/myFoodRecordList.wxml','./pages/index/home.wxml','./pages/index/index.wxml','./pages/meeting/bookMeeting.wxml','./pages/meeting/index.wxml','./pages/meeting/meetingRecordDetail.wxml','./pages/meeting/myMeetingRecordList.wxml','./pages/user/editPassword.wxml','./pages/user/index.wxml','./pages/work/carDetail.wxml','./pages/work/carList.wxml','./pages/work/checkUseCarRecordDetail.wxml','./pages/work/checkUseCarRecordList.wxml','./pages/work/directorRepairRecordDetail.wxml','./pages/work/directorRepairRecordList.wxml','./pages/work/dispatchCarOrderDetail.wxml','./pages/work/dispatchCarOrderList.wxml','./pages/work/dispatchUseCar.wxml','./pages/work/dispatchUseCarDetail.wxml','./pages/work/dispatchUseCarRecordDetail.wxml','./pages/work/dispatchUseCarRecordList.wxml','./pages/work/driverDetail.wxml','./pages/work/driverList.wxml','./pages/work/foodDetail.wxml','./pages/work/foodList.wxml','./pages/work/foodRecordDetail.wxml','./pages/work/foodRecordList.wxml','./pages/work/foremanRepairRecordDetail.wxml','./pages/work/foremanRepairRecordList.wxml','./pages/work/index.wxml','./pages/work/meetingDetail.wxml','./pages/work/meetingList.wxml','./pages/work/meetingRecordDetail.wxml','./pages/work/meetingRecordList.wxml','./pages/work/myRepairRecordDetail.wxml','./pages/work/myRepairRecordList.wxml','./pages/work/repairOrderDetail.wxml','./pages/work/repairRecordDetail.wxml','./pages/work/repairRecordList.wxml','./pages/work/saveApplyRepair.wxml','./pages/work/saveCar.wxml','./pages/work/saveFood.wxml','./pages/work/saveMeeting.wxml','./pages/work/saveRepairOrder.wxml','./pages/work/secretaryRepairRecordDetail.wxml','./pages/work/secretaryRepairRecordList.wxml','./pages/work/settleDispatchCar.wxml','./pages/work/useCarDispatchDetail.wxml','./pages/work/useCarRecordDetail.wxml','./pages/work/useCarRecordList.wxml'];d_[x[0]]={}
+var x=['./colorui/components/cu-custom.wxml','./colorui/components/uni-collapse-item.wxml','./colorui/components/uni-collapse.wxml','./colorui/components/uni-icon.wxml','./colorui/components/uni-load-more.wxml','./pages/account/findPassword.wxml','./pages/account/login.wxml','./pages/account/register.wxml','./pages/car/bookCar.wxml','./pages/car/carRecordDetail.wxml','./pages/car/dispatchUseCarDetail.wxml','./pages/car/index.wxml','./pages/car/myCarRecordList.wxml','./pages/food/bookFood.wxml','./pages/food/foodRecordDetail.wxml','./pages/food/index.wxml','./pages/food/myFoodRecordList.wxml','./pages/index/home.wxml','./pages/index/index.wxml','./pages/meeting/bookMeeting.wxml','./pages/meeting/index.wxml','./pages/meeting/meetingRecordDetail.wxml','./pages/meeting/myMeetingRecordList.wxml','./pages/user/editPassword.wxml','./pages/user/index.wxml','./pages/work/carDetail.wxml','./pages/work/carList.wxml','./pages/work/checkUseCarRecordDetail.wxml','./pages/work/checkUseCarRecordList.wxml','./pages/work/directorRepairRecordDetail.wxml','./pages/work/directorRepairRecordList.wxml','./pages/work/dispatchCarOrderDetail.wxml','./pages/work/dispatchCarOrderList.wxml','./pages/work/dispatchUseCar.wxml','./pages/work/dispatchUseCarDetail.wxml','./pages/work/dispatchUseCarRecordDetail.wxml','./pages/work/dispatchUseCarRecordList.wxml','./pages/work/driverDetail.wxml','./pages/work/driverList.wxml','./pages/work/foodDetail.wxml','./pages/work/foodList.wxml','./pages/work/foodRecordDetail.wxml','./pages/work/foodRecordList.wxml','./pages/work/foremanRepairRecordDetail.wxml','./pages/work/foremanRepairRecordList.wxml','./pages/work/index.wxml','./pages/work/meetingDetail.wxml','./pages/work/meetingList.wxml','./pages/work/meetingRecordDetail.wxml','./pages/work/meetingRecordList.wxml','./pages/work/myRepairRecordDetail.wxml','./pages/work/myRepairRecordList.wxml','./pages/work/repairOrderDetail.wxml','./pages/work/repairRecordDetail.wxml','./pages/work/repairRecordList.wxml','./pages/work/saveApplyRepair.wxml','./pages/work/saveCar.wxml','./pages/work/saveFood.wxml','./pages/work/saveMeeting.wxml','./pages/work/saveRepairOrder.wxml','./pages/work/secretaryRepairRecordDetail.wxml','./pages/work/secretaryRepairRecordList.wxml','./pages/work/settleDispatchCar.wxml','./pages/work/useCarDispatchDetail.wxml','./pages/work/useCarRecordDetail.wxml','./pages/work/useCarRecordList.wxml','./pages/work/wxcRepairRecordList.wxml'];d_[x[0]]={}
 var m0=function(e,s,r,gg){
 var z=gz$gwx_1()
 var oB=_n('view')
@@ -18120,6 +18125,14 @@ _(r,fWOD)
 return r
 }
 e_[x[65]]={f:m65,j:[],i:[],ti:[],ic:[]}
+d_[x[66]]={}
+var m66=function(e,s,r,gg){
+var z=gz$gwx_67()
+var l9PD=_n('view')
+_(r,l9PD)
+return r
+}
+e_[x[66]]={f:m66,j:[],i:[],ti:[],ic:[]}
 if(path&&e_[path]){
 window.__wxml_comp_version__=0.02
 return function(env,dd,global){$gwxc=0;var root={"tag":"wx-page"};root.children=[]
@@ -18171,7 +18184,6 @@ return 0.5;
 }
 return number;
 }
-var usingStyleSheetManager = !!window.__styleSheetManager__
 var setCssToHead = function(file, _xcInvalid, info) {
 var Ca = {};
 var css_id;
@@ -18192,7 +18204,7 @@ if ( op == 0 )
 res = transformRPX(content[1], opt.deviceWidth) + "px" + res;
 else if ( op == 1)
 res = opt.suffix + res;
-else if ( op == 2 )
+else if ( op == 2 ) 
 res = makeup(content[1], opt) + res;
 }
 else
@@ -18210,16 +18222,13 @@ if ( opt.allowIllegalSelector )
 console.warn( "For developer:" + _xcInvalid );
 else
 {
-console.error( _xcInvalid );
+console.error( _xcInvalid + "This wxss file is ignored." );
+return;
 }
 }
 Ca={};
 css = makeup(file, opt);
-if (usingStyleSheetManager) {
-window.__styleSheetManager__.setCss(info.path, css);
-return;
-}
-if ( !style )
+if ( !style ) 
 {
 var head = document.head || document.getElementsByTagName('head')[0];
 window.__rpxRecalculatingFuncs__ = window.__rpxRecalculatingFuncs__ || [];
@@ -18237,18 +18246,15 @@ style.styleSheet.cssText = css;
 } else {
 if ( style.childNodes.length == 0 )
 style.appendChild(document.createTextNode(css));
-else
+else 
 style.childNodes[0].nodeValue = css;
 }
 }
-if (usingStyleSheetManager) {
-window.__styleSheetManager__.addPath(info.path);
-}
 return rewritor;
 }
-setCssToHead([])();setCssToHead([[2,0]],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./app.wxss:4644:9)",{path:"./app.wxss"})();
+setCssToHead([])();setCssToHead([[2,0]],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./app.wxss:3657:1)",{path:"./app.wxss"})();
 
-__wxAppCode__['app.wxss']=setCssToHead([[2,0]],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./app.wxss:4644:9)",{path:"./app.wxss"});    
+__wxAppCode__['app.wxss']=setCssToHead([[2,0]],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./app.wxss:3657:1)",{path:"./app.wxss"});    
 __wxAppCode__['app.wxml']=$gwx('./app.wxml');
 
 __wxAppCode__['colorui/components/cu-custom.wxss']=undefined;    
@@ -18269,7 +18275,7 @@ __wxAppCode__['colorui/components/uni-load-more.wxml']=$gwx('./colorui/component
 __wxAppCode__['pages/account/findPassword.wxss']=undefined;    
 __wxAppCode__['pages/account/findPassword.wxml']=$gwx('./pages/account/findPassword.wxml');
 
-__wxAppCode__['pages/account/login.wxss']=setCssToHead([".",[1],"container { padding-top: 115px; position: relative; width: 100vw; height: 100vh; overflow: hidden; background: #fff; }\n.",[1],"password-inut { border-bottom: ",[0,1]," solid #eee; }\n.",[1],"confirm-btn { width: ",[0,630],"; height: ",[0,76],"; line-height: ",[0,76],"; border-radius: 50px; margin-top: ",[0,70],"; background: #fa436a; color: #fff; font-size: ",[0,32],"; }\n.",[1],"confirm-btn:after { border-radius: 100px; }\n.",[1],"forget-section { font-size: ",[0,26],"; color: #4399fc; text-align: center; margin-top: ",[0,40],"; }\n.",[1],"register-section { position: absolute; left: 0; bottom: ",[0,50],"; width: 100%; font-size: ",[0,26],"; color: #606266; text-align: center; }\n.",[1],"register-section wx-text { color: #4399fc; margin-left: ",[0,10],"; }\n",],"Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors.(./pages/account/login.wxss:40:19)",{path:"./pages/account/login.wxss"});    
+__wxAppCode__['pages/account/login.wxss']=setCssToHead([".",[1],"container { padding-top: 115px; position: relative; width: 100vw; height: 100vh; overflow: hidden; background: #fff; }\n.",[1],"password-inut { border-bottom: ",[0,1]," solid #eee; }\n.",[1],"confirm-btn { width: ",[0,630],"; height: ",[0,76],"; line-height: ",[0,76],"; border-radius: 50px; margin-top: ",[0,70],"; background: #fa436a; color: #fff; font-size: ",[0,32],"; }\n.",[1],"confirm-btn:after { border-radius: 100px; }\n.",[1],"forget-section { font-size: ",[0,26],"; color: #4399fc; text-align: center; margin-top: ",[0,40],"; }\n.",[1],"register-section { position: absolute; left: 0; bottom: ",[0,50],"; width: 100%; font-size: ",[0,26],"; color: #606266; text-align: center; }\n.",[1],"register-section wx-text { color: #4399fc; margin-left: ",[0,10],"; }\n",],undefined,{path:"./pages/account/login.wxss"});    
 __wxAppCode__['pages/account/login.wxml']=$gwx('./pages/account/login.wxml');
 
 __wxAppCode__['pages/account/register.wxss']=undefined;    
@@ -18448,6 +18454,9 @@ __wxAppCode__['pages/work/useCarRecordDetail.wxml']=$gwx('./pages/work/useCarRec
 
 __wxAppCode__['pages/work/useCarRecordList.wxss']=undefined;    
 __wxAppCode__['pages/work/useCarRecordList.wxml']=$gwx('./pages/work/useCarRecordList.wxml');
+
+__wxAppCode__['pages/work/wxcRepairRecordList.wxss']=undefined;    
+__wxAppCode__['pages/work/wxcRepairRecordList.wxml']=$gwx('./pages/work/wxcRepairRecordList.wxml');
 
 ;var __pageFrameEndTime__ = Date.now();
 (function() {

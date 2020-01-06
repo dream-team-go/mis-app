@@ -55,7 +55,8 @@
     "pages/work/directorRepairRecordList",
     "pages/work/directorRepairRecordDetail",
     "pages/work/secretaryRepairRecordList",
-    "pages/work/secretaryRepairRecordDetail"
+    "pages/work/secretaryRepairRecordDetail",
+    "pages/work/wxcRepairRecordList"
   ],
   "window": {
     "navigationStyle": "custom"
@@ -67,7 +68,7 @@
     "autoclose": false
   },
   "appname": "开远事务局APP",
-  "compilerVersion": "2.4.6",
+  "compilerVersion": "2.5.1",
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
     "car": "/pages/car/index",
