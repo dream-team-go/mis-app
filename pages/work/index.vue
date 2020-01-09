@@ -147,7 +147,8 @@
 					cuIcon: 'questionfill',
 					color: 'mauve',
 					badge: 0,
-					name: '维修单'
+					name: '维修单',
+					url:"../work/wxcRepairRecordList"
 				}, {
 					cuIcon: 'questionfill',
 					color: 'mauve',

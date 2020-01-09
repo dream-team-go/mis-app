@@ -56,7 +56,8 @@
     "pages/work/directorRepairRecordDetail",
     "pages/work/secretaryRepairRecordList",
     "pages/work/secretaryRepairRecordDetail",
-    "pages/work/wxcRepairRecordList"
+    "pages/work/wxcRepairRecordList",
+    "pages/work/wxcRepairRecordDetail"
   ],
   "window": {
     "navigationStyle": "custom"
