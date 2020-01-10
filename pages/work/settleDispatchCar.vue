@@ -28,6 +28,10 @@
 				<input name="input" v-model="para.jy_fee"></input>
 			</view>
 			<view class="cu-form-group">
+				<view class="title">过路费(元)</view>
+				<input name="input" v-model="para.gl_fee"></input>
+			</view>
+			<view class="cu-form-group">
 				<view class="title">洗车费(元)</view>
 				<input name="input" v-model="para.xc_fee"></input>
 			</view>
@@ -65,6 +69,7 @@
 					tc_fee: 0,
 					hs_fee: 0,
 					jy_fee: 0,
+					gl_fee: 0,
 					xc_fee: 0,
 					clzy_fee: 0,
 					other_fee: 0,
@@ -82,21 +87,42 @@
 				this.para.tc_fee = info.tc_fee;
 				this.para.hs_fee = info.hs_fee;
 				this.para.jy_fee = info.jy_fee;
+				this.para.gl_fee = info.gl_fee;
 				this.para.xc_fee = info.xc_fee;
 				this.para.clzy_fee = info.clzy_fee;
 				this.para.other_fee = info.other_fee;
 			} else {
 				this.isAdd = true;
 			}
-			//获取里程费用
-			global.$http.post('/car/dispatch/getStop', {
+			//确认归队
+			global.$http.post('/car/dispatch/sureBack', {
 				params: {
 					dispatch_id: this.info.id
 				},
 			}).then(res => {
 				if (res.status === "0") {
-					this.stop_num = res.data.stop_num;
-					this.stop_price = res.data.stop_price;
+					//获取里程费用
+					global.$http.post('/car/dispatch/getStop', {
+						params: {
+							dispatch_id: this.info.id
+						},
+					}).then(res => {
+						if (res.status === "0") {
+							this.stop_num = res.data.stop_num;
+							this.stop_price = res.data.stop_price;
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -114,7 +140,7 @@
 		computed: {
 			total_fee: function() {
 				return this.stop_price * this.stop_num + Number(this.para.zs_fee) + Number(this.para.tc_fee) + Number(this.para.hs_fee) + Number(this.para.jy_fee) +
-					Number(this.para.xc_fee) + Number(this.para.clzy_fee) + Number(this.para.other_fee);
+					Number(this.para.xc_fee) + Number(this.para.clzy_fee) + Number(this.para.other_fee) + Number(this.para.gl_fee);
 			}
 		},
 		methods: {

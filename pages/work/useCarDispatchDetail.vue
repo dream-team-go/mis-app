@@ -92,6 +92,12 @@
 							<text class="text-bold">{{dispatchOrder.jy_fee}}</text>
 						</view>
 					</view>
+					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.gl_fee > 0">
+						<view class="action">
+							<text class="cuIcon-title text-orange"></text> 过路费(元)：
+							<text class="text-bold">{{dispatchOrder.gl_fee}}</text>
+						</view>
+					</view>
 					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.xc_fee > 0">
 						<view class="action">
 							<text class="cuIcon-title text-orange"></text> 洗车费(元)：

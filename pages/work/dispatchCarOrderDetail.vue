@@ -103,6 +103,12 @@
 						<text class="text-bold">{{info.jy_fee}}</text>
 					</view>
 				</view>
+				<view class="cu-bar bg-white solid-bottom" v-if="info.gl_fee > 0">
+					<view class="action">
+						<text class="cuIcon-title text-orange"></text> 过路费(元)：
+						<text class="text-bold">{{info.gl_fee}}</text>
+					</view>
+				</view>
 				<view class="cu-bar bg-white solid-bottom" v-if="info.xc_fee > 0">
 					<view class="action">
 						<text class="cuIcon-title text-orange"></text> 洗车费(元)：
