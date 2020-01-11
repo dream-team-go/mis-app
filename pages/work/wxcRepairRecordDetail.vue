@@ -4,6 +4,8 @@
 			<block slot="backText">返回</block>
 			<block slot="content">车辆维修申请详情</block>
 			<block v-show="info.status == 2 || info.status == 3" slot="right" @tap="saveRepairOrder">维修单</block>
+			<block v-show="info.status > 3 || info.status < -1" slot="right" @tap="toRepairOrderDetail">维修单</block>
+			
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -135,13 +137,17 @@
 				steps: [],
 				info: {},
 				showModal: false,
-				failReason: ""
+				failReason: "",
+				id: ""
 			}
 		},
 		onLoad(option) {
+			this.id = option.id;
+		},
+		onShow(){
 			global.$http.post('/car/repair/getInfo', {
 				params: {
-					apply_id: option.id
+					apply_id: this.id
 				},
 			}).then(res => {
 				if (res.status === "0") {
@@ -426,6 +432,11 @@
 			saveRepairOrder: function(e) {
 				uni.navigateTo({
 					url: '../work/saveRepairOrder?para=' + encodeURIComponent(JSON.stringify(this.info))
+				});
+			},
+			toRepairOrderDetail: function(e){
+				uni.navigateTo({
+					url: '../work/repairOrderDetail?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			}
 		}
