@@ -5,7 +5,7 @@
 				<block slot="content">我的</block>
 			</cu-custom>
 			<view class="cu-list menu">
-				<view class="cu-item" >
+				<view class="cu-item">
 					<view class="content padding-tb-sm">
 						<view>
 							<!-- :style="'background-image:url(' + userInfo.user.head_img + ')'" -->
@@ -22,19 +22,22 @@
 			</view>
 
 			<view class="cu-list menu margin-top">
-				<view class="cu-item arrow">
-					<navigator class="content" hover-class="none" url="../user/warnList" open-type="navigate">
+				<navigator class="cu-item arrow" hover-class="none" url="../user/warnList" open-type="navigate">
+					<view class="content">
 						<text class="cuIcon-message text-orange"></text>
 						<text class="text-grey">消息管理</text>
-					</navigator>
-				</view>
+					</view>
+					<view class="action" v-show="msgCount > 0">
+						<view class="cu-tag round bg-orange light">{{userData.msgCount}}</view>
+					</view>
+				</navigator>
 				<navigator class="cu-item arrow" hover-class="none" url="../user/editPassword" open-type="navigate">
 					<view class="content">
 						<image src="../../static/login/password.png" class="ico"></image>
 						<text class="text-grey">修改密码</text>
 					</view>
 				</navigator>
-				<view class="cu-item arrow"  @click="logout">
+				<view class="cu-item arrow" @click="logout">
 					<view class="content">
 						<image src="../../static/common/loginout.png" class="login-ico"></image>
 						<text class="text-grey">退出登录</text>
@@ -54,6 +57,7 @@
 	} from 'vuex';
 	export default {
 		name: "user",
+		props: ['userData'],
 		data() {
 			return {
 				menuBorder: false,
@@ -71,7 +75,7 @@
 					url: e.currentTarget.dataset.url
 				})
 			},
-			logout(){
+			logout() {
 				uni.showModal({
 					title: '提示',
 					content: '确定退出登录？',
@@ -79,7 +83,7 @@
 					cancelText: '取消',
 					confirmText: '确定',
 					success: res => {
-						if(res.cancel) return;
+						if (res.cancel) return;
 						uni.showLoading({
 							title: '退出登录中',
 							mask: false
@@ -93,7 +97,7 @@
 								this.setLogoutInfo();
 								//跳转登陆页
 								uni.reLaunch({
-									url:"../account/login"
+									url: "../account/login"
 								});
 							} else {
 								uni.showToast({
@@ -112,7 +116,7 @@
 					fail: () => {},
 					complete: () => {}
 				});
-				
+
 			}
 		},
 	}
@@ -122,18 +126,22 @@
 	.page {
 		height: 100vh;
 	}
+
 	.heard {
 		width: 80upx;
 		height: 80upx;
 	}
+
 	.ml20 {
 		margin-left: 40upx;
 	}
+
 	.ico {
 		width: 28upx !important;
 		height: 28upx !important;
 		margin: 0 20upx 0 10upx !important;
 	}
+
 	.login-ico {
 		width: 34upx !important;
 		height: 34upx !important;

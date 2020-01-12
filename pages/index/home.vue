@@ -3,7 +3,7 @@
 		<car v-if="PageCur=='car'" :carData="carData"></car>
 		<meeting v-if="PageCur=='meeting'" :meetingData="meetingData"></meeting>
 		<food v-if="PageCur=='food'" :foodData="foodData"></food>
-		<user v-if="PageCur=='user'"></user>
+		<user v-if="PageCur=='user'" :userData="userData"></user>
 		<work v-if="PageCur=='work'"></work>
 		<view class="cu-bar tabbar bg-white shadow foot">
 			<view class="action" @click="NavChange" data-cur="car">
@@ -91,6 +91,9 @@
 					start_place: "",
 					end_place: "",
 					status: ""
+				},
+				userData:{
+					msgCount: 0
 				}
 			}
 		},
@@ -312,6 +315,31 @@
 								this.foodData.end_time = res.data.end_time;
 								this.foodData.create_time = res.data.create_time;
 							}
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
+				}else if (this.PageCur === "food") {
+					uni.showLoading({
+						title: '加载中',
+						mask: false
+					});
+					//获取未读消息数量
+					global.$http.post('/core/warn/getNoReadCount', {
+						params: {},
+					}).then(res => {
+						if (res.status === "0") {
+							this.userData.msgCount = res.data;
+							uni.hideLoading();
 						} else {
 							uni.showToast({
 								title: res.msg,
