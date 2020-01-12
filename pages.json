@@ -228,6 +228,14 @@
             "path" : "pages/work/repairOrderDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/user/warnList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/user/warnDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

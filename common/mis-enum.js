@@ -53,11 +53,18 @@ const RepairRecordEnumMap = new Map([
 	[-3, "局长未通过"]
 ]);
 
+//消息装填枚举
+const WarnStatusEnumMap = new Map([
+	[0, "未读"],
+	[1, "已读"]
+]);
+
 export default { 
     MeetingRecordEnumMap,
 	FoodRecordEnumMap,
 	BuildingStatusEnumMap,
 	UseCarRecordEnumMap,
 	DispatchRecordEnumMap,
-	RepairRecordEnumMap
+	RepairRecordEnumMap,
+	WarnStatusEnumMap
 }

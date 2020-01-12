@@ -23,7 +23,7 @@
 
 			<view class="cu-list menu margin-top">
 				<view class="cu-item arrow">
-					<navigator class="content" hover-class="none" url="..//" open-type="navigate">
+					<navigator class="content" hover-class="none" url="../user/warnList" open-type="navigate">
 						<text class="cuIcon-discoverfill text-orange"></text>
 						<text class="text-grey">消息管理</text>
 					</navigator>
