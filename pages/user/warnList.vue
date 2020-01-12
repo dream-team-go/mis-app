@@ -1,34 +1,34 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">消息记录</block>
 		</cu-custom>
 
-		<scroll-view scroll-x class="bg-red nav text-center">
+		<scroll-view scroll-x class="bg-white nav text-center">
 			<view class="cu-item" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length"
 			 :key="index" @tap="recordStatusTab(index)">
 				{{Array.from(StatusEnumMap.values())[index]}}
 			</view>
 		</scroll-view>
-
-		<view class="cu-list menu text-left">
-			<view class="cu-item arrow" v-for="record in records" :key="record.id" @click="recordDetail(record)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
-				<view class="content">
-					<view>{{record.type}}</view>
-					<!-- <view class="text-gray text-sm flex">
-						<view class="text-cut">
-							{{record.content}})
-						</view>
-					</view> -->
-					<view class="text-gray text-sm flex">
-						<view class="text-cut">
-							{{record.create_time}}
-						</view>
-					</view>
+		<view class="bg-white p10">
+			<view class="small-card-detial" v-for="record in records" :key="record.id" @click="recordDetail(record)">
+				<view class="title-box bg-linear-blue">
+					<text class="id">{{record.type}}</text>
+					<text class="cu-tag round bg-orange sm status">{{record.is_read == 0 ? "未读" : "已读"}}</text>
+					<image src="../../static/common/next.png" class="arrow"></image>
 				</view>
-				<view class="action">
-					<view class="text-grey text-xs">{{record.is_read == 0 ? "未读" : "已读"}}</view>
+				<view class="info-box">
+					<text class="label">通知时间：</text>
+					<text class="info">{{record.create_time}}</text>
+				</view>
+				<view class="info-box" v-if="record.is_read == 1">
+					<text class="label">阅读时间：</text>
+					<text class="info">{{record.read_time}}</text>
+				</view>
+				<view class="reason-box">
+					<view class="label">通知内容：</view>
+					<view class="info">{{record.content}}</view>
 				</view>
 			</view>
 		</view>
@@ -132,14 +132,13 @@
 			},
 			recordDetail: function(record) {
 				uni.navigateTo({
-					url: "../user/warnDetail?para=" + encodeURIComponent(JSON.stringify(this.info)),
+					url: "../user/warnDetail?para=" + encodeURIComponent(JSON.stringify(record)),
 				});
 			}
 		}
 	}
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+	@import "style/mystyle.scss";
 </style>
-
