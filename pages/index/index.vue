@@ -115,4 +115,5 @@
 		font-size: 36upx;
 		color: #8f8f94;
 	}
+	
 </style>

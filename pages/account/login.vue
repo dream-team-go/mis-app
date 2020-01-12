@@ -1,13 +1,16 @@
 <template>
 	<view class="container">
+		<view class="top-box">
+			登录
+		</view>
 		<form>
 			<view class="cu-form-group">
-				<view class="title">手机号</view>
-				<input name="input" v-model="username"></input>
+				<image class="ico" src="../../static/login/phone.png"></image>
+				<input class="ipt" name="input" v-model="username" placeholder="请输入手机号"></input>
 			</view>
-			<view class="cu-form-group password-inut">
-				<view class="title">密码</view>
-				<input type="password" name="input" v-model="password"></input>
+			<view class="cu-form-group">
+				<image class="pass-ico" src="../../static/login/password.png"></image>
+				<input class="ipt" type="password" name="input" v-model="password" placeholder="请输入密码"></input>
 			</view>
 			<button class="confirm-btn" @click="toLogin">登录</button>
 			<view class="forget-section">
@@ -121,28 +124,52 @@
 
 <style lang='scss'>
 	.container {
-		padding-top: 115px;
 		position: relative;
 		width: 100vw;
 		height: 100vh;
-		overflow: hidden;
-		background: #fff;
+		.top-box {
+			color: #11c0ac;
+			text-align: center;
+			font-size: 40upx;
+			line-height: 60upx;
+			margin-bottom: 40upx;
+			padding-top: 200upx;
+		}
+		
+		.cu-form-group {
+			width: 90%;
+			margin-left: 5%;
+			background: transparent;
+			border: 1px solid #ccc;
+			border-radius: 50upx;
+			margin-bottom: 20upx;
+			height: 86upx;
+			.ico {
+				width: 40upx;
+				height: 40upx;
+				margin-right: 10upx;
+			}
+			.pass-ico {
+				width: 30upx;
+				height: 36upx;
+				margin-right: 10upx;
+			}
+			.ipt {
+				color: #11c0ac;
+			}
+		}
 	}
 
-	.password-inut {
-		border-bottom: 1upx solid #eee;
-	}
-
+	
 	.confirm-btn {
-		width: 630upx;
-		height: 76upx;
-		line-height: 76upx;
+		width: 90%;
+		height: 86upx;
+		line-height: 86upx;
 		border-radius: 50px;
-		margin-top: 70upx;
-		background: #fa436a;
-		color: #fff;
+		margin-top: 200upx;
+		background-image: linear-gradient(45deg, #44d7b6, #36bdbd);
+		color: #ffffff;
 		font-size: 32upx;
-
 		&:after {
 			border-radius: 100px;
 		}
@@ -150,7 +177,7 @@
 
 	.forget-section {
 		font-size: 26upx;
-		color: #4399fc;
+		color: #11c0ac;
 		text-align: center;
 		margin-top: 40upx;
 	}
@@ -165,7 +192,7 @@
 		text-align: center;
 
 		text {
-			color: #4399fc;
+			color: #1cccd6;
 			margin-left: 10upx;
 		}
 	}

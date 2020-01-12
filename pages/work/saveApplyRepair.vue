@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">{{isAdd ? '申请维修' : '编辑维修申请'}}</block>
 		</cu-custom>
@@ -29,13 +29,13 @@
 			</view>
 			
 			<view class="padding flex flex-direction">
-				<button class="cu-btn bg-orange margin-tb-sm lg" @click="Submit">提交</button>
+				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
 		</form>
 		
 		<view class="list-modal cu-modal bottom-modal" :class="isShowCarModal?'show':''">
 			<view class="cu-dialog">
-				<view class="cu-bar bg-gradual-blue" :style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
+				<view class="cu-bar bg-linear-blue" :style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
 					<view class="action text-white" @tap="hideCarModal">取消</view>
 					<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择车辆</view>
 					<view class="action"></view>

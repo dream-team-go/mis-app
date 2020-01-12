@@ -1,16 +1,16 @@
 <template>
 	<view>
 		<scroll-view scroll-y class="page">
-			<cu-custom bgColor="bg-gradual-pink">
+			<cu-custom bgColor="bg-linear-blue">
 				<block slot="content">会务</block>
 			</cu-custom>
 
 			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">
-					<text class="cuIcon-title text-orange"></text> 会务预定概况
+				<view class="action index-title">
+					<image src="../../static/common/house.png" class="title-ico"></image> 会务预定概况
 				</view>
 				<view class="action">
-					<button class="cu-btn bg-green shadow" @tap="toBookMeeting">预定</button>
+					<button class="cu-btn bg-linear-blue shadow" @tap="toBookMeeting">预定</button>
 				</view>
 			</view>
 			
@@ -48,61 +48,30 @@
 			</view>
 			
 			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">
-					<text class="cuIcon-title text-orange"></text> 最近预定
+				<view class="action index-title">
+					<image src="../../static/common/clock.png" class="title-ico"></image> 最近预定
 				</view>
 			</view>
-			<view class="cu-list menu">
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">会议主题</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">
-							{{meetingData.status.length > 0 ? meetingData.desc : '无'}}
-						</view>
-					</view>
+			<view class="card">
+				<view class="item">
+					<text class="title">会议室</text>
+					<text class="content">{{meetingData.status.length > 0 ? meetingData.building_name : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">会议室</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">
-							{{meetingData.status.length > 0 ? meetingData.building_name + '('+meetingData.room_number+')' : '无'}}
-						</view>
-					</view>
+				<view class="item">
+					<text class="title">会议时间</text>
+					<text class="content">{{meetingData.status.length > 0 ? meetingData.start_time + '—' + meetingData.end_time : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">会议时间</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">{{meetingData.status.length > 0 ? meetingData.start_time + '—' + meetingData.end_time : '无'}}</view>
-					</view>
+				<view class="item">
+					<text class="title">预定时间</text>
+					<text class="content">{{meetingData.status.length > 0 ? meetingData.create_time : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">预定时间</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">{{meetingData.status.length > 0 ? meetingData.create_time : '无'}}</view>
-					</view>
+				<view class="item">
+					<text class="title">状态</text>
+					<text class="content">{{meetingData.status.length > 0 ? meetingData.status : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">状态</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">
-							{{meetingData.status.length > 0 ? meetingData.status : '无'}}
-						</view>
-					</view>
+				<view class="reason-box">
+					<view class="title">会议主题</view>
+					<view class="reason">{{meetingData.status.length > 0 ? meetingData.desc : '无'}}</view>
 				</view>
 			</view>
 			<view class="cu-tabbar-height"></view>
@@ -128,7 +97,8 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+	@import "style/mystyle.scss";
 	.cu-list.grid>.cu-item .text-orange{
 		color: #f37b1d;
 	}

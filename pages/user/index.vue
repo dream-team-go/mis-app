@@ -1,18 +1,18 @@
 <template name="user">
 	<view>
 		<scroll-view scroll-y class="page">
-			<cu-custom bgColor="bg-gradual-pink">
+			<cu-custom bgColor="bg-linear-blue">
 				<block slot="content">我的</block>
 			</cu-custom>
 			<view class="cu-list menu">
-				<view class="cu-item" :class="arrow">
+				<view class="cu-item" >
 					<view class="content padding-tb-sm">
 						<view>
 							<!-- :style="'background-image:url(' + userInfo.user.head_img + ')'" -->
-							<view class="cu-avatar lg round margin-left bg-red">
-								<text class="cuIcon-people"></text>
+							<view class="margin-left ">
+								<image src="../../static/common/user.png" class="heard"></image>
 							</view>
-							<text class="text-bold text-lg">{{userInfo.user.userCnName}}</text>
+							<text class="text-bold text-lg ml20">{{userInfo?userInfo.user.userCnName:""}}</text>
 						</view>
 						<view class="text-gray text-lg text-right">
 							开远市机关事务局
@@ -24,19 +24,19 @@
 			<view class="cu-list menu margin-top">
 				<view class="cu-item arrow">
 					<navigator class="content" hover-class="none" url="..//" open-type="navigate">
-						<text class="cuIcon-discoverfill text-orange"></text>
+						<text class="cuIcon-message text-orange"></text>
 						<text class="text-grey">消息管理</text>
 					</navigator>
 				</view>
 				<navigator class="cu-item arrow" hover-class="none" url="../user/editPassword" open-type="navigate">
 					<view class="content">
-						<text class="cuIcon-discoverfill text-orange"></text>
+						<image src="../../static/login/password.png" class="ico"></image>
 						<text class="text-grey">修改密码</text>
 					</view>
 				</navigator>
 				<view class="cu-item arrow"  @click="logout">
 					<view class="content">
-						<text class="cuIcon-btn text-green"></text>
+						<image src="../../static/common/loginout.png" class="login-ico"></image>
 						<text class="text-grey">退出登录</text>
 					</view>
 				</view>
@@ -118,8 +118,25 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
 	.page {
 		height: 100vh;
+	}
+	.heard {
+		width: 80upx;
+		height: 80upx;
+	}
+	.ml20 {
+		margin-left: 40upx;
+	}
+	.ico {
+		width: 28upx !important;
+		height: 28upx !important;
+		margin: 0 20upx 0 10upx !important;
+	}
+	.login-ico {
+		width: 34upx !important;
+		height: 34upx !important;
+		margin: 0 18upx 0 4upx !important;
 	}
 </style>

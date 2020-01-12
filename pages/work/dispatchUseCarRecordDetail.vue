@@ -1,13 +1,13 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">车辆预约详情</block>
 			<block v-show="info.status > 0" slot="right" @tap="toDispatch">{{info.status > 2 ? "派车单" :(info.status == 2 ? "修改派车" : "派车")}}</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 预约进度
+				</text> 预约进度
 			</view>
 		</view>
 		<view class="bg-white padding">
@@ -19,73 +19,73 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.status == -2">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 取消订单原因：
+				</text> 取消订单原因：
 				<text class="text-red">{{info.cancel_reason}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 用车事由：
+				</text> 用车事由：
 				<text class="text-bold">{{info.reason}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 用车人：
+				</text> 用车人：
 				<text class="text-bold">{{info.car_user}}({{info.phone}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 乘车人数：
+				</text> 乘车人数：
 				<text class="text-bold">{{info.people_num}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 上车地点：
+				</text> 上车地点：
 				<text class="text-bold">{{info.start_place}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 用车区域：
+				</text> 用车区域：
 				<text class="text-bold">{{info.area}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 目的地：
+				</text> 目的地：
 				<text class="text-bold">{{info.end_city}}{{info.end_area}}{{info.end_place}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 出发时间：
+				</text> 出发时间：
 				<text class="text-bold">{{info.predict_start_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 回程时间：
+				</text> 回程时间：
 				<text class="text-bold">{{info.predict_end_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 预约时间：
+				</text> 预约时间：
 				<text class="text-bold">{{info.apply_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 用车类型：
+				</text> 用车类型：
 				<text class="text-bold">{{info.type == 1 ? "公务用车" : "网约车"}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 预约人：
+				</text> 预约人：
 				<text class="text-bold">{{info.apply_user_name}}({{info.apply_user_phone}})</text>
 			</view>
 		</view>

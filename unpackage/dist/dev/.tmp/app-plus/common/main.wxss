@@ -259,13 +259,13 @@ radio.radio .uni-radio-input-checked::after {
 }
 switch.switch-sex .wx-switch-input,
 switch.switch-sex .uni-switch-input {
-	background: #e54d42 !important;
-	border-color: #e54d42 !important;
+	background: #ffc0cb !important;
+	border-color: #ffc0cb !important;
 }
 switch.switch-sex[checked] .wx-switch-input,
 switch.switch-sex.checked .uni-switch-input {
-	background: #0081ff !important;
-	border-color: #0081ff !important;
+	background: #03a9f4 !important;
+	border-color: #03a9f4 !important;
 }
 switch.red[checked] .wx-switch-input.wx-switch-input-checked,
 checkbox.red[checked] .wx-checkbox-input,
@@ -489,7 +489,7 @@ radio.white.checked .uni-radio-input {
 	border-right: 1rpx solid rgba(0, 0, 0, 0.1);
 }
 .solid-bottom::after {
-	border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1rpx solid rgba(0, 0, 0, 0.5);
 }
 .solid-left::after {
 	border-left: 1rpx solid rgba(0, 0, 0, 0.1);
@@ -2006,6 +2006,7 @@ to {
 }
 .nav .cu-item.cur {
 	border-bottom: 4rpx solid;
+	color: #36bdbd;
 }
 
 /* ==================
@@ -3483,6 +3484,11 @@ scroll-view.cu-steps .cu-item {
 	background-color: #333333;
 	color: #ffffff;
 }
+.bg-linear-blue {
+	background-image: -o-linear-gradient(45deg, #44d7b6, #36bdbd);
+	background-image: linear-gradient(45deg, #44d7b6, #36bdbd);
+	color: #ffffff;
+}
 .bg-white {
 	background-color: #ffffff;
 	color: #666666;
@@ -3576,6 +3582,10 @@ scroll-view.cu-steps .cu-item {
 	background-image: -o-linear-gradient(45deg, #0081ff, #1cbbb4);
 	background-image: linear-gradient(45deg, #0081ff, #1cbbb4);
 	color: #ffffff;
+}
+.bg-gradual-white {
+	background: #FFFFFF;
+	color: #0e0f3e;
 }
 .shadow[class*="-red"] {
 	-webkit-box-shadow: 6rpx 6rpx 8rpx rgba(204, 69, 59, 0.2);
@@ -3817,6 +3827,11 @@ scroll-view.cu-steps .cu-item {
 .line-blue,
 .lines-blue {
 	color: #0081ff;
+}
+.text-bluelight,
+.line-bluelight,
+.lines-bluelight {
+	color: #36BDBD;
 }
 .text-purple,
 .line-purple,

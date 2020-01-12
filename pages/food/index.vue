@@ -1,16 +1,16 @@
 <template>
 	<view>
 		<scroll-view scroll-y class="page">
-			<cu-custom bgColor="bg-gradual-pink">
+			<cu-custom bgColor="bg-linear-blue">
 				<block slot="content">订餐</block>
 			</cu-custom>
 
 			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">
-					<text class="cuIcon-title text-orange"></text> 订餐概况
+				<view class="action index-title">
+					<image src="../../static/common/food.png" class="title-ico"></image> 订餐概况
 				</view>
 				<view class="action">
-					<button class="cu-btn bg-green shadow" @tap="toBookfood">预定</button>
+					<button class="cu-btn bg-linear-blue shadow" @tap="toBookfood">预定</button>
 				</view>
 			</view>
 			
@@ -48,61 +48,30 @@
 			</view>
 			
 			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">
-					<text class="cuIcon-title text-orange"></text> 最近预定
+				<view class="action index-title">
+					<image src="../../static/common/clock.png" class="title-ico"></image> 最近预定
 				</view>
 			</view>
-			<view class="cu-list menu">
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">订餐原由</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">
-							{{foodData.status.length > 0 ? foodData.desc : '无'}}
-						</view>
-					</view>
+			<view class="card">
+				<view class="item">
+					<text class="title">包房</text>
+					<text class="content">{{foodData.status.length > 0 ? foodData.building_name + '('+foodData.room_number+')' : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">包房</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">
-							{{foodData.status.length > 0 ? foodData.building_name + '('+foodData.room_number+')' : '无'}}
-						</view>
-					</view>
+				<view class="item">
+					<text class="title">用餐时间</text>
+					<text class="content">{{foodData.status.length > 0 ? foodData.start_time + '—' + foodData.end_time : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">用餐时间</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">{{foodData.status.length > 0 ? foodData.start_time + '—' + foodData.end_time : '无'}}</view>
-					</view>
+				<view class="item">
+					<text class="title">预定时间</text>
+					<text class="content">{{foodData.status.length > 0 ? foodData.create_time : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">预定时间</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">{{foodData.status.length > 0 ? foodData.create_time : '无'}}</view>
-					</view>
+				<view class="item">
+					<text class="title">状态</text>
+					<text class="content">{{foodData.status.length > 0 ? foodData.status : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">状态</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">
-							{{foodData.status.length > 0 ? foodData.status : '无'}}
-						</view>
-					</view>
+				<view class="reason-box">
+					<view class="title">订餐原由</view>
+					<view class="reason">{{foodData.status.length > 0 ? foodData.desc : '无'}}</view>
 				</view>
 			</view>
 			<view class="cu-tabbar-height"></view>
@@ -128,7 +97,8 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+	@import "style/mystyle.scss";
 	.cu-list.grid>.cu-item .text-orange{
 		color: #f37b1d;
 	}

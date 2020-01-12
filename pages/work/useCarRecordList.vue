@@ -1,54 +1,59 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">用车记录</block>
 		</cu-custom>
 
-		<scroll-view scroll-x class="bg-red nav text-center">
+		<scroll-view scroll-x class="bg-white nav text-center">
 			<view class="cu-item" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length"
 			 :key="index" @tap="recordStatusTab(index)">
 				{{Array.from(StatusEnumMap.values())[index]}}
 			</view>
 		</scroll-view>
-
-
-		<view class="cu-list menu text-left">
-			<view class="cu-item arrow" v-for="record in records" :key="record.id" @click="recordDetail(record)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
-				<view class="content">
-					<view>{{record.reason}}</view>
-					<view class="text-gray text-sm flex">
-						<view class="text-cut">
-							乘车人：{{record.car_user}}（{{record.phone}}）
+		<view class="bg-white p10">
+			<view class="card-detail" v-for="record in records" :key="record.id" @click="recordDetail(record)">
+				<view class="title-box bg-linear-blue">
+					<text class="id">{{record.order_code}}</text>
+					<text class="cu-tag round bg-orange sm status">{{getStatusStr(record.status)}}</text>
+					<image src="../../static/common/next.png" class="arrow"></image>
+				</view>
+				<view class="info-box">
+					<text class="label">乘车人：</text>
+					<text class="info">{{record.car_user}}（{{record.phone}}）</text>
+				</view>
+				<view class="info-box">
+					<text class="label">乘车人数：</text>
+					<text class="info">{{record.people_num}}人</text>
+				</view>
+				<view class="address-box">
+					<view class="start-address">
+						<image src="../../static/common/start-address.png" class="ico"></image>
+						<text class="text">{{record.start_place}}</text>
+					</view>
+					<view class="time-box">
+						<view class="line"></view>
+						<view class="time">
+							<view class="value">乘车时间：{{record.predict_start_time}}</view>
+							<view class="middle"></view>
 						</view>
 					</view>
-					<view class="text-gray text-sm flex">
-						<view class="text-cut">
-							乘车地点：{{record.start_place}}
-						</view>
-					</view>
-					<view class="text-gray text-sm flex">
-						<view class="text-cut">
-							目的地：{{record.end_place}}
-						</view>
-					</view>
-					<view class="text-gray text-sm flex">
-						<view class="text-cut">
-							乘车时间：{{record.predict_start_time}}
-						</view>
-					</view>
-					<view class="text-gray text-sm flex">
-						<view class="text-cut">
-							返程时间：{{record.predict_end_time}}
+					<view class="end-address">
+						<image src="../../static/common/end-address.png" class="ico"></image>
+						<view class="info">
+							<view class="value">{{record.end_place}}</view>
+							<view class="time">返程时间：{{record.predict_end_time}}</view>
 						</view>
 					</view>
 				</view>
-				<view class="action">
-					<view class="text-grey text-xs">{{record.people_num}}人乘车</view>
-					<view class="cu-tag round bg-orange sm">{{getStatusStr(record.status)}}</view>
+				<view class="reason-box">
+					<view class="label">用车事由：</view>
+					<view class="info">{{record.reason}}</view>
 				</view>
 			</view>
 		</view>
+
+		
 		<uni-load-more :status="status" :content-text="contentText" />
 	</view>
 </template>
@@ -156,6 +161,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+	@import "style/mystyle.scss";
 
 </style>

@@ -1,12 +1,12 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">会议预定详情</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 预定进度
+				 预定进度
 			</view>
 		</view>
 		<view class="bg-white padding">
@@ -18,55 +18,55 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.status == -1">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 失败原因：
+				 失败原因：
 				<text class="text-red">{{info.fail_reason}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 会议主题：
+				 会议主题：
 				<text class="text-bold">{{info.desc}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 会议室：
+				 会议室：
 				<text class="text-bold">{{info.room_number}}({{info.building_name}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 会议时间：
+				 会议时间：
 				<text class="text-bold">{{info.start_time}} — {{info.end_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 参会人数：
+				 参会人数：
 				<text class="text-bold">{{info.people_num}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.attend_leader != null">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 参会领导：
+				 参会领导：
 				<text class="text-bold">{{info.attend_leader}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 预定人：
+				 预定人：
 				<text class="text-bold">{{info.user_name}}({{info.user_tel}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 预定时间：
+				 预定时间：
 				<text class="text-bold">{{info.create_time}}</text>
 			</view>
 		</view>
 		
 		<view class="padding flex flex-direction" v-if="info.status == 0">
-			<button class="cu-btn bg-red margin-tb-sm lg" @click="cancleBook">取消预定</button>
+			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="cancleBook">取消预定</button>
 		</view>
 	</view>
 </template>
