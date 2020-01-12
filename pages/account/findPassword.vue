@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">找回密码</block>
 		</cu-custom>
@@ -24,11 +24,11 @@
 			<view class="cu-form-group">
 				<view class="title">验证码</view>
 				<input name="input" v-model="code"></input>
-				<button class='cu-btn bg-green shadow' @click="SendCode" :disabled="disabled">验证码{{authCode}}</button>
+				<button class='cu-btn bg-linear-blue shadow' @click="SendCode" :disabled="disabled">验证码{{authCode}}</button>
 			</view>
 
 			<view class="padding flex flex-direction">
-				<button class="cu-btn bg-orange margin-tb-sm lg" @click="Submit">提交</button>
+				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
 		</form>
 	</view>

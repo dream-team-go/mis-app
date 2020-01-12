@@ -1,22 +1,47 @@
 .container {
-  padding-top: 115px;
   position: relative;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
-  background: #fff;
 }
-.password-inut {
-  border-bottom: 1rpx solid #eee;
+.container .top-box {
+    color: #11c0ac;
+    text-align: center;
+    font-size: 40rpx;
+    line-height: 60rpx;
+    margin-bottom: 40rpx;
+    padding-top: 200rpx;
+}
+.container .cu-form-group {
+    width: 90%;
+    margin-left: 5%;
+    background: transparent;
+    border: 1px solid #ccc;
+    border-radius: 50rpx;
+    margin-bottom: 20rpx;
+    height: 86rpx;
+}
+.container .cu-form-group .ico {
+      width: 40rpx;
+      height: 40rpx;
+      margin-right: 10rpx;
+}
+.container .cu-form-group .pass-ico {
+      width: 30rpx;
+      height: 36rpx;
+      margin-right: 10rpx;
+}
+.container .cu-form-group .ipt {
+      color: #11c0ac;
 }
 .confirm-btn {
-  width: 630rpx;
-  height: 76rpx;
-  line-height: 76rpx;
+  width: 90%;
+  height: 86rpx;
+  line-height: 86rpx;
   border-radius: 50px;
-  margin-top: 70rpx;
-  background: #fa436a;
-  color: #fff;
+  margin-top: 200rpx;
+  background-image: -o-linear-gradient(45deg, #44d7b6, #36bdbd);
+  background-image: linear-gradient(45deg, #44d7b6, #36bdbd);
+  color: #ffffff;
   font-size: 32rpx;
 }
 .confirm-btn:after {
@@ -24,7 +49,7 @@
 }
 .forget-section {
   font-size: 26rpx;
-  color: #4399fc;
+  color: #11c0ac;
   text-align: center;
   margin-top: 40rpx;
 }
@@ -38,7 +63,7 @@
   text-align: center;
 }
 .register-section text {
-    color: #4399fc;
+    color: #1cccd6;
     margin-left: 10rpx;
 }
 

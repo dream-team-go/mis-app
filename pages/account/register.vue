@@ -1,9 +1,12 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">注册</block>
 		</cu-custom>
+		<!-- <view class="tag">
+			<text class="text">基本信息</text>	
+		</view> -->
 		<form>
 			<view class="cu-form-group">
 				<view class="title">机关事务局</view>
@@ -44,7 +47,6 @@
 				<view class="title">是否司机</view>
 				<switch @change="ChangeIsDriver" :class="isDriver?'checked':''" :checked="isDriver?true:false"></switch>
 			</view>
-			
 			<view class="cu-form-group" v-show="isDriver">
 				<view class="title">驾照类型</view>
 				<picker @change="ChangeDriverType" :value="dtIndex" :range="driverTypes">
@@ -72,9 +74,6 @@
 				<view class="title">身份证号</view>
 				<input name="input" v-model="para.id_card"></input>
 			</view>
-			
-			
-
 			<view class="cu-form-group">
 				<view class="title">手机号</view>
 				<input name="input" v-model="para.username"></input>
@@ -93,11 +92,11 @@
 			<view class="cu-form-group">
 				<view class="title">验证码</view>
 				<input name="input" v-model="para.code"></input>
-				<button class='cu-btn bg-green shadow' @click="SendCode" :disabled="disabled">验证码{{authCode}}</button>
+				<button class='cu-btn bg-linear-blue shadow' @click="SendCode" :disabled="disabled">验证码{{authCode}}</button>
 			</view>
 			
 			<view class="padding flex flex-direction">
-				<button class="cu-btn bg-orange margin-tb-sm lg" @click="Submit">提交</button>
+				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
 		</form>
 	</view>
@@ -483,5 +482,23 @@
 	}
 </script>
 
-<style>
+<style lang='scss' scoped>
+	/* 重写无用 */
+	/* .picker .uni-picker-container .uni-picker-action.uni-picker-action-confirm {
+		color: #0e0f3e !important;
+	} */
+	.tag {
+		background: #FFFFFF;
+		.text {
+			display: inline-block;
+			background-image: linear-gradient(45deg, #36bdbd, #44d7b6);
+			color: #fff;
+			height: 50upx;
+			line-height: 50upx;
+			width: 160upx;
+			padding-left: 30upx;
+			border-radius: 0 50upx 50upx 0;
+		}
+		
+	}
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">{{isAdd ? '预定用车' : '编辑预定用车'}}</block>
 		</cu-custom>
@@ -98,7 +98,7 @@
 			</view>
 			
 			<view class="padding flex flex-direction">
-				<button class="cu-btn bg-orange margin-tb-sm lg" @click="Submit">提交</button>
+				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
 		</form>
 	</view>

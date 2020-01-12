@@ -57,10 +57,18 @@
     "pages/work/secretaryRepairRecordList",
     "pages/work/secretaryRepairRecordDetail",
     "pages/work/wxcRepairRecordList",
+<<<<<<< HEAD
+    "pages/work/wxcRepairRecordDetail"
+=======
     "pages/work/wxcRepairRecordDetail",
+<<<<<<< HEAD
     "pages/work/repairOrderDetail",
     "pages/user/warnList",
     "pages/user/warnDetail"
+=======
+    "pages/work/repairOrderDetail"
+>>>>>>> d7c9860269c17d86b53feb584786b850f5dfaffa
+>>>>>>> 83fb0ccb843b263c2d67fea747fad0dc329937d8
   ],
   "window": {
     "navigationStyle": "custom"
@@ -72,7 +80,7 @@
     "autoclose": false
   },
   "appname": "开远事务局APP",
-  "compilerVersion": "2.5.1",
+  "compilerVersion": "2.4.2",
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
     "car": "/pages/car/index",

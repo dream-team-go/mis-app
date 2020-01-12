@@ -1,19 +1,19 @@
 <template>
 	<view>
 		<scroll-view scroll-y class="page">
-			<cu-custom bgColor="bg-gradual-pink">
+			<cu-custom bgColor="bg-linear-blue">
 				<block slot="content">用车</block>
 			</cu-custom>
 
 			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">
-					<text class="cuIcon-title text-orange"></text> 用车概况
+				<view class="action index-title">
+					<image src="../../static/car/car-title.png" class="title-ico"></image> 用车概况
 				</view>
 				<view class="action">
-					<button class="cu-btn bg-green shadow" @tap="toBookcar">预约</button>
+					<button class="cu-btn bg-linear-blue shadow" @tap="toBookcar">预约</button>
 				</view>
 			</view>
-			
+
 			<view class="cu-list grid no-border col-3">
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../car/myCarRecordList" open-type="navigate">
@@ -70,89 +70,40 @@
 					</navigator>
 				</view>
 			</view>
-			
-			<view class="cu-bar bg-white solid-bottom margin-top">
+
+			<view class="cu-bar bg-white solid-bottom margin-top index-title">
 				<view class="action">
-					<text class="cuIcon-title text-orange"></text> 最近预约
+					<image src="../../static/common/clock.png" class="title-ico"></image> 最近预约
 				</view>
 			</view>
-			<view class="cu-list menu">
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">用车事由</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">
-							{{carData.status.length > 0 ? carData.reason : '无'}}
-						</view>
-					</view>
+			<view class="card">
+				<view class="item">
+					<text class="title">乘车人数</text>
+					<text class="content">{{carData.status.length > 0 ? carData.people_num : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">乘车人数</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">
-							{{carData.status.length > 0 ? carData.people_num : '无'}}
-						</view>
-					</view>
+				<view class="item">
+					<text class="title">乘车时间</text>
+					<text class="content">{{carData.status.length > 0 ? carData.predict_start_time : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">乘车时间</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">
-							{{carData.status.length > 0 ? carData.predict_start_time : '无'}}
-						</view>
-					</view>
+				<view class="item">
+					<text class="title">返程时间</text>
+					<text class="content">{{carData.status.length > 0 ? carData.predict_end_time : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">返程时间</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">
-							{{carData.status.length > 0 ? carData.predict_end_time : '无'}}
-						</view>
-					</view>
+				<view class="item">
+					<text class="title">乘车地点</text>
+					<text class="content">{{carData.status.length > 0 ? carData.start_place : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">乘车地点</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">
-							{{carData.status.length > 0 ? carData.start_place : '无'}}
-						</view>
-					</view>
+				<view class="item">
+					<text class="title">目的地</text>
+					<text class="content">{{carData.status.length > 0 ? carData.end_place : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">目的地</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">
-							{{carData.status.length > 0 ? carData.end_place : '无'}}
-						</view>
-					</view>
+				<view class="item">
+					<text class="title">状态</text>
+					<text class="content">{{carData.status.length > 0 ? carData.status : '无'}}</text>
 				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
-						<text class="text-grey">状态</text>
-					</view>
-					<view class="action">
-						<view class="cu-tag round bg-orange light">
-							{{carData.status.length > 0 ? carData.status : '无'}}
-						</view>
-					</view>
+				<view class="reason-box">
+					<view class="title">用车事由</view>
+					<view class="reason">{{carData.status.length > 0 ? carData.reason : '无'}}</view>
 				</view>
 			</view>
 			<view class="cu-tabbar-height"></view>
@@ -162,14 +113,14 @@
 
 <script>
 	export default {
-		props:['carData'],
+		props: ['carData'],
 		data() {
 			return {
-				
+
 			}
 		},
 		methods: {
-			toBookcar: function(){
+			toBookcar: function() {
 				uni.navigateTo({
 					url: "../car/bookCar",
 				});
@@ -178,11 +129,14 @@
 	}
 </script>
 
-<style>
-	.cu-list.grid>.cu-item .text-orange{
+<style scoped lang="scss">
+	@import "style/mystyle.scss";
+	
+	.cu-list.grid>.cu-item .text-orange {
 		color: #f37b1d;
 	}
-	.cu-list.grid>.cu-item .text-lg{
+
+	.cu-list.grid>.cu-item .text-lg {
 		font-size: 32upx;
 	}
 </style>

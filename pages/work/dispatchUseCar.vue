@@ -1,13 +1,13 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">车辆调度</block>
 		</cu-custom>
 		<form>
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
-					<text class="cuIcon-title text-orange"></text> 用车人数：
+					用车人数：
 					<text class="text-bold">{{info.people_num}}</text>
 				</view>
 			</view>
@@ -22,7 +22,7 @@
 			<view class="cu-item arrow margin-top" v-for="(dispatchOrder,index) in para.list" :key="dispatchOrder.id">
 				<view class="cu-bar bg-white solid-bottom">
 					<view class="action">
-						<text class="cuIcon-title text-orange"></text> 派车单{{index+1}}
+						派车单{{index+1}}
 					</view>
 				</view>
 				<view class="cu-form-group">
@@ -55,13 +55,13 @@
 				</view>
 			</view>
 			<view class="padding flex flex-direction">
-				<button class="cu-btn bg-orange margin-tb-sm lg" @click="Submit">提交</button>
+				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
 		</form>
 		
 		<view class="list-modal cu-modal bottom-modal" :class="isShowCarModal?'show':''">
 			<view class="cu-dialog">
-				<view class="cu-bar bg-gradual-blue" :style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
+				<view class="cu-bar bg-linear-blue" :style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
 					<view class="action text-white" @tap="hideCarModal">取消</view>
 					<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择车辆</view>
 					<view class="action"></view>

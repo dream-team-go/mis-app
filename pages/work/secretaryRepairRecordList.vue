@@ -1,41 +1,46 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">维修记录</block>
 		</cu-custom>
 
-		<scroll-view scroll-x class="bg-red nav text-center">
+		<scroll-view scroll-x class="bg-white nav text-center">
 			<view class="cu-item" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length"
 			 :key="index" @tap="recordStatusTab(index)">
 				{{Array.from(StatusEnumMap.values())[index]}}
 			</view>
 		</scroll-view>
-
-
-		<view class="cu-list menu text-left">
-			<view class="cu-item arrow" v-for="record in records" :key="record.id" @click="recordDetail(record)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
-				<view class="content">
-					<view>{{record.order_code}}</view>
-					<view class="text-gray text-sm flex">
-						<view class="text-cut">
-							{{record.brand}} {{record.car_number}}
-						</view>
-					</view>
-					<view class="text-gray text-sm flex">
-						<view class="text-cut">
-							{{record.user_name}} {{record.user_phone}}
-						</view>
-					</view>
-					<view class="text-gray text-sm flex">
-						<view class="text-cut">
-							{{record.create_time}}
-						</view>
-					</view>
+		<view class="bg-white p10">
+			<view class="small-card-detial"  v-for="record in records" :key="record.id" @click="recordDetail(record)" >
+				<view class="title-box bg-linear-blue">
+					<text class="id">{{record.order_code}}</text>
+					<text class="cu-tag round bg-orange sm status">{{getStatusStr(record.status)}}</text>
+					<image src="../../static/common/next.png" class="arrow"></image>
 				</view>
-				<view class="action">
-					<view class="text-grey text-xs">{{record.type == 1 ? "维修" : "保养"}}</view>
-					<view class="cu-tag round bg-orange sm">{{getStatusStr(record.status)}}</view>
+				<view class="info-box">
+					<text class="label">车辆：</text>
+					<text class="info">{{record.brand}}({{record.car_number}}){{record.car_type}}</text>
+				</view>
+				<view class="info-box">
+					<text class="label">司机：</text>
+					<text class="info">{{record.user_name}} {{record.user_phone}}</text>
+				</view>
+				<view class="info-box">
+					<text class="label">修理厂：</text>
+					<text class="info">{{record.repair_shop}}</text>
+				</view>
+				<view class="info-box">
+					<text class="label">申请类型：</text>
+					<text class="info">{{record.type == 1 ? "维修" : "保养"}}</text>
+				</view>
+				<view class="info-box">
+					<text class="label">申请时间：</text>
+					<text class="info">{{record.create_time}}</text>
+				</view>
+				<view class="reason-box">
+					<view class="label">申请原因：</view>
+					<view class="info">{{record.desc}}</view>
 				</view>
 			</view>
 		</view>
@@ -161,6 +166,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+	@import "style/mystyle.scss";
 
 </style>

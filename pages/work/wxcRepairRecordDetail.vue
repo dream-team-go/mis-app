@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">车辆维修申请详情</block>
 			<block v-show="info.status == 2 || info.status == 3" slot="right" @tap="saveRepairOrder">维修单</block>
@@ -9,7 +9,7 @@
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 维修申请进度
+				 维修申请进度
 			</view>
 		</view>
 		<view class="bg-white padding">
@@ -21,42 +21,45 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.status < 0">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 不通过原因：
+				 不通过原因：
 				<text class="text-red">{{info.fail_reason}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 编号：
+				 编号：
 				<text class="text-bold">{{info.order_code}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 车辆：
+				 车辆：
 				<text class="text-bold">{{info.brand}} {{info.car_number}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 申请人：
+				 申请人：
 				<text class="text-bold">{{info.user_name}}({{info.user_phone}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 类型：
+				 类型：
 				<text class="text-bold">{{info.type == 1 ? "维修" : "保养"}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 申请时间：
+				 申请时间：
 				<text class="text-bold">{{info.create_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
+<<<<<<< HEAD
+				 备注：
+=======
 				<text class="cuIcon-title text-orange"></text> 维修厂：
 				<text class="text-bold">{{info.repair_shop}}</text>
 			</view>
@@ -65,31 +68,32 @@
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 备注：
+>>>>>>> d7c9860269c17d86b53feb584786b850f5dfaffa
 				<text class="text-bold">{{info.desc}}</text>
 			</view>
 		</view>
 
 		<view class="cu-bar bg-white solid-bottom" v-if="info.zz_name.length > 0">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 组长审批：
+				 组长审批：
 				<text class="text-bold">{{info.zz_name}} {{info.zzsp_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.zr_name.length > 0">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 主任审批：
+				 主任审批：
 				<text class="text-bold">{{info.zr_name}} {{info.end_area}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.business.length > 0">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 维修出单：
+				 维修出单：
 				<text class="text-bold">{{info.business}} {{info.cwxd_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.jz_name.length > 0">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 局长审批：
+				 局长审批：
 				<text class="text-bold">{{info.jz_name}} {{info.jzsp_time}}</text>
 			</view>
 		</view>

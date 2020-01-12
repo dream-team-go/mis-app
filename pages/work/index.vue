@@ -1,74 +1,82 @@
 <template name="work">
 	<view>
 		<scroll-view scroll-y class="page">
-			<cu-custom bgColor="bg-gradual-blue">
+			<cu-custom bgColor="bg-linear-blue">
 				<block slot="content">工作台</block>
 			</cu-custom>
-			
 			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">
-					<text class="cuIcon-title text-orange "></text> 用车管理
+				<view class="action index-title">
+					<image class="title-ico" src="../../static/car/car-title.png"></image> 用车管理
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
 				<view hover-class="navigator-hover" class="cu-item" v-for="(item,index) in carCuIconList" :key="index" @tap="navigateTo(item.url)">
-					<view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]">
+					<view>
+						<image :src="item.icoSrc" class="item-ico">
 						<view class="cu-tag badge" v-if="item.badge!=0">
 							<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
 						</view>
+						</image>
 					</view>
 					<text>{{item.name}}</text>
 				</view>
 			</view>
 			
 			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">
-					<text class="cuIcon-title text-orange "></text> 车辆维修
+				<view class="action index-title">
+					<image class="title-ico" src="../../static/common/fix-car.png"></image> 车辆维修
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
 				<view hover-class="navigator-hover" class="cu-item" v-for="(item,index) in maintainCuIconList" :key="index" @tap="navigateTo(item.url)">
-					<view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]">
+					<view>
+						<image :src="item.icoSrc" class="item-ico">
 						<view class="cu-tag badge" v-if="item.badge!=0">
 							<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
 						</view>
+						</image>
 					</view>
 					<text>{{item.name}}</text>
 				</view>
 			</view>
 			
 			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">
-					<text class="cuIcon-title text-orange "></text> 会务管理
+				<view class="action index-title">
+					<image class="title-ico" src="../../static/common/house.png"></image> 会务管理
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
 				<view hover-class="navigator-hover" class="cu-item" v-for="(item,index) in meetingCuIconList" :key="index" @tap="navigateTo(item.url)">
-					<view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]">
+					<view >
+						<image :src="item.icoSrc" class="item-ico">
 						<view class="cu-tag badge" v-if="item.badge!=0">
 							<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
 						</view>
+						</image>
 					</view>
+					
 					<text>{{item.name}}</text>
 				</view>
 			</view>
 			
 			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">
-					<text class="cuIcon-title text-orange "></text> 订餐管理
+				<view class="action index-title">
+					<image class="title-ico" src="../../static/common/food.png"></image> 订餐管理
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
 				<view hover-class="navigator-hover" class="cu-item" v-for="(item,index) in foodCuIconList" :key="index" @tap="navigateTo(item.url)">
-					<view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]">
+					<view>
+						<image :src="item.icoSrc" class="item-ico">
 						<view class="cu-tag badge" v-if="item.badge!=0">
 							<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
 						</view>
+						</image>
 					</view>
 					<text>{{item.name}}</text>
 				</view>
 			</view>
-			
+			<!-- <image src="../../static/common/car-info.png"></image> -->
 			<view class="cu-tabbar-height"></view>
 		</scroll-view>
 	</view>
@@ -92,121 +100,140 @@
 					color: 'red',
 					badge: 120,
 					name: '车辆信息',
-					url: "../work/carList"
-					
+					url: "../work/carList",
+					icoSrc: "../../static/common/car-info.png"
 				}, {
 					cuIcon: 'picfill',
 					color: 'yellow',
 					badge: 0,
 					name: '司机信息',
-					url: "../work/driverList"
+					url: "../work/driverList",
+					icoSrc: "../../static/common/driver-info.png"
 				}, {
 					cuIcon: 'noticefill',
 					color: 'olive',
 					badge: 22,
 					name: '用车记录',
-					url: "../work/useCarRecordList"
+					url: "../work/useCarRecordList",
+					icoSrc: "../../static/common/record-info.png"
 				}, {
 					cuIcon: 'noticefill',
 					color: 'olive',
 					badge: 22,
 					name: '用车审批',
-					url:"../work/checkUseCarRecordList"
+					url:"../work/checkUseCarRecordList",
+					icoSrc: "../../static/common/shen-car.png"
 				}, {
 					cuIcon: 'upstagefill',
 					color: 'cyan',
 					badge: 0,
 					name: '用车调度',
-					url:"../work/dispatchUseCarRecordList"
+					url:"../work/dispatchUseCarRecordList",
+					icoSrc: "../../static/common/dispatch.png"
 				},{
 					cuIcon: 'upstagefill',
 					color: 'cyan',
 					badge: 0,
 					name: '我的派车单',
-					url:"../work/dispatchCarOrderList"
+					url:"../work/dispatchCarOrderList",
+					icoSrc: "../../static/common/car-record.png"
 				}],
 				maintainCuIconList:[{
 					cuIcon: 'clothesfill',
 					color: 'blue',
 					badge: 0,
 					name: '维修记录',
-					url:"../work/repairRecordList"
+					url:"../work/repairRecordList",
+					icoSrc: "../../static/common/fix-record.png"
 				},{
 					cuIcon: 'clothesfill',
 					color: 'blue',
 					badge: 0,
 					name: '维修申请',
-					url:"../work/myRepairRecordList"
+					url:"../work/myRepairRecordList",
+					icoSrc: "../../static/common/fix-apply.png"
 				}, {
 					cuIcon: 'discoverfill',
 					color: 'purple',
 					badge: 0,
 					name: '组长审批',
-					url:"../work/foremanRepairRecordList"
+					url:"../work/foremanRepairRecordList",
+					icoSrc: "../../static/common/shenpi.png"
 				}, {
 					cuIcon: 'questionfill',
 					color: 'mauve',
 					badge: 0,
 					name: '维修单',
-					url:"../work/wxcRepairRecordList"
+					url:"../work/wxcRepairRecordList",
+					icoSrc: "../../static/common/fix-order.png"
 				}, {
 					cuIcon: 'questionfill',
 					color: 'mauve',
 					badge: 0,
 					name: '主任审批',
-					url:"../work/directorRepairRecordList"
+					url:"../work/directorRepairRecordList",
+					icoSrc: "../../static/common/shenpi.png"
 				}, {
 					cuIcon: 'questionfill',
 					color: 'mauve',
 					badge: 0,
 					name: '局长审批',
-					url:"../work/secretaryRepairRecordList"
+					url:"../work/secretaryRepairRecordList",
+					icoSrc: "../../static/common/shenpi.png"
 				}],
 				meetingCuIconList: [{
 					cuIcon: 'cardboardfill',
 					color: 'red',
 					badge: 120,
 					name: '会议室信息',
-					url: "../work/meetingList"
+					url: "../work/meetingList",
+					icoSrc: "../../static/common/house.png"
 				}, {
 					cuIcon: 'cardboardfill',
 					color: 'red',
 					badge: 120,
 					name: '会议记录',
-					url: "../work/meetingRecordList"
+					url: "../work/meetingRecordList",
+					icoSrc: "../../static/common/meeting-record.png"
 				}, {
 					cuIcon: 'picfill',
 					color: 'yellow',
 					badge: 0,
-					name: '会议统计'
+					name: '会议统计',
+					icoSrc: "../../static/common/tongji.png"
 				}],
 				foodCuIconList: [{
 					cuIcon: 'cardboardfill',
 					color: 'red',
 					badge: 120,
 					name: '包房信息',
-					url: "../work/foodList"
+					url: "../work/foodList",
+					icoSrc: "../../static/common/meeting-room.png"
 				}, {
 					cuIcon: 'cardboardfill',
 					color: 'red',
 					badge: 120,
 					name: '订餐记录',
-					url: "../work/foodRecordList"
+					url: "../work/foodRecordList",
+					icoSrc: "../../static/common/fix-record.png"
 				}, {
 					cuIcon: 'picfill',
 					color: 'yellow',
 					badge: 0,
-					name: '订餐统计'
+					name: '订餐统计',
+					icoSrc: "../../static/common/tongji.png"
 				}, {
 					cuIcon: 'picfill',
 					color: 'yellow',
 					badge: 0,
-					name: '领导订餐记录'
+					name: '领导订餐记录',
+					icoSrc: "../../static/common/fix-record.png"
 				}, {
 					cuIcon: 'picfill',
 					color: 'yellow',
 					badge: 0,
-					name: '领导订餐统计'
+					name: '领导订餐统计',
+					icoSrc: "../../static/common/tongji.png"
 				}]
 			};
 		},
@@ -226,8 +253,13 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+	@import "style/mystyle.scss";
 	.page {
 		height: 100vh;
+	}
+	.item-ico {
+		width: 48upx;
+		height: 48upx;
 	}
 </style>

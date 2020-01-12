@@ -1,13 +1,13 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">派车单详情</block>
 			<block v-show="info.status == 2 || info.status == 3" slot="right" @tap="sureBack">{{info.status == 2 ? "确认归队" : "修改费用"}}</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 派车进度
+				 派车进度
 			</view>
 		</view>
 		<view class="bg-white padding">
@@ -19,55 +19,55 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 乘车人：
+				 乘车人：
 				<text class="text-bold">{{applyInfo.car_user}}（{{applyInfo.phone}}）</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 乘车人数：
+				 乘车人数：
 				<text class="text-bold">{{info.people_num}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 乘车地：
+				 乘车地：
 				<text class="text-bold">{{applyInfo.start_place}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 目的地：
+				 目的地：
 				<text class="text-bold">{{applyInfo.end_place}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 乘车时间：
+				 乘车时间：
 				<text class="text-bold">{{applyInfo.predict_start_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 返程时间：
+				 返程时间：
 				<text class="text-bold">{{applyInfo.predict_end_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 车辆：
+				 车辆：
 				<text class="text-bold">{{info.brand + " " + info.color + " " + info.seat_num + "座" + " " + info.car_number}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 司机：
+				 司机：
 				<text class="text-bold">{{info.driver_name + "("+ info.driver_phone +")"}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.bak.length > 0">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 备注：
+				 备注：
 				<text class="text-bold">{{info.bak}}</text>
 			</view>
 		</view>
@@ -75,31 +75,31 @@
 			<uni-collapse-item :title="getTitle(info.total_fee)">
 				<view class="cu-bar bg-white solid-bottom">
 					<view class="action">
-						<text class="cuIcon-title text-orange"></text> 里程费(元)：
+						 里程费(元)：
 						<text class="text-bold">{{info.stop_price}}/公里 x {{info.stop_num}}公里 = {{info.stop_price * info.stop_num}}</text>
 					</view>
 				</view>
 				<view class="cu-bar bg-white solid-bottom" v-if="info.zs_fee > 0">
 					<view class="action">
-						<text class="cuIcon-title text-orange"></text> 住宿费(元)：
+						 住宿费(元)：
 						<text class="text-bold">{{info.zs_fee}}</text>
 					</view>
 				</view>
 				<view class="cu-bar bg-white solid-bottom" v-if="info.tc_fee > 0">
 					<view class="action">
-						<text class="cuIcon-title text-orange"></text> 停车费(元)：
+						 停车费(元)：
 						<text class="text-bold">{{info.tc_fee}}</text>
 					</view>
 				</view>
 				<view class="cu-bar bg-white solid-bottom" v-if="info.hs_fee > 0">
 					<view class="action">
-						<text class="cuIcon-title text-orange"></text> 伙食费(元)：
+						 伙食费(元)：
 						<text class="text-bold">{{info.hs_fee}}</text>
 					</view>
 				</view>
 				<view class="cu-bar bg-white solid-bottom" v-if="info.jy_fee > 0">
 					<view class="action">
-						<text class="cuIcon-title text-orange"></text> 加油费(元)：
+						 加油费(元)：
 						<text class="text-bold">{{info.jy_fee}}</text>
 					</view>
 				</view>
@@ -111,19 +111,19 @@
 				</view>
 				<view class="cu-bar bg-white solid-bottom" v-if="info.xc_fee > 0">
 					<view class="action">
-						<text class="cuIcon-title text-orange"></text> 洗车费(元)：
+						 洗车费(元)：
 						<text class="text-bold">{{info.xc_fee}}</text>
 					</view>
 				</view>
 				<view class="cu-bar bg-white solid-bottom" v-if="info.clzy_fee > 0">
 					<view class="action">
-						<text class="cuIcon-title text-orange"></text> 车辆占用费(元)：
+						 车辆占用费(元)：
 						<text class="text-bold">{{info.clzy_fee}}</text>
 					</view>
 				</view>
 				<view class="cu-bar bg-white solid-bottom" v-if="info.other_fee > 0">
 					<view class="action">
-						<text class="cuIcon-title text-orange"></text> 其它费用(元)：
+						 其它费用(元)：
 						<text class="text-bold">{{info.other_fee}}</text>
 					</view>
 				</view>

@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
-		userInfo: {},
+		userInfo: null,
 		hasLogin: false
 	},
 	mutations: {
@@ -18,7 +18,7 @@ const store = new Vuex.Store({
 		},
 		setLogoutInfo(state) {
 			state.hasLogin = false;
-			state.userInfo = {};
+			state.userInfo = null;
 			uni.removeStorage({
 				key: 'userInfo'
 			});

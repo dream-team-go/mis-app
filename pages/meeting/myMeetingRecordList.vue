@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">会议预定记录</block>
 		</cu-custom>
@@ -10,34 +10,39 @@
 				{{value}}
 			</view>
 		</scroll-view> -->
-		<scroll-view scroll-x class="bg-red nav text-center">
+		<scroll-view scroll-x class="bg-white nav text-center">
 			<view class="cu-item" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length"
 			 :key="index" @tap="recordStatusTab(index)">
 				{{Array.from(StatusEnumMap.values())[index]}}
 			</view>
 		</scroll-view>
-
-
-		<view class="cu-list menu text-left">
-			<view class="cu-item arrow" v-for="record in records" :key="record.id" @click="recordDetail(record)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
-				<view class="content">
-					<view>{{record.desc}}</view>
-					<view class="text-gray text-sm flex">
-						<view class="text-cut">
-							{{record.room_number}}({{record.building_name}})
-						</view>
-					</view>
-					<view class="text-gray text-sm flex">
-						<view class="text-cut">
-							{{record.start_time}} - {{record.end_time}}
-						</view>
-					</view>
-				</view>
-				<view class="action">
-					<view class="text-grey text-xs">{{record.people_num}}人参会</view>
-					<view class="cu-tag round bg-orange sm">{{getStatusStr(record.status)}}</view>
-				</view>
+	<view class="bg-white p10">
+		<view class="small-card-detial"  v-for="record in records" :key="record.id" @click="recordDetail(record)" >
+			<view class="title-box bg-linear-blue">
+				<text class="id">{{record.id}}</text>
+				<text class="cu-tag round bg-orange sm status">{{getStatusStr(record.status)}}</text>
+				<image src="../../static/common/next.png" class="arrow"></image>
 			</view>
+			<view class="info-box">
+				<text class="label">地址：</text>
+				<text class="info">{{record.building_name}}({{record.room_number}})</text>
+			</view>
+			<view class="time-box">
+				<view class="time">
+					<image src="../../static/common/start-address.png" class="ico"></image>
+					<text class="value">{{record.start_time}}</text>
+				</view>
+				<view class="line"></view>
+				<view class="time">
+					<image src="../../static/common/end-address.png" class="ico"></image>
+					<text class="value">{{record.end_time}}</text>
+				</view>
+			</view>	
+			<view class="reason-box">
+				<view class="label">会议主题：</view>
+				<view class="info">{{record.desc}}</view>
+			</view>
+		</view>
 		</view>
 		<uni-load-more :status="status" :content-text="contentText" />
 	</view>
@@ -146,6 +151,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+	@import "style/mystyle.scss";
 
 </style>

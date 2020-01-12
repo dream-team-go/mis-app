@@ -10,31 +10,31 @@
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/car' + [PageCur=='car'?'_cur':''] + '.png'"></image>
 				</view>
-				<view :class="PageCur=='car'?'text-green':'text-gray'">用车</view>
+				<view :class="PageCur=='car'?'text-bluelight':'text-gray'">用车</view>
 			</view>
 			<view class="action" @click="NavChange" data-cur="meeting">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/meeting' + [PageCur == 'meeting'?'_cur':''] + '.png'"></image>
 				</view>
-				<view :class="PageCur=='meeting'?'text-green':'text-gray'">会务</view>
+				<view :class="PageCur=='meeting'?'text-bluelight':'text-gray'">会务</view>
 			</view>
 			<view class="action" @click="NavChange" data-cur="food">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/food' + [PageCur == 'food'?'_cur':''] + '.png'"></image>
 				</view>
-				<view :class="PageCur=='food'?'text-green':'text-gray'">订餐</view>
+				<view :class="PageCur=='food'?'text-bluelight':'text-gray'">订餐</view>
 			</view>
 			<view class="action" @click="NavChange" data-cur="work">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/work' + [PageCur == 'work'?'_cur':''] + '.png'"></image>
 				</view>
-				<view :class="PageCur=='work'?'text-green':'text-gray'">工作台</view>
+				<view :class="PageCur=='work'?'text-bluelight':'text-gray'">工作台</view>
 			</view>
 			<view class="action" @click="NavChange" data-cur="user">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/user' + [PageCur == 'user'?'_cur':''] + '.png'"></image>
 				</view>
-				<view :class="PageCur=='user'?'text-green':'text-gray'">我的</view>
+				<view :class="PageCur=='user'?'text-bluelight':'text-gray'">我的</view>
 			</view>
 		</view>
 	</view>
@@ -335,6 +335,5 @@
 	}
 </script>
 
-<style>
-
+<style lang='scss'>
 </style>

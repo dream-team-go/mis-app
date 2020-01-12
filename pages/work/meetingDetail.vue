@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">会议室详情</block>
 			<block slot="right" @tap="toEdit">修改</block>
@@ -8,35 +8,35 @@
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 办公楼房：
+				 办公楼房：
 				<text class="text-bold">{{info.name}}</text>
 			</view>
 		</view>
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 办公房间：
+				 办公房间：
 				<text class="text-bold">{{info.number}}</text>
 			</view>
 		</view>
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 容纳人数：
+				 容纳人数：
 				<text class="text-bold">{{info.capacity}}</text>
 			</view>
 		</view>
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 地址：
+				 地址：
 				<text class="text-bold">{{info.address}}</text>
 			</view>
 		</view>
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 创建时间：
+				 创建时间：
 				<text class="text-bold">{{info.create_time}}</text>
 			</view>
 		</view>
