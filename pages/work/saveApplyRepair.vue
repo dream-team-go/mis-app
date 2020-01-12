@@ -23,9 +23,18 @@
 				<view class="title">车辆</view>
 				<view class="modal-group" @tap="showCarModal(index)" data-target="Modal">
 					<view class="picker">
-						{{ para.car_id > 0 ? para.brand + " " + para.car_number: '请选择' }}
+						{{ para.car_id > 0 ? para.brand + " " + para.car_type + " " + para.car_number: '请选择' }}
 					</view>
 				</view>
+			</view>
+			
+			<view class="cu-form-group">
+				<view class="title">维修厂</view>
+				<picker @change="OrganizationChange" :value="oIndex" :range="organizations" range-key="org_name">
+					<view class="picker">
+						{{oIndex>-1?organizations[oIndex].org_name:'请选择'}}
+					</view>
+				</picker>
 			</view>
 			
 			<view class="padding flex flex-direction">
@@ -89,13 +98,21 @@
 					contentrefresh: '加载中',
 					contentnomore: '没有更多'
 				},
+				oIndex: 0,
+				organizations: [{
+					org_name: "请选择",
+					org_id: ""
+				}],
 				para: {
 					id: "",
 					car_id: "",
 					car_number: "",
+					car_type: "",
 					brand: "",
 					type: 0,
-					desc: ""
+					desc: "",
+					repair_shop_id: "",
+					repair_shop: ""
 				}
 			}
 		},
@@ -108,9 +125,39 @@
 				this.para.type = info.type;
 				this.para.car_id = info.car_id;
 				this.para.car_number = info.car_number;
+				this.para.car_type = info.car_type;
 				this.para.brand = info.brand;
 				this.para.desc = info.desc;
+				this.para.repair_shop_id = info.repair_shop_id;
+				this.para.repair_shop = info.repair_shop;
 			}
+			//获取维修厂数据
+			global.$http.post('/core/organization/getRepairShopByOrg', {
+				params: {},
+			}).then(res => {
+				if (res.status === "0") {
+					for (var i = 0; i < res.data.length; i++) {
+						this.organizations.push(res.data[i]);
+						if(option.para){
+							if(res.data[i].org_id == info.repair_shop_id)
+							{
+								this.oIndex = i + 1;
+							}
+						}
+					}
+				} else {
+					uni.showToast({
+						title: res.msg,
+						icon: 'none'
+					});
+				}
+			}).catch(err => {
+				uni.hideLoading();
+				uni.showToast({
+					title: err.message,
+					icon: 'none'
+				});
+			});
 		},
 		methods: {
 			getCarListData() {
@@ -154,7 +201,15 @@
 				this.para.car_id = e.id;
 				this.para.car_number = e.car_number;
 				this.para.brand = e.brand;
+				this.para.car_type = e.car_type;
 				this.isShowCarModal = false;
+			},
+			OrganizationChange: function(e) {
+				this.para.repair_shop_id = this.organizations[e.detail.value].org_id;
+				this.para.repair_shop = this.organizations[e.detail.value].org_name;
+				if (this.oIndex != e.detail.value) {
+					this.oIndex = e.detail.value;
+				}
 			},
 			Submit: function(e){
 				//验证数据
@@ -176,6 +231,13 @@
 					uni.showToast({
 						icon: 'none',
 						title: '请选择维修车辆'
+					});
+					return;
+				}
+				if(this.para.repair_shop_id.length <= 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请选择维修厂'
 					});
 					return;
 				}

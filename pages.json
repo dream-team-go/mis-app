@@ -224,6 +224,10 @@
             "path" : "pages/work/wxcRepairRecordDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/work/repairOrderDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

@@ -5,7 +5,7 @@
 			<block slot="content">维修记录</block>
 		</cu-custom>
 
-		<scroll-view scroll-x class="bg-red nav text-center">
+		<scroll-view scroll-x class="bg-white nav text-center">
 			<view class="cu-item" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length"
 			 :key="index" @tap="recordStatusTab(index)">
 				{{Array.from(StatusEnumMap.values())[index]}}

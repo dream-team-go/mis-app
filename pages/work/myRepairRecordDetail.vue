@@ -60,6 +60,20 @@
 				<text class="text-bold">{{info.create_time}}</text>
 			</view>
 		</view>
+		
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 维修厂：
+				<text class="text-bold">{{info.repair_shop}}</text>
+			</view>
+		</view>
+		
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 备注：
+				<text class="text-bold">{{info.desc}}</text>
+			</view>
+		</view>
 
 		<view class="cu-bar bg-white solid-bottom" v-if="info.zz_name.length > 0">
 			<view class="action">

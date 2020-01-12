@@ -55,7 +55,18 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
+<<<<<<< HEAD
 				 备注：
+=======
+				<text class="cuIcon-title text-orange"></text> 维修厂：
+				<text class="text-bold">{{info.repair_shop}}</text>
+			</view>
+		</view>
+		
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 备注：
+>>>>>>> d7c9860269c17d86b53feb584786b850f5dfaffa
 				<text class="text-bold">{{info.desc}}</text>
 			</view>
 		</view>

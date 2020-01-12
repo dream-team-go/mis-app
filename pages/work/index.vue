@@ -164,6 +164,7 @@
 					color: 'mauve',
 					badge: 0,
 					name: '维修单',
+					url:"../work/wxcRepairRecordList",
 					icoSrc: "../../static/common/fix-order.png"
 				}, {
 					cuIcon: 'questionfill',
@@ -186,7 +187,7 @@
 					badge: 120,
 					name: '会议室信息',
 					url: "../work/meetingList",
-					icoSrc: "../../static/common/metting-info.png"
+					icoSrc: "../../static/common/house.png"
 				}, {
 					cuIcon: 'cardboardfill',
 					color: 'red',

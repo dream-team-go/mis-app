@@ -57,7 +57,12 @@
     "pages/work/secretaryRepairRecordList",
     "pages/work/secretaryRepairRecordDetail",
     "pages/work/wxcRepairRecordList",
+<<<<<<< HEAD
     "pages/work/wxcRepairRecordDetail"
+=======
+    "pages/work/wxcRepairRecordDetail",
+    "pages/work/repairOrderDetail"
+>>>>>>> d7c9860269c17d86b53feb584786b850f5dfaffa
   ],
   "window": {
     "navigationStyle": "custom"
