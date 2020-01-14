@@ -266,6 +266,37 @@
       font-size: 26rpx;
       text-indent: 2em;
 }
+.bottom-btns-seat.data-v-069fdbac {
+  width: 100%;
+  height: 160rpx;
+  background: #f1f1f1;
+}
+.bottom-btns.data-v-069fdbac {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 140rpx;
+  border-top: 2rpx solid #36BDBD;
+}
+.bottom-btns .cancel.data-v-069fdbac {
+    float: left;
+    width: 50%;
+    height: 140rpx;
+    line-height: 140rpx;
+    color: #36BDBD;
+    text-align: center;
+    background: #FFFFFF;
+}
+.bottom-btns .pass.data-v-069fdbac {
+    float: right;
+    width: 50%;
+    height: 140rpx;
+    line-height: 140rpx;
+    text-align: center;
+    color: #FFFFFF;
+    background-image: -webkit-linear-gradient(45deg, #44d7b6, #36bdbd);
+    background-image: linear-gradient(45deg, #44d7b6, #36bdbd);
+}
 .page.data-v-069fdbac {
   height: 100vh;
 }

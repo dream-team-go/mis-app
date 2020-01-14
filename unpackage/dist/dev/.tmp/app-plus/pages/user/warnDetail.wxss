@@ -1,0 +1,23 @@
+.message-box.data-v-35f9ecda {
+  background: #FFFFFF;
+  height: 100rpx;
+  line-height: 100rpx;
+  padding: 0 20rpx;
+  margin-bottom: 2rpx;
+}
+.message-box .label.data-v-35f9ecda {
+    width: 160rpx;
+}
+.content-box.data-v-35f9ecda {
+  background: #FFFFFF;
+}
+.content-box .label.data-v-35f9ecda {
+    height: 100rpx;
+    line-height: 100rpx;
+    padding: 0 20rpx;
+}
+.content-box .val.data-v-35f9ecda {
+    padding: 0 20rpx 40rpx;
+    text-indent: 2em;
+}
+

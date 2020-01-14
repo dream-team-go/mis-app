@@ -4,7 +4,29 @@
 			<block slot="backText">返回</block>
 			<block slot="content">消息详情</block>
 		</cu-custom>
-		<view class="cu-bar bg-white solid-bottom">
+		<view class="message-box">
+			<view class="item">
+				<text class="label text-bold">消息类型：</text>
+				<text class="val">{{info.type}}</text>
+			</view>
+		</view>
+		<view class="message-box">
+			<view class="item">
+				<text class="label text-bold">接收时间：</text>
+				<text class="val">{{info.create_time}}</text>
+			</view>
+		</view>
+		<view class="message-box">
+			<view class="item">
+				<text class="label text-bold">阅读时间：</text>
+				<text class="val">{{info.read_time}}</text>
+			</view>
+		</view>
+		<view class="content-box">
+			<view class="label text-bold">消息内容：</view>
+			<view class="val">{{info.content}}</view>
+		</view>
+		<!-- <view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				消息类型：
 				<text class="text-bold">{{info.type}}</text>
@@ -13,13 +35,7 @@
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				接收时间：
-				<text class="text-bold">{{info.create_time}})</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				消息内容：
-				<text class="text-bold">{{info.content}}</text>
+				<text class="text-bold">{{info.create_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
@@ -28,7 +44,14 @@
 				<text class="text-bold">{{info.read_time}}</text>
 			</view>
 		</view>
-	</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				消息内容：
+				<text class="text-bold">{{info.content}}</text>
+			</view>
+		</view>
+		-->
+	</view> 
 </template>
 
 <script>
@@ -85,6 +108,27 @@
 	}
 </script>
 
-<style>
-
+<style scoped lang="scss">
+.message-box {
+	background: #FFFFFF;
+	height: 100upx;
+	line-height: 100upx;
+	padding: 0 20upx;
+	margin-bottom: 2upx;
+	.label {
+		width: 160upx;
+	}
+}
+.content-box {
+	background: #FFFFFF;
+	.label {
+		height: 100upx;
+		line-height: 100upx;
+		padding: 0 20upx;
+	}
+	.val {
+		padding: 0 20upx 40upx;
+		text-indent: 2em;
+	}
+}
 </style>
