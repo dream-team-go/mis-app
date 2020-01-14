@@ -3,6 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">领导订餐记录</block>
+			<block slot="right" @tap="toSaveLeaderBook">订餐</block>
 		</cu-custom>
 		
 		<view class="bg-white p10">
@@ -14,7 +15,7 @@
 				</view>
 				<view class="info-box">
 					<text class="label">用餐领导：</text>
-					<text class="info">{{record.lead}})</text>
+					<text class="info">{{record.lead}}</text>
 				</view>
 				<view class="info-box">
 					<text class="label">用餐人数：</text>
@@ -23,6 +24,10 @@
 				<view class="info-box">
 					<view class="label">订餐时间：</view>
 					<view class="info">{{record.create_time}}</view>
+				</view>
+				<view class="reason-box">
+					<view class="label">用餐要求：</view>
+					<view class="info">{{record.desc}}</view>
 				</view>
 			</view>
 		</view>
@@ -38,6 +43,9 @@
 			uniLoadMore
 		},
 		onLoad(option) {
+			
+		},
+		onShow() {
 			this.page = 1;
 			this.records = [];
 			this.loadData();
@@ -64,7 +72,7 @@
 		methods: {
 			loadData() {
 				this.status = 'loading';
-				global.$http.post('/dining/lead/list', {
+				global.$http.post('/dining/lead/myList', {
 					params: {
 						status: this.recordStatus,
 						page: this.page,
@@ -103,7 +111,12 @@
 			},
 			recordDetail: function(record) {
 				uni.navigateTo({
-					url: "../food/foodRecordDetail?id=" + record.id,
+					url: "../work/myLeaderBookFoodDetail?para=" + encodeURIComponent(JSON.stringify(record))
+				});
+			},
+			toSaveLeaderBook: function(e){
+				uni.navigateTo({
+					url: '../work/saveLeaderBook?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			}
 		}

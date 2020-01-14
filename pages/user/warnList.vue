@@ -132,7 +132,7 @@
 			},
 			recordDetail: function(record) {
 				uni.navigateTo({
-					url: "../user/warnDetail?para=" + encodeURIComponent(JSON.stringify(record)),
+					url: "../user/warnDetail?para=" + encodeURIComponent(JSON.stringify(record))
 				});
 			}
 		}

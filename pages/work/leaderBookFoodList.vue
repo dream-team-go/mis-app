@@ -14,7 +14,7 @@
 				</view>
 				<view class="info-box">
 					<text class="label">用餐领导：</text>
-					<text class="info">{{record.lead}})</text>
+					<text class="info">{{record.lead}}</text>
 				</view>
 				<view class="info-box">
 					<text class="label">用餐人数：</text>
@@ -27,6 +27,10 @@
 				<view class="info-box">
 					<view class="label">订餐时间：</view>
 					<view class="info">{{record.create_time}}</view>
+				</view>
+				<view class="reason-box">
+					<view class="label">用餐要求：</view>
+					<view class="info">{{record.desc}}</view>
 				</view>
 			</view>
 		</view>
@@ -107,7 +111,7 @@
 			},
 			recordDetail: function(record) {
 				uni.navigateTo({
-					url: "../food/foodRecordDetail?id=" + record.id,
+					url: "../work/leaderBookFoodDetail?para=" + encodeURIComponent(JSON.stringify(record))
 				});
 			}
 		}
