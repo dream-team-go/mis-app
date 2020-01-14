@@ -63,13 +63,9 @@
     "pages/user/warnDetail",
     "pages/work/leaderBookFoodList",
     "pages/work/leaderBookFoodDetail",
-<<<<<<< HEAD
     "pages/work/myLeaderBookFoodList",
     "pages/work/myLeaderBookFoodDetail",
     "pages/work/saveLeaderBook"
-=======
-    "pages/work/myLeaderBookFoodList"
->>>>>>> f8184b27d2c94609e7afb8a72c71730427fc502c
   ],
   "window": {
     "navigationStyle": "custom"
@@ -81,7 +77,7 @@
     "autoclose": false
   },
   "appname": "开远事务局APP",
-  "compilerVersion": "2.4.2",
+  "compilerVersion": "2.5.1",
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
     "car": "/pages/car/index",

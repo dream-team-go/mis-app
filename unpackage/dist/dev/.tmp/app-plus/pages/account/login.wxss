@@ -39,7 +39,7 @@
   line-height: 86rpx;
   border-radius: 50px;
   margin-top: 200rpx;
-  background-image: -o-linear-gradient(45deg, #44d7b6, #36bdbd);
+  background-image: -webkit-linear-gradient(45deg, #44d7b6, #36bdbd);
   background-image: linear-gradient(45deg, #44d7b6, #36bdbd);
   color: #ffffff;
   font-size: 32rpx;
