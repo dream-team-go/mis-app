@@ -67,38 +67,42 @@
 			</view>
 		</view>
 
-		<view class="cu-bar bg-white solid-bottom" v-if="info.zz_name.length > 0">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.zz_name">
 			<view class="action">
 				 组长审批：
 				<text class="text-bold">{{info.zz_name}} {{info.zzsp_time}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.zr_name.length > 0">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.zr_name">
 			<view class="action">
 				 主任审批：
 				<text class="text-bold">{{info.zr_name}} {{info.end_area}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.business.length > 0">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.business">
 			<view class="action">
 				 维修出单：
 				<text class="text-bold">{{info.business}} {{info.cwxd_time}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.jz_name.length > 0">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.jz_name">
 			<view class="action">
 				 局长审批：
 				<text class="text-bold">{{info.jz_name}} {{info.jzsp_time}}</text>
 			</view>
 		</view>
-		
-		<view class="padding" v-if="info.status == 1" style="display: inline-flex;">
+		<view class="bottom-btns-seat"></view>
+		<view class="bottom-btns" v-if="info.status == 1">
+			<view class="cancel" @click="verifyFail">审批不通过</view>
+			<view class="pass" @click="verifySuccess">审批通过</view>
+		</view>
+		<!-- <view class="padding" v-if="info.status == 1" style="display: inline-flex;">
 			<button class="cu-btn bg-red lg" @click="verifyFail">审核不通过</button>
 		</view>
 		
 		<view class="padding" v-if="info.status == 1" style="display: inline-flex;float: right;">
 			<button class="cu-btn bg-green lg" @click="verifySuccess">审批通过</button>
-		</view>
+		</view> -->
 		
 		<view class="cu-modal" :class="showModal?'show':''">
 			<view class="cu-dialog">
@@ -115,9 +119,8 @@
 				</view>
 				<view class="cu-bar bg-white justify-end">
 					<view class="action">
-						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
-						<button class="cu-btn bg-green margin-left" @tap="sureModal">确定</button>
-		
+						<button class="cu-btn line-bluelight text-green" @tap="hideModal">取消</button>
+						<button class="cu-btn bg-linear-blue margin-left" @tap="sureModal">确定</button>
 					</view>
 				</view>
 			</view>
@@ -432,6 +435,6 @@
 	}
 </script>
 
-<style>
-
+<style scoped lang="scss">
+@import "style/mystyle.scss";
 </style>

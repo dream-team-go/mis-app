@@ -88,8 +88,8 @@
 				</view>
 				<view class="cu-bar bg-white justify-end">
 					<view class="action">
-						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
-						<button class="cu-btn bg-green margin-left" @tap="sureModal">确定</button>
+						<button class="cu-btn line-bluelight text-green" @tap="hideModal">取消</button>
+						<button class="cu-btn bg-linear-blue margin-left" @tap="sureModal">确定</button>
 		
 					</view>
 				</view>
