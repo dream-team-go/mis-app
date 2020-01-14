@@ -60,7 +60,10 @@
     "pages/work/wxcRepairRecordDetail",
     "pages/work/repairOrderDetail",
     "pages/user/warnList",
-    "pages/user/warnDetail"
+    "pages/user/warnDetail",
+    "pages/work/leaderBookFoodList",
+    "pages/work/leaderBookFoodDetail",
+    "pages/work/myLeaderBookFoodList"
   ],
   "window": {
     "navigationStyle": "custom"
@@ -72,7 +75,7 @@
     "autoclose": false
   },
   "appname": "开远事务局APP",
-  "compilerVersion": "2.5.1",
+  "compilerVersion": "2.4.2",
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
     "car": "/pages/car/index",

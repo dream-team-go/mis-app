@@ -269,3 +269,39 @@
 			}
 		}
 	}
+	
+	.bottom-btns-seat {
+		width: 100%;
+		height: 160upx;
+		background: #f1f1f1;
+	}
+	
+	.bottom-btns {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 140upx;
+		border-top: 2upx solid #36BDBD;
+		.cancel {
+			float: left;
+			width: 50%;
+			height: 140upx;
+			line-height: 140upx;
+			color: #36BDBD;
+			text-align: center;
+			background: #FFFFFF;
+		}
+		.pass {
+			float: right;
+			width: 50%;
+			height: 140upx;
+			line-height: 140upx;
+			text-align: center;
+			color: #FFFFFF;
+			background-image: linear-gradient(45deg, #44d7b6, #36bdbd);
+		}
+	}
+	
+	
+	
+	

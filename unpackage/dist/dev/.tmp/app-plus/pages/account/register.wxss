@@ -3,12 +3,12 @@
 /* .picker .uni-picker-container .uni-picker-action.uni-picker-action-confirm {
 	color: #0e0f3e !important;
 } */
-.tag.data-v-e2dba1c6 {
+.tag.data-v-0a56fb1a {
   background: #FFFFFF;
 }
-.tag .text.data-v-e2dba1c6 {
+.tag .text.data-v-0a56fb1a {
     display: inline-block;
-    background-image: -webkit-linear-gradient(45deg, #36bdbd, #44d7b6);
+    background-image: -o-linear-gradient(45deg, #36bdbd, #44d7b6);
     background-image: linear-gradient(45deg, #36bdbd, #44d7b6);
     color: #fff;
     height: 50rpx;
