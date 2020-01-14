@@ -53,10 +53,16 @@ const RepairRecordEnumMap = new Map([
 	[-3, "局长未通过"]
 ]);
 
-//消息装填枚举
+//消息状态枚举
 const WarnStatusEnumMap = new Map([
 	[0, "未读"],
 	[1, "已读"]
+]);
+
+//领导订餐类型枚举
+const LeaderBookFoodEnumMap = new Map([
+	[1, "午餐"],
+	[2, "晚餐"]
 ]);
 
 export default { 
@@ -66,5 +72,6 @@ export default {
 	UseCarRecordEnumMap,
 	DispatchRecordEnumMap,
 	RepairRecordEnumMap,
-	WarnStatusEnumMap
+	WarnStatusEnumMap,
+	LeaderBookFoodEnumMap
 }

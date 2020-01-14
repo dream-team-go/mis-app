@@ -236,6 +236,18 @@
             "path" : "pages/user/warnDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/work/leaderBookFoodList",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/leaderBookFoodDetail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/myLeaderBookFoodList",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"
