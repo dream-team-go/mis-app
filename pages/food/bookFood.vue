@@ -2,7 +2,7 @@
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">预定包房</block>
+			<block slot="content">{{isAdd ? '预定包房' : '编辑预定包房'}}</block>
 		</cu-custom>
 		<form v-show="isShowBottomModal == false">
 			<view class="cu-form-group">
@@ -49,7 +49,7 @@
 					</view>
 				</picker>
 			</view>
-			
+
 			<view class="cu-form-group">
 				<view class="title">上菜时间</view>
 				<picker mode="time" :value="mealTime" @change="MealTimeChange">
@@ -58,7 +58,7 @@
 					</view>
 				</picker>
 			</view>
-			
+
 			<view class="cu-form-group">
 				<view class="title">包房</view>
 				<view class="modal-group" @tap="showBottomModal" data-target="Modal">
@@ -67,32 +67,32 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view class="cu-form-group">
 				<view class="title">有无回族</view>
 				<switch @change="ChangeHasHz" :class="isHasHz?'checked':''" :checked="isHasHz?true:false"></switch>
 			</view>
-			
+
 			<view class="cu-form-group">
 				<view class="title">用餐标准</view>
 				<input name="input" v-model="para.meal_spec"></input>
 			</view>
-			
+
 			<view class="cu-form-group">
 				<view class="title">接待对象</view>
 				<input name="input" v-model="para.receive_people"></input>
 			</view>
-			
+
 			<view class="cu-form-group">
 				<view class="title">陪同领导</view>
 				<input name="input" v-model="para.lender"></input>
 			</view>
-			
+
 			<view class="cu-form-group">
 				<view class="title">特殊要求</view>
 				<input name="input" v-model="para.meal_request"></input>
 			</view>
-			
+
 			<view class="padding flex flex-direction">
 				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
@@ -105,7 +105,7 @@
 					<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择包房</view>
 					<view class="action"></view>
 				</view>
-				
+
 				<view id="list-view" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
 					<view class="cu-list menu text-left">
 						<view class="cu-item arrow" v-for="dining in dinings" :key="dining.id" @click="getdining(dining)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
@@ -197,6 +197,7 @@
 		},
 		data() {
 			return {
+				isAdd: true,
 				StatusBar: this.StatusBar,
 				CustomBar: this.CustomBar,
 				ScreenHeight: this.ScreenHeight,
@@ -223,6 +224,7 @@
 				page: 1,
 				pageSize: 100,
 				para: {
+					id: "",
 					desc: "",
 					user_name: "",
 					user_tel: "",
@@ -239,22 +241,54 @@
 		},
 		computed: {
 			...mapState(['userInfo']),
-			start_time: function(){
+			start_time: function() {
 				return this.date + " " + this.time;
 			},
-			end_time: function(){
+			end_time: function() {
 				return getEndTime(this.start_time, this.hours[this.hourIndex]);
 			},
-			meal_time: function(){
+			meal_time: function() {
 				return this.date + " " + this.mealTime;
 			}
 		},
 		onLoad() {
-			this.para.user_name = this.userInfo.user.userCnName;
-			this.para.user_tel = this.userInfo.user.username;
+			if (option.para) {
+				this.isAdd = false;
+				var info = JSON.parse(decodeURIComponent(option.para));
+				this.para.id = info.id;
+				this.para.desc = info.desc;
+				this.para.user_name = info.user_name;
+				this.para.user_tel = info.user_tel;
+				this.para.people_num = info.people_num;
+				this.peopleIndex = info.people_num - 1;
+				this.para.receive_people = info.receive_people;
+				this.para.lender = info.lender;
+				this.para.dining_id = info.dining_id;
+				this.para.building_name = info.building_name;
+				this.para.meal_spec = info.meal_spec;
+				this.para.room_number = info.room_number;
+				this.para.has_hz = info.has_hz;
+				
+				
+				this.areaIndex = info.area == "市内" ? 1 : 2;
+				this.para.area = info.area;
+				this.para.start_place = info.start_place;
+				this.para.end_place = info.end_place;
+				this.date = info.predict_start_time.substring(0, 10);
+				this.time = info.predict_start_time.substring(11, 16);
+				this.backDate = info.predict_end_time.substring(0, 10);
+				this.backTime = info.predict_end_time.substring(11, 16);
+				this.para.end_city = info.end_city;
+				this.para.end_area = info.end_area;
+				this.typeIndex = info.type;
+				this.para.type = info.type;
+			} else {
+				this.para.user_name = this.userInfo.user.userCnName;
+				this.para.user_tel = this.userInfo.user.username;
+			}
 		},
 		onPullDownRefresh() {
-			
+
 		},
 		onReachBottom() {
 			this.status = 'more';
@@ -265,10 +299,10 @@
 			DateChange: function(e) {
 				this.date = e.detail.value;
 			},
-			TimeChange: function(e){
+			TimeChange: function(e) {
 				this.time = e.detail.value;
 			},
-			MealTimeChange:function(e){
+			MealTimeChange: function(e) {
 				this.mealTime = e.detail.value;
 			},
 			ChangeHours: function(e) {
@@ -287,8 +321,8 @@
 			hideBottomModal: function(e) {
 				this.isShowBottomModal = false;
 			},
-			ChangeHasHz: function(e){
-				this.isHasHz =  e.detail.value;
+			ChangeHasHz: function(e) {
+				this.isHasHz = e.detail.value;
 				this.para.has_hz = e.detail.value ? 1 : 0;
 			},
 			getdiningListData: function() {
@@ -323,47 +357,47 @@
 				this.para.room_number = e.number;
 				this.isShowBottomModal = false;
 			},
-			Submit: function(e){
+			Submit: function(e) {
 				this.para.start_time = this.start_time;
 				this.para.end_time = this.end_time;
 				this.para.meal_time = this.meal_time;
 				//验证数据
-				if(this.para.desc.length <= 0){
+				if (this.para.desc.length <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写订餐原由'
 					});
 					return;
 				}
-				if(this.para.desc.length > 20){
+				if (this.para.desc.length > 20) {
 					uni.showToast({
 						icon: 'none',
 						title: '订餐原由不超过20字'
 					});
 					return;
 				}
-				if(this.para.user_name.length <= 0){
+				if (this.para.user_name.length <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写姓名'
 					});
 					return;
 				}
-				if(this.para.user_tel.length <= 0){
+				if (this.para.user_tel.length <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写手机号'
 					});
 					return;
 				}
-				if(this.para.dining_id <= 0){
+				if (this.para.dining_id <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择会议室'
 					});
 					return;
 				}
-				
+
 				//提交数据
 				uni.showLoading({
 					title: '提交中',
