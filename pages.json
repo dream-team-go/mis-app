@@ -248,6 +248,14 @@
             "path" : "pages/work/myLeaderBookFoodList",
             "style" : {}
         }
+        ,{
+            "path" : "pages/work/myLeaderBookFoodDetail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/saveLeaderBook",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

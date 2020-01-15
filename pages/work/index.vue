@@ -195,13 +195,15 @@
 					name: '会议记录',
 					url: "../work/meetingRecordList",
 					icoSrc: "../../static/common/meeting-record.png"
-				}, {
-					cuIcon: 'picfill',
-					color: 'yellow',
-					badge: 0,
-					name: '会议统计',
-					icoSrc: "../../static/common/tongji.png"
-				}],
+				}, 
+				// {
+				// 	cuIcon: 'picfill',
+				// 	color: 'yellow',
+				// 	badge: 0,
+				// 	name: '会议统计',
+				// 	icoSrc: "../../static/common/tongji.png"
+				// }
+				],
 				foodCuIconList: [{
 					cuIcon: 'cardboardfill',
 					color: 'red',
@@ -220,21 +222,26 @@
 					cuIcon: 'picfill',
 					color: 'yellow',
 					badge: 0,
-					name: '订餐统计',
-					icoSrc: "../../static/common/tongji.png"
-				}, {
-					cuIcon: 'picfill',
-					color: 'yellow',
-					badge: 0,
 					name: '领导订餐记录',
-					icoSrc: "../../static/common/fix-record.png"
-				}, {
-					cuIcon: 'picfill',
-					color: 'yellow',
-					badge: 0,
-					name: '领导订餐统计',
-					icoSrc: "../../static/common/tongji.png"
-				}]
+					url: "../work/leaderBookFoodList",
+					icoSrc: "../../static/common/record-info.png"
+				},
+				{
+				 	cuIcon: 'picfill',
+				 	color: 'yellow',
+				 	badge: 0,
+				 	name: '我的领导订餐',
+					url: "../work/myLeaderBookFoodList",
+				 	icoSrc: "../../static/common/record-info.png"
+				}
+				// {
+				// 	cuIcon: 'picfill',
+				// 	color: 'yellow',
+				// 	badge: 0,
+				// 	name: '领导订餐统计',
+				// 	icoSrc: "../../static/common/tongji.png"
+				// }
+				]
 			};
 		},
 		computed: mapState(['userInfo']),
