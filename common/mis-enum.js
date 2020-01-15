@@ -65,6 +65,15 @@ const LeaderBookFoodEnumMap = new Map([
 	[2, "晚餐"]
 ]);
 
+const CarTypeEnumMap = new Map([
+	[0, "小轿车"],
+	[1, "越野车"],
+	[2, "商务车"],
+	[3, "中型客车"],
+	[4, "大型客车"],
+	[5, "其它"]
+]);
+
 export default { 
     MeetingRecordEnumMap,
 	FoodRecordEnumMap,
@@ -73,5 +82,6 @@ export default {
 	DispatchRecordEnumMap,
 	RepairRecordEnumMap,
 	WarnStatusEnumMap,
-	LeaderBookFoodEnumMap
+	LeaderBookFoodEnumMap,
+	CarTypeEnumMap
 }
