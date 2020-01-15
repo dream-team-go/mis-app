@@ -3,6 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">包房预定详情</block>
+			<block v-show="info.status == 0" slot="right" @tap="toEdit">修改</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -171,6 +172,11 @@
 			});
 		},
 		methods: {
+			toEdit: function(e) {
+				uni.navigateTo({
+					url: '../food/bookFood?para=' + encodeURIComponent(JSON.stringify(this.info))
+				});
+			},
 			cancleBook: function(){
 				uni.showModal({
 					title: '提示',

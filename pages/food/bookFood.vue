@@ -190,6 +190,15 @@
 
 		return `${year}-${month}-${day} ${hour}:${minute}`;
 	}
+	
+	//计算两个时间相差了几个小时
+	     function getIntervalHour(startDate, endDate) {
+			 startDate = new Date(startDate.replace(/-/g, '/'));
+			 endDate = new Date(endDate.replace(/-/g, '/'));
+	            var ms = endDate.getTime() - startDate.getTime();
+	            if (ms < 0) return 0;
+	            return Math.floor(ms/1000/60/60);
+	        }
 
 	export default {
 		components: {
@@ -235,7 +244,8 @@
 					building_name: "",
 					meal_spec: "",
 					room_number: "",
-					has_hz: 0
+					has_hz: 0,
+					meal_request: ""
 				}
 			}
 		},
@@ -251,7 +261,7 @@
 				return this.date + " " + this.mealTime;
 			}
 		},
-		onLoad() {
+		onLoad(option) {
 			if (option.para) {
 				this.isAdd = false;
 				var info = JSON.parse(decodeURIComponent(option.para));
@@ -268,20 +278,12 @@
 				this.para.meal_spec = info.meal_spec;
 				this.para.room_number = info.room_number;
 				this.para.has_hz = info.has_hz;
-				
-				
-				this.areaIndex = info.area == "市内" ? 1 : 2;
-				this.para.area = info.area;
-				this.para.start_place = info.start_place;
-				this.para.end_place = info.end_place;
-				this.date = info.predict_start_time.substring(0, 10);
-				this.time = info.predict_start_time.substring(11, 16);
-				this.backDate = info.predict_end_time.substring(0, 10);
-				this.backTime = info.predict_end_time.substring(11, 16);
-				this.para.end_city = info.end_city;
-				this.para.end_area = info.end_area;
-				this.typeIndex = info.type;
-				this.para.type = info.type;
+				this.date = info.start_time.substring(0, 10);
+				this.time = info.start_time.substring(11, 16);
+				this.hourIndex = getIntervalHour(info.start_time, info.end_time) - 1;
+				this.mealTime = info.meal_time.substring(11, 16);
+				this.isHasHz = info.has_hz == 1;
+				this.para.meal_request = info.meal_request;
 			} else {
 				this.para.user_name = this.userInfo.user.userCnName;
 				this.para.user_tel = this.userInfo.user.username;

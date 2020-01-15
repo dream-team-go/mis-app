@@ -1,15 +1,15 @@
-.outer-box.data-v-9df9f9a4 {
+.outer-box.data-v-4f7f6753 {
   width: 100%;
   min-height: calc(100vh - 90rpx);
   background: #FFFFFF;
 }
-.outer-box .room-box.data-v-9df9f9a4 {
+.outer-box .room-box.data-v-4f7f6753 {
     width: 25%;
     height: 120rpx;
     float: left;
     margin: 0 auto;
 }
-.outer-box .room-box .img.data-v-9df9f9a4 {
+.outer-box .room-box .img.data-v-4f7f6753 {
       text-align: center;
       width: 100%;
       height: 60rpx;
@@ -17,7 +17,7 @@
       background-size: 80rpx 80rpx;
       background-position-x: 50%;
 }
-.outer-box .room-box .car-num.data-v-9df9f9a4 {
+.outer-box .room-box .car-num.data-v-4f7f6753 {
       font-size: 24rpx;
       text-align: center;
       color: #36BDBD;
