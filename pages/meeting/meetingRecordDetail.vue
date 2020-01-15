@@ -3,6 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">会议预定详情</block>
+			<block v-show="info.status == 0" slot="right" @tap="toEdit">修改</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -79,13 +80,17 @@
 				StatusEnumMap: misEnum.MeetingRecordEnumMap,
 				steps: [],
 				color: '',
-				info: {}
+				info: {},
+				id: ""
 			}
 		},
 		onLoad(option) {
+			this.id = option.id;
+		},
+		onShow(){
 			global.$http.post('/meeting/record/recordInfo', {
 				params: {
-					record_id: option.id
+					record_id: this.id
 				},
 			}).then(res => {
 				if (res.status === "0") {
@@ -141,6 +146,11 @@
 			});
 		},
 		methods: {
+			toEdit: function(e) {
+				uni.navigateTo({
+					url: '../meeting/bookMeeting?para=' + encodeURIComponent(JSON.stringify(this.info))
+				});
+			},
 			cancleBook: function(){
 				uni.showModal({
 					title: '提示',

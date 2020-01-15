@@ -2,7 +2,7 @@
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">预定会议室</block>
+			<block slot="content">{{isAdd ? '预定会议室' : '编辑预定会议室'}}</block>
 		</cu-custom>
 		<form v-show="isShowBottomModal == false">
 			<view class="cu-form-group">
@@ -160,6 +160,14 @@
 
 		return `${year}-${month}-${day} ${hour}:${minute}`;
 	}
+	//计算两个时间相差了几个小时
+	     function getIntervalHour(startDate, endDate) {
+			 startDate = new Date(startDate.replace(/-/g, '/'));
+			 endDate = new Date(endDate.replace(/-/g, '/'));
+	            var ms = endDate.getTime() - startDate.getTime();
+	            if (ms < 0) return 0;
+	            return Math.floor(ms/1000/60/60);
+	        }
 
 	export default {
 		components: {
@@ -167,6 +175,7 @@
 		},
 		data() {
 			return {
+				isAdd: true,
 				StatusBar: this.StatusBar,
 				CustomBar: this.CustomBar,
 				ScreenHeight: this.ScreenHeight,
@@ -211,9 +220,28 @@
 				return getEndTime(this.start_time, this.hours[this.hourIndex]);
 			}
 		},
-		onLoad() {
-			this.para.user_name = this.userInfo.user.userCnName;
-			this.para.user_tel = this.userInfo.user.username;
+		onLoad(option) {
+			if (option.para) {
+				this.isAdd = false;
+				var info = JSON.parse(decodeURIComponent(option.para));
+				this.para.id = info.id;
+				this.para.desc = info.desc;
+				this.para.user_name = info.user_name;
+				this.para.user_tel = info.user_tel;
+				this.para.people_num = info.people_num;
+				this.peopleIndex = info.people_num - 1;
+				this.para.room_number = info.room_number;
+				this.para.building_name = info.building_name;
+				this.para.meeting_id = info.meeting_id;
+				this.para.attend_leader = info.attend_leader;
+				
+				this.date = info.start_time.substring(0, 10);
+				this.time = info.start_time.substring(11, 16);
+				this.hourIndex = getIntervalHour(info.start_time, info.end_time) - 1;
+			} else {
+				this.para.user_name = this.userInfo.user.userCnName;
+				this.para.user_tel = this.userInfo.user.username;
+			}
 		},
 		onPullDownRefresh() {
 			

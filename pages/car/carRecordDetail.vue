@@ -104,13 +104,17 @@
 				StatusEnumMap: [],
 				steps: [],
 				color: '',
-				info: {}
+				info: {},
+				id: ""
 			}
 		},
 		onLoad(option) {
+			this.id = option.id;
+		},
+		onShow(){
 			global.$http.post('/car/apply/getInfo', {
 				params: {
-					apply_id: option.id
+					apply_id: this.id
 				},
 			}).then(res => {
 				if (res.status === "0") {

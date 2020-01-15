@@ -110,13 +110,17 @@
 				StatusEnumMap: misEnum.FoodRecordEnumMap,
 				steps: [],
 				color: '',
-				info: {}
+				info: {},
+				id: ""
 			}
 		},
 		onLoad(option) {
+			this.id = option.id;
+		},
+		onShow() {
 			global.$http.post('/dining/record/recordInfo', {
 				params: {
-					record_id: option.id
+					record_id: this.id
 				},
 			}).then(res => {
 				if (res.status === "0") {
