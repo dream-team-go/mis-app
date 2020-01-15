@@ -1,1 +1,2 @@
+setCssToHead([".",[1],"outer-box.",[1],"data-v-63b39342 { width: 100%; min-height: calc(100vh - ",[0,90],"); background: #FFFFFF; padding: ",[0,20],"; }\n.",[1],"outer-box .",[1],"car-box.",[1],"data-v-63b39342 { width: 30%; height: ",[0,120],"; float: left; background: red; padding: ",[0,20],"; }\n",],undefined,{path:"./pages/work/carList.wxss"})();
 document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/work/carList.wxml') } }));

@@ -1,0 +1,14 @@
+.outer-box.data-v-63b39342 {
+  width: 100%;
+  min-height: calc(100vh - 90rpx);
+  background: #FFFFFF;
+  padding: 20rpx;
+}
+.outer-box .car-box.data-v-63b39342 {
+    width: 30%;
+    height: 120rpx;
+    float: left;
+    background: red;
+    padding: 20rpx;
+}
+

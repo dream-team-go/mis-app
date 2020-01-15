@@ -208,7 +208,7 @@
 					badge: 120,
 					name: '包房信息',
 					url: "../work/foodList",
-					icoSrc: "../../static/common/meeting-room.png"
+					icoSrc: "../../static/common/house.png"
 				}, {
 					cuIcon: 'cardboardfill',
 					color: 'red',
