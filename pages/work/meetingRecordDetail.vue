@@ -64,14 +64,18 @@
 				<text class="text-bold">{{info.create_time}}</text>
 			</view>
 		</view>
-
-		<view class="padding" v-if="info.status == 0" style="display: inline-flex;">
+<view class="bottom-btns-seat"></view>
+		<view class="bottom-btns" v-if="info.status == 0">
+			<view class="cancel" @click="verifyFail">审批不通过</view>
+			<view class="pass" @click="verifySuccess">审批通过</view>
+		</view>
+		<!-- <view class="padding" v-if="info.status == 0" style="display: inline-flex;">
 			<button class="cu-btn bg-red lg" @click="verifyFail">审核不通过</button>
 		</view>
 
 		<view class="padding" v-if="info.status == 0" style="display: inline-flex;float: right;">
 			<button class="cu-btn bg-green lg" @click="verifySuccess">审批通过</button>
-		</view>
+		</view> -->
 
 		<view class="cu-modal" :class="showModal?'show':''">
 			<view class="cu-dialog">
@@ -255,6 +259,7 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
+@import "style/mystyle.scss";
 
 </style>

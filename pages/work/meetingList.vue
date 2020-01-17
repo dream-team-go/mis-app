@@ -38,20 +38,20 @@
 	min-height: calc(100vh - 90upx);
 	background: #FFFFFF;
 	.room-box {
-		width: 25%;
-		height: 120upx;
+		width: 33%;
+		height: 140upx;
 		float: left;
 		margin: 0 auto;
 		.img {
 			text-align: center;
 			width: 100%;
-			height: 60upx;
+			height: 100upx;
 			background: url(../../static/common/meeting-room.png) no-repeat;
-			background-size: 80upx 80upx;
-			background-position-x: 50%;
+			background-size: 150upx 150upx;
+			background-position: 50% 20%;
 		}
 		.car-num {
-			font-size: 24upx;
+			font-size: 28upx;
 			text-align: center;
 			color: #36BDBD;
 		}

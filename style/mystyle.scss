@@ -279,13 +279,14 @@
 		position: fixed;
 		bottom: 0;
 		width: 100%;
-		height: 140upx;
+		height: 114upx;
 		border-top: 2upx solid #36BDBD;
+		box-shadow: 1px 1px 40px rgba(0, 0, 0, 0.2);
 		.cancel {
 			float: left;
 			width: 50%;
-			height: 140upx;
-			line-height: 140upx;
+			height: 114upx;
+			line-height: 114upx;
 			color: #36BDBD;
 			text-align: center;
 			background: #FFFFFF;
@@ -293,8 +294,8 @@
 		.pass {
 			float: right;
 			width: 50%;
-			height: 140upx;
-			line-height: 140upx;
+			height: 114upx;
+			line-height: 114upx;
 			text-align: center;
 			color: #FFFFFF;
 			background-image: linear-gradient(45deg, #44d7b6, #36bdbd);
