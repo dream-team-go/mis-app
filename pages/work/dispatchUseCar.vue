@@ -90,7 +90,7 @@
 		</view>
 		<view class="list-modal cu-modal bottom-modal" :class="isShowDriverModal?'show':''">
 			<view class="cu-dialog">
-				<view class="cu-bar bg-gradual-blue" :style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
+				<view class="cu-bar bg-linear-blue" :style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
 					<view class="action text-white" @tap="hideDriverModal">取消</view>
 					<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择司机</view>
 					<view class="action"></view>

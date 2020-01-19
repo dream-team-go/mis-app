@@ -94,14 +94,11 @@
 				<text class="text-bold">{{info.create_time}}</text>
 			</view>
 		</view>
-
-		<view class="padding" v-if="info.status == 0" style="display: inline-flex;">
-			<button class="cu-btn bg-gradual-orange lg" @click="verifyFail">驳回</button>
-		</view>
-
-		<view class="padding" v-if="info.status == 0" style="display: inline-flex;float: right;">
-			<button class="cu-btn bg-linear-blue lg" @click="verifySuccess">确认预定</button>
-		</view>
+		<view class="bottom-btns-seat"></view>
+				<view class="bottom-btns" v-if="info.status == 0">
+					<view class="cancel" @click="verifyFail">驳回</view>
+					<view class="pass" @click="verifySuccess">确认预定</view>
+				</view>
 
 		<view class="cu-modal" :class="showModal?'show':''">
 			<view class="cu-dialog">
@@ -118,8 +115,8 @@
 				</view>
 				<view class="cu-bar bg-white justify-end">
 					<view class="action">
-						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
-						<button class="cu-btn bg-green margin-left" @tap="sureModal">确定</button>
+						<button class="cu-btn line-bluelight text-green" @tap="hideModal">取消</button>
+						<button class="cu-btn bg-linear-blue margin-left" @tap="sureModal">确定</button>
 
 					</view>
 				</view>
@@ -229,7 +226,7 @@
 							this.steps[1].color = 'text-red';
 							this.steps[2].color = 'text-red';
 						}
-
+						this.info.fail_reason = failReason;
 					} else {
 						uni.showToast({
 							title: res.msg,
@@ -283,6 +280,7 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
+@import "style/mystyle.scss";
 
 </style>

@@ -65,7 +65,7 @@
 				this.para.lead = info.lead;
 				this.para.num = info.num;
 				this.peopleIndex = info.num - 1;
-				this.para.dining_date = info.dining_date.substring(0,10);
+				this.para.dining_date = info.dining_date.substring(0, 10);
 				this.para.desc = info.desc;
 				this.para.id = info.id;
 			}
@@ -74,7 +74,7 @@
 			return {
 				isAdd: true,
 				peopleIndex: 0,
-				peoples: [1, 2, 3, 4, 5],
+				peoples: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 				typeIndex: 0,
 				types: ["请选择", "午餐", "晚餐"],
 				para: {
@@ -98,7 +98,7 @@
 			},
 			Submit: function(e) {
 				//验证数据
-				if(this.para.lead.length <= 0){
+				if (this.para.lead.length <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '用餐领导不能为空'
@@ -126,12 +126,11 @@
 							icon: 'none',
 							title: '提交成功'
 						});
-						if(this.isAdd){
+						if (this.isAdd) {
 							uni.navigateBack();
-						}
-						else{
+						} else {
 							uni.navigateBack({
-							    delta: 2
+								delta: 2
 							});
 						}
 					} else {

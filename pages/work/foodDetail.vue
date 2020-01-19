@@ -48,13 +48,17 @@
 	export default {
 		data() {
 			return {
+				id: "",
 				info: {}
 			}
 		},
 		onLoad(option) {
+			this.id = option.id;
+		},
+		onShow() {
 			global.$http.post('/dining/info/getInfo', {
 				params: {
-					dining_id: option.id
+					dining_id: this.id
 				},
 			}).then(res => {
 				if (res.status === "0") {

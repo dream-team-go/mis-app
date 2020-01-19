@@ -1,19 +1,19 @@
-.page.data-v-81a62888 {
+.page.data-v-6f1c3c01 {
   height: 100vh;
 }
-.heard.data-v-81a62888 {
+.heard.data-v-6f1c3c01 {
   width: 80rpx;
   height: 80rpx;
 }
-.ml20.data-v-81a62888 {
+.ml20.data-v-6f1c3c01 {
   margin-left: 40rpx;
 }
-.ico.data-v-81a62888 {
+.ico.data-v-6f1c3c01 {
   width: 28rpx !important;
   height: 28rpx !important;
   margin: 0 20rpx 0 10rpx !important;
 }
-.login-ico.data-v-81a62888 {
+.login-ico.data-v-6f1c3c01 {
   width: 34rpx !important;
   height: 34rpx !important;
   margin: 0 18rpx 0 4rpx !important;

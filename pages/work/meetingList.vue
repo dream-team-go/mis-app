@@ -7,9 +7,9 @@
 		</cu-custom>
 		<view class="outer-box">
 			<!-- 循环这个box就好 -->
-			<view class="room-box">
+			<view class="room-box" v-for="room in rooms" :key="room.id" @click="roomDetail(room)">
 				<view class="img"></view>
-				<view class="car-num">08室</view>
+				<view class="car-num">{{room.number}}</view>
 			</view>
 		</view>
 	</view>
@@ -19,13 +19,48 @@
 	export default {
 		data() {
 			return {
-				
+				rooms: []
 			}
 		},
+		onLoad() {
+			
+		},
+		onShow() {
+			//获取会议室所属办公楼房信息
+			
+			this.loadData();
+		},
 		methods: {
+			loadData(){
+				global.$http.post('/meeting/info/meetingList', {
+					params: {
+						page: 1,
+						pageSize: 1000
+					},
+				}).then(res => {
+					if (res.status === "0") {
+						this.rooms = res.data.list;
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+			},
+			roomDetail: function(room){
+				uni.navigateTo({
+					url: "../work/meetingDetail?id=" + room.id
+				});
+			},
 			toAdd: function(e){
 				uni.navigateTo({
-					url:'../work/saveFood'
+					url:'../work/saveMeeting'
 				});
 			}
 		}

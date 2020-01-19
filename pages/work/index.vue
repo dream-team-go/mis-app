@@ -98,7 +98,7 @@
 				carCuIconList: [{
 					cuIcon: 'cardboardfill',
 					color: 'red',
-					badge: 120,
+					badge: 0,
 					name: '车辆信息',
 					url: "../work/carList",
 					icoSrc: "../../static/common/car-info.png"
@@ -112,14 +112,14 @@
 				}, {
 					cuIcon: 'noticefill',
 					color: 'olive',
-					badge: 22,
+					badge: 0,
 					name: '用车记录',
 					url: "../work/useCarRecordList",
 					icoSrc: "../../static/common/record-info.png"
 				}, {
 					cuIcon: 'noticefill',
 					color: 'olive',
-					badge: 22,
+					badge: 0,
 					name: '用车审批',
 					url:"../work/checkUseCarRecordList",
 					icoSrc: "../../static/common/shen-car.png"
@@ -184,14 +184,14 @@
 				meetingCuIconList: [{
 					cuIcon: 'cardboardfill',
 					color: 'red',
-					badge: 120,
+					badge: 0,
 					name: '会议室信息',
 					url: "../work/meetingList",
 					icoSrc: "../../static/common/house.png"
 				}, {
 					cuIcon: 'cardboardfill',
 					color: 'red',
-					badge: 120,
+					badge: 0,
 					name: '会议记录',
 					url: "../work/meetingRecordList",
 					icoSrc: "../../static/common/meeting-record.png"
@@ -207,14 +207,14 @@
 				foodCuIconList: [{
 					cuIcon: 'cardboardfill',
 					color: 'red',
-					badge: 120,
+					badge: 0,
 					name: '包房信息',
 					url: "../work/foodList",
 					icoSrc: "../../static/common/house.png"
 				}, {
 					cuIcon: 'cardboardfill',
 					color: 'red',
-					badge: 120,
+					badge: 0,
 					name: '订餐记录',
 					url: "../work/foodRecordList",
 					icoSrc: "../../static/common/fix-record.png"

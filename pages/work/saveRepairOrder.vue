@@ -61,7 +61,7 @@
 				</view>
 			</view>
 			<view class="padding flex flex-direction">
-				<button class="cu-btn bg-orange margin-tb-sm lg" @click="Submit">提交</button>
+				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
 		</form>
 	</view>

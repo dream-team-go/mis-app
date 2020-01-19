@@ -118,6 +118,7 @@
 			this.id = option.id;
 		},
 		onShow() {
+			this.steps.length = 0;
 			global.$http.post('/dining/record/recordInfo', {
 				params: {
 					record_id: this.id
