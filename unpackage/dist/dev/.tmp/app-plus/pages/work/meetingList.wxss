@@ -1,15 +1,15 @@
-.outer-box.data-v-9df9f9a4 {
+.outer-box.data-v-887c8aae {
   width: 100%;
   min-height: calc(100vh - 90rpx);
   background: #FFFFFF;
 }
-.outer-box .room-box.data-v-9df9f9a4 {
+.outer-box .room-box.data-v-887c8aae {
     width: 33%;
     height: 140rpx;
     float: left;
     margin: 0 auto;
 }
-.outer-box .room-box .img.data-v-9df9f9a4 {
+.outer-box .room-box .img.data-v-887c8aae {
       text-align: center;
       width: 100%;
       height: 100rpx;
@@ -17,7 +17,7 @@
       background-size: 150rpx 150rpx;
       background-position: 50% 20%;
 }
-.outer-box .room-box .car-num.data-v-9df9f9a4 {
+.outer-box .room-box .car-num.data-v-887c8aae {
       font-size: 28rpx;
       text-align: center;
       color: #36BDBD;

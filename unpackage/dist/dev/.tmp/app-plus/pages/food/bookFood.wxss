@@ -13,6 +13,7 @@
 .cu-form-group .modal-group {
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
+	    -ms-flex: 1;
 	        flex: 1;
 	padding-right: 40rpx;
 	overflow: hidden;
@@ -21,7 +22,8 @@
 .cu-form-group .modal-group .picker {
 	line-height: 100rpx;
 	font-size: 28rpx;
-	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	   text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
 	width: 100%;

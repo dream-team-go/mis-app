@@ -1,15 +1,15 @@
-.outer-box.data-v-55e03372 {
+.outer-box.data-v-63b39342 {
   width: 100%;
   min-height: calc(100vh - 90rpx);
   background: #FFFFFF;
 }
-.outer-box .car-box.data-v-55e03372 {
+.outer-box .car-box.data-v-63b39342 {
     width: 33%;
     height: 140rpx;
     float: left;
     margin: 0 auto;
 }
-.outer-box .car-box .jiao-img.data-v-55e03372 {
+.outer-box .car-box .jiao-img.data-v-63b39342 {
       text-align: center;
       width: 100%;
       height: 100rpx;
@@ -17,7 +17,7 @@
       background-size: 150rpx 150rpx;
       background-position: 50% 20%;
 }
-.outer-box .car-box .yue-img.data-v-55e03372 {
+.outer-box .car-box .yue-img.data-v-63b39342 {
       text-align: center;
       width: 100%;
       height: 100rpx;
@@ -25,7 +25,7 @@
       background-size: 150rpx 150rpx;
       background-position: 50% 20%;
 }
-.outer-box .car-box .shang-img.data-v-55e03372 {
+.outer-box .car-box .shang-img.data-v-63b39342 {
       text-align: center;
       width: 100%;
       height: 100rpx;
@@ -33,7 +33,7 @@
       background-size: 150rpx 150rpx;
       background-position: 50% 20%;
 }
-.outer-box .car-box .xiaoba-img.data-v-55e03372 {
+.outer-box .car-box .xiaoba-img.data-v-63b39342 {
       text-align: center;
       width: 100%;
       height: 100rpx;
@@ -41,7 +41,7 @@
       background-size: 150rpx 150rpx;
       background-position: 50% 20%;
 }
-.outer-box .car-box .daba-img.data-v-55e03372 {
+.outer-box .car-box .daba-img.data-v-63b39342 {
       text-align: center;
       width: 100%;
       height: 100rpx;
@@ -49,7 +49,7 @@
       background-size: 150rpx 150rpx;
       background-position: 50% 20%;
 }
-.outer-box .car-box .car-num.data-v-55e03372 {
+.outer-box .car-box .car-num.data-v-63b39342 {
       font-size: 28rpx;
       text-align: center;
       color: #36BDBD;
