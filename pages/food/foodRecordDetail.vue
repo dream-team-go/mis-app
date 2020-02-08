@@ -7,7 +7,7 @@
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 预定进度
+				预定进度
 			</view>
 		</view>
 		<view class="bg-white padding">
@@ -19,83 +19,83 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.status == -1">
 			<view class="action">
-				 失败原因：
+				失败原因：
 				<text class="text-red">{{info.fail_reason}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 订餐原由：
+				订餐原由：
 				<text class="text-bold">{{info.desc}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 包房：
+				包房：
 				<text class="text-bold">{{info.room_number}}({{info.building_name}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 用餐时间：
+				用餐时间：
 				<text class="text-bold">{{info.start_time}} — {{info.end_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 上菜时间：
+				上菜时间：
 				<text class="text-bold">{{info.meal_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 用餐人数：
+				用餐人数：
 				<text class="text-bold">{{info.people_num}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 有无回族：
+				有无回族：
 				<text class="text-bold">{{info.has_hz == 0 ? "无" : "有"}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.meal_spec != null">
 			<view class="action">
-				 用餐标准：
+				用餐标准：
 				<text class="text-bold">{{info.meal_spec}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 接待对象：
+				接待对象：
 				<text class="text-bold">{{info.receive_people}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.lender != null">
 			<view class="action">
-				 陪同领导：
+				陪同领导：
 				<text class="text-bold">{{info.lender}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.meal_request != null">
 			<view class="action">
-				 特殊要求：
+				特殊要求：
 				<text class="text-bold">{{info.meal_request}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 预定人：
+				预定人：
 				<text class="text-bold">{{info.user_name}}({{info.user_tel}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 预定时间：
+				预定时间：
 				<text class="text-bold">{{info.create_time}}</text>
 			</view>
 		</view>
-		
+
 		<view class="padding flex flex-direction" v-if="info.status == 0">
 			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="cancleBook">取消预定</button>
 		</view>
@@ -140,10 +140,10 @@
 					misEnum.FoodRecordEnumMap.forEach((value, key, map) => {
 						var cuIcon = '';
 						var color = '';
-						if(!isFind || key == this.info.status){
+						if (!isFind || key == this.info.status) {
 							color = this.color;
 						}
-						if(key == this.info.status){
+						if (key == this.info.status) {
 							isFind = true;
 						}
 						if (key === 0) {
@@ -162,7 +162,7 @@
 							color: color
 						})
 					});
-					
+
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -182,7 +182,7 @@
 					url: '../food/bookFood?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			},
-			cancleBook: function(){
+			cancleBook: function() {
 				uni.showModal({
 					title: '提示',
 					content: '确定取消预定？',
@@ -190,7 +190,7 @@
 					cancelText: '取消',
 					confirmText: '确定',
 					success: res => {
-						if(res.cancel) return;
+						if (res.cancel) return;
 						uni.showLoading({
 							title: '提交中',
 							mask: false
@@ -231,6 +231,7 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
+@import "style/mystyle.scss";
 
 </style>

@@ -1,5 +1,5 @@
 {
-    "name" : "开远事务局APP",
+    "name" : "智慧机关",
     "appid" : "__UNI__3C0082A",
     "description" : "",
     "versionName" : "1.0.0",
@@ -15,7 +15,9 @@
             "delay" : 0
         },
         /* 模块配置 */
-        "modules" : {},
+        "modules" : {
+            "SQLite" : {}
+        },
         /* 应用发布信息 */
         "distribute" : {
             /* android打包配置 */
@@ -78,6 +80,42 @@
                         "settings@3x" : "unpackage/res/icons/87x87.png",
                         "spotlight@2x" : "unpackage/res/icons/80x80.png",
                         "spotlight@3x" : "unpackage/res/icons/120x120.png"
+                    }
+                }
+            },
+            "splashscreen" : {
+                "android" : {
+                    "hdpi" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                    "xhdpi" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                    "xxhdpi" : "C:/Users/82069/Desktop/微信图片_20200208110225.png"
+                },
+                "ios" : {
+                    "ipad" : {
+                        "landscape7" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "portrait7" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "landscape-retina7" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "portrait-retina7" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "landscape-1112h@2x" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "portrait-1112h@2x" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "landscape-1194h@2x" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "portrait-1194h@2" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "landscape-1366h@2x" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "portrait-1366h@2x" : "C:/Users/82069/Desktop/微信图片_20200208110225.png"
+                    },
+                    "iphone" : {
+                        "retina35" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "retina40l" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "retina40" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "retina47l" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "retina47" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "retina55l" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "retina55" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "iphonexl" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "iphonex" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "landscape-896h@2x" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "portrait-896h@2x" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "landscape-896h@3x" : "C:/Users/82069/Desktop/微信图片_20200208110225.png",
+                        "portrait-896h@3x" : "C:/Users/82069/Desktop/微信图片_20200208110225.png"
                     }
                 }
             }

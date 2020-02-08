@@ -76,7 +76,7 @@
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
-  "appname": "开远事务局APP",
+  "appname": "智慧机关",
   "compilerVersion": "2.5.1",
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
