@@ -90,8 +90,12 @@
 				<text class="text-bold">{{info.apply_user_name}}({{info.apply_user_phone}})</text>
 			</view>
 		</view>
-		<view class="padding flex flex-direction" v-if="info.status == 0">
+		<!-- <view class="padding flex flex-direction" v-if="info.status == 0">
 			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="cancleBook">取消预定</button>
+		</view> -->
+		<view class="bottom-btns-seat" v-if="info.status == 0"></view>
+		<view class="bottom-cancel-btn"  @click="cancleBook">
+			取消预定
 		</view>
 	</view>
 </template>
@@ -362,7 +366,7 @@
 		}
 	}
 </script>
-
-<style>
+<style scoped lang="scss">
+@import "style/mystyle.scss";
 
 </style>

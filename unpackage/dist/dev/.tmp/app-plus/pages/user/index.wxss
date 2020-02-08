@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .page.data-v-a9a84034 {
   height: 100vh;
 }
@@ -9,11 +10,28 @@
   margin-left: 40rpx;
 }
 .ico.data-v-a9a84034 {
+=======
+.page.data-v-81a62888 {
+  height: 100vh;
+}
+.heard.data-v-81a62888 {
+  width: 80rpx;
+  height: 80rpx;
+}
+.ml20.data-v-81a62888 {
+  margin-left: 40rpx;
+}
+.ico.data-v-81a62888 {
+>>>>>>> dc47cdd093467a627e8dd955edf9eb9f4b70d420
   width: 28rpx !important;
   height: 28rpx !important;
   margin: 0 20rpx 0 10rpx !important;
 }
+<<<<<<< HEAD
 .login-ico.data-v-a9a84034 {
+=======
+.login-ico.data-v-81a62888 {
+>>>>>>> dc47cdd093467a627e8dd955edf9eb9f4b70d420
   width: 34rpx !important;
   height: 34rpx !important;
   margin: 0 18rpx 0 4rpx !important;

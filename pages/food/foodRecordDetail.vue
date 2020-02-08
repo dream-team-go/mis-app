@@ -95,9 +95,9 @@
 				<text class="text-bold">{{info.create_time}}</text>
 			</view>
 		</view>
-
-		<view class="padding flex flex-direction" v-if="info.status == 0">
-			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="cancleBook">取消预定</button>
+		<view class="bottom-btns-seat" v-if="info.status == 0"></view>
+		<view class="bottom-cancel-btn"  @click="cancleBook">
+			取消预定
 		</view>
 	</view>
 </template>

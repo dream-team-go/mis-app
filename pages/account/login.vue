@@ -1,7 +1,8 @@
 <template>
 	<view class="container">
 		<view class="top-box">
-			登录
+			<image src="../../static/login/WechatIMG419.png"></image>
+			<view class="title">智慧机关</view>
 		</view>
 		<form>
 			<view class="cu-form-group">
@@ -127,13 +128,20 @@
 		position: relative;
 		width: 100vw;
 		height: 100vh;
+		background: #FFFFFF;
 		.top-box {
 			color: #11c0ac;
 			text-align: center;
-			font-size: 40upx;
 			line-height: 60upx;
-			margin-bottom: 40upx;
-			padding-top: 200upx;
+			padding-bottom: 80upx;
+			image {
+				width: 240upx;
+				height: 240upx;
+			}
+			.title {
+				font-size: 44upx;
+				font-weight: 500;
+			}
 		}
 		
 		.cu-form-group {
@@ -166,7 +174,7 @@
 		height: 86upx;
 		line-height: 86upx;
 		border-radius: 50px;
-		margin-top: 200upx;
+		margin-top: 160upx;
 		background-image: linear-gradient(45deg, #44d7b6, #36bdbd);
 		color: #ffffff;
 		font-size: 32upx;

@@ -69,25 +69,25 @@
 			</view>
 		</view>
 
-		<view class="cu-bar bg-white solid-bottom" v-if="info.zz_name.length > 0">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.zz_name">
 			<view class="action">
 				 组长审批：
 				<text class="text-bold">{{info.zz_name}} {{info.zzsp_time}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.zr_name.length > 0">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.zr_name">
 			<view class="action">
 				 主任审批：
 				<text class="text-bold">{{info.zr_name}} {{info.end_area}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.business.length > 0">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.business">
 			<view class="action">
 				 维修出单：
 				<text class="text-bold">{{info.business}} {{info.cwxd_time}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.jz_name.length > 0">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.jz_name">
 			<view class="action">
 				 局长审批：
 				<text class="text-bold">{{info.jz_name}} {{info.jzsp_time}}</text>

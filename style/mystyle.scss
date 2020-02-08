@@ -302,6 +302,19 @@
 		}
 	}
 	
-	
+.bottom-cancel-btn {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 114upx;
+	border-top: 2upx solid #36BDBD;
+	box-shadow: 1px 1px 40px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	background-image: linear-gradient(45deg, #44d7b6, #36bdbd);
+	line-height: 114upx;
+	color: #FFFFFF;
+	// font-size: 36upx;
+	font-weight: 500;
+}
 	
 	

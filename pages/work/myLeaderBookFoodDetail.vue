@@ -42,8 +42,12 @@
 				<text class="text-bold">{{info.desc}}</text>
 			</view>
 		</view>
-		<view class="padding flex flex-direction" v-if="info.dining_date > nowDate">
+		<!-- <view class="padding flex flex-direction" v-if="info.dining_date > nowDate">
 			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="cancleBook">取消预定</button>
+		</view> -->
+		<view class="bottom-btns-seat" v-if="info.dining_date > nowDate"></view>
+		<view class="bottom-cancel-btn"  @click="cancleBook">
+			取消预定
 		</view>
 	</view>
 </template>
@@ -129,6 +133,7 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
+@import "style/mystyle.scss";
 
 </style>

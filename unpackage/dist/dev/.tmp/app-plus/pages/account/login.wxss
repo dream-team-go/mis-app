@@ -2,14 +2,21 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+  background: #FFFFFF;
 }
 .container .top-box {
     color: #11c0ac;
     text-align: center;
-    font-size: 40rpx;
     line-height: 60rpx;
-    margin-bottom: 40rpx;
-    padding-top: 200rpx;
+    padding-bottom: 80rpx;
+}
+.container .top-box image {
+      width: 240rpx;
+      height: 240rpx;
+}
+.container .top-box .title {
+      font-size: 44rpx;
+      font-weight: 500;
 }
 .container .cu-form-group {
     width: 90%;
@@ -38,8 +45,8 @@
   height: 86rpx;
   line-height: 86rpx;
   border-radius: 50px;
-  margin-top: 200rpx;
-  background-image: -webkit-linear-gradient(45deg, #44d7b6, #36bdbd);
+  margin-top: 160rpx;
+  background-image: -o-linear-gradient(45deg, #44d7b6, #36bdbd);
   background-image: linear-gradient(45deg, #44d7b6, #36bdbd);
   color: #ffffff;
   font-size: 32rpx;

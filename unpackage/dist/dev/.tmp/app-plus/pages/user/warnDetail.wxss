@@ -1,10 +1,15 @@
+<<<<<<< HEAD
 .message-box.data-v-35f9ecda {
+=======
+.message-box.data-v-5c1df37d {
+>>>>>>> dc47cdd093467a627e8dd955edf9eb9f4b70d420
   background: #FFFFFF;
   height: 100rpx;
   line-height: 100rpx;
   padding: 0 20rpx;
   margin-bottom: 2rpx;
 }
+<<<<<<< HEAD
 .message-box .label.data-v-35f9ecda {
     width: 160rpx;
 }
@@ -12,11 +17,24 @@
   background: #FFFFFF;
 }
 .content-box .label.data-v-35f9ecda {
+=======
+.message-box .label.data-v-5c1df37d {
+    width: 160rpx;
+}
+.content-box.data-v-5c1df37d {
+  background: #FFFFFF;
+}
+.content-box .label.data-v-5c1df37d {
+>>>>>>> dc47cdd093467a627e8dd955edf9eb9f4b70d420
     height: 100rpx;
     line-height: 100rpx;
     padding: 0 20rpx;
 }
+<<<<<<< HEAD
 .content-box .val.data-v-35f9ecda {
+=======
+.content-box .val.data-v-5c1df37d {
+>>>>>>> dc47cdd093467a627e8dd955edf9eb9f4b70d420
     padding: 0 20rpx 40rpx;
     text-indent: 2em;
 }

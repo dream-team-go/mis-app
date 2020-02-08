@@ -1,15 +1,27 @@
+<<<<<<< HEAD
 .outer-box.data-v-4f7f6753 {
+=======
+.outer-box.data-v-887c8aae {
+>>>>>>> dc47cdd093467a627e8dd955edf9eb9f4b70d420
   width: 100%;
   min-height: calc(100vh - 90rpx);
   background: #FFFFFF;
 }
+<<<<<<< HEAD
 .outer-box .room-box.data-v-4f7f6753 {
+=======
+.outer-box .room-box.data-v-887c8aae {
+>>>>>>> dc47cdd093467a627e8dd955edf9eb9f4b70d420
     width: 33%;
     height: 140rpx;
     float: left;
     margin: 0 auto;
 }
+<<<<<<< HEAD
 .outer-box .room-box .img.data-v-4f7f6753 {
+=======
+.outer-box .room-box .img.data-v-887c8aae {
+>>>>>>> dc47cdd093467a627e8dd955edf9eb9f4b70d420
       text-align: center;
       width: 100%;
       height: 100rpx;
@@ -17,7 +29,11 @@
       background-size: 150rpx 150rpx;
       background-position: 50% 20%;
 }
+<<<<<<< HEAD
 .outer-box .room-box .car-num.data-v-4f7f6753 {
+=======
+.outer-box .room-box .car-num.data-v-887c8aae {
+>>>>>>> dc47cdd093467a627e8dd955edf9eb9f4b70d420
       font-size: 28rpx;
       text-align: center;
       color: #36BDBD;
