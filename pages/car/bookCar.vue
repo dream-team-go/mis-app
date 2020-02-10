@@ -89,7 +89,7 @@
 			</view>
 			
 			<view class="cu-form-group">
-				<view class="title">用车类型（公务用车、网约车）</view>
+				<view class="title">用车类型（公务用车）</view>
 				<picker @change="ChangeTypes" :value="typeIndex" :range="types">
 					<view class="picker">
 						{{types[typeIndex]}}
@@ -182,7 +182,7 @@
 				areaIndex: 0,
 				areas:["请选择", "市内", "市外"],
 				typeIndex: 0,
-				types:["请选择", "公务用车", "网约车"],
+				types:["请选择", "公务用车"],
 				multiArray: [
 					[],
 					[]

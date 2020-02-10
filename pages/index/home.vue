@@ -6,25 +6,25 @@
 		<user v-if="PageCur=='user'" :userData="userData"></user>
 		<work v-if="PageCur=='work'"></work>
 		<view class="cu-bar tabbar bg-white shadow foot">
-			<view class="action" @click="NavChange" data-cur="car">
+			<view class="action" @click="NavChange" data-cur="car" v-if="CarPermission">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/car' + [PageCur=='car'?'_cur':''] + '.png'"></image>
 				</view>
 				<view :class="PageCur=='car'?'text-bluelight':'text-gray'">用车</view>
 			</view>
-			<view class="action" @click="NavChange" data-cur="meeting">
+			<view class="action" @click="NavChange" data-cur="meeting" v-if="MeetingPermission">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/meeting' + [PageCur == 'meeting'?'_cur':''] + '.png'"></image>
 				</view>
 				<view :class="PageCur=='meeting'?'text-bluelight':'text-gray'">会务</view>
 			</view>
-			<view class="action" @click="NavChange" data-cur="food">
+			<view class="action" @click="NavChange" data-cur="food" v-if="FoodPermission">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/food' + [PageCur == 'food'?'_cur':''] + '.png'"></image>
 				</view>
 				<view :class="PageCur=='food'?'text-bluelight':'text-gray'">订餐</view>
 			</view>
-			<view class="action" @click="NavChange" data-cur="work">
+			<view class="action" @click="NavChange" data-cur="work" v-if="WorkPermission">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/work' + [PageCur == 'work'?'_cur':''] + '.png'"></image>
 				</view>
@@ -41,11 +41,18 @@
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex';
 	import misEnum from '../../common/mis-enum.js'; 
 	export default {
 		data() {
 			return {
-				PageCur: 'car',
+				PageCur: "",
+				CarPermission: false,
+				MeetingPermission: false,
+				FoodPermission: false,
+				WorkPermission: false,
 				meetingData: {
 					totalCount: "",
 					successCount: "",
@@ -97,8 +104,42 @@
 				}
 			}
 		},
+		computed: {
+			...mapState(['userInfo'])
+		},
 		onLoad() {
-
+			//设置权限
+			if(this.userInfo.key.includes("use_car:apply")){
+				this.CarPermission = true;
+				if(!this.PageCur)
+					this.PageCur = "car";
+			}
+			if(this.userInfo.key.includes("meeting:order")){
+				this.MeetingPermission = true;
+				if(!this.PageCur)
+					this.PageCur = "meeting";
+			}
+			if(this.userInfo.key.includes("dining:order")){
+				this.FoodPermission = true;
+				if(!this.PageCur)
+					this.PageCur = "food";
+			}
+			//设置工作台权限
+			if(this.userInfo.key.includes("dining:manage") || this.userInfo.key.includes("dining:list") || 
+			this.userInfo.key.includes("dining_lead:order") || this.userInfo.key.includes("dining_lead:manage") ||
+			this.userInfo.key.includes("meeting:manage") || this.userInfo.key.includes("meeting:list") ||
+			this.userInfo.key.includes("use_car:sp") || this.userInfo.key.includes("fix_car:jzsp") ||
+			this.userInfo.key.includes("car:manage") || this.userInfo.key.includes("driver:manage") ||
+			this.userInfo.key.includes("use_car:list") || this.userInfo.key.includes("use_car:dispatch") ||
+			this.userInfo.key.includes("fix_car:list") || this.userInfo.key.includes("fix_car:zzsp") ||
+			this.userInfo.key.includes("fix_car:zrsp") || this.userInfo.key.includes("fix_car:shop") ||
+			this.userInfo.key.includes("use_car:driver") || this.userInfo.key.includes("fix_car:apply")){
+				this.WorkPermission = true;
+				if(!this.PageCur)
+					this.PageCur = "work";
+			}
+			if(!this.PageCur)
+				this.PageCur = "user";
 		},
 		onShow() {
 			this.loadData();
