@@ -1,9 +1,6 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
+		<image class="logo" src="/static/verify.gif"></image>
 	</view>
 </template>
 
@@ -14,11 +11,6 @@
 	export default {
 		methods: {
 			...mapMutations(['setLoginInfo', 'setLogoutInfo'])
-		},
-		data() {
-			return {
-				title: '身份认证中...'
-			}
 		},
 		onLoad() {
 			//判断是否保存用户identity信息
