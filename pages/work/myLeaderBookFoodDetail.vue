@@ -46,7 +46,7 @@
 			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="cancleBook">取消预定</button>
 		</view> -->
 		<view class="bottom-btns-seat" v-if="info.dining_date > nowDate"></view>
-		<view class="bottom-cancel-btn"  @click="cancleBook">
+		<view class="bottom-cancel-btn" v-if="info.dining_date > nowDate" @click="cancleBook">
 			取消预定
 		</view>
 	</view>

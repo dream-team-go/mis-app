@@ -96,7 +96,7 @@
 			</view>
 		</view>
 		<view class="bottom-btns-seat" v-if="info.status == 0"></view>
-		<view class="bottom-cancel-btn"  @click="cancleBook">
+		<view class="bottom-cancel-btn" v-if="info.status == 0" @click="cancleBook">
 			取消预定
 		</view>
 	</view>
