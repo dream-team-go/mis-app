@@ -2,7 +2,7 @@
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">{{isAdd ? '新增会议室' : '编辑会议室'}}</block>
+			<block slot="content">{{isAdd ? '新增包房' : '编辑包房'}}</block>
 		</cu-custom>
 
 		<form>

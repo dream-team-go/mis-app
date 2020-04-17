@@ -100,8 +100,9 @@
 			</view>
 		</view>
 
-		<view class="padding flex flex-direction" v-if="info.status == 1">
-			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="cancleBook">取消申请</button>
+		<view class="bottom-btns-seat" v-if="info.status == 1"></view>
+		<view class="bottom-cancel-btn" v-if="info.status == 1"  @click="cancleBook">
+			取消申请
 		</view>
 	</view>
 </template>
@@ -390,6 +391,7 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
+@import "style/mystyle.scss";
 
 </style>
