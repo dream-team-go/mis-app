@@ -62,7 +62,8 @@
 				global.$http.post('/car/info/carList', {
 					params: {
 						page: 1,
-						pageSize: 1000
+						pageSize: 1000,
+						car_type: this.type
 					},
 				}).then(res => {
 					if (res.status === "0") {

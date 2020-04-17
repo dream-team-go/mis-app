@@ -89,8 +89,10 @@
 				<text class="text-bold">{{info.apply_user_name}}({{info.apply_user_phone}})</text>
 			</view>
 		</view>
-		<view class="padding flex flex-direction" v-if="info.status == 1">
-			<button class="cu-btn bg-red margin-tb-sm lg" @click="cancleBook">取消订单</button>
+		
+		<view class="bottom-btns-seat" v-if="info.status == 1"></view>
+		<view class="bottom-cancel-btn" v-if="info.status == 1"  @click="cancleBook">
+			取消订单
 		</view>
 		
 		<view class="cu-modal" :class="showModal?'show':''">
@@ -398,6 +400,7 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
+@import "style/mystyle.scss";
 
 </style>
