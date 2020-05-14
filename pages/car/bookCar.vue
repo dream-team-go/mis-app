@@ -97,6 +97,47 @@
 				</picker>
 			</view>
 			
+			<view class="cu-form-group">
+				<view class="title">小轿车</view>
+				<picker @change="ChangeXJC" :value="XJCIndex" :range="carQuantiy">
+					<view class="picker">
+						{{XJCIndex>-1?carQuantiy[XJCIndex] + "辆" : "请选择"}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">越野车</view>
+				<picker @change="ChangeYYC" :value="YYCIndex" :range="carQuantiy">
+					<view class="picker">
+						{{YYCIndex>-1?carQuantiy[YYCIndex] + "辆" : "请选择"}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">商务车</view>
+				<picker @change="ChangeSWC" :value="SWCIndex" :range="carQuantiy">
+					<view class="picker">
+						{{SWCIndex>-1?carQuantiy[SWCIndex] + "辆" : "请选择"}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">中型客车</view>
+				<picker @change="ChangeZXKC" :value="ZXKCIndex" :range="carQuantiy">
+					<view class="picker">
+						{{ZXKCIndex>-1?carQuantiy[ZXKCIndex] + "辆" : "请选择"}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">大型客车</view>
+				<picker @change="ChangeDXKC" :value="DXKCIndex" :range="carQuantiy">
+					<view class="picker">
+						{{DXKCIndex>-1?carQuantiy[DXKCIndex] + "辆" : "请选择"}}
+					</view>
+				</picker>
+			</view>
+			
 			<view class="padding flex flex-direction">
 				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
@@ -179,6 +220,14 @@
 				backTime: getTime(),
 				peopleIndex: 0,
 				peoples: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+				
+				XJCIndex: 0,
+				YYCIndex: 0,
+				SWCIndex: 0,
+				ZXKCIndex: 0,
+				DXKCIndex: 0,
+				carQuantiy:[0, 1, 2, 3, 4, 5],
+				
 				areaIndex: 0,
 				areas:["请选择", "市内", "市外"],
 				typeIndex: 0,
@@ -306,6 +355,27 @@
 				this.peopleIndex = e.detail.value;
 				this.para.people_num = this.peoples[e.detail.value];
 			},
+			
+			ChangeXJC: function(e){
+				this.XJCIndex = e.detail.value;
+				//TODO: 对接提交参数
+			},
+			ChangeYYC: function(e){
+				this.YYCIndex = e.detail.value;
+				//TODO: 对接提交参数
+			},
+			ChangeSWC: function(e){
+				this.SWCIndex = e.detail.value;
+				//TODO: 对接提交参数
+			},
+			ChangeZXKC: function(e){
+				this.ZXKCIndex = e.detail.value;
+				//TODO: 对接提交参数
+			},
+			ChangeDXKC: function(e){
+				this.DXKCIndex = e.detail.value;
+				//TODO: 对接提交参数
+			},
 			ChangeAreas: function(e){
 				this.areaIndex = e.detail.value;
 				this.para.area = this.areas[e.detail.value];
@@ -314,6 +384,7 @@
 				this.typeIndex = e.detail.value;
 				this.para.type = e.detail.value;
 			},
+			
 			MultiChange: function(e) {
 				this.multiIndex = e.detail.value;
 				this.para.end_city = this.multiArray[0][this.multiIndex[0]];

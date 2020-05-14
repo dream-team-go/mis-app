@@ -41,6 +41,13 @@
 			</view>
 		</view>
 		
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				 会议室照片：
+				<image :src="info.vr"></image>
+			</view>
+		</view>
+		
 	</view>
 </template>
 

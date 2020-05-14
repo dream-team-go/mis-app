@@ -369,7 +369,7 @@
 							icon: 'none'
 						});
 					});
-				}else if (this.PageCur === "food") {
+				}else if (this.PageCur === "user") {
 					uni.showLoading({
 						title: '加载中',
 						mask: false

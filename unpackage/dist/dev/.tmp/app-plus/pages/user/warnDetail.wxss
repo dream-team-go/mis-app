@@ -1,22 +1,22 @@
-.message-box.data-v-35f9ecda {
+.message-box.data-v-42ff0658 {
   background: #FFFFFF;
   height: 100rpx;
   line-height: 100rpx;
   padding: 0 20rpx;
   margin-bottom: 2rpx;
 }
-.message-box .label.data-v-35f9ecda {
+.message-box .label.data-v-42ff0658 {
     width: 160rpx;
 }
-.content-box.data-v-35f9ecda {
+.content-box.data-v-42ff0658 {
   background: #FFFFFF;
 }
-.content-box .label.data-v-35f9ecda {
+.content-box .label.data-v-42ff0658 {
     height: 100rpx;
     line-height: 100rpx;
     padding: 0 20rpx;
 }
-.content-box .val.data-v-35f9ecda {
+.content-box .val.data-v-42ff0658 {
     padding: 0 20rpx 40rpx;
     text-indent: 2em;
 }

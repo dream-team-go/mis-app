@@ -27,7 +27,7 @@
 						<text class="cuIcon-message text-orange"></text>
 						<text class="text-grey">消息管理</text>
 					</view>
-					<view class="action" v-show="msgCount > 0">
+					<view class="action" v-show="userData.ssmsgCount > 0">
 						<view class="cu-tag round bg-orange light">{{userData.msgCount}}</view>
 					</view>
 				</navigator>
