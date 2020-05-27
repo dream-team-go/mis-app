@@ -23,7 +23,7 @@
 					 派车单{{index+1}} <text class="text-orange text-bold margin-left">{{getStatusStr(dispatchOrder.status)}}</text>
 				</view>
 				<view class="action" v-if="dispatchOrder.status == 3">
-					<button class="cu-btn bg-green shadow" @tap="sureSettle(dispatchOrder)">确认结算</button>
+					<button class="cu-btn bg-linear-blue shadow" @tap="sureSettle(dispatchOrder)">确认结算</button>
 				</view>
 			</view>
 
@@ -43,6 +43,24 @@
 				<view class="action">
 					 司机：
 					<text class="text-bold">{{dispatchOrder.driver_name + "("+ dispatchOrder.driver_phone +")"}}</text>
+				</view>
+			</view>
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action">
+					 里程数：
+					<text class="text-bold">{{dispatchOrder.stop_num}}公里</text>
+				</view>
+				<view class="action">
+					<button class="cu-btn bg-linear-blue shadow" @tap="editMileage(index)">修改里程</button>
+				</view>
+			</view>
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action">
+					 用车天数：
+					<text class="text-bold">{{dispatchOrder.days}}</text>
+				</view>
+				<view class="action">
+					<button class="cu-btn bg-linear-blue shadow" @tap="editDays(index)">修改天数</button>
 				</view>
 			</view>
 			<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.bak.length > 0">
@@ -122,6 +140,53 @@
 				</uni-collapse-item>
 			</uni-collapse>
 		</view>
+		
+		<view class="cu-modal" :class="showMileageModal?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">修改里程数</view>
+					<view class="action" @tap="hideMileageModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view>
+					<view class="cu-form-group" style="text-align: left;">
+						<textarea type="number" min="0" :value="fillMileage" @input="fillMileageInput"></textarea>
+					</view>
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action">
+						<button class="cu-btn line-bluelight text-green" @tap="hideMileageModal">取消</button>
+						<button class="cu-btn bg-linear-blue margin-left" @tap="sureMileageModal">确定</button>
+		
+					</view>
+				</view>
+			</view>
+		</view>
+		
+		<view class="cu-modal" :class="showDaysModal?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">修改用车天数</view>
+					<view class="action" @tap="hideDaysModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view>
+					<view class="cu-form-group" style="text-align: left;">
+						<textarea type="number" min="0" :value="fillDays" @input="fillDaysInput"></textarea>
+					</view>
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action">
+						<button class="cu-btn line-bluelight text-green" @tap="hideDaysModal">取消</button>
+						<button class="cu-btn bg-linear-blue margin-left" @tap="sureDaysModal">确定</button>
+		
+					</view>
+				</view>
+			</view>
+		</view>
+		
 	</view>
 </template>
 
@@ -138,7 +203,12 @@
 			return {
 				stars: [1, 2, 3, 4, 5],
 				info: {},
-				list: []
+				list: [],
+				fillMileage: 0,
+				showMileageModal: false,
+				orderIndex: 0,
+				fillDays: 0,
+				showDaysModal: false
 			}
 		},
 		onLoad(option) {
@@ -272,6 +342,104 @@
 					fail: () => {},
 					complete: () => {}
 				});
+			},
+			hideDaysModal: function(){
+				this.showDaysModal = false;
+			},
+			fillDaysInput: function(e){
+				this.fillDays = e.detail.value;
+			},
+			sureDaysModal:function(){
+				if(this.fillDays < 0){
+					uni.showToast({
+						title: "用车天数不能小于0",
+						icon: 'none'
+					});
+					return;
+				}
+				this.showDaysModal = false;
+				uni.showLoading({
+					title: '提交中',
+					mask: false
+				});
+				var order = this.list[this.orderIndex];
+				global.$http.post('/car/dispatch/update', {
+					params: {
+						id: order.id,
+						days: this.fillDays,
+						stop_num: order.stop_num
+					},
+				}).then(res => {
+					uni.hideLoading();
+					if (res.status === "0") {
+						order.days = this.fillDays;
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+			},
+			hideMileageModal: function(){
+				this.showMileageModal = false;
+			},
+			fillMileageInput: function(e){
+				this.fillMileage = e.detail.value;
+			},
+			sureMileageModal:function(){
+				if(this.fillMileage < 0){
+					uni.showToast({
+						title: "里程数不能小于0",
+						icon: 'none'
+					});
+					return;
+				}
+				this.showMileageModal = false;
+				uni.showLoading({
+					title: '提交中',
+					mask: false
+				});
+				var order = this.list[this.orderIndex];
+				global.$http.post('/car/dispatch/update', {
+					params: {
+						id: order.id,
+						days: order.days,
+						stop_num: this.fillMileage
+					},
+				}).then(res => {
+					uni.hideLoading();
+					if (res.status === "0") {
+						order.stop_num = this.fillMileage;
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+			},
+			editMileage: function(index){
+				this.orderIndex = index;
+				this.fillMileage = this.list[index].stop_num;
+				this.showMileageModal = true;
+			},
+			editDays: function(index){
+				this.orderIndex = index;
+				this.fillDays = this.list[index].days;
+				this.showDaysModal = true;
 			}
 		}
 	}
