@@ -50,7 +50,7 @@
 					 里程数：
 					<text class="text-bold">{{dispatchOrder.stop_num}}公里</text>
 				</view>
-				<view class="action">
+				<view class="action" v-if="dispatchOrder.status == 3">
 					<button class="cu-btn bg-linear-blue shadow" @tap="editMileage(index)">修改里程</button>
 				</view>
 			</view>
@@ -59,7 +59,7 @@
 					 用车天数：
 					<text class="text-bold">{{dispatchOrder.days}}</text>
 				</view>
-				<view class="action">
+				<view class="action" v-if="dispatchOrder.status == 3">
 					<button class="cu-btn bg-linear-blue shadow" @tap="editDays(index)">修改天数</button>
 				</view>
 			</view>
