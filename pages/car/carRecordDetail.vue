@@ -90,6 +90,12 @@
 				<text class="text-bold">{{info.apply_user_name}}({{info.apply_user_phone}})</text>
 			</view>
 		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				 用车要求：
+				<text class="text-bold">{{require}}</text>
+			</view>
+		</view>
 		<!-- <view class="padding flex flex-direction" v-if="info.status == 0">
 			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="cancleBook">取消预定</button>
 		</view> -->
@@ -109,7 +115,8 @@
 				steps: [],
 				color: '',
 				info: {},
-				id: ""
+				id: "",
+				require: "无"
 			}
 		},
 		onLoad(option) {
@@ -125,6 +132,18 @@
 					this.info = res.data;
 					this.StatusEnumMap = misEnum.UseCarRecordEnumMap;
 					this.showSteps();
+					//设置用车要求
+					this.info.nums.forEach(c=>{
+						if(c.num > 0)
+						{
+							if(this.require == "无")
+							{
+								this.require = c.car_type+c.num+"辆";
+							}else{
+								this.require += "; " + c.car_type+c.num+"辆";
+							}
+						}
+					});
 				} else {
 					uni.showToast({
 						title: res.msg,

@@ -55,8 +55,8 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				有无回族：
-				<text class="text-bold">{{info.has_hz == 0 ? "无" : "有"}}</text>
+				清真人数：
+				<text class="text-bold">{{info.has_hz}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.meal_spec != null">

@@ -239,7 +239,6 @@
 				multiIndex: [0, 0],
 				regions:[],
 				para: {
-					id: "",
 					car_user: "",
 					phone: "",
 					people_num: 1,
@@ -251,7 +250,8 @@
 					predict_end_time: "",
 					end_city: "",
 					end_area: "",
-					type: 0
+					type: 0,
+					nums: [{car_type: "小轿车", num: 0}, {car_type: "越野车", num: 0},{car_type: "商务车", num: 0},{car_type: "中型客车", num: 0},{car_type: "大型客车", num: 0}]
 				}
 			}
 		},
@@ -286,6 +286,40 @@
 				this.para.end_area = info.end_area;
 				this.typeIndex = info.type;
 				this.para.type = info.type;
+				//设置车辆
+				info.nums.forEach(c=>{
+					if(c.car_type == "小轿车")
+					{
+						this.XJCIndex = c.num;
+						this.para.nums[0].car_type = c.car_type;
+						this.para.nums[0].num = c.num;
+					}
+					if(c.car_type == "越野车")
+					{
+						this.YYCIndex = c.num;
+						this.para.nums[1].car_type = c.car_type;
+						this.para.nums[1].num = c.num;
+					}
+					if(c.car_type == "商务车")
+					{
+						this.SWCIndex = c.num;
+						this.para.nums[2].car_type = c.car_type;
+						this.para.nums[2].num = c.num;
+					}
+					if(c.car_type == "中型客车")
+					{
+						this.ZXKCIndex = c.num;
+						this.para.nums[3].car_type = c.car_type;
+						this.para.nums[3].num = c.num;
+					}
+					if(c.car_type == "大型客车")
+					{
+						this.DXKCIndex = c.num;
+						this.para.nums[4].car_type = c.car_type;
+						this.para.nums[4].num = c.num;
+					}
+				});
+				
 			}
 			else
 			{
@@ -358,23 +392,23 @@
 			
 			ChangeXJC: function(e){
 				this.XJCIndex = e.detail.value;
-				//TODO: 对接提交参数
+				this.para.nums[0].num = this.carQuantiy[e.detail.value];
 			},
 			ChangeYYC: function(e){
 				this.YYCIndex = e.detail.value;
-				//TODO: 对接提交参数
+				this.para.nums[1].num = this.carQuantiy[e.detail.value];
 			},
 			ChangeSWC: function(e){
 				this.SWCIndex = e.detail.value;
-				//TODO: 对接提交参数
+				this.para.nums[2].num = this.carQuantiy[e.detail.value];
 			},
 			ChangeZXKC: function(e){
 				this.ZXKCIndex = e.detail.value;
-				//TODO: 对接提交参数
+				this.para.nums[3].num = this.carQuantiy[e.detail.value];
 			},
 			ChangeDXKC: function(e){
 				this.DXKCIndex = e.detail.value;
-				//TODO: 对接提交参数
+				this.para.nums[4].num = this.carQuantiy[e.detail.value];
 			},
 			ChangeAreas: function(e){
 				this.areaIndex = e.detail.value;
@@ -403,8 +437,8 @@
 				}
 			},
 			Submit: function(e){
-				this.para.predict_start_time = this.start_time;
-				this.para.predict_end_time = this.end_time;
+				this.para.predict_start_time = this.start_time + ":00";
+				this.para.predict_end_time = this.end_time + ":00";
 				//验证数据
 				if(this.para.reason.length <= 0){
 					uni.showToast({
@@ -462,7 +496,11 @@
 					mask: false
 				});
 				global.$http.post('/car/apply/' + (this.isAdd ? 'create' : 'update'), {
-					params: this.para,
+					//params: this.para,
+					header:{
+						ContentType: 'text/plain'
+					},
+					data: JSON.stringify(this.para)
 				}).then(res => {
 					uni.hideLoading();
 					if (res.status === "0") {

@@ -11,6 +11,12 @@
 					<text class="text-bold">{{info.people_num}}</text>
 				</view>
 			</view>
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action">
+					用车要求：
+					<text class="text-bold">{{require}}</text>
+				</view>
+			</view>
 			<view class="cu-form-group">
 				<view class="title">派车数量</view>
 				<picker @change="ChangeNumber" :value="numberIndex" :range="numbers">
@@ -147,6 +153,7 @@
 					contentrefresh: '加载中',
 					contentnomore: '没有更多'
 				},
+				require: "无",
 				editIndex: 0,
 				para: {
 					order_code: "",
@@ -169,6 +176,18 @@
 			var info = JSON.parse(decodeURIComponent(option.para));
 			this.info = info;
 			this.para.order_code = info.order_code;
+			//设置用车要求
+			info.nums.forEach(c=>{
+				if(c.num > 0)
+				{
+					if(this.require == "无")
+					{
+						this.require = c.car_type+c.num+"辆";
+					}else{
+						this.require += "; " + c.car_type+c.num+"辆";
+					}
+				}
+			});
 			//获取派车单
 			if(this.info.status >= 2){
 				global.$http.post('/car/dispatch/getListByDispatch', {

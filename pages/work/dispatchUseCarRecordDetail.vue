@@ -89,6 +89,12 @@
 				<text class="text-bold">{{info.apply_user_name}}({{info.apply_user_phone}})</text>
 			</view>
 		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				 用车要求：
+				<text class="text-bold">{{require}}</text>
+			</view>
+		</view>
 		
 		<view class="bottom-btns-seat" v-if="info.status == 1"></view>
 		<view class="bottom-cancel-btn" v-if="info.status == 1"  @click="cancleBook">
@@ -131,7 +137,8 @@
 				info: {},
 				id: 0,
 				showModal: false,
-				cancelReason: ""
+				cancelReason: "",
+				require: "无"
 			}
 		},
 		onLoad(option) {
@@ -321,6 +328,18 @@
 						this.info = res.data;
 						this.StatusEnumMap = misEnum.UseCarRecordEnumMap;
 						this.showSteps();
+						//设置用车要求
+						this.info.nums.forEach(c=>{
+							if(c.num > 0)
+							{
+								if(this.require == "无")
+								{
+									this.require = c.car_type+c.num+"辆";
+								}else{
+									this.require += "; " + c.car_type+c.num+"辆";
+								}
+							}
+						});
 					} else {
 						uni.showToast({
 							title: res.msg,

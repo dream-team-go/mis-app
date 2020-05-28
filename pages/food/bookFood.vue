@@ -67,10 +67,14 @@
 					</view>
 				</view>
 			</view>
-
+			
 			<view class="cu-form-group">
-				<view class="title">有无回族</view>
-				<switch @change="ChangeHasHz" :class="isHasHz?'checked':''" :checked="isHasHz?true:false"></switch>
+				<view class="title">清真人数</view>
+				<picker @change="ChangeHasHz" :value="hzIndex" :range="hzPeoples">
+					<view class="picker">
+						{{hzIndex>-1?hzPeoples[hzIndex] + "人" : "请选择"}}
+					</view>
+				</picker>
 			</view>
 
 			<view class="cu-form-group">
@@ -224,7 +228,10 @@
 				isShowBottomModal: false,
 				dinings: [],
 				status: 'more',
-				isHasHz: false,
+				hzIndex: 0,
+				hzPeoples: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+					30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50
+				],
 				contentText: {
 					contentdown: '上拉加载更多',
 					contentrefresh: '加载中',
@@ -282,7 +289,7 @@
 				this.time = info.start_time.substring(11, 16);
 				this.hourIndex = getIntervalHour(info.start_time, info.end_time) - 1;
 				this.mealTime = info.meal_time.substring(11, 16);
-				this.isHasHz = info.has_hz == 1;
+				this.hzIndex = info.has_hz;
 				this.para.meal_request = info.meal_request;
 			} else {
 				this.para.user_name = this.userInfo.user.userCnName;
@@ -324,8 +331,8 @@
 				this.isShowBottomModal = false;
 			},
 			ChangeHasHz: function(e) {
-				this.isHasHz = e.detail.value;
-				this.para.has_hz = e.detail.value ? 1 : 0;
+				this.hzIndex = e.detail.value;
+				this.para.has_hz = this.hzPeoples[e.detail.value];
 			},
 			getdiningListData: function() {
 				this.status = 'loading';
