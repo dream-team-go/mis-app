@@ -214,7 +214,7 @@
 				ScreenHeight: this.ScreenHeight,
 				date: getDate(),
 				startDate: getDate(),
-				endDate: getDate(30),
+				endDate: getDate(7),
 				time: getTime(),
 				backDate: getDate(),
 				backTime: getTime(),

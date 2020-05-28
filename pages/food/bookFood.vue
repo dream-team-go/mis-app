@@ -216,7 +216,7 @@
 				ScreenHeight: this.ScreenHeight,
 				date: getDate(),
 				startDate: getDate(),
-				endDate: getDate(30),
+				endDate: getDate(7),
 				time: getTime(),
 				mealTime: getTime(),
 				hourIndex: 0,
@@ -367,9 +367,9 @@
 				this.isShowBottomModal = false;
 			},
 			Submit: function(e) {
-				this.para.start_time = this.start_time;
-				this.para.end_time = this.end_time;
-				this.para.meal_time = this.meal_time;
+				this.para.start_time = this.start_time + ":00";
+				this.para.end_time = this.end_time + ":00";
+				this.para.meal_time = this.meal_time + ":00";
 				//验证数据
 				if (this.para.desc.length <= 0) {
 					uni.showToast({
