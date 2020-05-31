@@ -153,7 +153,7 @@
 		methods: {
 			toEdit: function(e) {
 				uni.navigateTo({
-					url: '../meeting/bookMeeting?para=' + encodeURIComponent(JSON.stringify(this.info))
+					url: '../meeting/selectTime?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			},
 			cancleBook: function(){

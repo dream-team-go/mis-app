@@ -76,6 +76,16 @@
 				</view>
 			</view>
 		</view>
+		
+		<!-- <view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				 维修照片：
+				 <view class="cu-item arrow border solid-top" v-for="(partItem,index) in parts" :key="partItem.id">
+					<image :src="info.vr"></image>
+				</view>
+			</view>
+		</view> -->
+		
 	</view>
 </template>
 

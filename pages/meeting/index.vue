@@ -90,7 +90,7 @@
 		methods: {
 			toBookMeeting: function(){
 				uni.navigateTo({
-					url: "../meeting/bookMeeting",
+					url: "../meeting/selectTime",
 				});
 			}
 		}

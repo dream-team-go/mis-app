@@ -260,6 +260,14 @@
             "path" : "pages/user/signature",
             "style" : {}
         }
+        ,{
+            "path" : "pages/meeting/selectTime",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/meeting/selectRoom",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"
