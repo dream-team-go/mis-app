@@ -2,7 +2,7 @@
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">领导订餐记录</block>
+			<block slot="content">工作餐记录</block>
 		</cu-custom>
 		
 		<view class="bg-white p10">

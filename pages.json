@@ -256,6 +256,10 @@
             "path" : "pages/work/saveLeaderBook",
             "style" : {}
         }
+        ,{
+            "path" : "pages/user/signature",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

@@ -48,7 +48,7 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.attend_leader != null">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 参会领导：
+				<text class="cuIcon-title text-orange"></text> 备注：
 				<text class="text-bold">{{info.attend_leader}}</text>
 			</view>
 		</view>

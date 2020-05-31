@@ -59,7 +59,7 @@
 				</view>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">参会领导</view>
+				<view class="title">备注</view>
 				<input name="input" v-model="para.attend_leader"></input>
 			</view>
 			

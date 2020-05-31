@@ -241,7 +241,7 @@
 					cuIcon: 'picfill',
 					color: 'yellow',
 					badge: 0,
-					name: '领导订餐记录',
+					name: '工作餐记录',
 					url: "../work/leaderBookFoodList",
 					icoSrc: "../../static/common/record-info.png",
 					permissionKey: "dining_lead:manage"
@@ -250,7 +250,7 @@
 				 	cuIcon: 'picfill',
 				 	color: 'yellow',
 				 	badge: 0,
-				 	name: '我的领导订餐',
+				 	name: '我的工作餐',
 					url: "../work/myLeaderBookFoodList",
 				 	icoSrc: "../../static/common/record-info.png",
 					permissionKey: "dining_lead:order"
@@ -259,7 +259,7 @@
 				// 	cuIcon: 'picfill',
 				// 	color: 'yellow',
 				// 	badge: 0,
-				// 	name: '领导订餐统计',
+				// 	name: '工作餐统计',
 				// 	icoSrc: "../../static/common/tongji.png",
 				//	permissionKey: ""
 				// }

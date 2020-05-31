@@ -60,6 +60,30 @@
 					<input name="input" type="number" v-model="para.parts[index].num"></input>
 				</view>
 			</view>
+			
+			<view class="cu-bar bg-white margin-top">
+				<view class="action">
+					维修照片上传
+				</view>
+				<view class="action">
+					{{para.imgs.length}}/5
+				</view>
+			</view>
+			
+			<view class="cu-form-group">
+				<view class="grid col-4 grid-square flex-sub">
+					<view class="bg-img" v-for="(item,index) in para.imgs" :key="index" @tap="ViewImage" :data-url="para.imgs[index]">
+						<image :src="para.imgs[index]" mode="aspectFill"></image>
+						<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
+							<text class='cuIcon-close'></text>
+						</view>
+					</view>
+					<view class="solids" @tap="ChooseImage" v-if="para.imgs.length<5">
+						<text class='cuIcon-cameraadd'></text>
+					</view>
+				</view>
+			</view>
+			
 			<view class="padding flex flex-direction">
 				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
@@ -79,7 +103,8 @@
 				para: {
 					order_code: "",
 					items: [],
-					parts: []
+					parts: [],
+					imgs: []
 				}
 			}
 		},
@@ -158,6 +183,47 @@
 						});
 					}
 				}
+			},
+			ChooseImage: function() {
+				uni.chooseImage({
+					count: 5, //默认9
+					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+					success: (res) => {
+						//上传图片
+						uni.showLoading({
+							title: '上传图片中',
+							mask: false
+						});
+						global.$http.upload('/oos/upload', {
+							name: 'file',
+							filePath: res.tempFilePaths[0]
+						}).then(res => {
+							uni.hideLoading();
+							if (res.status === "0") {
+								this.para.imgs.push(res.data);
+								uni.showToast({
+									icon: 'none',
+									title: '上传成功'
+								});
+							} else {
+								uni.showToast({
+									title: res.msg,
+									icon: 'none'
+								});
+							}
+						}).catch(err => {
+							uni.hideLoading();
+							uni.showToast({
+								title: err.message,
+								icon: 'none'
+							});
+						});
+					}
+				});
+			},
+			DelImg: function(e) {
+				this.para.imgs.splice(e.currentTarget.dataset.index, 1);
+				this.para.img = "";
 			},
 			Submit: function(e) {
 				//验证数据

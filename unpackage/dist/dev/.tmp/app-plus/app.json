@@ -65,7 +65,8 @@
     "pages/work/leaderBookFoodDetail",
     "pages/work/myLeaderBookFoodList",
     "pages/work/myLeaderBookFoodDetail",
-    "pages/work/saveLeaderBook"
+    "pages/work/saveLeaderBook",
+    "pages/user/signature"
   ],
   "window": {
     "navigationStyle": "custom"

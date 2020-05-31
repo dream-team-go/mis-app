@@ -31,7 +31,7 @@
 				<input name="input" v-model="para.start_place"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">用车区域（市内/市外）</view>
+				<view class="title">用车区域（交通补贴区域内/交通补贴区域外）</view>
 				<picker @change="ChangeAreas" :value="areaIndex" :range="areas">
 					<view class="picker">
 						{{areas[areaIndex]}}
@@ -229,7 +229,7 @@
 				carQuantiy:[0, 1, 2, 3, 4, 5],
 				
 				areaIndex: 0,
-				areas:["请选择", "市内", "市外"],
+				areas:["请选择", "交通补贴区域内", "交通补贴区域外"],
 				typeIndex: 0,
 				types:["请选择", "公务用车"],
 				multiArray: [
@@ -274,7 +274,7 @@
 				this.para.people_num = info.people_num;
 				this.peopleIndex = info.people_num - 1;
 				this.para.reason = info.reason;
-				this.areaIndex = info.area == "市内" ? 1 : 2;
+				this.areaIndex = info.area == "交通补贴区域内" ? 1 : 2;
 				this.para.area = info.area;
 				this.para.start_place = info.start_place;
 				this.para.end_place = info.end_place;

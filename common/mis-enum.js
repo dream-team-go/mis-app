@@ -59,7 +59,7 @@ const WarnStatusEnumMap = new Map([
 	[1, "已读"]
 ]);
 
-//领导订餐类型枚举
+//工作餐类型枚举
 const LeaderBookFoodEnumMap = new Map([
 	[1, "午餐"],
 	[2, "晚餐"]

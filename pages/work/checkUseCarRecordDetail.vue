@@ -16,6 +16,12 @@
 				</view>
 			</view>
 		</view>
+		<view class="cu-bar bg-white solid-bottom" v-if="info.status < 0">
+			<view class="action">
+				 不通过原因：
+				<text class="text-red">{{info.cancel_reason}}</text>
+			</view>
+		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 用车事由：
@@ -100,6 +106,30 @@
 			<view class="cancel" @click="verifyFail">审批不通过</view>
 			<view class="pass" @click="verifySuccess">审批通过</view>
 		</view>
+		
+		<view class="cu-modal" :class="showModal?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">审批不通过</view>
+					<view class="action" @tap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view>
+					<view class="cu-form-group" style="text-align: left;">
+						<textarea maxlength="100" @input="fillFailReason" placeholder="不通过原因"></textarea>
+					</view>
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action">
+						<button class="cu-btn line-bluelight text-green" @tap="hideModal">取消</button>
+						<button class="cu-btn bg-linear-blue margin-left" @tap="sureModal">确定</button>
+		
+					</view>
+				</view>
+			</view>
+		</view>
+		
 	</view>
 </template>
 
@@ -112,7 +142,10 @@
 				steps: [],
 				color: '',
 				info: {},
-				require: "无"
+				require: "无",
+				showModal: false,
+				failReason: ""
+				
 			}
 		},
 		onLoad(option) {
@@ -370,8 +403,25 @@
 					complete: () => {}
 				});
 			},
-			verifyFail: function() {
-				this.verify(-1, "");
+			verifyFail:function(){
+				this.showModal = true;
+			},
+			hideModal: function(){
+				this.showModal = false;
+			},
+			fillFailReason: function(e){
+				this.failReason = e.detail.value;
+			},
+			sureModal:function(){
+				if(this.failReason.length <= 0){
+					uni.showToast({
+						title: "请填写不通过原因",
+						icon: 'none'
+					});
+					return;
+				}
+				this.verify(-1, this.failReason)
+				this.showModal = false;
 			}
 		}
 	}

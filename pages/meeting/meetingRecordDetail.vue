@@ -49,7 +49,7 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.attend_leader != null">
 			<view class="action">
-				 参会领导：
+				 备注：
 				<text class="text-bold">{{info.attend_leader}}</text>
 			</view>
 		</view>

@@ -31,6 +31,15 @@
 						<view class="cu-tag round bg-orange light">{{userData.msgCount}}</view>
 					</view>
 				</navigator>
+				<navigator class="cu-item arrow" hover-class="none" url="../user/signature" open-type="navigate">
+					<view class="content">
+						<image src="../../static/common/meeting-record.png" class="ico"></image>
+						<text class="text-grey">电子签名</text>
+					</view>
+				</navigator>
+			</view>
+			
+			<view class="cu-list menu margin-top">
 				<navigator class="cu-item arrow" hover-class="none" url="../user/editPassword" open-type="navigate">
 					<view class="content">
 						<image src="../../static/login/password.png" class="ico"></image>
