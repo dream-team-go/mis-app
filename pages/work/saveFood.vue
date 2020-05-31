@@ -33,9 +33,27 @@
 				</picker>
 			</view>
 
+			<view class="cu-bar bg-white">
+				<view class="action">
+					包房照片上传
+				</view>
+				<view class="action">
+					{{imgList.length}}/1
+				</view>
+			</view>
+			
 			<view class="cu-form-group">
-				<view class="title">VR展示连接</view>
-				<input name="input" v-model="para.vr"></input>
+				<view class="grid col-4 grid-square flex-sub">
+					<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
+						<image :src="imgList[index]" mode="aspectFill"></image>
+						<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
+							<text class='cuIcon-close'></text>
+						</view>
+					</view>
+					<view class="solids" @tap="ChooseImage" v-if="imgList.length<1">
+						<text class='cuIcon-cameraadd'></text>
+					</view>
+				</view>
 			</view>
 
 			<view class="padding flex flex-direction">
@@ -117,6 +135,8 @@
 				this.peopleIndex = info.capacity - 1;
 				this.para.vr = info.vr;
 				this.para.id = info.id;
+				//设置辅助参数
+				this.imgList.push(this.para.vr);
 			}
 		},
 		data() {
@@ -150,7 +170,8 @@
 				},
 				building_id: 0,
 				building_name: "",
-				room_name: ""
+				room_name: "",
+				imgList: []
 			}
 		},
 		methods: {
@@ -239,6 +260,48 @@
 			},
 			hideRoomModal: function(e) {
 				this.isShowRoomModal = false;
+			},
+			ChooseImage: function() {
+				uni.chooseImage({
+					count: 1, //默认9
+					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+					success: (res) => {
+						//上传图片
+						uni.showLoading({
+							title: '上传图片中',
+							mask: false
+						});
+						global.$http.upload('/oos/upload', {
+							name: 'file',
+							filePath: res.tempFilePaths[0]
+						}).then(res => {
+							uni.hideLoading();
+							if (res.status === "0") {
+								this.imgList.push(res.data);
+								this.para.vr = res.data;
+								uni.showToast({
+									icon: 'none',
+									title: '上传成功'
+								});
+							} else {
+								uni.showToast({
+									title: res.msg,
+									icon: 'none'
+								});
+							}
+						}).catch(err => {
+							uni.hideLoading();
+							uni.showToast({
+								title: err.message,
+								icon: 'none'
+							});
+						});
+					}
+				});
+			},
+			DelImg: function(e) {
+				this.imgList.splice(e.currentTarget.dataset.index, 1);
+				this.para.vr = "";
 			},
 			Submit: function(e) {
 				//验证数据

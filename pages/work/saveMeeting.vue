@@ -173,7 +173,7 @@
 				building_id: 0,
 				building_name: "",
 				room_name: "",
-				imgList: [],
+				imgList: []
 			}
 		},
 		methods: {
