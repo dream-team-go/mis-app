@@ -90,7 +90,7 @@
 		methods: {
 			toBookfood: function(){
 				uni.navigateTo({
-					url: "../food/bookFood",
+					url: "../food/selectTime",
 				});
 			}
 		}

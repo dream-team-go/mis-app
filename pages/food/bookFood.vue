@@ -19,7 +19,8 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">日期</view>
-				<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="DateChange">
+				<!-- <picker mode="date" :value="date" :start="startDate" :end="endDate" @change="DateChange"> -->
+				<picker mode="date" :value="date" :start="startDate" :end="endDate">
 					<view class="picker">
 						{{date}}
 					</view>
@@ -27,7 +28,8 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">时间</view>
-				<picker mode="time" :value="time" @change="TimeChange">
+				<!-- <picker mode="time" :value="time" @change="TimeChange"> -->
+				<picker mode="time" :value="time">
 					<view class="picker">
 						{{time}}
 					</view>
@@ -35,7 +37,8 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">用餐时长</view>
-				<picker @change="ChangeHours" :value="hourIndex" :range="hours">
+				<!-- <picker @change="ChangeHours" :value="hourIndex" :range="hours"> -->
+				<picker :value="hourIndex" :range="hours">
 					<view class="picker">
 						{{hourIndex>-1?hours[hourIndex] + "小时" : "请选择"}}
 					</view>
@@ -61,7 +64,8 @@
 
 			<view class="cu-form-group">
 				<view class="title">包房</view>
-				<view class="modal-group" @tap="showBottomModal" data-target="Modal">
+				<!-- <view class="modal-group" @tap="showBottomModal" data-target="Modal"> -->
+				<view class="modal-group" data-target="Modal">
 					<view class="picker">
 						{{ para.room_number.length > 0 ? (para.room_number + '('+para.building_name+')') : '请选择' }}
 					</view>
@@ -269,9 +273,15 @@
 			}
 		},
 		onLoad(option) {
-			if (option.para) {
+			var info = JSON.parse(decodeURIComponent(option.para));
+			this.date = info.start_time.substring(0, 10);
+			this.time = info.start_time.substring(11, 16);
+			this.hourIndex = getIntervalHour(info.start_time, info.end_time) - 1;
+			this.para.dining_id = info.dining_id;
+			this.para.building_name = info.building_name;
+			this.para.room_number = info.room_number;
+			if (info.id > 0) {
 				this.isAdd = false;
-				var info = JSON.parse(decodeURIComponent(option.para));
 				this.para.id = info.id;
 				this.para.desc = info.desc;
 				this.para.user_name = info.user_name;
@@ -280,14 +290,8 @@
 				this.peopleIndex = info.people_num - 1;
 				this.para.receive_people = info.receive_people;
 				this.para.lender = info.lender;
-				this.para.dining_id = info.dining_id;
-				this.para.building_name = info.building_name;
 				this.para.meal_spec = info.meal_spec;
-				this.para.room_number = info.room_number;
 				this.para.has_hz = info.has_hz;
-				this.date = info.start_time.substring(0, 10);
-				this.time = info.start_time.substring(11, 16);
-				this.hourIndex = getIntervalHour(info.start_time, info.end_time) - 1;
 				this.mealTime = info.meal_time.substring(11, 16);
 				this.hzIndex = info.has_hz;
 				this.para.meal_request = info.meal_request;
@@ -421,7 +425,7 @@
 							icon: 'none',
 							title: '提交成功'
 						});
-						uni.navigateBack();
+						uni.navigateBack({delta: 3});
 					} else {
 						uni.showToast({
 							title: res.msg,

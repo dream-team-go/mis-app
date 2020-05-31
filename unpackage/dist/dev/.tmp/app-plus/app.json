@@ -68,7 +68,9 @@
     "pages/work/saveLeaderBook",
     "pages/user/signature",
     "pages/meeting/selectTime",
-    "pages/meeting/selectRoom"
+    "pages/meeting/selectRoom",
+    "pages/food/selectTime",
+    "pages/food/selectRoom"
   ],
   "window": {
     "navigationStyle": "custom"

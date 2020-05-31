@@ -150,11 +150,6 @@
 				uni.navigateTo({
 					url: '../meeting/bookMeeting?para=' + encodeURIComponent(JSON.stringify(this.para))
 				});
-			},
-			toAdd: function(e){
-				uni.navigateTo({
-					url:'../work/saveMeeting'
-				});
 			}
 		}
 	}
