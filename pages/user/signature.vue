@@ -35,10 +35,10 @@
 			return {
 				data: null,
 				signImage: '',
+				oldImage: '',
 				isEnd: false // 是否签名
 			}
 		},
-
 		methods: {
 			overSign: function() {
 				if (this.isEnd) {
@@ -54,25 +54,42 @@
 					});
 					uni.canvasToTempFilePath({
 						canvasId: 'firstCanvas',
-
 						success: function(res) {
 							//上传图片
 							uni.showLoading({
-								title: '上传图片中',
+								title: '保存中',
 								mask: false
 							});
 							global.$http.upload('/oos/upload', {
 								name: 'file',
 								filePath: res.tempFilePath
 							}).then(res => {
-								uni.hideLoading();
 								if (res.status === "0") {
 									_that.signImage = res.data;
-									uni.showToast({
-										icon: 'none',
-										title: '保存成功'
+									global.$http.post('/core/user/addSign', {
+										sign: _that.signImage
+									}).then(re => {
+										uni.hideLoading();
+										if (re.status === "0") {
+											uni.showToast({
+												icon: 'none',
+												title: '保存成功'
+											});
+										} else {
+											uni.showToast({
+												title: re.msg,
+												icon: 'none'
+											});
+										}
+									}).catch(err => {
+										uni.hideLoading();
+										uni.showToast({
+											title: err.message,
+											icon: 'none'
+										});
 									});
 								} else {
+									uni.hideLoading();
 									uni.showToast({
 										title: res.msg,
 										icon: 'none'
@@ -85,9 +102,6 @@
 									icon: 'none'
 								});
 							});
-							//打印图片路径
-							//设置图片
-							//_that.signImage = res.tempFilePath
 						}
 					});
 				} else {
@@ -185,23 +199,48 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
-			_that = this
+			_that = this;
 			//获得Canvas的上下文
-			content = wx.createCanvasContext('firstCanvas')
+			content = wx.createCanvasContext('firstCanvas');
 			//设置线的颜色
-			content.setStrokeStyle("#000")
+			content.setStrokeStyle("#000");
 			//设置线的宽度
-			content.setLineWidth(5)
+			content.setLineWidth(5);
 			//设置线两端端点样式更加圆润
-			content.setLineCap('round')
+			content.setLineCap('round');
 			//设置两条线连接处更加圆润
-			content.setLineJoin('round')
+			content.setLineJoin('round');
 			
-			const query = uni.createSelectorQuery().in(this);
-			query.select('.firstCanvas').boundingClientRect(data => {
-				content.drawImage("http://mis-dream.oos-cn.ctyunapi.cn/20200530212413525441d.png", 0, 0, data.width, data.height);
-				content.draw();
-			}).exec();
+			uni.showLoading({
+				title: '加载中',
+				mask: false
+			});
+			global.$http.post('/core/user/getSign', {
+				
+			}).then(res => {
+				uni.hideLoading();
+				if (res.status === "0") {
+					if(res.data && res.data.length > 0){
+						const query = uni.createSelectorQuery().in(_that);
+						query.select('.firstCanvas').boundingClientRect(data => {
+							content.drawImage(res.data, 0, 0, data.width, data.height);
+							content.draw();
+						}).exec();
+					}
+					
+				} else {
+					uni.showToast({
+						title: res.msg,
+						icon: 'none'
+					});
+				}
+			}).catch(err => {
+				uni.hideLoading();
+				uni.showToast({
+					title: err.message,
+					icon: 'none'
+				});
+			});
 		},
 
 	}
