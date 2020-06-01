@@ -139,6 +139,11 @@
 							});
 						});
 						this.partIndex = res.data.parts.length;
+						
+						this.para.imgs.length = 0;
+						res.data.imgs.forEach(c => {
+							this.para.imgs.push(c);
+						});
 					} else {
 						uni.showToast({
 							title: res.msg,

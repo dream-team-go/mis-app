@@ -77,14 +77,18 @@
 			</view>
 		</view>
 		
-		<!-- <view class="cu-bar bg-white solid-bottom">
+		<view class="cu-bar bg-white solid-bottom margin-top">
 			<view class="action">
-				 维修照片：
-				 <view class="cu-item arrow border solid-top" v-for="(partItem,index) in parts" :key="partItem.id">
-					<image :src="info.vr"></image>
+				<text class="cuIcon-title text-orange"></text> 维修照片
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom" v-for="(item,index) in imgs" :key="item.id">
+			<view class="action">
+				 <view class="cu-item arrow border solid-top">
+					<image :src="item"></image>
 				</view>
 			</view>
-		</view> -->
+		</view>
 		
 	</view>
 </template>
@@ -95,7 +99,8 @@
 			return {
 				info: {},
 				items: [],
-				parts: []
+				parts: [],
+				imgs: []
 			}
 		},
 		onLoad(option) {
@@ -120,6 +125,10 @@
 							num: c.num,
 							price: c.price
 						});
+					});
+					
+					res.data.imgs.forEach(c => {
+						this.imgs.push(c);
 					});
 				} else {
 					uni.showToast({
