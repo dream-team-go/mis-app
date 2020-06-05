@@ -1,283 +1,319 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {}
-		},{
+    "pages" : [
+        //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+        {
+            "path" : "pages/index/index",
+            "style" : {}
+        },
+        {
             "path" : "pages/index/home",
             "style" : {}
-        },{
-		    "path" : "pages/account/login",
-		    "style" : {}
-		},{
-		    "path" : "pages/account/register",
-		    "style" : {}
-		},{
-		    "path" : "pages/account/findPassword",
-		    "style" : {}
-		}
-        ,{
+        },
+        {
+            "path" : "pages/account/login",
+            "style" : {}
+        },
+        {
+            "path" : "pages/account/register",
+            "style" : {}
+        },
+        {
+            "path" : "pages/account/findPassword",
+            "style" : {}
+        },
+        {
             "path" : "pages/user/editPassword",
             "style" : {}
-        }
-        ,{
+        },
+        {
+            "path" : "pages/meeting/index",
+            "style" : {}
+        },
+        {
             "path" : "pages/meeting/myMeetingRecordList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/meeting/bookMeeting",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/meetingList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/meeting/meetingRecordDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/meetingRecordList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/meetingRecordDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/food/bookFood",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/food/myFoodRecordList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/food/foodRecordDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/foodRecordList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/foodRecordDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/saveMeeting",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/meetingDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/saveFood",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/foodList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/foodDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/carList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/saveCar",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/driverList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/driverDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/useCarRecordList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/carDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
+            "path" : "pages/car/index",
+            "style" : {}
+        },
+        {
             "path" : "pages/car/bookCar",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/car/myCarRecordList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/car/carRecordDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/useCarRecordDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/checkUseCarRecordList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/checkUseCarRecordDetail",
             "style" : {}
-        },{
+        },
+        {
             "path" : "pages/work/dispatchUseCarRecordList",
             "style" : {}
-        },{
+        },
+        {
             "path" : "pages/work/dispatchUseCarRecordDetail",
             "style" : {}
-        },{
+        },
+        {
             "path" : "pages/work/dispatchUseCar",
             "style" : {}
-        },{
+        },
+        {
             "path" : "pages/work/dispatchUseCarDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/dispatchCarOrderList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/dispatchCarOrderDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/settleDispatchCar",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/car/dispatchUseCarDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/useCarDispatchDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/repairRecordList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/repairRecordDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/saveApplyRepair",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/myRepairRecordList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/myRepairRecordDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/repairOrderDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/saveRepairOrder",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/foremanRepairRecordList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/foremanRepairRecordDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/directorRepairRecordList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/directorRepairRecordDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/secretaryRepairRecordList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/secretaryRepairRecordDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/wxcRepairRecordList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/wxcRepairRecordDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/repairOrderDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/user/warnList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/user/warnDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/leaderBookFoodList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/leaderBookFoodDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/myLeaderBookFoodList",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/myLeaderBookFoodDetail",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/work/saveLeaderBook",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/user/signature",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/meeting/selectTime",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/meeting/selectRoom",
             "style" : {}
-        }
-        ,{
+        },
+        {
+            "path" : "pages/food/index",
+            "style" : {}
+        },
+        {
             "path" : "pages/food/selectTime",
             "style" : {}
-        }
-        ,{
+        },
+        {
             "path" : "pages/food/selectRoom",
+            "style" : {}
+        },
+        {
+            "path" : "pages/index/main",
             "style" : {}
         }
     ],
-	"globalStyle": {
-		"navigationStyle": "custom"
-	}
+    "globalStyle" : {
+        "navigationStyle" : "custom"
+    },
+    "condition" : {
+        //模式配置，仅开发期间生效
+        "current" : 0, //当前激活的模式(list 的索引项)
+        "list" : [
+            {
+                "name" : "", //模式名称
+                "path" : "", //启动页面，必选
+                "query" : "" //启动参数，在页面的onLoad函数里面得到
+            }
+        ]
+    }
 }

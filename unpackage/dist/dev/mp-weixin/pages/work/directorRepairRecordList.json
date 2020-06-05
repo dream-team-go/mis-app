@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "uni-load-more": "/colorui/components/uni-load-more"
+  }
+}

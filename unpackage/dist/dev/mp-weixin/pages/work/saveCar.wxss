@@ -1,0 +1,45 @@
+
+.list-modal {
+		z-index: 10000;
+}
+.list-modal .cu-dialog {
+		height: 100vh;
+}
+.list-modal.cu-modal.show #list-view {
+		overflow-x: hidden;
+		overflow-y: scroll;
+		pointer-events: auto;
+}
+.cu-form-group .modal-group {
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		        flex: 1;
+		padding-right: 40rpx;
+		overflow: hidden;
+		position: relative;
+}
+.cu-form-group .modal-group .picker {
+		line-height: 100rpx;
+		font-size: 28rpx;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		width: 100%;
+		text-align: right;
+}
+.cu-form-group .modal-group::after {
+		font-family: cuIcon;
+		display: block;
+		content: "\E6A3";
+		position: absolute;
+		font-size: 34rpx;
+		color: #8799a3;
+		line-height: 100rpx;
+		width: 60rpx;
+		text-align: center;
+		top: 0;
+		bottom: 0;
+		right: -20rpx;
+		margin: auto;
+}
+

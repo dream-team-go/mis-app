@@ -70,7 +70,8 @@
     "pages/meeting/selectTime",
     "pages/meeting/selectRoom",
     "pages/food/selectTime",
-    "pages/food/selectRoom"
+    "pages/food/selectRoom",
+    "pages/index/uniSwiperDot/uniSwiperDot"
   ],
   "window": {
     "navigationStyle": "custom"

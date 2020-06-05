@@ -3,10 +3,11 @@
 		<car v-if="PageCur=='car'" :carData="carData"></car>
 		<meeting v-if="PageCur=='meeting'" :meetingData="meetingData"></meeting>
 		<food v-if="PageCur=='food'" :foodData="foodData"></food>
+		<main-page v-if="PageCur=='main'"></main-page>
 		<user v-if="PageCur=='user'" :userData="userData"></user>
 		<work v-if="PageCur=='work'"></work>
 		<view class="cu-bar tabbar bg-white shadow foot">
-			<view class="action" @click="NavChange" data-cur="car" v-if="CarPermission">
+			<!-- <view class="action" @click="NavChange" data-cur="car" v-if="CarPermission">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/car' + [PageCur=='car'?'_cur':''] + '.png'"></image>
 				</view>
@@ -23,6 +24,12 @@
 					<image :src="'/static/tabbar/food' + [PageCur == 'food'?'_cur':''] + '.png'"></image>
 				</view>
 				<view :class="PageCur=='food'?'text-bluelight':'text-gray'">订餐</view>
+			</view> -->
+			<view class="action" @click="NavChange" data-cur="main">
+				<view class='cuIcon-cu-image'>
+					<image :src="'/static/tabbar/main' + [PageCur == 'main'?'_cur':''] + '.png'"></image>
+				</view>
+				<view :class="PageCur=='main'?'text-bluelight':'text-gray'">首页</view>
 			</view>
 			<view class="action" @click="NavChange" data-cur="work" v-if="WorkPermission">
 				<view class='cuIcon-cu-image'>
@@ -45,7 +52,11 @@
 		mapState
 	} from 'vuex';
 	import misEnum from '../../common/mis-enum.js'; 
+	import MainPage from './main.vue'
 	export default {
+		components: {
+			MainPage
+		},
 		data() {
 			return {
 				PageCur: "",
@@ -112,17 +123,17 @@
 			if(this.userInfo.key.includes("use_car:apply")){
 				this.CarPermission = true;
 				if(!this.PageCur)
-					this.PageCur = "car";
+					this.PageCur = "main";
 			}
 			if(this.userInfo.key.includes("meeting:order")){
 				this.MeetingPermission = true;
 				if(!this.PageCur)
-					this.PageCur = "meeting";
+					this.PageCur = "main";
 			}
 			if(this.userInfo.key.includes("dining:order")){
 				this.FoodPermission = true;
 				if(!this.PageCur)
-					this.PageCur = "food";
+					this.PageCur = "main";
 			}
 			//设置工作台权限
 			if(this.userInfo.key.includes("dining:manage") || this.userInfo.key.includes("dining:list") || 

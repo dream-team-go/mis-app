@@ -1,0 +1,85 @@
+.main-page {
+  min-height: 100vh;
+  position: relative;
+}
+.main-page .swiper-box {
+    position: absolute;
+    top: 0;
+    left: -30vw;
+    width: 160vw;
+    overflow: hidden;
+    border-radius: 0 0 50% 50%;
+}
+.main-page .uni-swiper__dots-box {
+    left: 38vw;
+    bottom: 70px;
+    right: auto;
+}
+.main-page .swiper {
+    margin: 0 auto;
+    width: 100vw;
+    height: 500rpx;
+}
+.main-page .swiper .swiper-item .swiper-img {
+      height: 500rpx;
+}
+.main-page .swiper .uni-swiper-dots-horizontal,
+    .main-page .swiper .wx-swiper-dots-horizontal {
+      left: 8vw;
+      bottom: 140rpx;
+      -webkit-transform: translate(0);
+              transform: translate(0);
+}
+.main-page .swiper .uni-swiper-dot {
+      border-radius: 8px;
+      -webkit-transition: all .3s;
+      transition: all .3s;
+}
+.main-page .swiper .uni-swiper-dot-active {
+      padding: 0 10rpx;
+      border-radius: 8rpx;
+}
+.main-page .nav-bar {
+    position: absolute;
+    top: 380rpx;
+    height: 160rpx;
+    width: 90vw;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+    padding: 20rpx 60rpx;
+    background-color: #fff;
+    border-radius: 8rpx;
+    box-shadow: 0px 8rpx 16rpx rgba(0, 0, 0, 0.15);
+}
+.main-page .nav-bar .nav-item {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+              align-items: center;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+              justify-content: space-between;
+}
+.main-page .nav-bar .nav-item .nav-img {
+        width: 80rpx;
+        height: 80rpx;
+        object-fit: contain;
+}
+.main-page .nav-bar .nav-item .name {
+        font-size: 12px;
+        text-align: center;
+}
+
