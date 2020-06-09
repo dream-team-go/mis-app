@@ -43,10 +43,15 @@
 				</picker>
 			</view>
 			
-			<view class="cu-form-group">
-				<view class="title">是否司机</view>
-				<switch @change="ChangeIsDriver" :class="isDriver?'checked':''" :checked="isDriver?true:false"></switch>
+			<view class="cu-form-group" v-show="para.org_id.length > 0">
+				<view class="title">职位</view>
+				<picker @change="JobChange" :value="jobIndex" :range="jobs" range-key="job_name">
+					<view class="picker">
+						{{jobIndex>-1?jobs[oIndex].job_name:'请选择'}}
+					</view>
+				</picker>
 			</view>
+			
 			<view class="cu-form-group" v-show="isDriver">
 				<view class="title">驾照类型</view>
 				<picker @change="ChangeDriverType" :value="dtIndex" :range="driverTypes">
@@ -107,7 +112,10 @@
 		data() {
 			return {
 				sysIndex: 0,
-				sysOrganizations: [],
+				sysOrganizations: [{
+					org_name: "请选择",
+					org_id: ""
+				}],
 				oIndex: 0,
 				organizations: [{
 					org_name: "请选择",
@@ -123,11 +131,17 @@
 					name: "请选择",
 					id: 0
 				}],
+				jobIndex: 0,
+				jobs:[{
+					job_name: "请选择",
+					job_id: 0
+				}],
 				para: {
 					system_org_id: "",
 					org_id: "",
 					department_id: 0,
 					section_id: 0,
+					job_id: 0,
 					username: "",
 					password: "",
 					rPassword: "",
@@ -232,6 +246,10 @@
 						name: "请选择",
 						id: 0
 					}];
+					this.jobs = [{
+						job_name: "请选择",
+						job_id: 0
+					}];
 					this.dIndex = 0;
 					if (e.detail.value > 0) {
 						//获取部门数据
@@ -246,6 +264,29 @@
 							if (res.status === "0") {
 								for (var i = 0; i < res.data.list.length; i++) {
 									this.departments.push(res.data.list[i]);
+								}
+							} else {
+								uni.showToast({
+									title: res.msg,
+									icon: 'none'
+								});
+							}
+						}).catch(err => {
+							uni.hideLoading();
+							uni.showToast({
+								title: err.message,
+								icon: 'none'
+							});
+						});
+						//获取职务数据
+						global.$http.post('/core/organization/getJobByOrg', {
+							params: {
+								org_id: this.para.org_id
+							},
+						}).then(res => {
+							if (res.status === "0") {
+								for (var i = 0; i < res.data.list.length; i++) {
+									this.jobs.push(res.data.list[i]);
 								}
 							} else {
 								uni.showToast({
@@ -308,6 +349,10 @@
 				this.para.section_id = this.sections[e.detail.value].id;
 				this.sIndex = e.detail.value;
 			},
+			JobChange: function(e) {
+				this.para.job_id = this.jobs[e.detail.value].job_id;
+				this.isDriver = this.jobs[e.detail.value].job_name == "司机";
+			},
 			SendCode: function(e) {
 				this.disabled = true;
 				if (this.para.username.length <= 0) {
@@ -354,10 +399,6 @@
 			ChangeDriveAge: function(e){
 				this.para.drive_age = e.detail.value;
 			},
-			ChangeIsDriver: function(e){
-				this.isDriver =  e.detail.value;
-				this.para.is_driver = e.detail.value ? 1 : 0;
-			},
 			ChangeDriverSex: function(e){
 				this.driverSex = e.detail.value;
 				this.para.sex = e.detail.value ? 1 : 2;
@@ -393,6 +434,13 @@
 					uni.showToast({
 						icon: 'none',
 						title: '请选择所属科室'
+					});
+					return;
+				}
+				if(this.para.job_id<=0){
+					uni.showToast({
+						icon: 'none',
+						title: '请选择职务'
 					});
 					return;
 				}
