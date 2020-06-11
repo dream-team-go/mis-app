@@ -1,17 +1,22 @@
 <template>
 	<view>
 		<view class="main-page">
-			<view class="swiper-box">
-				<swiper class="swiper" indicator-dots indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#fff" circular autoplay :interval="3000" :duration="500" @change="change">
-					<swiper-item v-for="(item, index) in imgs" :key="index">
-						<view class="swiper-item">
-							<image class="swiper-img" mode="aspectFill" :src="item"></image>
-						</view>
-					</swiper-item>
-				</swiper>
-			</view>
-			<view class="blank">
-				
+			<swiper class="swiper" indicator-dots indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#fff" circular autoplay :interval="3000" :duration="500" @change="change">
+				<swiper-item v-for="(item, index) in imgs" :key="index">
+					<view class="swiper-item">
+						<image class="swiper-img" mode="aspectFill" :src="item"></image>
+					</view>
+				</swiper-item>
+			</swiper>
+			<view class="grid-box">
+				<view class="grid-item" v-for="(item, index) in grids" :key="index" @click="goPage(item)">
+					<view class="grid-icon">
+						<image height="160rpx" width="160rpx" :src="item.img" mode="aspectFill"></image>
+					</view>
+					<view class="grid-name">
+						{{ item.name }}
+					</view>
+				</view>
 			</view>
 			<view class="nav-bar">
 				<view class="nav-item" v-for="(item, index) in navList" :key="index" @click="goPage(item)">
@@ -20,6 +25,25 @@
 						{{ item.name }}
 					</view>
 				</view>
+			</view>
+			<view class="ads-box">
+				通知：XXXXXXXXXXXXXXX
+			</view>
+			<view class="notice-box">
+				<view class="notice-left">
+					<view class="notice-left-top">
+						<image style="width: 332rpx;height: 136rpx;" src="/static/notice1.png" mode="aspectFit"></image>
+					</view>
+					<view class="notice-left-bottom">
+						<image style="width: 332rpx;height: 136rpx;" src="/static/notice2.png" mode="aspectFit"></image>
+					</view>
+				</view>
+				<view class="notice-right">
+					<image style="width: 332rpx;height: 292rpx;" src="/static/notice3.png" mode="aspectFit"></image>
+				</view>
+			</view>
+			<view class="blank">
+				
 			</view>
 		</view>
 	</view>
@@ -52,17 +76,58 @@ export default {
 				{
 					img: '/static/tabbar/car_cur.png',
 					name: '用车',
-					to: '../car/index',
+					to: '/pages/car/index',
 				},
 				{
 					img: '/static/tabbar/meeting_cur.png',
 					name: '会务',
-					to: '../meeingt/index',
+					to: '/pages/meeting/index',
 				},
 				{
 					img: '/static/tabbar/food_cur.png',
 					name: '订餐',
-					to: '../food/index',
+					to: '/pages/food/index',
+				}
+			],
+			grids: [
+				{
+					img: '/static/main/bangongyongfang.png',
+					name: '办公用房',
+					to: ''
+				},
+				{
+					img: '/static/main/zhouzhuanfang.png',
+					name: '周转房',
+					to: ''
+				},
+				{
+					img: '/static/main/gudingzichanguanli.png',
+					name: '固定资产',
+					to: ''
+				},
+				{
+					img: '/static/main/jiedaishenpi.png',
+					name: '接待审批',
+					to: ''
+				},{
+					img: '/static/main/chebian.png',
+					name: '车编',
+					to: ''
+				},
+				{
+					img: '/static/main/wuguan.png',
+					name: '物管',
+					to: ''
+				},
+				{
+					img: '/static/main/tongxunlu.png',
+					name: '通讯录',
+					to: ''
+				},
+				{
+					img: '/static/main/caiwu.png',
+					name: '财务',
+					to: ''
 				}
 			]
 		}
@@ -72,7 +137,13 @@ export default {
 			this.current = e.detail.current;
 		},
 		goPage (item) {
-			console.log(item)
+			if (!item.to) {
+				uni.showToast({
+					title: '敬请期待',
+					icon: 'none'
+				})
+				return
+			}
 			uni.navigateTo({
 				url: item.to
 			})
@@ -88,27 +159,6 @@ export default {
 		overflow: hidden;
 		position: relative;
 		
-		.blank {
-			height: 500rpx;
-		}
-		
-		.test {
-			height: 100rpx;
-			width: 100rpx;
-			background-color: #f00;
-			border-radius: 50%;
-			overflow: hidden;
-		}
-		
-		.swiper-box {
-			position: absolute;
-			top: 0;
-			left: -30vw;
-			width: 160vw;
-			overflow: hidden;
-			border-radius: 0 0 50% 50%;
-		}
-		
 		/deep/ .uni-swiper__dots-box {
 			left: 38vw;
 			bottom: 70px;
@@ -120,6 +170,7 @@ export default {
 			width: 100vw;
 			height: 500rpx;
 			
+			
 			.swiper-item {
 				.swiper-img {
 					height: 500rpx;
@@ -128,7 +179,7 @@ export default {
 			
 			/deep/ .uni-swiper-dots {
 				left: 8vw;
-				bottom: 140rpx;
+				bottom: 100rpx;
 				transform: translate(0);
 			}
 			
@@ -144,9 +195,9 @@ export default {
 		
 		.nav-bar {
 			position: absolute;
-			top: 380rpx;
+			top: 420rpx;
 			height: 160rpx;
-			width: 90vw;
+			width: calc(100vw - 64rpx);
 			left: 50%;
 			transform: translateX(-50%);
 			display: flex;
@@ -169,10 +220,83 @@ export default {
 				}
 				
 				.name {
-					font-size: 12px;
+					font-size: 14px;
 					text-align: center;
 				}
 			}
+		}
+		
+		.grid-box {
+			padding-top: 100rpx;
+			display: flex;
+			justify-content: space-around;
+			flex-wrap: wrap;
+			background-color: #fff;
+			
+			.grid-item {
+				width: 160rpx;
+				height: 140rpx;
+				margin: 10rpx;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+
+				.grid-icon {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					
+					uni-image {
+						width: 48rpx;
+						height: 48rpx;
+					}
+				}
+				
+				.grid-name {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					font-size: 24rpx;
+					margin: 16rpx 0;
+				}
+			}
+		}
+		
+		.ads-box {
+			margin: 32rpx;
+			border-radius: 16rpx;
+			padding: 20rpx;
+			background-color: #fff;
+			color: #44d7b6;
+		}
+		
+		.notice-box {
+			width: 100vw;
+			padding: 0 32rpx;
+			display: flex;
+			justify-content: space-between;
+			
+			.notice-left {
+				width: 332rpx;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				
+				.notice-left-top, 
+				.notice-left-bottom {
+					border-radius: 20rpx;
+					overflow: hidden;
+				}
+			}
+			
+			.notice-right {
+				border-radius: 20rpx;
+				overflow: hidden;
+			}
+		}
+		
+		.blank {
+			height: 120rpx;
 		}
 	}
 </style>
