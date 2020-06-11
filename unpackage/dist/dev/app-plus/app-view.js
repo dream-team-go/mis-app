@@ -2113,22 +2113,48 @@ var render = function() {
           ),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(21, "sc"), attrs: { _i: 21 } },
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm._$g(21, "v-show"),
+                  expression: "_$g(21,'v-show')"
+                }
+              ],
+              staticClass: _vm._$g(21, "sc"),
+              attrs: { _i: 21 }
+            },
             [
               _c(
                 "v-uni-view",
                 { staticClass: _vm._$g(22, "sc"), attrs: { _i: 22 } },
-                [_vm._v("是否司机")]
+                [_vm._v("职位")]
               ),
-              _c("v-uni-switch", {
-                class: _vm._$g(23, "c"),
-                attrs: { checked: _vm._$g(23, "a-checked"), _i: 23 },
-                on: {
-                  change: function($event) {
-                    return _vm.$handleViewEvent($event)
+              _c(
+                "v-uni-picker",
+                {
+                  attrs: {
+                    value: _vm._$g(23, "a-value"),
+                    range: _vm._$g(23, "a-range"),
+                    "range-key": "job_name",
+                    _i: 23
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.$handleViewEvent($event)
+                    }
                   }
-                }
-              })
+                },
+                [
+                  _c(
+                    "v-uni-view",
+                    { staticClass: _vm._$g(24, "sc"), attrs: { _i: 24 } },
+                    [_vm._v(_vm._$g(24, "t0-0"))]
+                  )
+                ],
+                1
+              )
             ],
             1
           ),
@@ -2139,26 +2165,26 @@ var render = function() {
                 {
                   name: "show",
                   rawName: "v-show",
-                  value: _vm._$g(24, "v-show"),
-                  expression: "_$g(24,'v-show')"
+                  value: _vm._$g(25, "v-show"),
+                  expression: "_$g(25,'v-show')"
                 }
               ],
-              staticClass: _vm._$g(24, "sc"),
-              attrs: { _i: 24 }
+              staticClass: _vm._$g(25, "sc"),
+              attrs: { _i: 25 }
             },
             [
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(25, "sc"), attrs: { _i: 25 } },
+                { staticClass: _vm._$g(26, "sc"), attrs: { _i: 26 } },
                 [_vm._v("驾照类型")]
               ),
               _c(
                 "v-uni-picker",
                 {
                   attrs: {
-                    value: _vm._$g(26, "a-value"),
-                    range: _vm._$g(26, "a-range"),
-                    _i: 26
+                    value: _vm._$g(27, "a-value"),
+                    range: _vm._$g(27, "a-range"),
+                    _i: 27
                   },
                   on: {
                     change: function($event) {
@@ -2169,8 +2195,8 @@ var render = function() {
                 [
                   _c(
                     "v-uni-view",
-                    { staticClass: _vm._$g(27, "sc"), attrs: { _i: 27 } },
-                    [_vm._v(_vm._$g(27, "t0-0"))]
+                    { staticClass: _vm._$g(28, "sc"), attrs: { _i: 28 } },
+                    [_vm._v(_vm._$g(28, "t0-0"))]
                   )
                 ],
                 1
@@ -2185,26 +2211,26 @@ var render = function() {
                 {
                   name: "show",
                   rawName: "v-show",
-                  value: _vm._$g(28, "v-show"),
-                  expression: "_$g(28,'v-show')"
+                  value: _vm._$g(29, "v-show"),
+                  expression: "_$g(29,'v-show')"
                 }
               ],
-              staticClass: _vm._$g(28, "sc"),
-              attrs: { _i: 28 }
+              staticClass: _vm._$g(29, "sc"),
+              attrs: { _i: 29 }
             },
             [
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(29, "sc"), attrs: { _i: 29 } },
+                { staticClass: _vm._$g(30, "sc"), attrs: { _i: 30 } },
                 [_vm._v("驾龄")]
               ),
               _c(
                 "v-uni-picker",
                 {
                   attrs: {
-                    value: _vm._$g(30, "a-value"),
-                    range: _vm._$g(30, "a-range"),
-                    _i: 30
+                    value: _vm._$g(31, "a-value"),
+                    range: _vm._$g(31, "a-range"),
+                    _i: 31
                   },
                   on: {
                     change: function($event) {
@@ -2215,8 +2241,8 @@ var render = function() {
                 [
                   _c(
                     "v-uni-view",
-                    { staticClass: _vm._$g(31, "sc"), attrs: { _i: 31 } },
-                    [_vm._v(_vm._$g(31, "t0-0"))]
+                    { staticClass: _vm._$g(32, "sc"), attrs: { _i: 32 } },
+                    [_vm._v(_vm._$g(32, "t0-0"))]
                   )
                 ],
                 1
@@ -2231,23 +2257,23 @@ var render = function() {
                 {
                   name: "show",
                   rawName: "v-show",
-                  value: _vm._$g(32, "v-show"),
-                  expression: "_$g(32,'v-show')"
+                  value: _vm._$g(33, "v-show"),
+                  expression: "_$g(33,'v-show')"
                 }
               ],
-              staticClass: _vm._$g(32, "sc"),
-              attrs: { _i: 32 }
+              staticClass: _vm._$g(33, "sc"),
+              attrs: { _i: 33 }
             },
             [
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(33, "sc"), attrs: { _i: 33 } },
+                { staticClass: _vm._$g(34, "sc"), attrs: { _i: 34 } },
                 [_vm._v("性别")]
               ),
               _c("v-uni-switch", {
-                staticClass: _vm._$g(34, "sc"),
-                class: _vm._$g(34, "c"),
-                attrs: { checked: _vm._$g(34, "a-checked"), _i: 34 },
+                staticClass: _vm._$g(35, "sc"),
+                class: _vm._$g(35, "c"),
+                attrs: { checked: _vm._$g(35, "a-checked"), _i: 35 },
                 on: {
                   change: function($event) {
                     return _vm.$handleViewEvent($event)
@@ -2264,25 +2290,25 @@ var render = function() {
                 {
                   name: "show",
                   rawName: "v-show",
-                  value: _vm._$g(35, "v-show"),
-                  expression: "_$g(35,'v-show')"
+                  value: _vm._$g(36, "v-show"),
+                  expression: "_$g(36,'v-show')"
                 }
               ],
-              staticClass: _vm._$g(35, "sc"),
-              attrs: { _i: 35 }
+              staticClass: _vm._$g(36, "sc"),
+              attrs: { _i: 36 }
             },
             [
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(36, "sc"), attrs: { _i: 36 } },
+                { staticClass: _vm._$g(37, "sc"), attrs: { _i: 37 } },
                 [_vm._v("身份证号")]
               ),
               _c("v-uni-input", {
-                attrs: { name: "input", _i: 37 },
+                attrs: { name: "input", _i: 38 },
                 model: {
-                  value: _vm._$g(37, "v-model"),
+                  value: _vm._$g(38, "v-model"),
                   callback: function($$v) {
-                    _vm.$handleVModelEvent(37, $$v)
+                    _vm.$handleVModelEvent(38, $$v)
                   },
                   expression: "para.id_card"
                 }
@@ -2292,19 +2318,19 @@ var render = function() {
           ),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(38, "sc"), attrs: { _i: 38 } },
+            { staticClass: _vm._$g(39, "sc"), attrs: { _i: 39 } },
             [
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(39, "sc"), attrs: { _i: 39 } },
+                { staticClass: _vm._$g(40, "sc"), attrs: { _i: 40 } },
                 [_vm._v("手机号")]
               ),
               _c("v-uni-input", {
-                attrs: { name: "input", _i: 40 },
+                attrs: { name: "input", _i: 41 },
                 model: {
-                  value: _vm._$g(40, "v-model"),
+                  value: _vm._$g(41, "v-model"),
                   callback: function($$v) {
-                    _vm.$handleVModelEvent(40, $$v)
+                    _vm.$handleVModelEvent(41, $$v)
                   },
                   expression: "para.username"
                 }
@@ -2314,19 +2340,19 @@ var render = function() {
           ),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(41, "sc"), attrs: { _i: 41 } },
+            { staticClass: _vm._$g(42, "sc"), attrs: { _i: 42 } },
             [
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(42, "sc"), attrs: { _i: 42 } },
+                { staticClass: _vm._$g(43, "sc"), attrs: { _i: 43 } },
                 [_vm._v("密码")]
               ),
               _c("v-uni-input", {
-                attrs: { type: "password", name: "input", _i: 43 },
+                attrs: { type: "password", name: "input", _i: 44 },
                 model: {
-                  value: _vm._$g(43, "v-model"),
+                  value: _vm._$g(44, "v-model"),
                   callback: function($$v) {
-                    _vm.$handleVModelEvent(43, $$v)
+                    _vm.$handleVModelEvent(44, $$v)
                   },
                   expression: "para.password"
                 }
@@ -2336,19 +2362,19 @@ var render = function() {
           ),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(44, "sc"), attrs: { _i: 44 } },
+            { staticClass: _vm._$g(45, "sc"), attrs: { _i: 45 } },
             [
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(45, "sc"), attrs: { _i: 45 } },
+                { staticClass: _vm._$g(46, "sc"), attrs: { _i: 46 } },
                 [_vm._v("重复密码")]
               ),
               _c("v-uni-input", {
-                attrs: { type: "password", name: "input", _i: 46 },
+                attrs: { type: "password", name: "input", _i: 47 },
                 model: {
-                  value: _vm._$g(46, "v-model"),
+                  value: _vm._$g(47, "v-model"),
                   callback: function($$v) {
-                    _vm.$handleVModelEvent(46, $$v)
+                    _vm.$handleVModelEvent(47, $$v)
                   },
                   expression: "para.rPassword"
                 }
@@ -2358,19 +2384,19 @@ var render = function() {
           ),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(47, "sc"), attrs: { _i: 47 } },
+            { staticClass: _vm._$g(48, "sc"), attrs: { _i: 48 } },
             [
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(48, "sc"), attrs: { _i: 48 } },
+                { staticClass: _vm._$g(49, "sc"), attrs: { _i: 49 } },
                 [_vm._v("验证码")]
               ),
               _c("v-uni-input", {
-                attrs: { name: "input", _i: 49 },
+                attrs: { name: "input", _i: 50 },
                 model: {
-                  value: _vm._$g(49, "v-model"),
+                  value: _vm._$g(50, "v-model"),
                   callback: function($$v) {
-                    _vm.$handleVModelEvent(49, $$v)
+                    _vm.$handleVModelEvent(50, $$v)
                   },
                   expression: "para.code"
                 }
@@ -2378,28 +2404,28 @@ var render = function() {
               _c(
                 "v-uni-button",
                 {
-                  staticClass: _vm._$g(50, "sc"),
-                  attrs: { disabled: _vm._$g(50, "a-disabled"), _i: 50 },
+                  staticClass: _vm._$g(51, "sc"),
+                  attrs: { disabled: _vm._$g(51, "a-disabled"), _i: 51 },
                   on: {
                     click: function($event) {
                       return _vm.$handleViewEvent($event)
                     }
                   }
                 },
-                [_vm._v("验证码" + _vm._$g(50, "t0-0"))]
+                [_vm._v("验证码" + _vm._$g(51, "t0-0"))]
               )
             ],
             1
           ),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(51, "sc"), attrs: { _i: 51 } },
+            { staticClass: _vm._$g(52, "sc"), attrs: { _i: 52 } },
             [
               _c(
                 "v-uni-button",
                 {
-                  staticClass: _vm._$g(52, "sc"),
-                  attrs: { _i: 52 },
+                  staticClass: _vm._$g(53, "sc"),
+                  attrs: { _i: 53 },
                   on: {
                     click: function($event) {
                       return _vm.$handleViewEvent($event)
