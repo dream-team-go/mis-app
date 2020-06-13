@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">车辆预约详情</block>
-			<block v-show="info.status > 0" slot="right" @tap="toDispatch">{{info.status > 2 ? "派车单" :(info.status == 2 ? "修改派车" : "派车")}}</block>
+			<block slot="right"><view v-show="info.status > 0" @tap="toDispatch">{{info.status > 2 ? "派车单" :(info.status == 2 ? "修改派车" : "派车")}}</view></block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -92,7 +92,7 @@
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 用车要求：
-				<text class="text-bold">{{require}}</text>
+				<text class="text-bold">{{carRequire}}</text>
 			</view>
 		</view>
 		
@@ -138,7 +138,7 @@
 				id: 0,
 				showModal: false,
 				cancelReason: "",
-				require: "无"
+				carRequire: "无"
 			}
 		},
 		onLoad(option) {
@@ -332,11 +332,11 @@
 						this.info.nums.forEach(c=>{
 							if(c.num > 0)
 							{
-								if(this.require == "无")
+								if(this.carRequire == "无")
 								{
-									this.require = c.car_type+c.num+"辆";
+									this.carRequire = c.car_type+c.num+"辆";
 								}else{
-									this.require += "; " + c.car_type+c.num+"辆";
+									this.carRequire += "; " + c.car_type+c.num+"辆";
 								}
 							}
 						});

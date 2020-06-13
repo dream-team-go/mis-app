@@ -160,7 +160,7 @@
 			
 			<view class="cu-form-group">
 				<view class="title">司机</view>
-				<view class="modal-group" @tap="showDriverModal(index)" data-target="Modal">
+				<view class="modal-group" @tap="showDriverModal()" data-target="Modal">
 					<view class="picker">
 						{{ para.driver_id.length > 0 ? driver_name + "("+ driver_phone +")" : '请选择' }}
 					</view>
@@ -178,7 +178,7 @@
 			
 			<view class="cu-form-group">
 				<view class="grid col-4 grid-square flex-sub">
-					<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
+					<view class="bg-img" v-for="(item,index) in imgList" :key="index" :data-url="imgList[index]">
 						<image :src="imgList[index]" mode="aspectFill"></image>
 						<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
 							<text class='cuIcon-close'></text>
@@ -228,7 +228,7 @@
 				<input name="input" v-model="para.remark"></input>
 			</view>
 			<view class="padding flex flex-direction">
-				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
+				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @tap="Submit">提交</button>
 			</view>
 		</form>
 		<view class="list-modal cu-modal bottom-modal" :class="isShowDriverModal?'show':''">
@@ -241,7 +241,7 @@
 		
 				<view id="list-view" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
 					<view class="cu-list menu text-left">
-						<view class="cu-item arrow" v-for="driver in drivers" :key="driver.id" @click="getDriver(driver)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
+						<view class="cu-item arrow" v-for="driver in drivers" :key="driver.id" @tap="getDriver(driver)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
 							<view class="content">
 								<view>{{driver.user_cn_name}}({{driver.sex == 1 ? '男' : '女'}})</view>
 								<view class="text-gray text-sm flex">
@@ -299,10 +299,10 @@
 				this.para.power = info.power;
 				this.para.fuel_type = info.fuel_type;
 				this.para.quality = info.quality;
-				if(info.produce_time && info.produce_time.length > 0){
+				if(info.produce_time){
 					this.para.produce_time = info.produce_time.substring(0,10);
 				}
-				if(info.license_time && info.license_time.length > 0){
+				if(info.license_time){
 					this.para.license_time = info.license_time.substring(0,10);
 				}
 				this.para.nature = info.nature;

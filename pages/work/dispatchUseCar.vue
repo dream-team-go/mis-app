@@ -14,7 +14,7 @@
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
 					用车要求：
-					<text class="text-bold">{{require}}</text>
+					<text class="text-bold">{{carRequire}}</text>
 				</view>
 			</view>
 			<view class="cu-form-group">
@@ -153,7 +153,7 @@
 					contentrefresh: '加载中',
 					contentnomore: '没有更多'
 				},
-				require: "无",
+				carRequire: "无",
 				editIndex: 0,
 				para: {
 					order_code: "",
@@ -180,11 +180,11 @@
 			info.nums.forEach(c=>{
 				if(c.num > 0)
 				{
-					if(this.require == "无")
+					if(this.carRequire == "无")
 					{
-						this.require = c.car_type+c.num+"辆";
+						this.carRequire = c.car_type+c.num+"辆";
 					}else{
-						this.require += "; " + c.car_type+c.num+"辆";
+						this.carRequire += "; " + c.car_type+c.num+"辆";
 					}
 				}
 			});

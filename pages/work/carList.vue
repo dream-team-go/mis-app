@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">车辆</block>
-			<block slot="right" @tap="toAdd">新增</block>
+			<block slot="right"><view @tap="toAdd">新增</view></block>
 		</cu-custom>
 		
 		<scroll-view scroll-x class="bg-white nav text-center">

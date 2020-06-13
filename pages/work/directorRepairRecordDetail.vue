@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">车辆维修申请详情</block>
-			<block v-show="info.status >= 3 || info.status <= -2" slot="right" @tap="toRepairOrder">维修单</block>
+			<block slot="right"><view v-show="info.status >= 3 || info.status <= -2" @tap="toRepairOrder">维修单</view></block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
@@ -67,25 +67,25 @@
 			</view>
 		</view>
 
-		<view class="cu-bar bg-white solid-bottom" v-if="info.zz_name.length > 0">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.zz_name">
 			<view class="action">
 				 组长审批：
 				<text class="text-bold">{{info.zz_name}} {{info.zzsp_time}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.zr_name.length > 0">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.zr_name">
 			<view class="action">
 				 主任审批：
 				<text class="text-bold">{{info.zr_name}} {{info.end_area}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.business.length > 0">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.business">
 			<view class="action">
 				 维修出单：
 				<text class="text-bold">{{info.business}} {{info.cwxd_time}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.jz_name.length > 0">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.jz_name">
 			<view class="action">
 				 局长审批：
 				<text class="text-bold">{{info.jz_name}} {{info.jzsp_time}}</text>

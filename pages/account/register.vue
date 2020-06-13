@@ -43,11 +43,16 @@
 				</picker>
 			</view>
 			
+			<view class="cu-form-group">
+			    <view class="title">姓名</view>
+			    <input name="input" v-model="para.user_cn_name"></input>
+			</view>
+			
 			<view class="cu-form-group" v-show="para.org_id.length > 0">
 				<view class="title">职位</view>
 				<picker @change="JobChange" :value="jobIndex" :range="jobs" range-key="job_name">
 					<view class="picker">
-						{{jobIndex>-1?jobs[oIndex].job_name:'请选择'}}
+						{{jobIndex>-1?jobs[jobIndex].job_name:'请选择'}}
 					</view>
 				</picker>
 			</view>
@@ -141,6 +146,7 @@
 					org_id: "",
 					department_id: 0,
 					section_id: 0,
+					user_cn_name: "",
 					job_id: 0,
 					username: "",
 					password: "",
@@ -434,6 +440,13 @@
 					uni.showToast({
 						icon: 'none',
 						title: '请选择所属科室'
+					});
+					return;
+				}
+				if(this.para.user_cn_name.length <= 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请填写姓名'
 					});
 					return;
 				}

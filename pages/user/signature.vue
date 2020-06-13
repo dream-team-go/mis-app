@@ -67,7 +67,9 @@
 								if (res.status === "0") {
 									_that.signImage = res.data;
 									global.$http.post('/core/user/addSign', {
-										sign: _that.signImage
+										params: {
+											sign: _that.signImage
+										}
 									}).then(re => {
 										uni.hideLoading();
 										if (re.status === "0") {

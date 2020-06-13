@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">车辆维修申请详情</block>
-			<block v-show="info.status >= 3 || info.status <= -2" slot="right" @tap="toRepairOrder">维修单</block>
+			<block slot="right"><view v-show="info.status >= 3 || info.status <= -2" @tap="toRepairOrder">维修单</view></block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">

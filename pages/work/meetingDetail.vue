@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">会议室详情</block>
-			<block slot="right" @tap="toEdit">修改</block>
+			<block slot="right"><view @tap="toEdit">修改</view></block>
 		</cu-custom>
 		
 		<view class="cu-bar bg-white solid-bottom">

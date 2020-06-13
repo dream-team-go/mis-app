@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">工作餐详情</block>
-			<block v-show="info.dining_date > nowDate" slot="right" @tap="toSaveLeaderBook">修改</block>
+			<block slot="right"><view v-show="info.dining_date > nowDate" @tap="toSaveLeaderBook">修改</view></block>
 		</cu-custom>
 		
 		<view class="cu-bar bg-white solid-bottom">

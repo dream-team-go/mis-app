@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">派车单详情</block>
-			<block v-show="info.status == 2 || info.status == 3" slot="right" @tap="sureBack">{{info.status == 2 ? "确认归队" : "修改费用"}}</block>
+			<block slot="right"><view v-show="info.status == 2 || info.status == 3" @tap="sureBack">{{info.status == 2 ? "确认归队" : "修改费用"}}</view></block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">

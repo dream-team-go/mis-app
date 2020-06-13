@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">包房预定详情</block>
-			<block v-show="info.status == 0" slot="right" @tap="toEdit">修改</block>
+			<block slot="right"><view v-show="info.status == 0" @tap="toEdit">修改</view></block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">

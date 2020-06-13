@@ -72,7 +72,7 @@
 			
 			<view class="cu-form-group">
 				<view class="grid col-4 grid-square flex-sub">
-					<view class="bg-img" v-for="(item,index) in para.imgs" :key="index" @tap="ViewImage" :data-url="para.imgs[index]">
+					<view class="bg-img" v-for="(item,index) in para.imgs" :key="index" :data-url="para.imgs[index]">
 						<image :src="para.imgs[index]" mode="aspectFill"></image>
 						<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
 							<text class='cuIcon-close'></text>
