@@ -167,6 +167,7 @@
 						params: {},
 					}).then(res => {
 						if (res.status === "0") {
+							console.log(this.$store)
 							this.carData.totalCount = 0;
 							this.carData.waitCheckCount = 0;
 							this.carData.cancleCount = 0;
