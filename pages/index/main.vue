@@ -122,7 +122,7 @@ export default {
 				{
 					img: '/static/main/tongxunlu.png',
 					name: '通讯录',
-					to: ''
+					to: '/pages/index/contacts'
 				},
 				{
 					img: '/static/main/caiwu.png',

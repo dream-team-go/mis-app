@@ -67,7 +67,7 @@
 		onLoad(option) {
 			global.$http.post('/car/driver/getInfo', {
 				params: {
-					driver_id: option.id
+					customer_id: option.id
 				},
 			}).then(res => {
 				if (res.status === "0") {

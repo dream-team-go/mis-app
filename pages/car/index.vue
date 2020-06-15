@@ -113,6 +113,7 @@
 </template>
 
 <script>
+	import misEnum from '../../common/mis-enum.js';
 export default {
 	data() {
 		return {

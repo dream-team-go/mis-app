@@ -338,7 +338,7 @@
 				if(this.para.driver_id.length > 0){
 					global.$http.post('/car/driver/getInfo', {
 						params: {
-							driver_id: this.para.driver_id
+							customer_id: this.para.driver_id
 						},
 					}).then(res => {
 						if (res.status === "0") {
