@@ -8,27 +8,27 @@
 		<view class="cu-bar bg-white search fixed" :style="[{top:CustomBar + 'px'}]">
 			<view class="search-form round">
 				<text class="cuIcon-search"></text>
-				<input type="text" placeholder="姓名/电话/单位/职务" :value="key" confirm-type="search"></input>
+				<input type="text" placeholder="姓名/电话/单位/职务" @input="onKeyInput" confirm-type="search"></input>
 			</view>
 			<view class="action">
-				<button class="cu-btn bg-linear-blue shadow-blur round">搜索</button>
+				<button class="cu-btn bg-linear-blue shadow-blur round" @tap="search()">搜索</button>
 			</view>
 		</view>
 		<scroll-view scroll-y class="indexes" :scroll-into-view="'indexes-'+ listCurID" :style="[{height:'calc(100vh - '+ CustomBar + 'px - 50px)'}]"
 		 :scroll-with-animation="true" :enable-back-to-top="true">
-			<block v-for="(item,index) in list" :key="index" @tap="makePhoneCall()">
-				<view :class="'indexItem-' + item.name" :id="'indexes-' + item.name" :data-index="item.name">
-					<view class="padding">{{item.name}}</view>
+			<block v-for="(item,index) in list" :key="index">
+				<view :class="'indexItem-' + item.code" :id="'indexes-' + item.code" :data-index="item.code">
+					<view class="padding">{{item.code}}</view>
 					<view class="cu-list menu-avatar no-padding">
-						<view class="cu-item" v-for="(items,sub) in 2" :key="sub">
-							<view class="cu-avatar round lg">{{item.name}}</view>
+						<view class="cu-item" v-for="(sub, subIndex) in item.sub_list" :key="sub.id" @tap="makePhoneCall(sub)">
+							<view class="cu-avatar round lg">{{item.code}}</view>
 							<view class="content">
-								<view class="text-grey">{{item.user_name}}<text class="text-abc">({{item.job_name}})</text></view>
+								<view class="text-grey">{{sub.user_name + " "}}<text class="text-abc">({{sub.job_name}})</text></view>
 								<view class="text-gray text-sm">
-									{{item.org_name}}
+									{{sub.org_name}}
 								</view>
 								<view class="text-gray text-sm">
-									{{item.phone}}
+									{{sub.phone}}
 								</view>
 							</view>
 						</view>
@@ -38,7 +38,7 @@
 		</scroll-view>
 		<view class="indexBar" :style="[{height:'calc(100vh - ' + CustomBar + 'px - 50px)'}]">
 			<view class="indexBar-box" @touchstart="tStart" @touchend="tEnd" @touchmove.stop="tMove">
-				<view class="indexBar-item" v-for="(item,index) in list" :key="index" :id="index" @touchstart="getCur" @touchend="setCur"> {{item.name}}</view>
+				<view class="indexBar-item" v-for="(item,index) in list" :key="index" :id="index" @touchstart="getCur" @touchend="setCur"> {{item.code}}</view>
 			</view>
 		</view>
 		<!--选择显示-->
@@ -89,7 +89,7 @@
 							list[i] = res.data.list[i];
 						}
 						this.list = list;
-						this.listCur = list[0];
+						this.listCur = list[0].code;
 					} else {
 						uni.showToast({
 							title: res.msg,
@@ -112,14 +112,16 @@
 					}
 				})
 			},
+			onKeyInput(e){
+				this.key =  e.target.value;
+			},
 			//获取文字信息
 			getCur(e) {
 				this.hidden = false;
-				this.listCur = this.list[e.target.id].name;
+				this.listCur = this.list[e.target.id].code;
 			},
 			setCur(e) {
 				this.hidden = true;
-				this.listCur = this.listCur
 			},
 			//滑动选择Item
 			tMove(e) {

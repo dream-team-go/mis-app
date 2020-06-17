@@ -120,7 +120,7 @@ function handleCode({ data, statusCode, config }) {
 						});
 						return Promise.reject({ statusCode, message: '身份过期' });
 					}
-					return Promise.reject();
+					return Promise.reject({ statusCode, message: '身份过期' });
 				}else if(data.code === "403"){
 					return Promise.reject({ statusCode, message: '未授权' });
 				}

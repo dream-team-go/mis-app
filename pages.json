@@ -300,6 +300,14 @@
         {
             "path" : "pages/index/main",
             "style" : {}
+        },
+		{
+            "path" : "pages/index/contacts",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/work/repairProcess",
+            "style" : {}
         }
     ],
     "globalStyle" : {
