@@ -181,6 +181,11 @@
 				<text class="text-bold">{{info.remark}}</text>
 			</view>
 		</view>
+		
+		<view class="bottom-btns-seat"></view>
+		<view class="bottom-cancel-btn" @click="repairProcess">
+			车辆历程
+		</view>
 	</view>
 </template>
 
@@ -221,11 +226,17 @@
 				uni.navigateTo({
 					url: '../work/saveCar?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
+			},
+			repairProcess: function(e){
+				uni.navigateTo({
+					url: '../work/repairProcess?car_id=' + this.info.id + '&car_number=' + this.info.car_number
+				});
 			}
 		}
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
+@import "style/mystyle.scss";
 
 </style>

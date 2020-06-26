@@ -23,7 +23,7 @@
 						<view class="cu-item" v-for="(sub, subIndex) in item.sub_list" :key="sub.id" @tap="makePhoneCall(sub)">
 							<view class="cu-avatar round lg">{{item.code}}</view>
 							<view class="content">
-								<view class="text-grey">{{sub.user_name + " "}}<text class="text-abc">({{sub.job_name}})</text></view>
+								<view class="text-grey">{{sub.user_name}} <text class="text-abc"> ({{sub.job_name}})</text></view>
 								<view class="text-gray text-sm">
 									{{sub.org_name}}
 								</view>

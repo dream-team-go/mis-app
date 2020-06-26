@@ -6,12 +6,17 @@
 		</cu-custom>
 		
 		<view class="cu-timeline" v-for="(item,index) in items" :key="item.id">
-			<view class="cu-time">{{item.jzsp_time.substring(0, 10)}}</view>
-			<view class="cu-item text-blue">
+			<view class="cu-time" style="width: fit-content;">{{item.jzsp_time.substring(0, 10)}}</view>
+			<view class="cu-item text-linear-blue">
 				<view class="bg-linear-blue content">
 					<text v-if="item.items.length > 0">【维修项目】</text> 
 					<view v-if="item.items.length > 0" v-for="(c, i) in item.items" :key="c.id">
 						{{c.item_name}} — ￥{{c.item_fee}}
+					</view>
+					
+					<text v-if="item.paats.length > 0">【维修配件】</text>
+					<view v-if="item.paats.length > 0" v-for="(c, i) in item.paats" :key="c.id">
+						{{c.parts_name}} x {{c.num}} — ￥{{c.total}}
 					</view>
 				</view>
 			</view>
@@ -39,7 +44,7 @@
 			}).then(res => {
 				if (res.status === "0") {
 					for (let i = 0; i < res.data.length; i++) {
-						items[i] = res.data.list[i];
+						this.items.push(res.data[i]);
 					}
 				} else {
 					uni.showToast({

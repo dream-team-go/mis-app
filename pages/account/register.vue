@@ -25,7 +25,7 @@
 				</picker>
 			</view>
 
-			<view class="cu-form-group" v-show="para.org_id.length > 0">
+			<view class="cu-form-group" v-show="para.org_id">
 				<view class="title">所属部门</view>
 				<picker @change="DepartmentChange" :value="dIndex" :range="departments" range-key="name">
 					<view class="picker">
@@ -48,7 +48,7 @@
 			    <input name="input" v-model="para.user_cn_name"></input>
 			</view>
 			
-			<view class="cu-form-group" v-show="para.org_id.length > 0">
+			<view class="cu-form-group" v-show="para.org_id">
 				<view class="title">职位</view>
 				<picker @change="JobChange" :value="jobIndex" :range="jobs" range-key="job_name">
 					<view class="picker">
@@ -291,8 +291,8 @@
 							},
 						}).then(res => {
 							if (res.status === "0") {
-								for (var i = 0; i < res.data.list.length; i++) {
-									this.jobs.push(res.data.list[i]);
+								for (var i = 0; i < res.data.length; i++) {
+									this.jobs.push(res.data[i]);
 								}
 							} else {
 								uni.showToast({
@@ -356,8 +356,11 @@
 				this.sIndex = e.detail.value;
 			},
 			JobChange: function(e) {
-				this.para.job_id = this.jobs[e.detail.value].job_id;
-				this.isDriver = this.jobs[e.detail.value].job_name == "司机";
+				if (this.jobIndex != e.detail.value) {
+					this.jobIndex = e.detail.value;
+					this.para.job_id = this.jobs[e.detail.value].job_id;
+					this.isDriver = this.jobs[e.detail.value].job_name == "司机";
+				}
 			},
 			SendCode: function(e) {
 				this.disabled = true;
