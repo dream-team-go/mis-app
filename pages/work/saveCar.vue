@@ -580,6 +580,18 @@
 				});
 			},
 			DelImg: function(e) {
+				global.$http.post('/oos/delete', {
+					params: {
+						url: this.para.img
+					},
+				}).then(res => {
+					var tmp = res;
+				}).catch(err => {
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
 				this.imgList.splice(e.currentTarget.dataset.index, 1);
 				this.para.img = "";
 			},

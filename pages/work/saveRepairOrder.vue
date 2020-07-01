@@ -227,8 +227,19 @@
 				});
 			},
 			DelImg: function(e) {
+				global.$http.post('/oos/delete', {
+					params: {
+						url: this.para.imgs[e.currentTarget.dataset.index]
+					}
+				}).then(res => {
+					var tmp = res;
+				}).catch(err => {
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
 				this.para.imgs.splice(e.currentTarget.dataset.index, 1);
-				this.para.img = "";
 			},
 			Submit: function(e) {
 				//验证数据

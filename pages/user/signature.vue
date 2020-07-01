@@ -40,6 +40,29 @@
 			}
 		},
 		methods: {
+			delOldImg: function(){
+				if(this.oldImage){
+					global.$http.post('/oos/delete', {
+						params: {
+							url: this.oldImage
+						},
+					}).then(res => {
+						uni.hideLoading();
+						uni.showToast({
+							icon: 'none',
+							title: '保存成功'
+						});
+						uni.navigateBack();
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							icon: 'none',
+							title: '保存成功'
+						});
+						uni.navigateBack();
+					});
+				}
+			},
 			overSign: function() {
 				if (this.isEnd) {
 					uni.canvasGetImageData({
@@ -71,12 +94,9 @@
 											sign: _that.signImage
 										}
 									}).then(re => {
-										uni.hideLoading();
 										if (re.status === "0") {
-											uni.showToast({
-												icon: 'none',
-												title: '保存成功'
-											});
+											//清除旧图片
+											_that.delOldImg();
 										} else {
 											uni.showToast({
 												title: re.msg,
@@ -114,7 +134,6 @@
 				}
 
 			},
-
 			// 画布的触摸移动开始手势响应
 			start: function(event) {
 				//获取触摸开始的 x,y
@@ -138,7 +157,6 @@
 					this.draw(touchs)
 				}
 			},
-
 			// 画布的触摸移动结束手势响应
 			end: function(e) {
 				// 设置为已经签名
@@ -149,7 +167,6 @@
 				}
 
 			},
-
 			// 画布的触摸取消响应
 			cancel: function(e) {
 
@@ -195,7 +212,7 @@
 				// 		console.log(res);
 				// 	}
 				// });
-			},
+			}
 		},
 		/**
 		 * 生命周期函数--监听页面加载
@@ -223,6 +240,7 @@
 				uni.hideLoading();
 				if (res.status === "0") {
 					if(res.data && res.data.length > 0){
+						this.oldImage = res.data;
 						const query = uni.createSelectorQuery().in(_that);
 						query.select('.firstCanvas').boundingClientRect(data => {
 							content.drawImage(res.data, 0, 0, data.width, data.height);
