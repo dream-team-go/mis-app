@@ -7,7 +7,13 @@
         },
         {
             "path" : "pages/index/home",
-            "style" : {}
+            "style" : {
+							"navigationBarTitleText": "首页",
+							"app-plus": {
+								//app页面不显示滚动条
+								"scrollIndicator": "none"
+							}
+						}
         },
         {
             "path" : "pages/account/login",

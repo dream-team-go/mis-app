@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "uni-collapse": "/colorui/components/uni-collapse",
-    "uni-collapse-item": "/colorui/components/uni-collapse-item"
-  }
-}
