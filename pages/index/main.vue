@@ -6,11 +6,11 @@
 					<view class="swiper-item">
 						<image class="swiper-img" mode="aspectFill" :src="item"></image>
 					</view>
+					<view class="word-box">
+						<image src="/static/home/words.png" class="word-img" mode="aspectFit"></image>
+					</view>
 				</swiper-item>
 			</swiper>
-			<view class="word-box">
-				<image src="/static/home/words.png" class="word-img" mode="aspectFit"></image>
-			</view>
 			<view class="nav-bar">
 				<view class="nav-item" v-for="(item, index) in navList" :key="index" @click="goPage(item)">
 					<image class="nav-img" :src="item.img" mode="aspectFill"></image>
