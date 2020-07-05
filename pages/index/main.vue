@@ -74,20 +74,25 @@ export default {
 				{
 					img: '/static/tabbar/car_cur.png',
 					name: '用车',
-					to: '/pages/car/index',
+					to: '/pages/car/bookCar',
 				},
 				{
 					img: '/static/tabbar/meeting_cur.png',
 					name: '会务',
-					to: '/pages/meeting/index',
+					to: '/pages/meeting/bookMeeting',
 				},
 				{
 					img: '/static/tabbar/food_cur.png',
 					name: '订餐',
-					to: '/pages/food/index',
+					to: '/pages/food/bookFood',
 				}
 			],
 			grids: [
+				{
+					img: '/static/main/tongxunlu.png',
+					name: '通讯录',
+					to: '/pages/index/contacts'
+				},
 				{
 					img: '/static/main/bangongyongfang.png',
 					name: '办公用房',
@@ -118,11 +123,6 @@ export default {
 					to: ''
 				},
 				{
-					img: '/static/main/tongxunlu.png',
-					name: '通讯录',
-					to: '/pages/index/contacts'
-				},
-				{
 					img: '/static/main/caiwu.png',
 					name: '财务',
 					to: ''
@@ -151,7 +151,7 @@ export default {
 					img: '/static/main/message.png',
 					title: '我的消息',
 					desc: '消息记录',
-					to: ''
+					to: '/pages/user/warnList'
 				}
 			]
 		}
