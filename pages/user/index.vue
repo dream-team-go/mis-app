@@ -40,19 +40,19 @@
 			</view>
 			
 			<view class="cu-list menu margin-top">
-				<navigator class="cu-item arrow" hover-class="none" url="/pages/car/bookCar" open-type="navigate">
+				<navigator class="cu-item arrow" hover-class="none" url="/pages/car/index" open-type="navigate">
 					<view class="content">
 						<image src="../../static/tabbar/car_cur.png" class="ico"></image>
 						<text class="text-grey">我的用车</text>
 					</view>
 				</navigator>
-				<navigator class="cu-item arrow" hover-class="none" url="/pages/meeting/bookMeeting" open-type="navigate">
+				<navigator class="cu-item arrow" hover-class="none" url="/pages/meeting/index" open-type="navigate">
 					<view class="content">
 						<image src="../../static/tabbar/meeting_cur.png" class="ico"></image>
 						<text class="text-grey">我的会务</text>
 					</view>
 				</navigator>
-				<navigator class="cu-item arrow" hover-class="none" url="/pages/food/bookFood" open-type="navigate">
+				<navigator class="cu-item arrow" hover-class="none" url="/pages/food/index" open-type="navigate">
 					<view class="content">
 						<image src="../../static/tabbar/food_cur.png" class="ico"></image>
 						<text class="text-grey">我的订餐</text>

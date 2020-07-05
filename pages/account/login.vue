@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view class="top-box">
-			<image src="../../static/login/WechatIMG419.png"></image>
+			<image src="../../static/logo.png"></image>
 			<view class="title">智慧机关</view>
 		</view>
 		<form>
