@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">车辆</block>
-			<block slot="right"><view @tap="toAdd">新增</view></block>
+			<block slot="right"><view v-if="HasOperateKey" @tap="toAdd">新增</view></block>
 		</cu-custom>
 		
 		<scroll-view scroll-x class="bg-white nav text-center">
@@ -29,6 +29,9 @@
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex';
 	import misEnum from '../../common/mis-enum.js';
 	export default {
 		data() {
@@ -37,6 +40,12 @@
 				cars: [],
 				TabCur: 0,
 				StatusEnumMap: misEnum.CarTypeEnumMap
+			}
+		},
+		computed: {
+			...mapState(['userInfo']),
+			HasOperateKey: function(){
+				return this.userInfo.key.includes('car:manage');
 			}
 		},
 		onLoad(option) {

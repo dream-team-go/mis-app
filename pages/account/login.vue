@@ -133,6 +133,7 @@
 			color: #11c0ac;
 			text-align: center;
 			line-height: 60upx;
+			padding-top: 130upx;
 			padding-bottom: 80upx;
 			image {
 				width: 240upx;
@@ -174,7 +175,7 @@
 		height: 86upx;
 		line-height: 86upx;
 		border-radius: 50px;
-		margin-top: 160upx;
+		margin-top: 60upx;
 		background-image: linear-gradient(45deg, #44d7b6, #36bdbd);
 		color: #ffffff;
 		font-size: 32upx;

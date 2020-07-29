@@ -6,6 +6,9 @@ import Request from './js_sdk/pocky-request/index.js'
 import cuCustom from './colorui/components/cu-custom.vue'
 Vue.component('cu-custom',cuCustom)
 
+import contacts from './pages/index/contacts.vue'
+Vue.component('contacts',contacts)
+
 import car from './pages/car/index.vue'
 Vue.component('car',car)
 

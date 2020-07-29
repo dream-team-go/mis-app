@@ -22,9 +22,9 @@ const store = new Vuex.Store({
 			uni.removeStorage({
 				key: 'userInfo'
 			});
-			uni.removeStorage({
-				key: 'userIdentity'
-			});
+			// uni.removeStorage({
+			// 	key: 'userIdentity'
+			// });
 		}
 	}
 })

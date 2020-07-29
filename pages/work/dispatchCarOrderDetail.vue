@@ -65,7 +65,7 @@
 				<text class="text-bold">{{info.driver_name + "("+ info.driver_phone +")"}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.bak.length > 0">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.bak">
 			<view class="action">
 				 备注：
 				<text class="text-bold">{{info.bak}}</text>
@@ -229,7 +229,7 @@
 		}
 	}
 </script>
-
-<style>
+<style scoped lang="scss">
+@import "style/mystyle.scss";
 
 </style>

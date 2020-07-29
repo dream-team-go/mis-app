@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">包房</block>
-			<block slot="right"><view @tap="toAdd">新增</view></block>
+			<block slot="right"><view v-if="HasOperateKey" @tap="toAdd">新增</view></block>
 		</cu-custom>
 		
 		<!-- <scroll-view scroll-x class="bg-white nav text-center">
@@ -48,6 +48,9 @@
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex';
 	import uniLoadMore from '@/colorui/components/uni-load-more.vue';
 	export default {
 		components: {
@@ -65,6 +68,12 @@
 				TabCur: 0,
 				buildings: [],
 				rooms: []
+			}
+		},
+		computed: {
+			...mapState(['userInfo']),
+			HasOperateKey: function(){
+				return this.userInfo.key.includes('dining:manage');
 			}
 		},
 		onReady() {

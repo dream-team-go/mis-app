@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">会议室</block>
-			<block slot="right"><view @tap="toAdd">新增</view></block>
+			<block slot="right"><view v-if="HasOperateKey" @tap="toAdd">新增</view></block>
 		</cu-custom>
 		<!-- <view class="outer-box">
 			<view class="room-box" v-for="room in rooms" :key="room.id" @click="roomDetail(room)">
@@ -47,6 +47,9 @@
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex';
 	import uniLoadMore from '@/colorui/components/uni-load-more.vue';
 	export default {
 		components: {
@@ -64,6 +67,12 @@
 				TabCur: 0,
 				buildings: [],
 				rooms: []
+			}
+		},
+		computed: {
+			...mapState(['userInfo']),
+			HasOperateKey: function(){
+				return this.userInfo.key.includes('meeting:manage');
 			}
 		},
 		onReady(){

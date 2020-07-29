@@ -25,7 +25,7 @@
 				<navigator class="cu-item arrow" hover-class="none" url="../user/warnList" open-type="navigate">
 					<view class="content">
 						<text class="cuIcon-message text-orange"></text>
-						<text class="text-grey">消息管理</text>
+						<text class="text-black">消息管理</text>
 					</view>
 					<view class="action" v-show="userData.msgCount > 0">
 						<view class="cu-tag round bg-orange light">{{userData.msgCount}}</view>
@@ -34,7 +34,7 @@
 				<navigator class="cu-item arrow" hover-class="none" url="../user/signature" open-type="navigate">
 					<view class="content">
 						<image src="../../static/common/meeting-record.png" class="ico"></image>
-						<text class="text-grey">电子签名</text>
+						<text class="text-black">电子签名</text>
 					</view>
 				</navigator>
 			</view>
@@ -43,19 +43,19 @@
 				<navigator class="cu-item arrow" hover-class="none" url="/pages/car/index" open-type="navigate">
 					<view class="content">
 						<image src="../../static/tabbar/car_cur.png" class="ico"></image>
-						<text class="text-grey">我的用车</text>
+						<text class="text-black">我的用车</text>
 					</view>
 				</navigator>
 				<navigator class="cu-item arrow" hover-class="none" url="/pages/meeting/index" open-type="navigate">
 					<view class="content">
 						<image src="../../static/tabbar/meeting_cur.png" class="ico"></image>
-						<text class="text-grey">我的会务</text>
+						<text class="text-black">我的会务</text>
 					</view>
 				</navigator>
 				<navigator class="cu-item arrow" hover-class="none" url="/pages/food/index" open-type="navigate">
 					<view class="content">
 						<image src="../../static/tabbar/food_cur.png" class="ico"></image>
-						<text class="text-grey">我的订餐</text>
+						<text class="text-black">我的订餐</text>
 					</view>
 				</navigator>
 			</view>
@@ -64,13 +64,13 @@
 				<navigator class="cu-item arrow" hover-class="none" url="../user/editPassword" open-type="navigate">
 					<view class="content">
 						<image src="../../static/login/password.png" class="ico"></image>
-						<text class="text-grey">修改密码</text>
+						<text class="text-black">修改密码</text>
 					</view>
 				</navigator>
 				<view class="cu-item arrow" @click="logout">
 					<view class="content">
 						<image src="../../static/common/loginout.png" class="login-ico"></image>
-						<text class="text-grey">退出登录</text>
+						<text class="text-black">退出登录</text>
 					</view>
 				</view>
 			</view>

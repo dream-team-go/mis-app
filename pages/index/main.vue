@@ -43,9 +43,6 @@
 							<view class="notice-item-title">
 								{{ item.title }}
 							</view>
-							<view class="notice-item-desc">
-								{{ item.desc }}
-							</view>
 						</view>
 					</view>
 				</view>
@@ -79,54 +76,74 @@ export default {
 				{
 					img: '/static/tabbar/meeting_cur.png',
 					name: '会务',
-					to: '/pages/meeting/bookMeeting',
+					to: '/pages/meeting/selectTime',
 				},
 				{
 					img: '/static/tabbar/food_cur.png',
 					name: '订餐',
-					to: '/pages/food/bookFood',
+					to: '/pages/food/selectTime',
 				}
 			],
 			grids: [
 				{
 					img: '/static/main/tongxunlu.png',
-					name: '通讯录',
-					to: '/pages/index/contacts'
+					name: '车辆信息',
+					to: '/pages/work/carList'
 				},
 				{
 					img: '/static/main/bangongyongfang.png',
-					name: '办公用房',
-					to: ''
+					name: '会议室信息',
+					to: '/pages/work/meetingList'
 				},
 				{
 					img: '/static/main/zhouzhuanfang.png',
-					name: '周转房',
-					to: ''
+					name: '包房信息',
+					to: '/pages/work/foodList'
 				},
 				{
 					img: '/static/main/gudingzichanguanli.png',
-					name: '固定资产',
-					to: ''
-				},
-				{
-					img: '/static/main/jiedaishenpi.png',
-					name: '接待审批',
-					to: ''
-				},{
-					img: '/static/main/chebian.png',
-					name: '车编',
-					to: ''
-				},
-				{
-					img: '/static/main/wuguan.png',
-					name: '物管',
-					to: ''
-				},
-				{
-					img: '/static/main/caiwu.png',
-					name: '财务',
-					to: ''
+					name: '规划信息',
+					to: '/pages/index/plan'
 				}
+				// {
+				// 	img: '/static/main/tongxunlu.png',
+				// 	name: '通讯录',
+				// 	to: '/pages/index/contacts'
+				// },
+				// {
+				// 	img: '/static/main/bangongyongfang.png',
+				// 	name: '办公用房',
+				// 	to: ''
+				// },
+				// {
+				// 	img: '/static/main/zhouzhuanfang.png',
+				// 	name: '周转房',
+				// 	to: ''
+				// },
+				// {
+				// 	img: '/static/main/gudingzichanguanli.png',
+				// 	name: '固定资产',
+				// 	to: ''
+				// },
+				// {
+				// 	img: '/static/main/jiedaishenpi.png',
+				// 	name: '接待审批',
+				// 	to: ''
+				// },{
+				// 	img: '/static/main/chebian.png',
+				// 	name: '车编',
+				// 	to: ''
+				// },
+				// {
+				// 	img: '/static/main/wuguan.png',
+				// 	name: '物管',
+				// 	to: ''
+				// },
+				// {
+				// 	img: '/static/main/caiwu.png',
+				// 	name: '财务',
+				// 	to: ''
+				// }
 			],
 			noticeList: [
 				{
@@ -256,7 +273,7 @@ export default {
 				}
 				
 				.name {
-					font-size: 14px;
+					font-size: 26upx;
 					text-align: center;
 				}
 			}

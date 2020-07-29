@@ -45,7 +45,7 @@
 					<text class="text-bold">{{dispatchOrder.driver_name + "("+ dispatchOrder.driver_phone +")"}}</text>
 				</view>
 			</view>
-			<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.bak.length > 0">
+			<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.bak">
 				<view class="action">
 					<text class="cuIcon-title text-orange"></text> 备注：
 					<text class="text-bold">{{dispatchOrder.bak}}</text>
@@ -57,7 +57,7 @@
 					<text v-for="(value,key) in stars" :key="key" :class="key < dispatchOrder.appraise_grade ? 'cuIcon-favorfill text-yellow' : 'cuIcon-favor text-gray'"></text>
 				</view>
 			</view>
-			<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.is_appraise == 1 && dispatchOrder.appraise_contnet.length > 0">
+			<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.is_appraise == 1 && dispatchOrder.appraise_contnet">
 				<view class="action">
 					<text class="cuIcon-title text-orange"></text> 评价内容：
 					<text class="text-bold">{{dispatchOrder.bak}}</text>

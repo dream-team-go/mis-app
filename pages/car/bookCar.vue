@@ -31,7 +31,7 @@
 				<input name="input" v-model="para.start_place"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">用车区域（交通补贴区域内/交通补贴区域外）</view>
+				<view class="title">用车区域</view>
 				<picker @change="ChangeAreas" :value="areaIndex" :range="areas">
 					<view class="picker">
 						{{areas[areaIndex]}}

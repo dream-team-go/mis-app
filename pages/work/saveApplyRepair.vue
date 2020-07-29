@@ -21,7 +21,7 @@
 			
 			<view class="cu-form-group">
 				<view class="title">车辆</view>
-				<view class="modal-group" @tap="showCarModal(index)" data-target="Modal">
+				<view class="modal-group" @tap="showCarModal()" data-target="Modal">
 					<view class="picker">
 						{{ para.car_id > 0 ? para.brand + " " + para.car_type + " " + para.car_number: '请选择' }}
 					</view>

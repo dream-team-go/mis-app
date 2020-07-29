@@ -1328,7 +1328,7 @@ button.cuIcon.lg {
 	margin: auto;
 	width: 30upx;
 	height: 30upx;
-	color: #8799a3;
+	color: #333333;
 	content: "\e6a3";
 	text-align: center;
 	font-size: 34upx;
@@ -1425,7 +1425,7 @@ button.cuIcon.lg {
 .cu-list.grid>.cu-item text {
 	display: block;
 	margin-top: 10upx;
-	color: #888;
+	color: #333333;
 	font-size: 26upx;
 	line-height: 40upx
 }

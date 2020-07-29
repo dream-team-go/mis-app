@@ -209,7 +209,7 @@
 					badge: 0,
 					name: '会议记录',
 					url: "../work/meetingRecordList",
-					icoSrc: "../../static/common/meeting-record.png",
+					icoSrc: "../../static/common/fix-record.png",
 					permissionKey: "meeting:list"
 				}, 
 				// {

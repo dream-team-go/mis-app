@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<image class="logo" style="width: 60%;" src="/static/verify.gif"></image>
+		<image class="logo" style="width: 60%;height: 440upx;" src="/static/verify.gif"></image>
 	</view>
 </template>
 

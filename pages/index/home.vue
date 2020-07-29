@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<contacts v-if="PageCur=='contacts'" :contactsData='contactsData'></contacts>
 		<car v-if="PageCur=='car'" :carData="carData"></car>
 		<meeting v-if="PageCur=='meeting'" :meetingData="meetingData"></meeting>
 		<food v-if="PageCur=='food'" :foodData="foodData"></food>
@@ -11,37 +12,43 @@
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/car' + [PageCur=='car'?'_cur':''] + '.png'"></image>
 				</view>
-				<view :class="PageCur=='car'?'text-bluelight':'text-gray'">用车</view>
+				<view :class="PageCur=='car'?'text-bluelight':'text-black'">用车</view>
 			</view>
 			<view class="action" @click="NavChange" data-cur="meeting" v-if="MeetingPermission">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/meeting' + [PageCur == 'meeting'?'_cur':''] + '.png'"></image>
 				</view>
-				<view :class="PageCur=='meeting'?'text-bluelight':'text-gray'">会务</view>
+				<view :class="PageCur=='meeting'?'text-bluelight':'text-black'">会务</view>
 			</view>
 			<view class="action" @click="NavChange" data-cur="food" v-if="FoodPermission">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/food' + [PageCur == 'food'?'_cur':''] + '.png'"></image>
 				</view>
-				<view :class="PageCur=='food'?'text-bluelight':'text-gray'">订餐</view>
+				<view :class="PageCur=='food'?'text-bluelight':'text-black'">订餐</view>
 			</view> -->
 			<view class="action" @click="NavChange" data-cur="main">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/main' + [PageCur == 'main'?'_cur':''] + '.png'"></image>
 				</view>
-				<view :class="PageCur=='main'?'text-bluelight':'text-gray'">首页</view>
+				<view :class="PageCur=='main'?'text-bluelight':'text-black'">首页</view>
+			</view>
+			<view class="action" @click="NavChange" data-cur="contacts">
+				<view class='cuIcon-cu-image'>
+					<image :src="'/static/tabbar/contacts' + [PageCur == 'contacts'?'_cur':''] + '.png'"></image>
+				</view>
+				<view :class="PageCur=='contacts'?'text-bluelight':'text-black'">通讯录</view>
 			</view>
 			<view class="action" @click="NavChange" data-cur="work" v-if="WorkPermission">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/work' + [PageCur == 'work'?'_cur':''] + '.png'"></image>
 				</view>
-				<view :class="PageCur=='work'?'text-bluelight':'text-gray'">工作台</view>
+				<view :class="PageCur=='work'?'text-bluelight':'text-black'">工作台</view>
 			</view>
 			<view class="action" @click="NavChange" data-cur="user">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/user' + [PageCur == 'user'?'_cur':''] + '.png'"></image>
 				</view>
-				<view :class="PageCur=='user'?'text-bluelight':'text-gray'">我的</view>
+				<view :class="PageCur=='user'?'text-bluelight':'text-black'">我的</view>
 			</view>
 		</view>
 	</view>
@@ -110,6 +117,7 @@
 					end_place: "",
 					status: ""
 				},
+				contactsData:[],
 				userData:{
 					msgCount: 0
 				}
@@ -392,6 +400,37 @@
 					}).then(res => {
 						if (res.status === "0") {
 							this.userData.msgCount = res.data;
+							uni.hideLoading();
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
+				}else if (this.PageCur === "contacts") {
+					uni.showLoading({
+						title: '加载中',
+						mask: false
+					});
+					//获取行政单位数据
+					global.$http.post('/core/organization/orgListAll', {
+						params: {
+							name: ''
+						},
+					}).then(res => {
+						if (res.status === "0") {
+							let list = [{}];
+							for (let i = 0; i < res.data.length; i++) {
+								list[i] = res.data[i];
+							}
+							this.contactsData = list;
 							uni.hideLoading();
 						} else {
 							uni.showToast({

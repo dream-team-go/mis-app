@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">会议室详情</block>
-			<block slot="right"><view @tap="toEdit">修改</view></block>
+			<block slot="right"><view v-if="HasOperateKey" @tap="toEdit">修改</view></block>
 		</cu-custom>
 		
 		<view class="cu-bar bg-white solid-bottom">
@@ -52,11 +52,20 @@
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex';
 	export default {
 		data() {
 			return {
 				id:"",
 				info: {}
+			}
+		},
+		computed: {
+			...mapState(['userInfo']),
+			HasOperateKey: function(){
+				return this.userInfo.key.includes('meeting:manage');
 			}
 		},
 		onLoad(option) {
