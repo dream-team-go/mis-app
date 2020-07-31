@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="backText">返回</block>
+			
 			<block slot="content">我的维修申请记录</block>
 			<block slot="right"><view @tap="toSaveApplyRepair">申请维修</view></block>
 		</cu-custom>

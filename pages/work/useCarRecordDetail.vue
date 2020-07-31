@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="backText">返回</block>
+			
 			<block slot="content">车辆预约详情</block>
 			<block slot="right"><view v-show="info.status > 1" @tap="toDispatch">派车单</view></block>
 		</cu-custom>

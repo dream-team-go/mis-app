@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="backText">返回</block>
+			
 			<block slot="content">修改密码</block>
 		</cu-custom>
 		

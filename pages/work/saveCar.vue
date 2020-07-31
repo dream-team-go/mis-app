@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="backText">返回</block>
+			
 			<block slot="content">{{isAdd ? '新增车辆' : '编辑车辆'}}</block>
 		</cu-custom>
 

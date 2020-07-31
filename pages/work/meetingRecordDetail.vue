@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="backText">返回</block>
+			
 			<block slot="content">会议预定详情</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">

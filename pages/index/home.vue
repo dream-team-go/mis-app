@@ -159,8 +159,6 @@
 			}
 			if(!this.PageCur)
 				this.PageCur = "user";
-		},
-		onShow() {
 			this.loadData();
 		},
 		methods: {

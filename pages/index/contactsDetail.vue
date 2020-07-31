@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="backText">返回</block>
+			
 			<block slot="content">{{title}}</block>
 		</cu-custom>
 
@@ -18,19 +18,21 @@
 		 :scroll-with-animation="true" :enable-back-to-top="true">
 			<block v-for="(item,index) in list" :key="index">
 				<view :class="'indexItem-' + item.code" :id="'indexes-' + item.code" :data-index="item.code">
-					<view class="padding">{{item.code}}</view>
+					<view class="padding-sm">{{item.code}}</view>
 					<view class="cu-list menu-avatar no-padding">
 						<view class="cu-item" v-for="(sub, subIndex) in item.sub_list" :key="sub.id" @tap="makePhoneCall(sub)">
-							<view class="cu-avatar round lg">{{item.code}}</view>
+							<view class="cu-avatar round md bg-linear-blue">{{item.code}}</view>
 							<view class="content">
-								<view class="text-black text-xs">{{sub.user_name}} <text class="text-abc" v-if="sub.job_name"> ({{sub.job_name}})</text></view>
+								<view class="text-black">{{sub.user_name}}  </view>
 								<!-- <view class="text-gray text-sm">
 									{{sub.org_name}}
 								</view> -->
-								<view class="text-gray">
+								<view class="text-somber">
 									{{sub.phone}}
 								</view>
 							</view>
+							
+							<view v-if="sub.job_name" style="margin-right: 50upx;" class="solid-right cu-tag round bg-right-blue light">{{sub.job_name}}</view>
 						</view>
 					</view>
 				</view>
@@ -209,7 +211,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 24upx;
+		font-size: 28upx;
 		color: #888;
 	}
 

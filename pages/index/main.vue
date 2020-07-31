@@ -22,7 +22,7 @@
 			<view class="grid-box">
 				<view class="grid-item" v-for="(item, index) in grids" :key="index" @click="goPage(item)">
 					<view class="grid-icon">
-						<image height="160rpx" width="160rpx" :src="item.img" mode="aspectFill"></image>
+						<image height="160upx" width="160upx" :src="item.img" mode="aspectFill"></image>
 					</view>
 					<view class="grid-name">
 						{{ item.name }}
@@ -34,7 +34,7 @@
 			</view>
 			<view class="notice-box">
 				<view class="notice-title">
-					<image class="notice-title-img" height="32rpx" width="32rpx" src="/static/main/zuji.png" mode=""></image>我的足迹
+					<image class="notice-title-img" src="/static/common/newIcon/track.png" mode=""></image>我的足迹
 				</view>
 				<view class="notice-main">
 					<view class="notice-item" v-for="(item, index) in noticeList" :key="index" @click="goPage(item)">
@@ -42,6 +42,9 @@
 						<view class="notice-item-content">
 							<view class="notice-item-title">
 								{{ item.title }}
+							</view>
+							<view class="notice-item-desc">
+								{{item.desc}}
 							</view>
 						</view>
 					</view>
@@ -69,40 +72,40 @@ export default {
 			],
 			navList: [
 				{
-					img: '/static/tabbar/car_cur.png',
+					img: '/static/common/newIcon/car.png',
 					name: '用车',
 					to: '/pages/car/bookCar',
 				},
 				{
-					img: '/static/tabbar/meeting_cur.png',
+					img: '/static/common/newIcon/meeting.png',
 					name: '会务',
 					to: '/pages/meeting/selectTime',
 				},
 				{
-					img: '/static/tabbar/food_cur.png',
+					img: '/static/common/newIcon/food.png',
 					name: '订餐',
 					to: '/pages/food/selectTime',
 				}
 			],
 			grids: [
 				{
-					img: '/static/main/tongxunlu.png',
-					name: '车辆信息',
+					img: '/static/common/newIcon/carInfo.png',
+					name: '车辆',
 					to: '/pages/work/carList'
 				},
 				{
-					img: '/static/main/bangongyongfang.png',
-					name: '会议室信息',
+					img: '/static/common/newIcon/meetingInfo.png',
+					name: '会议室',
 					to: '/pages/work/meetingList'
 				},
 				{
-					img: '/static/main/zhouzhuanfang.png',
-					name: '包房信息',
+					img: '/static/common/newIcon/foodInfo.png',
+					name: '包房',
 					to: '/pages/work/foodList'
 				},
 				{
-					img: '/static/main/gudingzichanguanli.png',
-					name: '规划信息',
+					img: '/static/common/newIcon/planInfo.png',
+					name: '规划',
 					to: '/pages/index/plan'
 				}
 				// {
@@ -147,27 +150,27 @@ export default {
 			],
 			noticeList: [
 				{
-					img: '/static/tabbar/car_cur.png',
+					img: '/static/common/newIcon/car_record.png',
 					title: '我的用车',
 					desc: '统计用车信息',
 					to: '/pages/car/index'
 				},
 				{
-					img: '/static/tabbar/meeting_cur.png',
+					img: '/static/common/newIcon/meeting_record.png',
 					title: '我的会务',
 					desc: '统计会务信息',
 					to: '/pages/meeting/index'
 				},
 				{
-					img: '/static/tabbar/food_cur.png',
+					img: '/static/common/newIcon/food_record.png',
 					title: '我的订餐',
 					desc: '统计订餐信息',
 					to: '/pages/food/index'
 				},
 				{
-					img: '/static/main/message.png',
+					img: '/static/common/newIcon/message_record.png',
 					title: '我的消息',
-					desc: '消息记录',
+					desc: '接收消息记录',
 					to: '/pages/user/warnList'
 				}
 			]
@@ -209,18 +212,18 @@ export default {
 		.swiper {
 			margin: 0 auto;
 			width: 100vw;
-			height: 500rpx;
+			height: 500upx;
 			
 			
 			.swiper-item {
 				.swiper-img {
-					height: 500rpx;
+					height: 500upx;
 				}
 			}
 			
 			/deep/ .uni-swiper-dots {
 				left: 8vw;
-				bottom: 100rpx;
+				bottom: 100upx;
 				transform: translate(0);
 			}
 			
@@ -230,7 +233,7 @@ export default {
 			}
 			
 			/deep/ .uni-swiper-dot-active {
-				padding: 0 10rpx;
+				padding: 0 10upx;
 			}
 		}
 		
@@ -241,24 +244,24 @@ export default {
 			
 			.word-img {
 				width: 90vw;
-				height: 440rpx;
+				height: 440upx;
 				margin-left: 5vw;
 			}
 		}
 		
 		.nav-bar {
 			position: absolute;
-			top: 420rpx;
-			height: 160rpx;
-			width: calc(100vw - 64rpx);
+			top: 420upx;
+			height: 160upx;
+			width: calc(100vw - 64upx);
 			left: 50%;
 			transform: translateX(-50%);
 			display: flex;
 			justify-content: space-between;
-			padding: 20rpx 60rpx;
+			padding: 15upx 70upx;
 			background-color: #fff;
-			border-radius: 8rpx;
-			box-shadow: 0px 8rpx 16rpx rgba(0,0,0,.15);
+			border-radius: 8upx;
+			box-shadow: 0px 8upx 16upx rgba(0,0,0,.15);
 			
 			.nav-item {
 				display: flex;
@@ -267,29 +270,29 @@ export default {
 				justify-content: space-between;
 				
 				.nav-img {
-					width: 80rpx;
-					height: 80rpx;
+					width: 80upx;
+					height: 80upx;
 					object-fit: contain;
 				}
 				
 				.name {
-					font-size: 26upx;
+					font-size: 32upx;
 					text-align: center;
 				}
 			}
 		}
 		
 		.grid-box {
-			padding-top: 100rpx;
+			padding-top: 100upx;
 			display: flex;
 			justify-content: space-around;
 			flex-wrap: wrap;
 			background-color: #fff;
 			
 			.grid-item {
-				width: 160rpx;
-				height: 140rpx;
-				margin: 20rpx 10rpx;
+				width: 160upx;
+				height: 130upx;
+				margin: 20upx 10upx;
 				display: flex;
 				flex-direction: column;
 				justify-content: space-around;
@@ -300,8 +303,8 @@ export default {
 					align-items: center;
 					
 					uni-image {
-						width: 48rpx;
-						height: 48rpx;
+						width: 70upx;
+						height: 70upx;
 					}
 				}
 				
@@ -309,18 +312,18 @@ export default {
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					font-size: 24rpx;
-					margin: 16rpx 0;
+					font-size: 30upx;
+					margin: 13upx 0;
 				}
 			}
 		}
 		
 		.ads-box {
-			margin: 20rpx;
-			border-radius: 16rpx;
-			padding: 20rpx;
+			margin: 20upx;
+			border-radius: 16upx;
+			padding: 20upx;
 			background-color: #fff;
-			color: #44d7b6;
+			color: #36bdbd;
 		}
 		
 		.notice-box {
@@ -328,16 +331,17 @@ export default {
 			background-color: #fff;
 			
 			.notice-title {
-				padding: 20rpx;
-				font-size: 28rpx;
+				padding: 20upx;
+				font-size: 30upx;
+				color: #777777;
 				display: flex;
 				align-items: center;
-				border-bottom: 1rpx solid #ddd;
+				border-bottom: 1upx solid #ddd;
 				
 				.notice-title-img {
-					height: 32rpx;
-					width: 32rpx;
-					margin-right: 16rpx;
+					height: 50upx;
+					width: 50upx;
+					margin-right: 16upx;
 				}
 			}
 			
@@ -348,7 +352,7 @@ export default {
 				
 				&::before {
 					content: '';
-					height: 1rpx;
+					height: 1upx;
 					width: 100%;
 					background-color: #ddd;
 					position: absolute;
@@ -358,7 +362,7 @@ export default {
 				
 				&::after {
 					content: '';
-					width: 1rpx;
+					width: 1upx;
 					height: 100%;
 					background-color: #ddd;
 					position: absolute;
@@ -368,15 +372,15 @@ export default {
 				
 				.notice-item {
 					width: 50%;
-					height: 160rpx;
+					height: 160upx;
 					display: flex;
 					align-items: center;
-					padding: 32rpx 40rpx;
+					padding: 32upx 40upx;
 					
 					.notice-item-img {
-						height: 80rpx;
-						width: 80rpx;
-						margin-right: 24rpx;
+						height: 80upx;
+						width: 80upx;
+						margin-right: 24upx;
 					}
 					
 					.notice-item-content {
@@ -386,14 +390,13 @@ export default {
 						flex: 1;
 						
 						.notice-item-title {
-							font-size: 28rpx;
-							font-weight: bold;
-							margin-bottom: 12rpx;
+							font-size: 34upx;
+							margin-bottom: 10upx;
 						}
 						
 						.notice-item-desc {
-							font-size: 24rpx;
-							color: #999;
+							font-size: 28upx;
+							color: #aaaaaa;
 						}
 					}
 				}
@@ -401,7 +404,7 @@ export default {
 		}
 		
 		.blank {
-			height: 120rpx;
+			height: 120upx;
 		}
 	}
 </style>

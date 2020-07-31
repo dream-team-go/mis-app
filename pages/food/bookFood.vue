@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="backText">返回</block>
+			
 			<block slot="content">{{isAdd ? '预定包房' : '编辑预定包房'}}</block>
 		</cu-custom>
 		<form v-show="isShowBottomModal == false">

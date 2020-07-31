@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="backText">返回</block>
+			
 			<block slot="content">{{isAdd ? '申请维修' : '编辑维修申请'}}</block>
 		</cu-custom>
 		<form>

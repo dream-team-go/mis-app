@@ -17,7 +17,7 @@
 			<view class="cu-list menu text-left">
 				<view class="cu-item arrow" v-for="item in contactsData" @click="getDetail(item)">
 					<view class="content">
-						<image src="/static/main/org.png" class="png" mode="aspectFit"></image>
+						<image src="/static/tabbar/contacts_cur.png" class="png" mode="aspectFit"></image>
 						<text class="text-black">{{item.org_name}}</text>
 					</view>
 				</view>

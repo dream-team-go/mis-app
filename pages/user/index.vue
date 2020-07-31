@@ -12,7 +12,7 @@
 							<view class="margin-left ">
 								<image src="../../static/common/user.png" class="heard"></image>
 							</view>
-							<text class="text-bold text-lg ml20">{{userInfo?userInfo.user.userCnName:""}}</text>
+							<text class="text-bold text-xl ml20">{{userInfo?userInfo.user.userCnName:""}}</text>
 						</view>
 						<view class="text-gray text-lg text-right">
 							开远市机关事务局
@@ -24,7 +24,7 @@
 			<view class="cu-list menu margin-top">
 				<navigator class="cu-item arrow" hover-class="none" url="../user/warnList" open-type="navigate">
 					<view class="content">
-						<text class="cuIcon-message text-orange"></text>
+						<image src="../../static/common/newIcon/message_record.png" class="ico"></image>
 						<text class="text-black">消息管理</text>
 					</view>
 					<view class="action" v-show="userData.msgCount > 0">
@@ -33,7 +33,7 @@
 				</navigator>
 				<navigator class="cu-item arrow" hover-class="none" url="../user/signature" open-type="navigate">
 					<view class="content">
-						<image src="../../static/common/meeting-record.png" class="ico"></image>
+						<image src="../../static/common/newIcon/sign.png" class="ico"></image>
 						<text class="text-black">电子签名</text>
 					</view>
 				</navigator>
@@ -42,19 +42,19 @@
 			<view class="cu-list menu margin-top">
 				<navigator class="cu-item arrow" hover-class="none" url="/pages/car/index" open-type="navigate">
 					<view class="content">
-						<image src="../../static/tabbar/car_cur.png" class="ico"></image>
+						<image src="../../static/common/newIcon/car_record.png" class="ico"></image>
 						<text class="text-black">我的用车</text>
 					</view>
 				</navigator>
 				<navigator class="cu-item arrow" hover-class="none" url="/pages/meeting/index" open-type="navigate">
 					<view class="content">
-						<image src="../../static/tabbar/meeting_cur.png" class="ico"></image>
+						<image src="../../static/common/newIcon/meeting_record.png" class="ico"></image>
 						<text class="text-black">我的会务</text>
 					</view>
 				</navigator>
 				<navigator class="cu-item arrow" hover-class="none" url="/pages/food/index" open-type="navigate">
 					<view class="content">
-						<image src="../../static/tabbar/food_cur.png" class="ico"></image>
+						<image src="../../static/common/newIcon/food_record.png" class="ico"></image>
 						<text class="text-black">我的订餐</text>
 					</view>
 				</navigator>
@@ -69,7 +69,7 @@
 				</navigator>
 				<view class="cu-item arrow" @click="logout">
 					<view class="content">
-						<image src="../../static/common/loginout.png" class="login-ico"></image>
+						<image src="../../static/common/loginout.png" class="ico"></image>
 						<text class="text-black">退出登录</text>
 					</view>
 				</view>
@@ -167,14 +167,8 @@
 	}
 
 	.ico {
-		width: 28upx !important;
-		height: 28upx !important;
-		margin: 0 20upx 0 10upx !important;
-	}
-
-	.login-ico {
-		width: 34upx !important;
-		height: 34upx !important;
-		margin: 0 18upx 0 4upx !important;
+		width: 42upx !important;
+		height: 42upx !important;
+		margin: 0 25upx 0 5upx !important;
 	}
 </style>

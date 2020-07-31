@@ -2,7 +2,7 @@
 	<view>
 		<scroll-view scroll-y class="page">
 			<cu-custom bgColor="bg-linear-blue" :isBack="true">
-				<block slot="backText">返回</block>
+				
 				<block slot="content">用车</block>
 			</cu-custom>
 

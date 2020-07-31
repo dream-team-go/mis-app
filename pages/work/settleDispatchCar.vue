@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="backText">返回</block>
+			
 			<block slot="content">{{isAdd ? '费用结算' : '修改费用'}}</block>
 		</cu-custom>
 		<form>

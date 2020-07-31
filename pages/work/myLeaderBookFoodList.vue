@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="backText">返回</block>
+			
 			<block slot="content">工作餐记录</block>
 			<block slot="right"><view @tap="toSaveLeaderBook">订餐</view></block>
 		</cu-custom>
