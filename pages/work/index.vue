@@ -6,7 +6,8 @@
 			</cu-custom>
 			<view class="cu-bar bg-white solid-bottom margin-top" v-if="carCuIconListPermission.length > 0">
 				<view class="action index-title">
-					<image class="title-ico" src="../../static/car/car-title.png"></image> 用车管理
+					<image class="title-ico" src="../../static/common/newIcon/car_record.png"></image>
+					<text class="text-lg text-black">用车管理</text>
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']" v-if="carCuIconListPermission.length > 0">
@@ -18,13 +19,14 @@
 						</view>
 						</image>
 					</view>
-					<text>{{item.name}}</text>
+					<text class="cu-tag-text">{{item.name}}</text>
 				</view>
 			</view>
 			
 			<view class="cu-bar bg-white solid-bottom margin-top" v-if="maintainCuIconListPermission.length > 0">
 				<view class="action index-title">
-					<image class="title-ico" src="../../static/common/fix-car.png"></image> 车辆维修
+					<image class="title-ico" src="../../static/common/newIcon/car_repair.png"></image>
+					<text class="text-lg text-black">车辆维修</text>
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']" v-if="maintainCuIconListPermission.length > 0">
@@ -36,13 +38,14 @@
 						</view>
 						</image>
 					</view>
-					<text>{{item.name}}</text>
+					<text class="cu-tag-text">{{item.name}}</text>
 				</view>
 			</view>
 			
 			<view class="cu-bar bg-white solid-bottom margin-top" v-if="meetingCuIconListPermission.length > 0">
 				<view class="action index-title">
-					<image class="title-ico" src="../../static/common/house.png"></image> 会务管理
+					<image class="title-ico" src="../../static/common/newIcon/meeting_record.png"></image>
+					<text class="text-lg text-black">会务管理</text>
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']" v-if="meetingCuIconListPermission.length > 0">
@@ -55,13 +58,14 @@
 						</image>
 					</view>
 					
-					<text>{{item.name}}</text>
+					<text class="cu-tag-text">{{item.name}}</text>
 				</view>
 			</view>
 			
 			<view class="cu-bar bg-white solid-bottom margin-top" v-if="foodCuIconListPermission.length > 0">
 				<view class="action index-title">
-					<image class="title-ico" src="../../static/common/food.png"></image> 订餐管理
+					<image class="title-ico" src="../../static/common/newIcon/food_record.png"></image> 
+					<text class="text-lg text-black">订餐管理</text>
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']" v-if="foodCuIconListPermission.length > 0">
@@ -74,7 +78,7 @@
 						</view>
 						</image>
 					</view>
-					<text>{{item.name}}</text>
+					<text class="cu-tag-text">{{item.name}}</text>
 					</view>
 				</view>
 			</view>
@@ -103,7 +107,7 @@
 					badge: 0,
 					name: '车辆信息',
 					url: "../work/carList",
-					icoSrc: "../../static/common/car-info.png",
+					icoSrc: "../../static/common/newIcon/carInfo.png",
 					permissionKey: "car:manage"
 				}, {
 					cuIcon: 'picfill',
@@ -111,7 +115,7 @@
 					badge: 0,
 					name: '司机信息',
 					url: "../work/driverList",
-					icoSrc: "../../static/common/driver-info.png",
+					icoSrc: "../../static/common/newIcon/car.png",
 					permissionKey: "driver:manage"
 				}, {
 					cuIcon: 'noticefill',
@@ -119,7 +123,7 @@
 					badge: 0,
 					name: '用车记录',
 					url: "../work/useCarRecordList",
-					icoSrc: "../../static/common/record-info.png",
+					icoSrc: "../../static/common/newIcon/car.png",
 					permissionKey: "use_car:list"
 				}, {
 					cuIcon: 'noticefill',
@@ -127,7 +131,7 @@
 					badge: 0,
 					name: '用车审批',
 					url:"../work/checkUseCarRecordList",
-					icoSrc: "../../static/common/shen-car.png",
+					icoSrc: "../../static/common/newIcon/meeting.png",
 					permissionKey: "use_car:sp"
 				}, {
 					cuIcon: 'upstagefill',
@@ -135,7 +139,7 @@
 					badge: 0,
 					name: '用车调度',
 					url:"../work/dispatchUseCarRecordList",
-					icoSrc: "../../static/common/dispatch.png",
+					icoSrc: "../../static/common/newIcon/meeting.png",
 					permissionKey: "use_car:dispatch"
 				},{
 					cuIcon: 'upstagefill',
@@ -143,7 +147,7 @@
 					badge: 0,
 					name: '我的派车单',
 					url:"../work/dispatchCarOrderList",
-					icoSrc: "../../static/common/car-record.png",
+					icoSrc: "../../static/common/newIcon/meeting.png",
 					permissionKey: "use_car:driver"
 				}],
 				maintainCuIconList:[{
@@ -152,7 +156,7 @@
 					badge: 0,
 					name: '维修记录',
 					url:"../work/repairRecordList",
-					icoSrc: "../../static/common/fix-record.png",
+					icoSrc: "../../static/common/newIcon/tuoyuan.png",
 					permissionKey: "fix_car:list"
 				},{
 					cuIcon: 'clothesfill',
@@ -160,7 +164,7 @@
 					badge: 0,
 					name: '维修申请',
 					url:"../work/myRepairRecordList",
-					icoSrc: "../../static/common/fix-apply.png",
+					icoSrc: "../../static/common/newIcon/tuoyuan.png",
 					permissionKey: "fix_car:apply"
 				}, {
 					cuIcon: 'discoverfill',
@@ -168,7 +172,7 @@
 					badge: 0,
 					name: '组长审批',
 					url:"../work/foremanRepairRecordList",
-					icoSrc: "../../static/common/shenpi.png",
+					icoSrc: "../../static/common/newIcon/tuoyuan.png",
 					permissionKey: "fix_car:zzsp"
 				}, {
 					cuIcon: 'questionfill',
@@ -176,7 +180,7 @@
 					badge: 0,
 					name: '维修单',
 					url:"../work/wxcRepairRecordList",
-					icoSrc: "../../static/common/fix-order.png",
+					icoSrc: "../../static/common/newIcon/tuoyuan.png",
 					permissionKey: "fix_car:shop"
 				}, {
 					cuIcon: 'questionfill',
@@ -184,7 +188,7 @@
 					badge: 0,
 					name: '主任审批',
 					url:"../work/directorRepairRecordList",
-					icoSrc: "../../static/common/shenpi.png",
+					icoSrc: "../../static/common/newIcon/tuoyuan.png",
 					permissionKey: "fix_car:zrsp"
 				}, {
 					cuIcon: 'questionfill',
@@ -192,7 +196,7 @@
 					badge: 0,
 					name: '局长审批',
 					url:"../work/secretaryRepairRecordList",
-					icoSrc: "../../static/common/shenpi.png",
+					icoSrc: "../../static/common/newIcon/tuoyuan.png",
 					permissionKey: "fix_car:jzsp"
 				}],
 				meetingCuIconList: [{
@@ -201,7 +205,7 @@
 					badge: 0,
 					name: '会议室信息',
 					url: "../work/meetingList",
-					icoSrc: "../../static/common/house.png",
+					icoSrc: "../../static/common/newIcon/meetingInfo.png",
 					permissionKey: "meeting:manage"
 				}, {
 					cuIcon: 'cardboardfill',
@@ -227,7 +231,7 @@
 					badge: 0,
 					name: '包房信息',
 					url: "../work/foodList",
-					icoSrc: "../../static/common/house.png",
+					icoSrc: "../../static/common/newIcon/foodInfo.png",
 					permissionKey: "dining:manage"
 				}, {
 					cuIcon: 'cardboardfill',
@@ -327,9 +331,5 @@
 	@import "style/mystyle.scss";
 	.page {
 		height: 100vh;
-	}
-	.item-ico {
-		width: 48upx;
-		height: 48upx;
 	}
 </style>

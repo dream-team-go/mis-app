@@ -21,7 +21,7 @@
 				<view class="yue-img" v-show="type === 1"></view>
 				<view class="daba-img" v-show="type === 4"></view>
 				<view class="xiaoba-img" v-show="type === 3"></view>
-				<view class="xiaoba-img" v-show="type === 5"></view>
+				<view class="qita-img" v-show="type === 5"></view>
 				<view class="car-num">{{car.car_number}}</view>
 			</view>
 		</view>
@@ -148,7 +148,7 @@
 			text-align: center;
 			width: 100%;
 			height: 100upx;
-			background: url(../../static/car/jiaoche.png) no-repeat;
+			background: url(../../static/car/xiaoba.png) no-repeat;
 			background-size: 150upx 150upx;
 			background-position: 50% 20%;
 		}
@@ -157,6 +157,14 @@
 			width: 100%;
 			height: 100upx;
 			background: url(../../static/car/daba.png) no-repeat;
+			background-size: 150upx 150upx;
+			background-position: 50% 20%;
+		}
+		.qita-img {
+			text-align: center;
+			width: 100%;
+			height: 100upx;
+			background: url(../../static/car/qita.png) no-repeat;
 			background-size: 150upx 150upx;
 			background-position: 50% 20%;
 		}

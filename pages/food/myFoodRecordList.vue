@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			
+
 			<block slot="content">订餐记录</block>
 		</cu-custom>
 
@@ -12,7 +12,7 @@
 			</view>
 		</scroll-view>
 		<view class="bg-white p10">
-			<view class="small-card-detial"  v-for="record in records" :key="record.id" @click="recordDetail(record)" >
+			<view class="card-detail" v-for="record in records" :key="record.id" @click="recordDetail(record)">
 				<view class="title-box bg-linear-blue">
 					<text class="id">{{record.id}}</text>
 					<text class="cu-tag round bg-orange sm status">{{getStatusStr(record.status)}}</text>
@@ -36,7 +36,7 @@
 						<image src="../../static/common/end-address.png" class="ico"></image>
 						<text class="value">{{record.end_time}}</text>
 					</view>
-				</view>	
+				</view>
 				<view class="reason-box">
 					<view class="label">订餐原由：</view>
 					<view class="info">{{record.desc}}</view>

@@ -1,11 +1,20 @@
-.index-title {
-		color: #0e0f3e;
-
+	.index-title {
+		color: #777777;
+		
 		.title-ico {
-			width: 44upx;
-			height: 44upx;
+			width: 46upx;
+			height: 46upx;
 			margin-right: 12upx;
 		}
+	}
+	.cu-tag-text {
+		margin-top: 2upx !important;
+		font-size: 28upx !important;
+		color: #333333 !important;
+	}
+	.item-ico{
+		width: 90upx;
+		height: 90upx;
 	}
 	.mt10 {
 		margin-top: 20upx;
@@ -13,7 +22,7 @@
 	.p10 {
 		padding: 20upx 0;
 	}
-.card {
+	.card {
 		width: 100%;
 		background: #FFFFFF;
 		margin-bottom: 40upx;
@@ -22,20 +31,21 @@
 			width: 100%;
 			height: 70upx;
 			line-height: 70upx;
-			padding: 0 20upx 0 40upx;
+			padding: 0 20upx 0 35upx;
 			.title {
 				float: left;
-				width: 120upx;
+				width: 130upx;
 				line-height: 70upx;
+				font-size: 32upx;
+				color: #777777;
 			}
 
 			.content {
 				float: right;
-				width: calc(100% - 126upx);
+				width: calc(100% - 136upx);
 				text-align: right;
 				line-height: 70upx;
-				color: #8799a3;
-				font-size: 26upx;
+				font-size: 32upx;
 			}
 		}
 		.reason-box {
@@ -43,11 +53,12 @@
 			padding: 0 20upx 20upx 40upx;
 			.title {
 				line-height: 70upx;
+				font-size: 32upx;
+				color: #777777;
 			}
 			.reason {
-				min-height: 70upx;
-				color: #8799a3;
-				font-size: 26upx;
+				min-height: 80upx;
+				font-size: 32upx;
 				text-indent: 2em;
 			}
 		}
@@ -59,44 +70,47 @@
 		margin: 0 auto 20upx;
 		box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
 		background: #FFFFFF;
-		border-radius: 20upx;
+		border-radius: 8upx;
 		.title-box {
 			width: 100%;
-			height: 56upx;
-			border-top-left-radius:20upx;
-			border-top-right-radius:20upx;
+			height: 70upx;
+			border-top-left-radius:8upx;
+			border-top-right-radius:8upx;
 			padding: 0 20upx;
-			line-height: 56upx;
+			line-height: 70upx;
+			font-weight: bold;
 			.id {
 				float: left;
 			}
 			.status {
 				float: left;
-				margin-top: 12upx;
+				font-size: 28upx;
+				margin-top: 18upx;
 				margin-left: 20upx;
 			}
 			.arrow {
 				float: right;
-				width: 28upx;
-				height: 28upx;
-				margin: 12upx 10upx 0 0;
+				width: 24px;
+				height: 40upx;
+				margin-top: 15upx;
 			}
 		}
 		.info-box {
 			width: 100%;
 			height: 48upx;
 			line-height: 48upx;
-			padding: 0 20upx;
+			padding: 7upx 20upx;
 			.label{
 				float: left;
-				margin-right: 10upx;
-				font-size: 26upx;
-				width: 130upx;
+				margin-right: 7upx;
+				font-size: 32upx;
+				width: 200upx;
+				color: #777777;
 			}
 			.info {
 				float: left;
-				color: #777676;
-				font-size: 26upx;
+				color: #333333;
+				font-size: 32upx;
 			}
 		}
 		.reason-box {
@@ -104,12 +118,13 @@
 			padding: 0 20upx 10upx 20upx;
 			.label {
 				line-height: 48upx;
-				font-size: 26upx;
+				font-size: 32upx;
+				color: #777777;
 			}
 			.info {
 				min-height: 48upx;
-				color: #8799a3;
-				font-size: 26upx;
+				color: #333333;
+				font-size: 32upx;
 				text-indent: 2em;
 			}
 		}
@@ -117,18 +132,19 @@
 			height: 210upx;
 			width: 100%;
 			.start-address{
-				padding: 0 20upx;
+				padding: 7upx 20upx;
 				height: 48upx;
 				line-height: 48upx;
 				.ico {
-					width: 28upx;
-					height: 28upx;
+					width: 32upx;
+					height: 32upx;
 					margin-right: 20upx;
-					margin-top: 8upx;
+					margin-top: 10upx;
 					vertical-align: top;
 				}
 				.text {
-					font-size: 26upx;
+					font-size: 30upx;
+					color: #333333;
 				}
 			}
 			.time-box {
@@ -138,7 +154,7 @@
 				.line {
 					width: 2upx;
 					height: 66upx;
-					margin: 2upx 36upx 0 12upx;
+					margin: 8upx 36upx 0 15upx;
 					background: #d0d0d0;
 					float: left;
 				}
@@ -146,10 +162,10 @@
 					float: left;
 					height: 70upx;
 					.value {
-						height: 24upx;
-						line-height: 24upx;
-						color: #AAAAAA;
-						font-size: 24upx;
+						height: 30upx;
+						line-height: 30upx;
+						color: #333333;
+						font-size: 30upx;
 					}
 					.middle {
 						height: 46upx;
@@ -160,8 +176,8 @@
 				padding: 0 20upx;
 				height: 72upx;
 				.ico {
-					width: 28upx;
-					height: 28upx;
+					width: 32upx;
+					height: 32upx;
 					margin-right: 20upx;
 					margin-top: 8upx;
 					vertical-align: top;
@@ -173,12 +189,13 @@
 					.value {
 						height: 48upx;
 						line-height: 48upx;
+						color: #333333;
 					}
 					.time {
-						height: 24upx;
-						line-height: 24upx;
-						color: #AAAAAA;
-						font-size: 24upx;
+						height: 30upx;
+						line-height: 30upx;
+						color: #333333;
+						font-size: 30upx;
 					}
 				}
 			}

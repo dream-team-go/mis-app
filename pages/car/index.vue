@@ -8,64 +8,64 @@
 
 			<view class="cu-bar bg-white solid-bottom margin-top">
 				<view class="action index-title">
-					<image src="../../static/car/car-title.png" class="title-ico"></image>
-					用车概况
+					<image src="../../static/common/newIcon/car_record.png" class="title-ico"></image>
+					<text class="text-lg text-black">用车概况</text>
 				</view>
-				<view class="action"><button class="cu-btn bg-linear-blue shadow" @tap="toBookcar">预约</button></view>
+				<!-- <view class="action"><button class="cu-btn bg-linear-blue shadow" @tap="toBookcar">预约</button></view> -->
 			</view>
 
 			<view class="cu-list grid no-border col-3">
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../car/myCarRecordList" open-type="navigate">
-						<text class="text-orange text-lg">{{ carData.totalCount }}</text>
+						<text class="text-color">{{ carData.totalCount }}</text>
 						<text>共预约</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../car/myCarRecordList?status=0" open-type="navigate">
-						<text class="text-orange text-lg">{{ carData.waitCheckCount }}</text>
+						<text class="text-color">{{ carData.waitCheckCount }}</text>
 						<text>待审批</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../car/myCarRecordList?status=-3" open-type="navigate">
-						<text class="text-orange text-lg">{{ carData.cancleCount }}</text>
-						<text>申请人取消订单</text>
+						<text class="text-color">{{ carData.cancleCount }}</text>
+						<text>申请人取消</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../car/myCarRecordList?status=1" open-type="navigate">
-						<text class="text-orange text-lg">{{ carData.approveCount }}</text>
+						<text class="text-color">{{ carData.approveCount }}</text>
 						<text>审批通过</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../car/myCarRecordList?status=-1" open-type="navigate">
-						<text class="text-orange text-lg">{{ carData.failCount }}</text>
+						<text class="text-color">{{ carData.failCount }}</text>
 						<text>审批未通过</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../car/myCarRecordList?status=2" open-type="navigate">
-						<text class="text-orange text-lg">{{ carData.finishDispatchCount }}</text>
+						<text class="text-color">{{ carData.finishDispatchCount }}</text>
 						<text>完成车辆调度</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../car/myCarRecordList?status=-2" open-type="navigate">
-						<text class="text-orange text-lg">{{ carData.centerCancleCount }}</text>
-						<text>调度中心取消订单</text>
+						<text class="text-color">{{ carData.centerCancleCount }}</text>
+						<text>调度中心取消</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../car/myCarRecordList?status=3" open-type="navigate">
-						<text class="text-orange text-lg">{{ carData.underwayCount }}</text>
+						<text class="text-color">{{ carData.underwayCount }}</text>
 						<text>订单进行中</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../car/myCarRecordList?status=4" open-type="navigate">
-						<text class="text-orange text-lg">{{ carData.successCount }}</text>
+						<text class="text-color">{{ carData.successCount }}</text>
 						<text>订单完成</text>
 					</navigator>
 				</view>
@@ -73,8 +73,8 @@
 
 			<view class="cu-bar bg-white solid-bottom margin-top index-title">
 				<view class="action">
-					<image src="../../static/common/clock.png" class="title-ico"></image>
-					最近预约
+					<image src="../../static/common/newIcon/car_clock.png" class="title-ico"></image>
+					<text class="text-lg text-black">最近预约</text>
 				</view>
 			</view>
 			<view class="card">
@@ -240,11 +240,9 @@ export default {
 <style scoped lang="scss">
 @import 'style/mystyle.scss';
 
-.cu-list.grid > .cu-item .text-orange {
-	color: #f37b1d;
-}
-
-.cu-list.grid > .cu-item .text-lg {
-	font-size: 32upx;
-}
+.cu-list.grid>.cu-item .text-color {
+		color: #17B986;
+		font-size: 34upx;
+		font-weight: bold;
+	}
 </style>

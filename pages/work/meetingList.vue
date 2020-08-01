@@ -5,12 +5,6 @@
 			<block slot="content">会议室</block>
 			<block slot="right"><view v-if="HasOperateKey" @tap="toAdd">新增</view></block>
 		</cu-custom>
-		<!-- <view class="outer-box">
-			<view class="room-box" v-for="room in rooms" :key="room.id" @click="roomDetail(room)">
-				<view class="img"></view>
-				<view class="car-num">{{room.number}}</view>
-			</view>
-		</view> -->
 		
 		<scroll-view scroll-x class="bg-white nav text-center">
 			<view class="cu-item" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in buildings.length"
@@ -168,29 +162,6 @@
 </script>
 
 <style scoped lang="scss">
-.outer-box {
-	width: 100%;
-	min-height: calc(100vh - 90upx);
-	background: #FFFFFF;
-	.room-box {
-		width: 33%;
-		height: 140upx;
-		float: left;
-		margin: 0 auto;
-		.img {
-			text-align: center;
-			width: 100%;
-			height: 100upx;
-			background: url(../../static/common/meeting-room.png) no-repeat;
-			background-size: 150upx 150upx;
-			background-position: 50% 20%;
-		}
-		.car-num {
-			font-size: 28upx;
-			text-align: center;
-			color: #36BDBD;
-		}
-	}
-}
+
 </style>
 

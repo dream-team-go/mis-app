@@ -6,9 +6,9 @@
 					<view class="swiper-item">
 						<image class="swiper-img" mode="aspectFill" :src="item"></image>
 					</view>
-					<view class="word-box">
+					<!-- <view class="word-box">
 						<image src="/static/home/words.png" class="word-img" mode="aspectFit"></image>
-					</view>
+					</view> -->
 				</swiper-item>
 			</swiper>
 			<view class="nav-bar">
@@ -253,12 +253,12 @@ export default {
 			position: absolute;
 			top: 420upx;
 			height: 160upx;
-			width: calc(100vw - 64upx);
+			width: calc(100vw - 80upx);
 			left: 50%;
 			transform: translateX(-50%);
 			display: flex;
 			justify-content: space-between;
-			padding: 15upx 70upx;
+			padding: 15upx 85upx;
 			background-color: #fff;
 			border-radius: 8upx;
 			box-shadow: 0px 8upx 16upx rgba(0,0,0,.15);
@@ -270,13 +270,13 @@ export default {
 				justify-content: space-between;
 				
 				.nav-img {
-					width: 80upx;
-					height: 80upx;
+					width: 90upx;
+					height: 90upx;
 					object-fit: contain;
 				}
 				
 				.name {
-					font-size: 32upx;
+					font-size: 28upx;
 					text-align: center;
 				}
 			}
@@ -287,7 +287,7 @@ export default {
 			display: flex;
 			justify-content: space-around;
 			flex-wrap: wrap;
-			background-color: #fff;
+			background-color: #ffffff;
 			
 			.grid-item {
 				width: 160upx;
@@ -303,8 +303,8 @@ export default {
 					align-items: center;
 					
 					uni-image {
-						width: 70upx;
-						height: 70upx;
+						width: 80upx;
+						height: 80upx;
 					}
 				}
 				
@@ -312,7 +312,7 @@ export default {
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					font-size: 30upx;
+					font-size: 28upx;
 					margin: 13upx 0;
 				}
 			}
@@ -378,8 +378,8 @@ export default {
 					padding: 32upx 40upx;
 					
 					.notice-item-img {
-						height: 80upx;
-						width: 80upx;
+						height: 70upx;
+						width: 70upx;
 						margin-right: 24upx;
 					}
 					
@@ -390,7 +390,7 @@ export default {
 						flex: 1;
 						
 						.notice-item-title {
-							font-size: 34upx;
+							font-size: 32upx;
 							margin-bottom: 10upx;
 						}
 						

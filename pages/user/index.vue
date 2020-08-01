@@ -14,7 +14,7 @@
 							</view>
 							<text class="text-bold text-xl ml20">{{userInfo?userInfo.user.userCnName:""}}</text>
 						</view>
-						<view class="text-gray text-lg text-right">
+						<view class="text-somber text-lg text-right">
 							开远市机关事务局
 						</view>
 					</view>
@@ -63,13 +63,13 @@
 			<view class="cu-list menu margin-top">
 				<navigator class="cu-item arrow" hover-class="none" url="../user/editPassword" open-type="navigate">
 					<view class="content">
-						<image src="../../static/login/password.png" class="ico"></image>
+						<image src="../../static/common/newIcon/edit_password.png" class="ico"></image>
 						<text class="text-black">修改密码</text>
 					</view>
 				</navigator>
 				<view class="cu-item arrow" @click="logout">
 					<view class="content">
-						<image src="../../static/common/loginout.png" class="ico"></image>
+						<image src="../../static/common/newIcon/logout.png" class="ico"></image>
 						<text class="text-black">退出登录</text>
 					</view>
 				</view>
@@ -167,8 +167,8 @@
 	}
 
 	.ico {
-		width: 42upx !important;
-		height: 42upx !important;
+		width: 46upx !important;
+		height: 46upx !important;
 		margin: 0 25upx 0 5upx !important;
 	}
 </style>

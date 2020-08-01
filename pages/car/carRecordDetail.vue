@@ -8,7 +8,8 @@
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 预约进度
+				<image src="../../static/common/newIcon/car_process.png"></image>
+				<text class="text-md text-black text-black">预约进度</text>
 			</view>
 		</view>
 		<view class="bg-white padding">
@@ -19,81 +20,81 @@
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.status == -2">
-			<view class="action">
+			<view class="action label">
 				 取消订单原因：
 				<text class="text-red">{{info.fail_reason}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
+			<view class="action label">
 				 用车事由：
-				<text class="text-bold">{{info.reason}}</text>
+				<text class="text-md text-black">{{info.reason}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 用车人：
-				<text class="text-bold">{{info.car_user}}({{info.phone}})</text>
+				<text class="text-md text-black">{{info.car_user}}({{info.phone}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 乘车人数：
-				<text class="text-bold">{{info.people_num}}</text>
+				<text class="text-md text-black">{{info.people_num}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 上车地点：
-				<text class="text-bold">{{info.start_place}}</text>
+				<text class="text-md text-black">{{info.start_place}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 用车区域：
-				<text class="text-bold">{{info.area}}</text>
+				<text class="text-md text-black">{{info.area}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 目的地：
-				<text class="text-bold">{{info.end_city}}{{info.end_area}}{{info.end_place}}</text>
+				<text class="text-md text-black">{{info.end_city}}{{info.end_area}}{{info.end_place}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 出发时间：
-				<text class="text-bold">{{info.predict_start_time}}</text>
+				<text class="text-md text-black">{{info.predict_start_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 回程时间：
-				<text class="text-bold">{{info.predict_end_time}}</text>
+				<text class="text-md text-black">{{info.predict_end_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 预约时间：
-				<text class="text-bold">{{info.apply_time}}</text>
+				<text class="text-md text-black">{{info.apply_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 用车类型：
-				<text class="text-bold">{{info.type == 1 ? "公务用车" : "网约车"}}</text>
+				<text class="text-md text-black">{{info.type == 1 ? "公务用车" : "网约车"}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 预约人：
-				<text class="text-bold">{{info.apply_user_name}}({{info.apply_user_phone}})</text>
+				<text class="text-md text-black">{{info.apply_user_name}}({{info.apply_user_phone}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 用车要求：
-				<text class="text-bold">{{carRequire}}</text>
+				<text class="text-md text-black">{{carRequire}}</text>
 			</view>
 		</view>
 		<!-- <view class="padding flex flex-direction" v-if="info.status == 0">
@@ -123,6 +124,7 @@
 			this.id = option.id;
 		},
 		onShow(){
+			this.carRequire == "无";
 			global.$http.post('/car/apply/getInfo', {
 				params: {
 					apply_id: this.id
@@ -165,7 +167,7 @@
 					case 0:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: "审批",
@@ -187,11 +189,11 @@
 					case 1:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(1),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: "调度",
@@ -209,7 +211,7 @@
 					case -1:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(-1),
@@ -231,15 +233,15 @@
 					case 2:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(1),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(2),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: "订单进行中",
@@ -253,11 +255,11 @@
 					case -2:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(1),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(-2),
@@ -275,19 +277,19 @@
 					case 3:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(1),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(2),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(3),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: "订单完成",
@@ -297,7 +299,7 @@
 					case -3:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(-3),
@@ -307,23 +309,23 @@
 					case 4:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(1),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(2),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(3),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(4),
-							color: 'text-green'
+							color: 'text-car'
 						});
 						break;
 				}

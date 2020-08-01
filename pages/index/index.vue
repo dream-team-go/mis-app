@@ -1,14 +1,17 @@
 <template>
-	<view class="content">
-		<image class="logo" style="width: 60%;height: 440upx;" src="/static/verify.gif"></image>
-	</view>
+	<view class="content" :style="{backgroundImage: 'url('+imageURL+')'}"></view>
 </template>
 
 <script>
 	import {
-	    mapMutations
+		mapMutations
 	} from 'vuex';
 	export default {
+		data() {
+			return {
+				imageURL: '/static/lead.png'
+			};
+		},
 		methods: {
 			...mapMutations(['setLoginInfo', 'setLogoutInfo'])
 		},
@@ -82,30 +85,5 @@
 </script>
 
 <style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
 
-	.logo {
-		height: 200upx;
-		width: 200upx;
-		margin-top: 200upx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50upx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36upx;
-		color: #8f8f94;
-	}
-	
 </style>

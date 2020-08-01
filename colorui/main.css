@@ -12,7 +12,7 @@
  ==================== */
 body {
 	background-color: #f1f1f1;
-	font-size: 30upx;
+	font-size: 32upx;
 	color: #333333;
 	font-family: Helvetica Neue, Helvetica, sans-serif;
 }
@@ -512,7 +512,7 @@ radio.white.checked .uni-radio-input {
 }
 
 .solid-bottom::after {
-	border-bottom: 1upx solid rgba(0, 0, 0, 0.5);
+	border-bottom: 1upx solid rgba(0, 0, 0, 0.2);
 }
 
 .solid-left::after {
@@ -1432,7 +1432,7 @@ button.cuIcon.lg {
 	display: block;
 	margin-top: 10upx;
 	color: #333333;
-	font-size: 28upx;
+	font-size: 30upx;
 	line-height: 40upx
 }
 
@@ -1559,7 +1559,7 @@ button.cuIcon.lg {
 
 .cu-bar .action:first-child {
 	margin-left: 30upx;
-	font-size: 30upx;
+	font-size: 32upx;
 }
 
 .cu-bar .action text.text-cut {
@@ -1956,9 +1956,9 @@ button.cuIcon.lg {
 }
 
 .nav .cu-item {
-	height: 90upx;
+	height: 80upx;
 	display: inline-block;
-	line-height: 90upx;
+	line-height: 80upx;
 	margin: 0 10upx;
 	padding: 0 20upx;
 }
@@ -2343,12 +2343,13 @@ button.cuIcon.lg {
 	position: relative;
 	height: 60upx;
 	line-height: 60upx;
+	color: #777777;
 }
 
 .cu-form-group input {
 	flex: 1;
 	font-size: 32upx;
-	color: #555;
+	color: #333333;
 	padding-right: 20upx;
 }
 
@@ -3784,6 +3785,10 @@ scroll-view.cu-steps .cu-item {
 	font-size: 30upx;
 }
 
+.text-md {
+	font-size: 32upx;
+}
+
 .text-lg {
 	font-size: 34upx;
 }
@@ -3952,4 +3957,28 @@ scroll-view.cu-steps .cu-item {
 
 .text-linear-blue {
 	color: #44d7b6;
+}
+
+.text-car,
+.line-car,
+.lines-car {
+	color: #17B986;
+}
+
+.text-food,
+.line-food,
+.lines-food {
+	color: #FF4868;
+}
+
+.text-meeting,
+.line-meeting,
+.lines-meeting {
+	color: #3DA3F3;
+}
+
+.cu-bar .action image{
+	width: 46upx;
+	height: 46upx;
+	margin-right: 12upx;
 }

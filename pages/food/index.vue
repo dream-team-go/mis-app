@@ -8,40 +8,40 @@
 
 			<view class="cu-bar bg-white solid-bottom margin-top">
 				<view class="action index-title">
-					<image src="../../static/common/food.png" class="title-ico"></image>
-					订餐概况
+					<image src="../../static/common/newIcon/food_record.png" class="title-ico"></image>
+					<text class="text-lg text-black">订餐概况</text>
 				</view>
-				<view class="action"><button class="cu-btn bg-linear-blue shadow" @tap="toBookfood">预定</button></view>
+				<!-- <view class="action"><button class="cu-btn bg-linear-blue shadow" @tap="toBookfood">预定</button></view> -->
 			</view>
 
 			<view class="cu-list grid no-border col-3">
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList" open-type="navigate">
-						<text class="text-orange text-lg">{{ foodData.totalCount }}</text>
+						<text class="text-color">{{ foodData.totalCount }}</text>
 						<text>共预定</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=1" open-type="navigate">
-						<text class="text-orange text-lg">{{ foodData.successCount }}</text>
+						<text class="text-color">{{ foodData.successCount }}</text>
 						<text>已确认</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=-1" open-type="navigate">
-						<text class="text-orange text-lg">{{ foodData.failCount }}</text>
+						<text class="text-color">{{ foodData.failCount }}</text>
 						<text>驳回</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=-2" open-type="navigate">
-						<text class="text-orange text-lg">{{ foodData.cancleCount }}</text>
+						<text class="text-color">{{ foodData.cancleCount }}</text>
 						<text>取消预定</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=0" open-type="navigate">
-						<text class="text-orange text-lg">{{ foodData.waitCheckCount }}</text>
+						<text class="text-color">{{ foodData.waitCheckCount }}</text>
 						<text>待确认</text>
 					</navigator>
 				</view>
@@ -49,8 +49,8 @@
 
 			<view class="cu-bar bg-white solid-bottom margin-top">
 				<view class="action index-title">
-					<image src="../../static/common/clock.png" class="title-ico"></image>
-					最近预定
+					<image src="../../static/common/newIcon/food_clock.png" class="title-ico"></image>
+					<text class="text-lg text-black">最近预定</text>
 				</view>
 			</view>
 			<view class="card">
@@ -59,8 +59,12 @@
 					<text class="content">{{ foodData.status.length > 0 ? foodData.building_name + '(' + foodData.room_number + ')' : '无' }}</text>
 				</view>
 				<view class="item">
-					<text class="title">用餐时间</text>
-					<text class="content">{{ foodData.status.length > 0 ? foodData.start_time + '—' + foodData.end_time : '无' }}</text>
+					<text class="title">开始时间</text>
+					<text class="content">{{ foodData.status.length > 0 ? foodData.start_time : '无' }}</text>
+				</view>
+				<view class="item">
+					<text class="title">结束时间</text>
+					<text class="content">{{ foodData.status.length > 0 ? foodData.end_time : '无' }}</text>
 				</view>
 				<view class="item">
 					<text class="title">预定时间</text>
@@ -190,10 +194,9 @@ export default {
 
 <style lang="scss" scoped>
 @import 'style/mystyle.scss';
-.cu-list.grid > .cu-item .text-orange {
-	color: #f37b1d;
-}
-.cu-list.grid > .cu-item .text-lg {
-	font-size: 32upx;
-}
+.cu-list.grid>.cu-item .text-color {
+		color: #FF4868;
+		font-size: 34upx;
+		font-weight: bold;
+	}
 </style>
