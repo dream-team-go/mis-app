@@ -100,7 +100,7 @@ switch::before {
 	color: #ffffff !important;
 	top: 0%;
 	left: 0upx;
-	font-size: 28upx;
+	font-size: 32upx;
 	line-height: 26px;
 	width: 50%;
 	text-align: center;
@@ -1978,11 +1978,11 @@ button.cuIcon.lg {
 }
 
 .cu-timeline .cu-time {
-	width: 120upx;
+	width: 140upx;
 	text-align: center;
 	padding: 20upx 0;
-	font-size: 28upx;
-	color: #888;
+	font-size: 32upx;
+	color: #333333;
 	display: block;
 }
 
@@ -2365,7 +2365,7 @@ button.cuIcon.lg {
 	width: 100%;
 	line-height: 1.2em;
 	flex: 1;
-	font-size: 30upx;
+	font-size: 32upx;
 	padding: 0;
 }
 
@@ -2384,7 +2384,7 @@ button.cuIcon.lg {
 
 .cu-form-group picker .picker {
 	line-height: 100upx;
-	font-size: 30upx;
+	font-size: 32upx;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
@@ -3982,3 +3982,53 @@ scroll-view.cu-steps .cu-item {
 	height: 46upx;
 	margin-right: 12upx;
 }
+
+/* ==================
+         弹框列表
+ ==================== */
+.list-modal {
+		z-index: 10000;
+	}
+
+	.list-modal .cu-dialog {
+		height: 100vh;
+	}
+
+	.list-modal.cu-modal.show #list-view {
+		overflow-x: hidden;
+		overflow-y: scroll;
+		pointer-events: auto;
+	}
+
+	.cu-form-group .modal-group {
+		flex: 1;
+		padding-right: 40upx;
+		overflow: hidden;
+		position: relative;
+		text-align: right;
+	}
+
+	.cu-form-group .modal-group .picker {
+		line-height: 50upx;
+		font-size: 32upx;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		width: 100%;
+	}
+
+	.cu-form-group .modal-group::after {
+		font-family: cuIcon;
+		display: block;
+		content: "\e6a3";
+		position: absolute;
+		font-size: 34upx;
+		color: #8799a3;
+		line-height: 50upx;
+		width: 60upx;
+		text-align: center;
+		top: 0;
+		bottom: 0;
+		right: -20upx;
+		margin: auto;
+	}

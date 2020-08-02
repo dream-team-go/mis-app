@@ -8,8 +8,8 @@
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<image src="../../static/common/newIcon/car_process.png"></image>
-				<text class="text-md text-black text-black">预约进度</text>
+				<image src="../../static/common/newIcon/car_record.png"></image>
+				<text class="text-lg text-black">预约进度</text>
 			</view>
 		</view>
 		<view class="bg-white padding">
@@ -167,7 +167,7 @@
 					case 0:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: "审批",
@@ -189,11 +189,11 @@
 					case 1:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(1),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: "调度",
@@ -211,7 +211,7 @@
 					case -1:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(-1),
@@ -233,15 +233,15 @@
 					case 2:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(1),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(2),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: "订单进行中",
@@ -255,11 +255,11 @@
 					case -2:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(1),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(-2),
@@ -277,19 +277,19 @@
 					case 3:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(1),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(2),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(3),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: "订单完成",
@@ -299,7 +299,7 @@
 					case -3:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(-3),
@@ -309,23 +309,23 @@
 					case 4:
 						this.steps.push({
 							name: this.StatusEnumMap.get(0),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(1),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(2),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(3),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						this.steps.push({
 							name: this.StatusEnumMap.get(4),
-							color: 'text-car'
+							color: 'text-green'
 						});
 						break;
 				}

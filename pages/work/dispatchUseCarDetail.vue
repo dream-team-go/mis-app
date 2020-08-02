@@ -7,20 +7,20 @@
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 用车人数：
-				<text class="text-bold">{{info.people_num}}</text>
+				<text class="text-black">{{info.people_num}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 派车数量：
-				<text class="text-bold">{{list.length}}辆</text>
+				<text class="text-black">{{list.length}}辆</text>
 			</view>
 		</view>
 
 		<view class="cu-item arrow margin-top" v-for="(dispatchOrder,index) in list" :key="dispatchOrder.id">
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
-					 派车单{{index+1}} <text class="text-orange text-bold margin-left">{{getStatusStr(dispatchOrder.status)}}</text>
+					 派车单{{index+1}} <text class="text-orange text-black margin-left">{{getStatusStr(dispatchOrder.status)}}</text>
 				</view>
 				<view class="action" v-if="dispatchOrder.status == 3">
 					<button class="cu-btn bg-linear-blue shadow" @tap="sureSettle(dispatchOrder)">确认结算</button>
@@ -30,25 +30,25 @@
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
 					 乘车人数：
-					<text class="text-bold">{{dispatchOrder.people_num}}</text>
+					<text class="text-black">{{dispatchOrder.people_num}}</text>
 				</view>
 			</view>
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
 					 车辆：
-					<text class="text-bold">{{dispatchOrder.brand + " " + dispatchOrder.color + " " + dispatchOrder.seat_num + "座" + " " + dispatchOrder.car_number}}</text>
+					<text class="text-black">{{dispatchOrder.brand + " " + dispatchOrder.color + " " + dispatchOrder.seat_num + "座" + " " + dispatchOrder.car_number}}</text>
 				</view>
 			</view>
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
 					 司机：
-					<text class="text-bold">{{dispatchOrder.driver_name + "("+ dispatchOrder.driver_phone +")"}}</text>
+					<text class="text-black">{{dispatchOrder.driver_name + "("+ dispatchOrder.driver_phone +")"}}</text>
 				</view>
 			</view>
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
 					 里程数：
-					<text class="text-bold">{{dispatchOrder.stop_num}}公里</text>
+					<text class="text-black">{{dispatchOrder.stop_num}}公里</text>
 				</view>
 				<view class="action" v-if="dispatchOrder.status == 3">
 					<button class="cu-btn bg-linear-blue shadow" @tap="editMileage(index)">修改里程</button>
@@ -57,7 +57,7 @@
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
 					 用车天数：
-					<text class="text-bold">{{dispatchOrder.days}}</text>
+					<text class="text-black">{{dispatchOrder.days}}</text>
 				</view>
 				<view class="action" v-if="dispatchOrder.status == 3">
 					<button class="cu-btn bg-linear-blue shadow" @tap="editDays(index)">修改天数</button>
@@ -66,7 +66,7 @@
 			<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.bak.length > 0">
 				<view class="action">
 					 备注：
-					<text class="text-bold">{{dispatchOrder.bak}}</text>
+					<text class="text-black">{{dispatchOrder.bak}}</text>
 				</view>
 			</view>
 			<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.is_appraise == 1">
@@ -78,7 +78,7 @@
 			<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.is_appraise == 1 && dispatchOrder.appraise_contnet.length > 0">
 				<view class="action">
 					 评价内容：
-					<text class="text-bold">{{dispatchOrder.bak}}</text>
+					<text class="text-black">{{dispatchOrder.bak}}</text>
 				</view>
 			</view>
 			<uni-collapse v-if="dispatchOrder.status > 2">
@@ -86,55 +86,55 @@
 					<view class="cu-bar bg-white solid-bottom">
 						<view class="action">
 							 里程费(元)：
-							<text class="text-bold">{{dispatchOrder.stop_price}}/公里 x {{dispatchOrder.stop_num}}公里 = {{dispatchOrder.stop_price * dispatchOrder.stop_num}}</text>
+							<text class="text-black">{{dispatchOrder.stop_price}}/公里 x {{dispatchOrder.stop_num}}公里 = {{dispatchOrder.stop_price * dispatchOrder.stop_num}}</text>
 						</view>
 					</view>
 					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.zs_fee > 0">
 						<view class="action">
 							 住宿费(元)：
-							<text class="text-bold">{{dispatchOrder.zs_fee}}</text>
+							<text class="text-black">{{dispatchOrder.zs_fee}}</text>
 						</view>
 					</view>
 					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.tc_fee > 0">
 						<view class="action">
 							 停车费(元)：
-							<text class="text-bold">{{dispatchOrder.tc_fee}}</text>
+							<text class="text-black">{{dispatchOrder.tc_fee}}</text>
 						</view>
 					</view>
 					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.hs_fee > 0">
 						<view class="action">
 							 伙食费(元)：
-							<text class="text-bold">{{dispatchOrder.hs_fee}}</text>
+							<text class="text-black">{{dispatchOrder.hs_fee}}</text>
 						</view>
 					</view>
 					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.jy_fee > 0">
 						<view class="action">
 							 加油费(元)：
-							<text class="text-bold">{{dispatchOrder.jy_fee}}</text>
+							<text class="text-black">{{dispatchOrder.jy_fee}}</text>
 						</view>
 					</view>
 					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.gl_fee > 0">
 						<view class="action">
 							<text class="cuIcon-title text-orange"></text> 过路费(元)：
-							<text class="text-bold">{{dispatchOrder.gl_fee}}</text>
+							<text class="text-black">{{dispatchOrder.gl_fee}}</text>
 						</view>
 					</view>
 					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.xc_fee > 0">
 						<view class="action">
 							 洗车费(元)：
-							<text class="text-bold">{{dispatchOrder.xc_fee}}</text>
+							<text class="text-black">{{dispatchOrder.xc_fee}}</text>
 						</view>
 					</view>
 					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.clzy_fee > 0">
 						<view class="action">
 							 车辆占用费(元)：
-							<text class="text-bold">{{dispatchOrder.clzy_fee}}</text>
+							<text class="text-black">{{dispatchOrder.clzy_fee}}</text>
 						</view>
 					</view>
 					<view class="cu-bar bg-white solid-bottom" v-if="dispatchOrder.other_fee > 0">
 						<view class="action">
 							 其它费用(元)：
-							<text class="text-bold">{{dispatchOrder.other_fee}}</text>
+							<text class="text-black">{{dispatchOrder.other_fee}}</text>
 						</view>
 					</view>
 				</uni-collapse-item>

@@ -9,35 +9,35 @@
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 食堂楼房：
-				<text class="text-bold">{{info.name}}</text>
+				<text class="text-black">{{info.name}}</text>
 			</view>
 		</view>
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 包房房间：
-				<text class="text-bold">{{info.number}}</text>
+				<text class="text-black">{{info.number}}</text>
 			</view>
 		</view>
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 容纳人数：
-				<text class="text-bold">{{info.capacity}}</text>
+				<text class="text-black">{{info.capacity}}</text>
 			</view>
 		</view>
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 地址：
-				<text class="text-bold">{{info.address}}</text>
+				<text class="text-black">{{info.address}}</text>
 			</view>
 		</view>
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 创建时间：
-				<text class="text-bold">{{info.create_time}}</text>
+				<text class="text-black">{{info.create_time}}</text>
 			</view>
 		</view>
 		

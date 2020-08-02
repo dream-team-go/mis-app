@@ -7,7 +7,8 @@
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 维修申请进度
+				<image src="../../static/common/newIcon/car_repair.png"></image>
+				<text class="text-lg text-black">维修申请进度</text>
 			</view>
 		</view>
 		<view class="bg-white padding">
@@ -26,69 +27,69 @@
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 编号：
-				<text class="text-bold">{{info.order_code}}</text>
+				<text class="text-black">{{info.order_code}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 车辆：
-				<text class="text-bold">{{info.brand}} {{info.car_number}}</text>
+				<text class="text-black">{{info.brand}} {{info.car_number}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 申请人：
-				<text class="text-bold">{{info.user_name}}({{info.user_phone}})</text>
+				<text class="text-black">{{info.user_name}}({{info.user_phone}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 类型：
-				<text class="text-bold">{{info.type == 1 ? "维修" : "保养"}}</text>
+				<text class="text-black">{{info.type == 1 ? "维修" : "保养"}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				 申请时间：
-				<text class="text-bold">{{info.create_time}}</text>
+				<text class="text-black">{{info.create_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				维修厂：
-				<text class="text-bold">{{info.repair_shop}}</text>
+				<text class="text-black">{{info.repair_shop}}</text>
 			</view>
 		</view>
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				备注：
-				<text class="text-bold">{{info.desc}}</text>
+				<text class="text-black">{{info.desc}}</text>
 			</view>
 		</view>
 
 		<view class="cu-bar bg-white solid-bottom" v-if="info.zz_name">
 			<view class="action">
 				 组长审批：
-				<text class="text-bold">{{info.zz_name}} {{info.zzsp_time}}</text>
+				<text class="text-black">{{info.zz_name}} {{info.zzsp_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.zr_name">
 			<view class="action">
 				 主任审批：
-				<text class="text-bold">{{info.zr_name}} {{info.end_area}}</text>
+				<text class="text-black">{{info.zr_name}} {{info.end_area}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.business">
 			<view class="action">
 				 维修出单：
-				<text class="text-bold">{{info.business}} {{info.cwxd_time}}</text>
+				<text class="text-black">{{info.business}} {{info.cwxd_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.jz_name">
 			<view class="action">
 				 局长审批：
-				<text class="text-bold">{{info.jz_name}} {{info.jzsp_time}}</text>
+				<text class="text-black">{{info.jz_name}} {{info.jzsp_time}}</text>
 			</view>
 		</view>
 		<view class="bottom-btns-seat"></view>

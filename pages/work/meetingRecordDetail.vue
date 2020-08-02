@@ -6,7 +6,8 @@
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 预定进度
+				<image src="../../static/common/newIcon/meeting_record.png"></image>
+				<text class="text-lg text-black">预约进度</text>
 			</view>
 		</view>
 		<view class="bg-white padding">
@@ -25,43 +26,43 @@
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 会议主题：
-				<text class="text-bold">{{info.desc}}</text>
+				<text class="text-black">{{info.desc}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 会议室：
-				<text class="text-bold">{{info.room_number}}({{info.building_name}})</text>
+				<text class="text-black">{{info.room_number}}({{info.building_name}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 会议时间：
-				<text class="text-bold">{{info.start_time}} — {{info.end_time}}</text>
+				<text class="text-black">{{info.start_time}} — {{info.end_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 参会人数：
-				<text class="text-bold">{{info.people_num}}</text>
+				<text class="text-black">{{info.people_num}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.attend_leader != null">
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 备注：
-				<text class="text-bold">{{info.attend_leader}}</text>
+				<text class="text-black">{{info.attend_leader}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 预定人：
-				<text class="text-bold">{{info.user_name}}({{info.user_tel}})</text>
+				<text class="text-black">{{info.user_name}}({{info.user_tel}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-title text-orange"></text> 预定时间：
-				<text class="text-bold">{{info.create_time}}</text>
+				<text class="text-black">{{info.create_time}}</text>
 			</view>
 		</view>
 <view class="bottom-btns-seat"></view>

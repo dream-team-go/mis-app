@@ -15,9 +15,9 @@
 <view class="bg-white p10">
 		<view class="small-card-detial"  v-for="record in records" :key="record.id" @click="recordDetail(record)" >
 			<view class="title-box bg-linear-blue">
-				<text class="id">{{record.order_code}}</text>
-				<text class="cu-tag round bg-orange sm status">{{getStatusStr(record.status)}}</text>
-				<image src="../../static/common/next.png" class="arrow"></image>
+				<text class="id">{{util.completeLength(record.order_code, 17)}}</text>
+				<text class="cu-tag round bg-orange status">{{getStatusStr(record.status)}}</text>
+				<!-- <image src="../../static/common/next.png" class="arrow"></image> -->
 			</view>
 			<view class="info-box">
 				<text class="label">车辆：</text>

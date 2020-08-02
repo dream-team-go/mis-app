@@ -6,7 +6,8 @@
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 预约进度
+				<image src="../../static/common/newIcon/car_record.png"></image>
+				<text class="text-lg text-black">预约进度</text>
 			</view>
 		</view>
 		<view class="bg-white padding">

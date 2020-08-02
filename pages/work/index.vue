@@ -115,7 +115,7 @@
 					badge: 0,
 					name: '司机信息',
 					url: "../work/driverList",
-					icoSrc: "../../static/common/newIcon/car.png",
+					icoSrc: "../../static/common/newIcon/driverInfo.png",
 					permissionKey: "driver:manage"
 				}, {
 					cuIcon: 'noticefill',
@@ -123,7 +123,7 @@
 					badge: 0,
 					name: '用车记录',
 					url: "../work/useCarRecordList",
-					icoSrc: "../../static/common/newIcon/car.png",
+					icoSrc: "../../static/common/newIcon/carRecordInfo.png",
 					permissionKey: "use_car:list"
 				}, {
 					cuIcon: 'noticefill',
@@ -131,7 +131,7 @@
 					badge: 0,
 					name: '用车审批',
 					url:"../work/checkUseCarRecordList",
-					icoSrc: "../../static/common/newIcon/meeting.png",
+					icoSrc: "../../static/common/newIcon/carApproveInfo.png",
 					permissionKey: "use_car:sp"
 				}, {
 					cuIcon: 'upstagefill',
@@ -139,7 +139,7 @@
 					badge: 0,
 					name: '用车调度',
 					url:"../work/dispatchUseCarRecordList",
-					icoSrc: "../../static/common/newIcon/meeting.png",
+					icoSrc: "../../static/common/newIcon/carDispatchInfo.png",
 					permissionKey: "use_car:dispatch"
 				},{
 					cuIcon: 'upstagefill',
@@ -147,7 +147,7 @@
 					badge: 0,
 					name: '我的派车单',
 					url:"../work/dispatchCarOrderList",
-					icoSrc: "../../static/common/newIcon/meeting.png",
+					icoSrc: "../../static/common/newIcon/dispatchInfo.png",
 					permissionKey: "use_car:driver"
 				}],
 				maintainCuIconList:[{
@@ -156,7 +156,7 @@
 					badge: 0,
 					name: '维修记录',
 					url:"../work/repairRecordList",
-					icoSrc: "../../static/common/newIcon/tuoyuan.png",
+					icoSrc: "../../static/common/newIcon/repairRecordInfo.png",
 					permissionKey: "fix_car:list"
 				},{
 					cuIcon: 'clothesfill',
@@ -164,31 +164,31 @@
 					badge: 0,
 					name: '维修申请',
 					url:"../work/myRepairRecordList",
-					icoSrc: "../../static/common/newIcon/tuoyuan.png",
+					icoSrc: "../../static/common/newIcon/repairApplyInfo.png",
 					permissionKey: "fix_car:apply"
-				}, {
-					cuIcon: 'discoverfill',
-					color: 'purple',
-					badge: 0,
-					name: '组长审批',
-					url:"../work/foremanRepairRecordList",
-					icoSrc: "../../static/common/newIcon/tuoyuan.png",
-					permissionKey: "fix_car:zzsp"
 				}, {
 					cuIcon: 'questionfill',
 					color: 'mauve',
 					badge: 0,
 					name: '维修单',
 					url:"../work/wxcRepairRecordList",
-					icoSrc: "../../static/common/newIcon/tuoyuan.png",
+					icoSrc: "../../static/common/newIcon/repairOrderInfo.png",
 					permissionKey: "fix_car:shop"
+				}, {
+					cuIcon: 'discoverfill',
+					color: 'purple',
+					badge: 0,
+					name: '组长审批',
+					url:"../work/foremanRepairRecordList",
+					icoSrc: "../../static/common/newIcon/zuzhangApproveInfo.png",
+					permissionKey: "fix_car:zzsp"
 				}, {
 					cuIcon: 'questionfill',
 					color: 'mauve',
 					badge: 0,
 					name: '主任审批',
 					url:"../work/directorRepairRecordList",
-					icoSrc: "../../static/common/newIcon/tuoyuan.png",
+					icoSrc: "../../static/common/newIcon/zhurenApproveInfo.png",
 					permissionKey: "fix_car:zrsp"
 				}, {
 					cuIcon: 'questionfill',
@@ -196,7 +196,7 @@
 					badge: 0,
 					name: '局长审批',
 					url:"../work/secretaryRepairRecordList",
-					icoSrc: "../../static/common/newIcon/tuoyuan.png",
+					icoSrc: "../../static/common/newIcon/juzhangApproveInfo.png",
 					permissionKey: "fix_car:jzsp"
 				}],
 				meetingCuIconList: [{
@@ -213,7 +213,7 @@
 					badge: 0,
 					name: '会议记录',
 					url: "../work/meetingRecordList",
-					icoSrc: "../../static/common/fix-record.png",
+					icoSrc: "../../static/common/newIcon/meetingRecordInfo.png",
 					permissionKey: "meeting:list"
 				}, 
 				// {
@@ -239,7 +239,7 @@
 					badge: 0,
 					name: '订餐记录',
 					url: "../work/foodRecordList",
-					icoSrc: "../../static/common/fix-record.png",
+					icoSrc: "../../static/common/newIcon/foodRecordInfo.png",
 					permissionKey: "dining:list"
 				}, {
 					cuIcon: 'picfill',
@@ -247,7 +247,7 @@
 					badge: 0,
 					name: '工作餐记录',
 					url: "../work/leaderBookFoodList",
-					icoSrc: "../../static/common/record-info.png",
+					icoSrc: "../../static/common/newIcon/workFoodRecordInfo.png",
 					permissionKey: "dining_lead:manage"
 				},
 				{
@@ -256,7 +256,7 @@
 				 	badge: 0,
 				 	name: '我的工作餐',
 					url: "../work/myLeaderBookFoodList",
-				 	icoSrc: "../../static/common/record-info.png",
+					icoSrc: "../../static/common/newIcon/workFoodInfo.png",
 					permissionKey: "dining_lead:order"
 				}
 				// {

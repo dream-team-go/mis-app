@@ -1,13 +1,16 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			
+
 			<block slot="content">会议预定详情</block>
-			<block slot="right"><view v-show="info.status == 0" @tap="toEdit">修改</view></block>
+			<block slot="right">
+				<view v-show="info.status == 0" @tap="toEdit">修改</view>
+			</block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 预定进度
+				<image src="../../static/common/newIcon/meeting_record.png"></image>
+				<text class="text-lg text-black">预约进度</text>
 			</view>
 		</view>
 		<view class="bg-white padding">
@@ -19,58 +22,58 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.status == -1">
 			<view class="action">
-				 失败原因：
+				失败原因：
 				<text class="text-red">{{info.fail_reason}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 会议主题：
-				<text class="text-bold">{{info.desc}}</text>
+				会议主题：
+				<text class="text-black">{{info.desc}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 会议室：
-				<text class="text-bold">{{info.room_number}}({{info.building_name}})</text>
+				会议室：
+				<text class="text-black">{{info.room_number}}({{info.building_name}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 会议时间：
-				<text class="text-bold">{{info.start_time}} — {{info.end_time}}</text>
+				会议时间：
+				<text class="text-black">{{info.start_time}} — {{info.end_time}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 参会人数：
-				<text class="text-bold">{{info.people_num}}</text>
+				参会人数：
+				<text class="text-black">{{info.people_num}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.attend_leader != null">
 			<view class="action">
-				 备注：
-				<text class="text-bold">{{info.attend_leader}}</text>
+				备注：
+				<text class="text-black">{{info.attend_leader}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 预定人：
-				<text class="text-bold">{{info.user_name}}({{info.user_tel}})</text>
+				预定人：
+				<text class="text-black">{{info.user_name}}({{info.user_tel}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 预定时间：
-				<text class="text-bold">{{info.create_time}}</text>
+				预定时间：
+				<text class="text-black">{{info.create_time}}</text>
 			</view>
 		</view>
-		
+
 		<!-- <view class="padding flex flex-direction" v-if="info.status == 0">
 			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="cancleBook">取消预定</button>
 		</view> -->
 		<view class="bottom-btns-seat" v-if="info.status == 0"></view>
-		<view class="bottom-cancel-btn" v-if="info.status == 0"  @click="cancleBook">
+		<view class="bottom-cancel-btn" v-if="info.status == 0" @click="cancleBook">
 			取消预定
 		</view>
 	</view>
@@ -91,7 +94,7 @@
 		onLoad(option) {
 			this.id = option.id;
 		},
-		onShow(){
+		onShow() {
 			this.steps.length = 0;
 			global.$http.post('/meeting/record/recordInfo', {
 				params: {
@@ -114,10 +117,10 @@
 					misEnum.MeetingRecordEnumMap.forEach((value, key, map) => {
 						var cuIcon = '';
 						var color = '';
-						if(!isFind || key == this.info.status){
+						if (!isFind || key == this.info.status) {
 							color = this.color;
 						}
-						if(key == this.info.status){
+						if (key == this.info.status) {
 							isFind = true;
 						}
 						if (key === 0) {
@@ -136,7 +139,7 @@
 							color: color
 						})
 					});
-					
+
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -156,7 +159,7 @@
 					url: '../meeting/selectTime?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			},
-			cancleBook: function(){
+			cancleBook: function() {
 				uni.showModal({
 					title: '提示',
 					content: '确定取消预定？',
@@ -164,7 +167,7 @@
 					cancelText: '取消',
 					confirmText: '确定',
 					success: res => {
-						if(res.cancel) return;
+						if (res.cancel) return;
 						uni.showLoading({
 							title: '提交中',
 							mask: false
@@ -206,6 +209,5 @@
 </script>
 
 <style scoped lang="scss">
-@import "style/mystyle.scss";
-
+	@import "style/mystyle.scss";
 </style>

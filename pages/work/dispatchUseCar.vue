@@ -77,16 +77,16 @@
 					<view class="cu-list menu text-left">
 						<view class="cu-item arrow" v-for="car in cars" :key="car.id" @click="getCar(car)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
 							<view class="content">
-								<view class="text-grey">{{car.car_number}}</view>
-								<view class="text-gray text-sm flex">
+								<view>{{car.car_number}}</view>
+								<view class="text-somber text-df">
 									<view class="text-cut">
 										{{car.brand}} {{car.color}}
 									</view>
 								</view>
 							</view>
 							<view class="action">
-								<view class="text-grey text-xs">{{car.seat_num}}座</view>
-								<view class="cu-tag round bg-orange sm">{{car.is_clash > 0 ? "已被调度" : "可调度"}}</view>
+								<view class="text-somber text-df">{{car.seat_num}}座</view>
+								<view class="cu-tag round bg-orange">{{car.is_clash > 0 ? "已被调度" : "可调度"}}</view>
 							</view>
 						</view>
 					</view>
@@ -107,14 +107,14 @@
 						<view class="cu-item arrow" v-for="driver in drivers" :key="driver.id" @click="getDriver(driver)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
 							<view class="content">
 								<view>{{driver.user_cn_name}}({{driver.sex == 1 ? '男' : '女'}})</view>
-								<view class="text-gray text-sm flex">
+								<view class="text-somber text-df">
 									<view class="text-cut">
 										{{driver.tel_no}}
 									</view>
 								</view>
 							</view>
 							<view class="action">
-								<view class="text-grey text-xs">驾龄{{driver.drive_age}}年</view>
+								<view class="text-somber text-df">驾龄{{driver.drive_age}}年</view>
 								<view class="cu-tag round bg-orange sm">{{driver.is_clash > 0 ? "已被调度" : "可调度"}}</view>
 							</view>
 						</view>
@@ -409,50 +409,5 @@
 </script>
 
 <style>
-	.list-modal {
-		z-index: 10000;
-	}
-
-	.list-modal .cu-dialog {
-		height: 100vh;
-	}
-
-	.list-modal.cu-modal.show #list-view {
-		overflow-x: hidden;
-		overflow-y: scroll;
-		pointer-events: auto;
-	}
-
-	.cu-form-group .modal-group {
-		flex: 1;
-		padding-right: 40upx;
-		overflow: hidden;
-		position: relative;
-	}
-
-	.cu-form-group .modal-group .picker {
-		line-height: 100upx;
-		font-size: 28upx;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden;
-		width: 100%;
-		text-align: right;
-	}
-
-	.cu-form-group .modal-group::after {
-		font-family: cuIcon;
-		display: block;
-		content: "\e6a3";
-		position: absolute;
-		font-size: 34upx;
-		color: #8799a3;
-		line-height: 100upx;
-		width: 60upx;
-		text-align: center;
-		top: 0;
-		bottom: 0;
-		right: -20upx;
-		margin: auto;
-	}
+	
 </style>

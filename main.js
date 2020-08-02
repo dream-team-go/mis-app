@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import store from './store'
 import Request from './js_sdk/pocky-request/index.js'
+import Util from './common/util.js';
 
 import cuCustom from './colorui/components/cu-custom.vue'
 Vue.component('cu-custom',cuCustom)
@@ -25,6 +26,8 @@ import user from './pages/user/index.vue'
 Vue.component('user',user)
 
 global.$http = Request();
+Vue.prototype.util = Util;
+
 Vue.prototype.$store = store
 
 Vue.config.productionTip = false

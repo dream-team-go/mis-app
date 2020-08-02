@@ -10,8 +10,8 @@
 			<view class="small-card-detial"  v-for="record in records" :key="record.id" @click="recordDetail(record)" >
 				<view class="title-box bg-linear-blue">
 					<text class="id">{{record.dining_date.substring(0,10)}}</text>
-					<text class="cu-tag round bg-orange sm status">{{getStatusStr(record.type)}}</text>
-					<image src="../../static/common/next.png" class="arrow"></image>
+					<text class="cu-tag round bg-orange status">{{getStatusStr(record.type)}}</text>
+					<!-- <image src="../../static/common/next.png" class="arrow"></image> -->
 				</view>
 				<view class="info-box">
 					<text class="label">用餐领导：</text>

@@ -8,7 +8,7 @@
 			<view class="grid-box">
 				<view class="grid-item" v-for="(item, index) in grids" :key="index" @click="goPage(item)">
 					<view class="grid-icon">
-						<image height="160rpx" width="160rpx" :src="item.img" mode="aspectFill"></image>
+						<image height="160upx" width="160upx" :src="item.img" mode="aspectFill"></image>
 					</view>
 					<view class="grid-name">
 						{{ item.name }}
@@ -100,9 +100,9 @@
 			background-color: #fff;
 			
 			.grid-item {
-				width: 160rpx;
-				height: 140rpx;
-				margin: 20rpx 10rpx;
+				width: 160upx;
+				height: 140upx;
+				margin: 20upx 10upx;
 				display: flex;
 				flex-direction: column;
 				justify-content: space-around;
@@ -113,8 +113,8 @@
 					align-items: center;
 					
 					uni-image {
-						width: 48rpx;
-						height: 48rpx;
+						width: 60upx;
+						height: 60upx;
 					}
 				}
 				
@@ -122,16 +122,17 @@
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					font-size: 24rpx;
-					margin: 16rpx 0;
+					font-size: 28upx;
+					margin: 16upx 0;
+					color: #333333;
 				}
 			}
 		}
 		
 		.ads-box {
-			margin: 20rpx;
-			border-radius: 16rpx;
-			padding: 20rpx;
+			margin: 20upx;
+			border-radius: 16upx;
+			padding: 20upx;
 			background-color: #fff;
 			color: #44d7b6;
 		}
@@ -141,16 +142,16 @@
 			background-color: #fff;
 			
 			.notice-title {
-				padding: 20rpx;
-				font-size: 28rpx;
+				padding: 20upx;
+				font-size: 28upx;
 				display: flex;
 				align-items: center;
-				border-bottom: 1rpx solid #ddd;
+				border-bottom: 1upx solid #ddd;
 				
 				.notice-title-img {
-					height: 32rpx;
-					width: 32rpx;
-					margin-right: 16rpx;
+					height: 32upx;
+					width: 32upx;
+					margin-right: 16upx;
 				}
 			}
 			
@@ -161,7 +162,7 @@
 				
 				&::before {
 					content: '';
-					height: 1rpx;
+					height: 1upx;
 					width: 100%;
 					background-color: #ddd;
 					position: absolute;
@@ -171,7 +172,7 @@
 				
 				&::after {
 					content: '';
-					width: 1rpx;
+					width: 1upx;
 					height: 100%;
 					background-color: #ddd;
 					position: absolute;
@@ -181,15 +182,15 @@
 				
 				.notice-item {
 					width: 50%;
-					height: 160rpx;
+					height: 160upx;
 					display: flex;
 					align-items: center;
-					padding: 32rpx 40rpx;
+					padding: 32upx 40upx;
 					
 					.notice-item-img {
-						height: 80rpx;
-						width: 80rpx;
-						margin-right: 24rpx;
+						height: 80upx;
+						width: 80upx;
+						margin-right: 24upx;
 					}
 					
 					.notice-item-content {
@@ -199,13 +200,13 @@
 						flex: 1;
 						
 						.notice-item-title {
-							font-size: 28rpx;
+							font-size: 28upx;
 							font-weight: bold;
-							margin-bottom: 12rpx;
+							margin-bottom: 12upx;
 						}
 						
 						.notice-item-desc {
-							font-size: 24rpx;
+							font-size: 24upx;
 							color: #999;
 						}
 					}
@@ -214,7 +215,7 @@
 		}
 		
 		.blank {
-			height: 120rpx;
+			height: 120upx;
 		}
 	}
 </style>

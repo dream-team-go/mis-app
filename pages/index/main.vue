@@ -276,7 +276,7 @@ export default {
 				}
 				
 				.name {
-					font-size: 28upx;
+					font-size: 29upx;
 					text-align: center;
 				}
 			}
@@ -312,7 +312,7 @@ export default {
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					font-size: 28upx;
+					font-size: 29upx;
 					margin: 13upx 0;
 				}
 			}
@@ -332,7 +332,7 @@ export default {
 			
 			.notice-title {
 				padding: 20upx;
-				font-size: 30upx;
+				font-size: 32upx;
 				color: #777777;
 				display: flex;
 				align-items: center;

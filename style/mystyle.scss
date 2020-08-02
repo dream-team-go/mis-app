@@ -9,7 +9,7 @@
 	}
 	.cu-tag-text {
 		margin-top: 2upx !important;
-		font-size: 28upx !important;
+		font-size: 29upx !important;
 		color: #333333 !important;
 	}
 	.item-ico{
@@ -83,10 +83,9 @@
 				float: left;
 			}
 			.status {
-				float: left;
+				float: right;
 				font-size: 28upx;
-				margin-top: 18upx;
-				margin-left: 20upx;
+				margin-top: 13upx;
 			}
 			.arrow {
 				float: right;
@@ -102,9 +101,9 @@
 			padding: 7upx 20upx;
 			.label{
 				float: left;
-				margin-right: 7upx;
+				margin-right: 4upx;
 				font-size: 32upx;
-				width: 200upx;
+				width: 160upx;
 				color: #777777;
 			}
 			.info {
@@ -143,6 +142,8 @@
 					vertical-align: top;
 				}
 				.text {
+					height: 48upx;
+					line-height: 48upx;
 					font-size: 30upx;
 					color: #333333;
 				}
@@ -150,6 +151,7 @@
 			.time-box {
 				height: 74upx;
 				width: 100%;
+				margin-top: 7upx;
 				padding: 0 20upx;
 				.line {
 					width: 2upx;
@@ -160,7 +162,7 @@
 				}
 				.time {
 					float: left;
-					height: 70upx;
+					height: 72upx;
 					.value {
 						height: 30upx;
 						line-height: 30upx;
@@ -168,7 +170,7 @@
 						font-size: 30upx;
 					}
 					.middle {
-						height: 46upx;
+						height: 48upx;
 					}
 				}
 			}
@@ -189,6 +191,7 @@
 					.value {
 						height: 48upx;
 						line-height: 48upx;
+						font-size: 30upx;
 						color: #333333;
 					}
 					.time {
@@ -207,27 +210,28 @@
 		margin: 20upx auto 0;
 		box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
 		background: #FFFFFF;
-		border-radius: 20upx;
+		border-radius: 8upx;
 		.title-box {
 			width: 100%;
-			height: 56upx;
-			border-top-left-radius:20upx;
-			border-top-right-radius:20upx;
+			height: 70upx;
+			border-top-left-radius:8upx;
+			border-top-right-radius:8upx;
 			padding: 0 20upx;
-			line-height: 56upx;
+			line-height: 70upx;
+			font-weight: bold;
 			.id {
 				float: left;
 			}
 			.status {
-				float: left;
-				margin-top: 12upx;
-				margin-left: 20upx;
+				float: right;
+				font-size: 28upx;
+				margin-top: 13upx;
 			}
 			.arrow {
 				float: right;
-				width: 28upx;
-				height: 28upx;
-				margin: 12upx 10upx 0 0;
+				width: 24upx;
+				height: 40upx;
+				margin-top: 15upx;
 			}
 		}
 		.info-box {
@@ -238,36 +242,39 @@
 			.label{
 				float: left;
 				margin-right: 4upx;
-				font-size: 26upx;
-				width: 132upx;
+				font-size: 32upx;
+				width: 160upx;
+				color: #777777;
 			}
 			.info {
 				float: left;
-				color: #777676;
+				color: #333333;
+				font-size: 32upx;
 			}
 		}
 		.time-box {
 			width: 100%;
-			height: 130upx;
+			height: 150upx;
 			.time {
-				padding: 0 20upx;
+				padding: 7upx 20upx;
 				height: 48upx;
 				line-height: 48upx;
 				.ico {
-					width: 28upx;
-					height: 28upx;
+					width: 32upx;
+					height: 32upx;
 					margin-right: 20upx;
-					margin-top: 8upx;
+					margin-top: 10upx;
 					vertical-align: top;
 				}
-				.text {
-					font-size: 26upx;
+				.value {
+					font-size: 30upx;
+					color: #333333;
 				}
 			}
 			.line {
 				width: 2upx;
 				height: 36upx;
-				margin: 2upx 36upx 0 30upx;
+				margin: 11upx 35upx 0 35upx;
 				background: #d0d0d0;
 			}
 		}
@@ -276,12 +283,13 @@
 			padding: 0 20upx 10upx 20upx;
 			.label {
 				line-height: 48upx;
-				font-size: 26upx;
+				font-size: 32upx;
+				color: #777777;
 			}
 			.info {
 				min-height: 48upx;
-				color: #8799a3;
-				font-size: 26upx;
+				color: #333333;
+				font-size: 32upx;
 				text-indent: 2em;
 			}
 		}

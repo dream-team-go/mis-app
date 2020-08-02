@@ -4,11 +4,12 @@
 			
 			<block slot="content">司机</block>
 		</cu-custom>
-		<view class="p10">
-			<view class="people-card"  v-for="driver in drivers" :key="driver.id" @click="driverDetail(driver)" >
-				<view :class="driver.sex == 1 ? 'title-box blue' : 'title-box pink'">
-					<text class="name" >{{driver.user_cn_name}}</text>
-					<image src="../../static/common/next.png" class="arrow"></image>
+		<view class="bg-white p10">
+			<view class="small-card-detial" v-for="driver in drivers" :key="driver.id" @click="driverDetail(driver)" >
+				<view class="title-box bg-linear-blue">
+					<text class="id" >{{driver.user_cn_name}}</text>
+					<text class="cu-tag round status" :class="driver.sex == 1 ? 'bg-blue' : 'bg-pink'">{{driver.sex == 1 ? '男' : '女'}}</text>
+					<!-- <image src="../../static/common/next.png" class="arrow"></image> -->
 				</view>
 				<view class="info-box">
 					<text class="label">电话：</text>
@@ -109,49 +110,5 @@
 
 <style scoped lang="scss">
 	@import "style/mystyle.scss";
-.people-card{
-	width: 96%;
-	min-height: 260upx;
-	margin: 20upx auto 0;
-	box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
-	background: #FFFFFF;
-	border-radius: 20upx;
-	.pink {
-		background: #ffc0cb;
-	}
-	.blue {
-		background: #44d7b6;
-	}
-	.title-box {
-		width: 100%;
-		height: 56upx;
-		border-top-left-radius:20upx;
-		border-top-right-radius:20upx;
-		padding: 0 20upx;
-		line-height: 56upx;
-		color: #FFFFFF;
-		.arrow {
-			float: right;
-			width: 28upx;
-			height: 28upx;
-			margin: 12upx 10upx 0 0;
-		}
-	}
-	.info-box {
-		width: 100%;
-		height: 48upx;
-		line-height: 48upx;
-		padding: 0 20upx;
-		.label{
-			float: left;
-			margin-right: 4upx;
-			font-size: 26upx;
-			width: 132upx;
-		}
-		.info {
-			float: left;
-			color: #777676;
-		}
-	}
-}
+
 </style>

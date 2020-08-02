@@ -161,13 +161,13 @@
 			<view class="cu-form-group">
 				<view class="title">司机</view>
 				<view class="modal-group" @tap="showDriverModal()" data-target="Modal">
-					<view class="picker">
-						{{ para.driver_id.length > 0 ? driver_name + "("+ driver_phone +")" : '请选择' }}
+					<view class="text-black">
+						{{ para.driver_id ? driver_name + "("+ driver_phone +")" : '请选择' }}
 					</view>
 				</view>
 			</view>
 			
-			<view class="cu-bar bg-white">
+			<view class="cu-bar bg-white" style="border-top: 1upx solid #eee;">
 				<view class="action">
 					车辆照片上传
 				</view>
@@ -191,7 +191,7 @@
 			</view>
 
 			<view class="cu-form-group">
-				<view class="title">重量</view>
+				<view class="title">重量(吨)</view>
 				<input name="input" type="number" v-model="para.quality"></input>
 			</view>
 
@@ -244,14 +244,14 @@
 						<view class="cu-item arrow" v-for="driver in drivers" :key="driver.id" @tap="getDriver(driver)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
 							<view class="content">
 								<view>{{driver.user_cn_name}}({{driver.sex == 1 ? '男' : '女'}})</view>
-								<view class="text-gray text-sm flex">
+								<view class="text-somber text-df">
 									<view class="text-cut">
 										{{driver.tel_no}}
 									</view>
 								</view>
 							</view>
 							<view class="action">
-								<view class="text-grey text-xs">驾龄{{driver.drive_age}}年</view>
+								<view class="text-somber text-df">驾龄{{driver.drive_age}}年</view>
 							</view>
 						</view>
 					</view>
@@ -335,7 +335,7 @@
 				this.isLeatherSeat = info.is_leather_seat == 1;
 				this.isCd = info.is_cd == 1;
 				//获取司机信息
-				if(this.para.driver_id.length > 0){
+				if(this.para.driver_id){
 					global.$http.post('/car/driver/getInfo', {
 						params: {
 							customer_id: this.para.driver_id
@@ -490,7 +490,7 @@
 					volume: "",
 					power: "",
 					fuel_type: "",
-					quality: "",
+					quality: 0,
 					produce_time: getDate(),
 					license_time: getDate(),
 					nature: "",
@@ -501,7 +501,7 @@
 					car_length: "",
 					car_width: "",
 					car_height: "",
-					wheel_base: "",
+					wheel_base: 0,
 					price: "",
 					is_town: 0,
 					is_operate: 0,
@@ -671,35 +671,35 @@
 			},
 			Submit: function(e) {
 				//验证数据
-				if (this.para.car_number.length <= 0) {
+				if (!this.para.car_number) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写车牌号'
 					});
 					return;
 				}
-				if (this.para.plate_color.length <= 0) {
+				if (!this.para.plate_color) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择车牌颜色'
 					});
 					return;
 				}
-				if (this.para.car_type.length <= 0) {
+				if (!this.para.car_type) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择车辆类型'
 					});
 					return;
 				}
-				if (this.para.nature.length <= 0) {
+				if (!this.para.nature) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择车辆使用性质'
 					});
 					return;
 				}
-				if (this.para.brand.length <= 0) {
+				if (!this.para.brand) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写品牌'
@@ -713,91 +713,91 @@
 					});
 					return;
 				}
-				if (this.para.color.length <= 0) {
+				if (!this.para.color) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写车身颜色'
 					});
 					return;
 				}
-				if (this.para.fuel_type.length <= 0) {
+				if (!this.para.fuel_type) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择燃料类型'
 					});
 					return;
 				}
-				if (this.para.volume.length <= 0) {
+				if (!this.para.volume) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写排量'
 					});
 					return;
 				}
-				if (this.para.power.length <= 0) {
+				if (!this.para.power) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写功率'
 					});
 					return;
 				}
-				if (this.para.vin_no.length <= 0) {
+				if (!this.para.vin_no) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写车架号'
 					});
 					return;
 				}
-				if (this.para.motor_no.length <= 0) {
+				if (!this.para.motor_no) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写发动机号'
 					});
 					return;
 				}
-				if (this.para.at_type.length <= 0) {
+				if (!this.para.at_type) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择变速箱类型'
 					});
 					return;
 				}
-				if (this.para.car_length.length <= 0) {
+				if (!this.para.car_length) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写车长'
 					});
 					return;
 				}
-				if (this.para.car_width.length <= 0) {
+				if (!this.para.car_width) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写车宽'
 					});
 					return;
 				}
-				if (this.para.car_height.length <= 0) {
+				if (!this.para.car_height) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写车高'
 					});
 					return;
 				}
-				if (this.para.price.length <= 0) {
+				if (!this.para.price) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写购置价格'
 					});
 					return;
 				}
-				if (this.para.car_gps.length <= 0) {
+				if (!this.para.car_gps) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写车辆GPS'
 					});
 					return;
 				}
-				if (this.para.img.length <= 0) {
+				if (!this.para.img) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择图片'
@@ -839,50 +839,5 @@
 
 
 <style>
-.list-modal {
-		z-index: 10000;
-	}
 
-	.list-modal .cu-dialog {
-		height: 100vh;
-	}
-
-	.list-modal.cu-modal.show #list-view {
-		overflow-x: hidden;
-		overflow-y: scroll;
-		pointer-events: auto;
-	}
-
-	.cu-form-group .modal-group {
-		flex: 1;
-		padding-right: 40upx;
-		overflow: hidden;
-		position: relative;
-	}
-
-	.cu-form-group .modal-group .picker {
-		line-height: 100upx;
-		font-size: 28upx;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden;
-		width: 100%;
-		text-align: right;
-	}
-
-	.cu-form-group .modal-group::after {
-		font-family: cuIcon;
-		display: block;
-		content: "\e6a3";
-		position: absolute;
-		font-size: 34upx;
-		color: #8799a3;
-		line-height: 100upx;
-		width: 60upx;
-		text-align: center;
-		top: 0;
-		bottom: 0;
-		right: -20upx;
-		margin: auto;
-	}
 </style>

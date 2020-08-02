@@ -15,8 +15,8 @@
 			<view class="small-card-detial" v-for="record in records" :key="record.id" @click="recordDetail(record)">
 				<view class="title-box bg-linear-blue">
 					<text class="id">{{record.type}}</text>
-					<text class="cu-tag round bg-orange sm status">{{record.is_read == 0 ? "未读" : "已读"}}</text>
-					<image src="../../static/common/next.png" class="arrow"></image>
+					<text class="cu-tag round bg-orange status">{{record.is_read == 0 ? "未读" : "已读"}}</text>
+					<!-- <image src="../../static/common/next.png" class="arrow"></image> -->
 				</view>
 				<view class="info-box">
 					<text class="label">通知时间：</text>
