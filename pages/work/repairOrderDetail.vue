@@ -85,7 +85,7 @@
 		<view class="cu-bar bg-white solid-bottom" v-for="(item,index) in imgs" :key="item.id">
 			<view class="action">
 				 <view class="cu-item arrow border solid-top">
-					<image :src="item"></image>
+					<image :src="item" style="width: 600upx;height: 600upx;"></image>
 				</view>
 			</view>
 		</view>

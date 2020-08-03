@@ -141,12 +141,6 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 车辆照片：
-				<image :src="info.img"></image>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
 				 重量(吨)：
 				<text class="text-black">{{info.quality}}</text>
 			</view>
@@ -179,6 +173,12 @@
 			<view class="action">
 				 备注：
 				<text class="text-black">{{info.remark}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				 车辆照片：
+				<image :src="info.img" style="width: 500upx;height: 500upx;"></image>
 			</view>
 		</view>
 		

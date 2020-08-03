@@ -43,8 +43,8 @@
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 会议室照片：
-				<image :src="info.vr"></image>
+				 包房照片：
+				<image :src="info.vr" style="width: 500upx;height: 500upx;"></image>
 			</view>
 		</view>
 		

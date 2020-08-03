@@ -1,5 +1,7 @@
 <template>
-	<view class="content" :style="{backgroundImage: 'url('+imageURL+')'}"></view>
+	<view>
+			<image src="/static/lead.png" :style="'width: 750upx;height:'+ ScreenHeight +'px;'"></image>
+		</view>
 </template>
 
 <script>
@@ -9,7 +11,7 @@
 	export default {
 		data() {
 			return {
-				imageURL: '/static/lead.png'
+				ScreenHeight: this.ScreenHeight
 			};
 		},
 		methods: {
@@ -85,5 +87,4 @@
 </script>
 
 <style>
-
 </style>
