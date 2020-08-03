@@ -425,7 +425,10 @@
 							icon: 'none',
 							title: '提交成功'
 						});
-						uni.navigateBack({delta: 3});
+						uni.navigateBack({delta: 2});
+						uni.redirectTo({
+							url: '/pages/food/index',
+						});
 					} else {
 						uni.showToast({
 							title: res.msg,
