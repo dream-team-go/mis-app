@@ -63,12 +63,12 @@
 				list: [],
 				listCur: '',
 				key: "",
-				orgId: ''
+				departId: ''
 			};
 		},
 		onLoad(option) {
-			this.orgId = option.orgId;
-			this.title = option.orgName;
+			this.departId = option.departId;
+			this.title = option.departName;
 			this.search();
 		},
 		onReady() {
@@ -89,14 +89,14 @@
 				//获取通讯录数据
 				global.$http.post('/core/addressBook/getListApp', {
 					params: {
-						org_id: this.orgId,
+						department_id: this.departId,
 						key: this.key,
 						page: 1,
 						pageSize: 10000
 					},
 				}).then(res => {
 					if (res.status === "0") {
-						let list = [{}];
+						let list = [];
 						for (let i = 0; i < res.data.length; i++) {
 							list[i] = res.data[i];
 						}

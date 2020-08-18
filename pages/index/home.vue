@@ -418,13 +418,16 @@
 						mask: false
 					});
 					//获取行政单位数据
-					global.$http.post('/core/organization/orgListAll', {
+					//获取行政单位数据
+					global.$http.post('/core/organization/organizationPage', {
 						params: {
+							page: 1,
+							size: 10000,
 							name: ''
 						},
 					}).then(res => {
 						if (res.status === "0") {
-							let list = [{}];
+							let list = [];
 							for (let i = 0; i < res.data.length; i++) {
 								list[i] = res.data[i];
 							}

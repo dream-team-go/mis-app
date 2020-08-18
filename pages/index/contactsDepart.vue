@@ -1,13 +1,13 @@
 <template name="contacts">
 	<view>
-		<cu-custom bgColor="bg-linear-blue">
-			<block slot="content">通讯录</block>
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
+			<block slot="content">{{title}}</block>
 		</cu-custom>
 
 		<view class="cu-bar bg-white search fixed" :style="[{top:CustomBar + 'px'}]">
 			<view class="search-form round">
 				<text class="cuIcon-search"></text>
-				<input type="text" placeholder="行政单位" @input="onKeyInput" confirm-type="search"></input>
+				<input type="text" placeholder="部门" @input="onKeyInput" confirm-type="search"></input>
 			</view>
 			<view class="action">
 				<button class="cu-btn bg-linear-blue shadow-blur round" @tap="search()">搜索</button>
@@ -18,7 +18,7 @@
 				<view class="cu-item arrow" v-for="item in contactsData" @click="getDetail(item)">
 					<view class="content">
 						<image src="/static/tabbar/contacts_cur.png" class="png" mode="aspectFit"></image>
-						<text class="text-black">{{item.org_name}}</text>
+						<text class="text-black">{{item.name}}</text>
 					</view>
 				</view>
 			</view>
@@ -29,15 +29,18 @@
 
 <script>
 	export default {
-		name: "contacts",
-		props: ['contactsData'],
 		data() {
 			return {
+				title: '',
+				orgId: '',
+				contactsData: [],
 				name: ''
 			};
 		},
-		onLoad() {
-			
+		onLoad(option) {
+			this.orgId = option.orgId;
+			this.title = option.orgName;
+			this.search();
 		},
 		methods: {
 			onKeyInput(e) {
@@ -49,17 +52,19 @@
 					mask: false
 				});
 				//获取行政单位数据
-				global.$http.post('/core/organization/organizationPage', {
+				global.$http.post('/core/department/departmentPage', {
 					params: {
 						page: 1,
 						size: 10000,
+						pid: 0,
+						orgId: this.orgId,
 						name: this.name
 					},
 				}).then(res => {
 					if (res.status === "0") {
 						let list = [];
-						for (let i = 0; i < res.data.length; i++) {
-							list[i] = res.data[i];
+						for (let i = 0; i < res.data.list.length; i++) {
+							list[i] = res.data.list[i];
 						}
 						this.contactsData = list;
 						uni.hideLoading();
@@ -80,7 +85,7 @@
 			},
 			getDetail(e){
 				uni.navigateTo({
-					url: "../index/contactsDepart?orgId=" + e.org_id + "&orgName=" + e.org_name,
+					url: "../index/contactsDetail?departId=" + e.id + "&departName=" + e.name,
 				});
 			}
 		}

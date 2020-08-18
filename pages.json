@@ -332,7 +332,11 @@
 			"path": "pages/index/contactsDetail",
 			"style": {}
 		}
-	],
+	    ,{
+            "path" : "pages/index/contactsDepart",
+            "style" : {}
+        }
+    ],
 	"globalStyle": {
 		"navigationStyle": "custom"
 	},

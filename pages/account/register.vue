@@ -360,6 +360,7 @@
 					this.jobIndex = e.detail.value;
 					this.para.job_id = this.jobs[e.detail.value].job_id;
 					this.isDriver = this.jobs[e.detail.value].job_name == "司机";
+					this.para.is_driver = this.isDriver ? 1 : 0;
 				}
 			},
 			SendCode: function(e) {
