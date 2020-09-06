@@ -51,7 +51,7 @@
 					title: '加载中',
 					mask: false
 				});
-				//获取行政单位数据
+				//获取部门数据
 				global.$http.post('/core/department/departmentPage', {
 					params: {
 						page: 1,

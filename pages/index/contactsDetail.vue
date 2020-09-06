@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			
+
 			<block slot="content">{{title}}</block>
 		</cu-custom>
 
@@ -20,18 +20,23 @@
 				<view :class="'indexItem-' + item.code" :id="'indexes-' + item.code" :data-index="item.code">
 					<view class="padding-sm">{{item.code}}</view>
 					<view class="cu-list menu-avatar no-padding">
-						<view class="cu-item" v-for="(sub, subIndex) in item.sub_list" :key="sub.id" @tap="makePhoneCall(sub)">
+						<view class="cu-item" v-for="(sub, subIndex) in item.sub_list" :key="sub.id">
 							<view class="cu-avatar round md bg-linear-blue">{{item.code}}</view>
 							<view class="content">
-								<view class="text-black">{{sub.user_name}}  </view>
+								<view class="text-black">{{sub.user_name}} </view>
 								<!-- <view class="text-gray text-sm">
 									{{sub.org_name}}
 								</view> -->
-								<view class="text-somber">
-									{{sub.phone}}
+								<view class="text-somber" @tap="makePhoneCall(sub.phone)">
+									<image src="../../static/common/phone.png" class="ico" style="width: 32upx;height: 32upx;margin-right: 10upx;vertical-align: middle;"></image>
+									<text style="vertical-align: middle;">{{sub.phone}}</text>
+								</view>
+								<view class="text-somber" v-show="sub.office_tel" @tap="makePhoneCall(sub.office_tel)">
+									<image src="../../static/common/tel.png" class="ico" style="width: 32upx;height: 32upx;margin-right: 10upx;vertical-align: middle;"></image>
+									<text style="vertical-align: middle;">{{sub.office_tel}}</text>
 								</view>
 							</view>
-							
+
 							<view v-if="sub.job_name" style="margin-right: 50upx;" class="solid-right cu-tag round bg-right-blue light">{{sub.job_name}}</view>
 						</view>
 					</view>
@@ -101,7 +106,9 @@
 							list[i] = res.data[i];
 						}
 						this.list = list;
-						this.listCur = list[0].code;
+						if (list.length) {
+							this.listCur = list[0].code;
+						}
 						uni.hideLoading();
 					} else {
 						uni.hideLoading();
@@ -118,9 +125,9 @@
 					});
 				});
 			},
-			makePhoneCall: function(item) {
+			makePhoneCall: function(phone) {
 				uni.makePhoneCall({
-					phoneNumber: item.phone,
+					phoneNumber: phone,
 					success: () => {
 						console.log("成功拨打电话")
 					}

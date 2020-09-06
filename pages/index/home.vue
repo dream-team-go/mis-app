@@ -418,7 +418,6 @@
 						mask: false
 					});
 					//获取行政单位数据
-					//获取行政单位数据
 					global.$http.post('/core/organization/organizationPage', {
 						params: {
 							page: 1,
@@ -428,8 +427,8 @@
 					}).then(res => {
 						if (res.status === "0") {
 							let list = [];
-							for (let i = 0; i < res.data.length; i++) {
-								list[i] = res.data[i];
+							for (let i = 0; i < res.data.list.length; i++) {
+								list[i] = res.data.list[i];
 							}
 							this.contactsData = list;
 							uni.hideLoading();
