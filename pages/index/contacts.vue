@@ -13,7 +13,7 @@
 				<button class="cu-btn bg-linear-blue shadow-blur round" @tap="search()">搜索</button>
 			</view>
 		</view>
-		<view style="padding-top: 100upx">
+		<view style="padding-top: 100upx;padding-bottom: 100upx;">
 			<view class="cu-list menu text-left">
 				<view class="cu-item arrow" v-for="item in contactsData" @click="getDetail(item)">
 					<view class="content">
@@ -58,8 +58,8 @@
 				}).then(res => {
 					if (res.status === "0") {
 						let list = [];
-						for (let i = 0; i < res.data.length; i++) {
-							list[i] = res.data[i];
+						for (let i = 0; i < res.data.list.length; i++) {
+							list[i] = res.data.list[i];
 						}
 						this.contactsData = list;
 						uni.hideLoading();
