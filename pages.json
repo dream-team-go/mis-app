@@ -336,6 +336,15 @@
             "path" : "pages/index/contactsDepart",
             "style" : {}
         }
+        ,{
+            "path" : "pages/index/contactsList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

@@ -14,45 +14,30 @@
 				<button class="cu-btn bg-linear-blue shadow-blur round" @tap="search()">搜索</button>
 			</view>
 		</view>
-		<scroll-view scroll-y class="indexes" :scroll-into-view="'indexes-'+ listCurID" :style="[{height:'calc(100vh - '+ CustomBar + 'px - 50px)'}]"
-		 :scroll-with-animation="true" :enable-back-to-top="true">
-			<block v-for="(item,index) in list" :key="index">
-				<view :class="'indexItem-' + item.code" :id="'indexes-' + item.code" :data-index="item.code">
-					<view class="padding-sm">{{item.code}}</view>
-					<view class="cu-list menu-avatar no-padding">
-						<view class="cu-item" v-for="(sub, subIndex) in item.sub_list" :key="sub.id">
-							<view class="cu-avatar round md bg-linear-blue">{{item.code}}</view>
-							<view class="content">
-								<view class="text-black">{{sub.user_name}} </view>
-								<!-- <view class="text-gray text-sm">
-									{{sub.org_name}}
-								</view> -->
-								<view class="text-somber" @tap="makePhoneCall(sub.phone)">
-									<image src="../../static/common/phone.png" class="ico" style="width: 32upx;height: 32upx;margin-right: 10upx;vertical-align: middle;"></image>
-									<text style="vertical-align: middle;">{{sub.phone}}</text>
-								</view>
-								<view class="text-somber" v-show="sub.office_tel" @tap="makePhoneCall(sub.office_tel)">
-									<image src="../../static/common/tel.png" class="ico" style="width: 32upx;height: 32upx;margin-right: 10upx;vertical-align: middle;"></image>
-									<text style="vertical-align: middle;">{{sub.office_tel}}</text>
-								</view>
-							</view>
-
-							<view v-if="sub.short_job_name" @tap="showJobToast(sub.job_name)" style="margin-right: 15upx;" class="solid-right cu-tag round bg-right-blue light">{{sub.short_job_name}}</view>
+		<scroll-view scroll-y class="indexes" :style="[{height:'calc(100vh - '+ CustomBar + 'px - 50px)'}]">
+			<view class="cu-list menu-avatar no-padding">
+				<view class="cu-item" v-for="(sub, subIndex) in list" :key="sub.id">
+					<view class="cu-avatar round md bg-linear-blue">{{sub.code}}</view>
+					<view class="content">
+						<view class="text-black">{{sub.user_name}} </view>
+						<!-- <view class="text-gray text-sm">
+							{{sub.org_name}}
+						</view> -->
+						<view class="text-somber" @tap="makePhoneCall(sub.phone)">
+							<image src="../../static/common/phone.png" class="ico" style="width: 32upx;height: 32upx;margin-right: 10upx;vertical-align: middle;"></image>
+							<text style="vertical-align: middle;">{{sub.phone}}</text>
+						</view>
+						<view class="text-somber" v-show="sub.office_tel" @tap="makePhoneCall(sub.office_tel)">
+							<image src="../../static/common/tel.png" class="ico" style="width: 32upx;height: 32upx;margin-right: 10upx;vertical-align: middle;"></image>
+							<text style="vertical-align: middle;">{{sub.office_tel}}</text>
 						</view>
 					</view>
+			
+					<view v-if="sub.short_job_name" @tap="showJobToast(sub.job_name)" style="margin-right: 15upx;" class="solid-right cu-tag round bg-right-blue light">{{sub.short_job_name}}</view>
 				</view>
-			</block>
-		</scroll-view>
-		<view class="indexBar" :style="[{height:'calc(100vh - ' + CustomBar + 'px - 50px)'}]">
-			<view class="indexBar-box" @touchstart="tStart" @touchend="tEnd" @touchmove.stop="tMove">
-				<view class="indexBar-item" v-for="(item,index) in list" :key="index" :id="index" @touchstart="getCur" @touchend="setCur">
-					{{item.code}}</view>
 			</view>
-		</view>
-		<!--选择显示-->
-		<view v-show="!hidden" class="indexToast">
-			{{listCur}}
-		</view>
+		</scroll-view>
+		
 	</view>
 </template>
 
@@ -77,13 +62,7 @@
 			this.search();
 		},
 		onReady() {
-			let that = this;
-			uni.createSelectorQuery().select('.indexBar-box').boundingClientRect(function(res) {
-				that.boxTop = res.top
-			}).exec();
-			uni.createSelectorQuery().select('.indexes').boundingClientRect(function(res) {
-				that.barTop = res.top
-			}).exec()
+			
 		},
 		methods: {
 			search() {
@@ -101,6 +80,7 @@
 					},
 				}).then(res => {
 					if (res.status === "0") {
+						this.list = [];
 						let list = [];
 						for (let i = 0; i < res.data.length; i++) {
 							list[i] = res.data[i];
@@ -109,11 +89,9 @@
 									c.short_job_name = c.job_name.substr(0, 9) + "...";
 								else
 									c.short_job_name = c.job_name;
+								c.code = list[i].code;
+								this.list.push(c);
 							});
-						}
-						this.list = list;
-						if (list.length) {
-							this.listCur = list[0].code;
 						}
 						uni.hideLoading();
 					} else {

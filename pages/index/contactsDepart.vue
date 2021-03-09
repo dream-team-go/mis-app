@@ -85,7 +85,7 @@
 			},
 			getDetail(e){
 				uni.navigateTo({
-					url: "../index/contactsDetail?departId=" + e.id + "&departName=" + e.name,
+					url: "../index/contactsList?departId=" + e.id + "&departName=" + e.name,
 				});
 			}
 		}
