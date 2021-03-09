@@ -1,28 +1,30 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			
+
 			<block slot="content">注册</block>
 		</cu-custom>
 		<!-- <view class="tag">
 			<text class="text">基本信息</text>	
 		</view> -->
 		<form>
-			<view class="cu-form-group">
+			<view class="cu-form-group" v-show="false">
 				<view class="title">机关事务局</view>
-				<picker @change="SysOrganizationChange" :value="sysIndex" :range="sysOrganizations" range-key="org_name">
+				<picker @change="SysOrganizationChange" :value="sysIndex" :range="sysOrganizations"
+					range-key="org_name">
 					<view class="picker">
 						{{sysIndex>-1?sysOrganizations[sysIndex].org_name:'请选择'}}
 					</view>
 				</picker>
 			</view>
+			
 			<view class="cu-form-group">
 				<view class="title">所属单位</view>
-				<picker @change="OrganizationChange" :value="oIndex" :range="organizations" range-key="org_name">
+				<view class="modal-group" @tap="showOrgModal()" data-target="Modal">
 					<view class="picker">
-						{{oIndex>-1?organizations[oIndex].org_name:'请选择'}}
+						{{ para.org_id ? orgName : '请选择' }}
 					</view>
-				</picker>
+				</view>
 			</view>
 
 			<view class="cu-form-group" v-show="para.org_id">
@@ -42,12 +44,12 @@
 					</view>
 				</picker>
 			</view>
-			
+
 			<view class="cu-form-group">
-			    <view class="title">姓名</view>
-			    <input name="input" v-model="para.user_cn_name"></input>
+				<view class="title">姓名</view>
+				<input name="input" v-model="para.user_cn_name"></input>
 			</view>
-			
+
 			<view class="cu-form-group" v-show="para.org_id">
 				<view class="title">职位</view>
 				<picker @change="JobChange" :value="jobIndex" :range="jobs" range-key="job_name">
@@ -56,7 +58,7 @@
 					</view>
 				</picker>
 			</view>
-			
+
 			<view class="cu-form-group" v-show="isDriver">
 				<view class="title">驾照类型</view>
 				<picker @change="ChangeDriverType" :value="dtIndex" :range="driverTypes">
@@ -65,7 +67,7 @@
 					</view>
 				</picker>
 			</view>
-			
+
 			<view class="cu-form-group" v-show="isDriver">
 				<view class="title">驾龄</view>
 				<picker @change="ChangeDriveAge" :value="para.drive_age" :range="driveAges">
@@ -74,12 +76,13 @@
 					</view>
 				</picker>
 			</view>
-			
+
 			<view class="cu-form-group" v-show="isDriver">
 				<view class="title">性别</view>
-				<switch @change="ChangeDriverSex" class='switch-sex' :class="driverSex?'checked':''" :checked="driverSex?true:false"></switch>
+				<switch @change="ChangeDriverSex" class='switch-sex' :class="driverSex?'checked':''"
+					:checked="driverSex?true:false"></switch>
 			</view>
-			
+
 			<view class="cu-form-group" v-show="isDriver">
 				<view class="title">身份证号</view>
 				<input name="input" v-model="para.id_card"></input>
@@ -102,18 +105,54 @@
 			<view class="cu-form-group">
 				<view class="title">验证码</view>
 				<input name="input" v-model="para.code"></input>
-				<button class='cu-btn bg-linear-blue shadow' @click="SendCode" :disabled="disabled">验证码{{authCode}}</button>
+				<button class='cu-btn bg-linear-blue shadow' @click="SendCode"
+					:disabled="disabled">验证码{{authCode}}</button>
 			</view>
-			
+
 			<view class="padding flex flex-direction">
 				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
+			</view>
+			
+			<view class="list-modal cu-modal bottom-modal" :class="isShowOrgModal?'show':''">
+				<view class="cu-dialog">
+					<view class="cu-bar bg-linear-blue" :style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
+						<view class="action text-white" @tap="hideOrgModal">取消</view>
+						<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择所属单位</view>
+						<view class="action"></view>
+					</view>
+					
+					<view class="cu-bar bg-white search fixed" :style="[{top:CustomBar + 'px'}]">
+						<view class="search-form round">
+							<text class="cuIcon-search"></text>
+							<input style="text-align:left;"  type="text" placeholder="行政单位" @input="onKeyInput" confirm-type="search"></input>
+						</view>
+						<view class="action">
+							<button class="cu-btn bg-linear-blue shadow-blur round" @tap="search()">搜索</button>
+						</view>
+					</view>
+					
+					<view id="list-view" style="padding-top: 100upx;" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
+						<view class="cu-list menu text-left">
+							<view class="cu-item arrow" v-for="org in orgs" :key="org.id" @click="getOrg(org)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
+								<view class="content">
+									<view>{{org.org_name}}</view>
+								</view>
+							</view>
+						</view>
+						<uni-load-more :status="status" :content-text="contentText" />
+					</view>
+				</view>
 			</view>
 		</form>
 	</view>
 </template>
 
 <script>
+	import uniLoadMore from '@/colorui/components/uni-load-more.vue';
 	export default {
+		components: {
+			uniLoadMore
+		},
 		data() {
 			return {
 				sysIndex: 0,
@@ -137,10 +176,27 @@
 					id: 0
 				}],
 				jobIndex: 0,
-				jobs:[{
+				jobs: [{
 					job_name: "请选择",
 					job_id: 0
 				}],
+				//选择单位模态框参数
+				StatusBar: this.StatusBar,
+				CustomBar: this.CustomBar,
+				ScreenHeight: this.ScreenHeight,
+				isShowOrgModal: false,
+				orgs: [],
+				page: 1,
+				pageSize: 1000,
+				orgNameLike: "",
+				orgName: "",
+				status: 'more',
+				contentText: {
+					contentdown: '上拉加载更多',
+					contentrefresh: '加载中',
+					contentnomore: '没有更多'
+				},
+				//提交参数
 				para: {
 					system_org_id: "",
 					org_id: "",
@@ -163,9 +219,11 @@
 				isDriver: false,
 				driverSex: false,
 				ageIndex: 0,
-				driveAges: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],
+				driveAges: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+					26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50
+				],
 				dtIndex: 0,
-				driverTypes:["请选择"]
+				driverTypes: ["请选择"]
 			}
 		},
 		onLoad() {
@@ -175,33 +233,8 @@
 			}).then(res => {
 				if (res.status === "0") {
 					this.sysOrganizations = res.data;
-					if(this.sysOrganizations.length > 0)
-					{
+					if (this.sysOrganizations.length > 0) {
 						this.para.system_org_id = this.sysOrganizations[0].org_id;
-					}
-				} else {
-					uni.showToast({
-						title: res.msg,
-						icon: 'none'
-					});
-				}
-			}).catch(err => {
-				uni.hideLoading();
-				uni.showToast({
-					title: err.message,
-					icon: 'none'
-				});
-			});
-			//获取组织数据
-			global.$http.post('/core/organization/organizationPage', {
-				params: {
-					page: 1,
-					size: 10000
-				},
-			}).then(res => {
-				if (res.status === "0") {
-					for (var i = 0; i < res.data.list.length; i++) {
-						this.organizations.push(res.data.list[i]);
 					}
 				} else {
 					uni.showToast({
@@ -239,78 +272,40 @@
 			});
 		},
 		methods: {
-			SysOrganizationChange: function(e){
-				this.para.system_org_id = this.sysOrganizations[e.detail.value].org_id;
-			},
-			OrganizationChange: function(e) {
-				this.para.org_id = this.organizations[e.detail.value].org_id;
-				if (this.oIndex != e.detail.value) {
-					this.para.department_id = 0;
-					this.para.section_id = 0;
-					this.oIndex = e.detail.value;
-					this.departments = [{
-						name: "请选择",
-						id: 0
-					}];
-					this.jobs = [{
-						job_name: "请选择",
-						job_id: 0
-					}];
-					this.dIndex = 0;
-					if (e.detail.value > 0) {
-						//获取部门数据
-						global.$http.post('/core/department/departmentPage', {
-							params: {
-								page: 1,
-								size: 10000,
-								pid: 0,
-								orgId: this.para.org_id
-							},
-						}).then(res => {
-							if (res.status === "0") {
-								for (var i = 0; i < res.data.list.length; i++) {
-									this.departments.push(res.data.list[i]);
-								}
-							} else {
-								uni.showToast({
-									title: res.msg,
-									icon: 'none'
-								});
-							}
-						}).catch(err => {
-							uni.hideLoading();
-							uni.showToast({
-								title: err.message,
-								icon: 'none'
-							});
-						});
-						//获取职务数据
-						global.$http.post('/core/organization/getJobByOrg', {
-							params: {
-								org_id: this.para.org_id
-							},
-						}).then(res => {
-							if (res.status === "0") {
-								for (var i = 0; i < res.data.length; i++) {
-									this.jobs.push(res.data[i]);
-								}
-							} else {
-								uni.showToast({
-									title: res.msg,
-									icon: 'none'
-								});
-							}
-						}).catch(err => {
-							uni.hideLoading();
-							uni.showToast({
-								title: err.message,
-								icon: 'none'
-							});
-						});
+			getOrgListData(){
+				//获取组织数据
+				global.$http.post('/core/organization/orgListAll', {
+					params: {
+						name: this.orgNameLike,
+						page: this.page,
+						pageSize: this.pageSize
+					},
+				}).then(res => {
+					if (res.totlePage <= this.page) {
+						this.status = 'noMore';
 					} else {
-
+						this.status = "more";
 					}
-				}
+					res.list.forEach(c => {
+						this.orgs.push(c);
+					});
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+			},
+			onKeyInput(e) {
+				this.orgNameLike = e.target.value;
+			},
+			search: function(){
+				this.orgs = [];
+				this.getOrgListData();
+			},
+			SysOrganizationChange: function(e) {
+				this.para.system_org_id = this.sysOrganizations[e.detail.value].org_id;
 			},
 			DepartmentChange: function(e) {
 				this.para.department_id = this.departments[e.detail.value].id;
@@ -327,7 +322,7 @@
 						global.$http.post('/core/department/departmentPage', {
 							params: {
 								page: 1,
-								size: 10000,
+								pageSize: 10000,
 								pid: this.para.department_id
 							},
 						}).then(res => {
@@ -382,7 +377,9 @@
 						this.authCode = 60;
 						//定时器
 						var inteval = setInterval(this.SetAuthCode, 1000);
-						setTimeout(function(){ clearInterval(inteval); }, 60000);
+						setTimeout(function() {
+							clearInterval(inteval);
+						}, 60000);
 					} else {
 						this.disabled = false;
 						uni.showToast({
@@ -399,62 +396,139 @@
 					});
 				});
 			},
-			SetAuthCode: function(){
+			SetAuthCode: function() {
 				this.authCode -= 1;
-				if(this.authCode == 0){
+				if (this.authCode == 0) {
 					this.authCode = "";
 					this.disabled = false;
 				}
 			},
-			ChangeDriveAge: function(e){
+			ChangeDriveAge: function(e) {
 				this.para.drive_age = e.detail.value;
 			},
-			ChangeDriverSex: function(e){
+			ChangeDriverSex: function(e) {
 				this.driverSex = e.detail.value;
 				this.para.sex = e.detail.value ? 1 : 2;
 			},
-			ChangeDriverType: function(e){
+			ChangeDriverType: function(e) {
 				this.dtIndex = e.detail.value;
 				this.para.license_type = this.driverTypes[e.detail.value];
 			},
-			Submit: function(e){
+			showOrgModal: function() {
+				this.page = 1;
+				this.orgs = [];
+				this.isShowOrgModal = true;
+				this.getOrgListData();
+			},
+			hideOrgModal: function(e){
+				this.isShowOrgModal = false;
+			},
+			getOrg: function(e) {
+				if(this.para.org_id != e.org_id)
+				{
+					this.para.department_id = 0;
+					this.para.section_id = 0;
+					this.departments = [{
+						name: "请选择",
+						id: 0
+					}];
+					this.jobs = [{
+						job_name: "请选择",
+						job_id: 0
+					}];
+					this.dIndex = 0;
+					//获取部门数据
+					global.$http.post('/core/department/departmentPage', {
+						params: {
+							page: 1,
+							pageSize: 10000,
+							pid: 0,
+							orgId: this.para.org_id
+						},
+					}).then(res => {
+						if (res.status === "0") {
+							for (var i = 0; i < res.data.list.length; i++) {
+								this.departments.push(res.data.list[i]);
+							}
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
+					//获取职务数据
+					global.$http.post('/core/organization/getJobByOrg', {
+						params: {
+							org_id: this.para.org_id
+						},
+					}).then(res => {
+						if (res.status === "0") {
+							for (var i = 0; i < res.data.length; i++) {
+								this.jobs.push(res.data[i]);
+							}
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
+				}
+				this.para.org_id = e.org_id;
+				this.orgName = e.org_name;
+				this.isShowOrgModal = false;
+			},
+			Submit: function(e) {
 				//验证数据
-				if(this.para.system_org_id.length <= 0){
+				if (this.para.system_org_id.length <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择机关事务局'
 					});
 					return;
 				}
-				if(this.para.org_id.length <= 0){
+				if (this.para.org_id.length <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择所属单位'
 					});
 					return;
 				}
-				if(this.para.department_id <= 0){
+				if (this.para.department_id <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择所属部门'
 					});
 					return;
 				}
-				if(this.para.section_id<=0){
+				if (this.para.section_id <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择所属科室'
 					});
 					return;
 				}
-				if(this.para.user_cn_name.length <= 0){
+				if (this.para.user_cn_name.length <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写姓名'
 					});
 					return;
 				}
-				if(this.para.job_id<=0){
+				if (this.para.job_id <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择职务'
@@ -462,22 +536,22 @@
 					return;
 				}
 				//验证司机数据
-				if(this.isDriver){
-					if(this.dtIndex <= 0){
+				if (this.isDriver) {
+					if (this.dtIndex <= 0) {
 						uni.showToast({
 							icon: 'none',
 							title: '请选择驾照类型'
 						});
 						return;
 					}
-					if(this.para.drive_age <= 0){
+					if (this.para.drive_age <= 0) {
 						uni.showToast({
 							icon: 'none',
 							title: '请选择驾龄'
 						});
 						return;
 					}
-					if(this.para.id_card.length <= 0){
+					if (this.para.id_card.length <= 0) {
 						uni.showToast({
 							icon: 'none',
 							title: '请填写身份证号'
@@ -485,29 +559,29 @@
 						return;
 					}
 				}
-				
-				if(this.para.username.length <= 0){
+
+				if (this.para.username.length <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写手机号'
 					});
 					return;
 				}
-				if(this.para.password.length < 6){
+				if (this.para.password.length < 6) {
 					uni.showToast({
 						icon: 'none',
 						title: '密码最短为 6 个字符'
 					});
 					return;
 				}
-				if(this.para.password !== this.para.rPassword){
+				if (this.para.password !== this.para.rPassword) {
 					uni.showToast({
 						icon: 'none',
 						title: '重复密码不一致'
 					});
 					return;
 				}
-				if(this.para.code.length <= 0){
+				if (this.para.code.length <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写验证码'
@@ -554,6 +628,7 @@
 	} */
 	.tag {
 		background: #FFFFFF;
+
 		.text {
 			display: inline-block;
 			background-image: linear-gradient(45deg, #36bdbd, #44d7b6);
@@ -564,6 +639,6 @@
 			padding-left: 30upx;
 			border-radius: 0 50upx 50upx 0;
 		}
-		
+
 	}
 </style>

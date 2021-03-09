@@ -421,7 +421,7 @@
 					global.$http.post('/core/organization/organizationPage', {
 						params: {
 							page: 1,
-							size: 10000,
+							pageSize: 10000,
 							name: ''
 						},
 					}).then(res => {

@@ -14,9 +14,9 @@ export const globalInterceptor = {
  */
 export const config = {
 	//正式环境
-	baseURL: "http://106.58.186.238:8081/mis",
+	//baseURL: "http://106.58.186.238:8081/mis",
 	//测试环境
-	//baseURL: "http://39.108.218.29:8080/mis",
+	baseURL: "http://39.108.218.29:8080/mis",
 	//baseURL: "http://192.168.1.119:8080/mis",
 	header: {
 		// 'X-Auth-Token': 'xxxx',

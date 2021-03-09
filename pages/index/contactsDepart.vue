@@ -55,7 +55,7 @@
 				global.$http.post('/core/department/departmentPage', {
 					params: {
 						page: 1,
-						size: 10000,
+						pageSize: 10000,
 						pid: 0,
 						orgId: this.orgId,
 						name: this.name
