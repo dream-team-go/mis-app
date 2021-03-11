@@ -108,7 +108,7 @@
 				uni.makePhoneCall({
 					phoneNumber: phone,
 					success: () => {
-						console.log("成功拨打电话aa")
+						console.log("成功拨打电话")
 					}
 				})
 			},
