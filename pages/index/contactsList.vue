@@ -71,7 +71,7 @@
 					mask: false
 				});
 				//获取通讯录数据
-				global.$http.post('/core/addressBook/getListApp', {
+				global.$http.post('/core/addressBook/appOrderWeight', {
 					params: {
 						department_id: this.departId,
 						key: this.key,
@@ -81,18 +81,13 @@
 				}).then(res => {
 					if (res.status === "0") {
 						this.list = [];
-						let list = [];
-						for (let i = 0; i < res.data.length; i++) {
-							list[i] = res.data[i];
-							list[i].sub_list.forEach(c=>{
-								if(c.job_name.length > 10)
-									c.short_job_name = c.job_name.substr(0, 9) + "...";
-								else
-									c.short_job_name = c.job_name;
-								c.code = list[i].code;
+						res.data.forEach(c=>{
+							if(c.job_name.length > 10)
+								c.short_job_name = c.job_name.substr(0, 9) + "...";
+							else
+								c.short_job_name = c.job_name;
 								this.list.push(c);
-							});
-						}
+						});
 						uni.hideLoading();
 					} else {
 						uni.hideLoading();

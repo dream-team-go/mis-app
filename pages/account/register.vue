@@ -17,7 +17,7 @@
 					</view>
 				</picker>
 			</view>
-			
+
 			<view class="cu-form-group">
 				<view class="title">所属单位</view>
 				<view class="modal-group" @tap="showOrgModal()" data-target="Modal">
@@ -52,11 +52,11 @@
 
 			<view class="cu-form-group" v-show="para.org_id">
 				<view class="title">职位</view>
-				<picker @change="JobChange" :value="jobIndex" :range="jobs" range-key="job_name">
+				<view class="modal-group" @tap="showJobModal()" data-target="Modal">
 					<view class="picker">
-						{{jobIndex>-1?jobs[jobIndex].job_name:'请选择'}}
+						{{ para.job_id.length > 0 ? jobName : '请选择' }}
 					</view>
-				</picker>
+				</view>
 			</view>
 
 			<view class="cu-form-group" v-show="isDriver">
@@ -112,28 +112,33 @@
 			<view class="padding flex flex-direction">
 				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
-			
+
 			<view class="list-modal cu-modal bottom-modal" :class="isShowOrgModal?'show':''">
 				<view class="cu-dialog">
-					<view class="cu-bar bg-linear-blue" :style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
+					<view class="cu-bar bg-linear-blue"
+						:style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
 						<view class="action text-white" @tap="hideOrgModal">取消</view>
-						<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择所属单位</view>
+						<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择所属单位
+						</view>
 						<view class="action"></view>
 					</view>
-					
+
 					<view class="cu-bar bg-white search fixed" :style="[{top:CustomBar + 'px'}]">
 						<view class="search-form round">
 							<text class="cuIcon-search"></text>
-							<input style="text-align:left;"  type="text" placeholder="行政单位" @input="onKeyInput" confirm-type="search"></input>
+							<input style="text-align:left;" type="text" placeholder="行政单位" @input="onKeyInput"
+								confirm-type="search"></input>
 						</view>
 						<view class="action">
 							<button class="cu-btn bg-linear-blue shadow-blur round" @tap="search()">搜索</button>
 						</view>
 					</view>
-					
-					<view id="list-view" style="padding-top: 100upx;" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
+
+					<view id="list-view" style="padding-top: 100upx;"
+						:style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
 						<view class="cu-list menu text-left">
-							<view class="cu-item arrow" v-for="org in orgs" :key="org.id" @click="getOrg(org)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
+							<view class="cu-item arrow" v-for="org in orgs" :key="org.id" @click="getOrg(org)"
+								style="padding-top: 10rpx;padding-bottom: 10rpx;">
 								<view class="content">
 									<view>{{org.org_name}}</view>
 								</view>
@@ -143,6 +148,33 @@
 					</view>
 				</view>
 			</view>
+
+			<view class="list-modal cu-modal bottom-modal" :class="isShowJobModal?'show':''">
+				<view class="cu-dialog">
+					<view class="cu-bar bg-linear-blue"
+						:style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
+						<view class="action text-white" @tap="hideJobModal">取消</view>
+						<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择职务
+						</view>
+						<view class="action" style="margin-right: 15upx;">
+							<view @tap="sureJob">确认</view>
+						</view>
+					</view>
+					<scroll-view scroll-y="true">
+						<view>
+							<checkbox-group @change="checkboxChange">
+								<view class="cu-form-group" v-for="job in modalJobs" :key="job.id">
+									<view class="title" style="color: #333333;font-size: 34upx;">{{job.job_name}}</view>
+									<checkbox :class="job.checked?'checked':''" :checked="job.checked?true:false"
+										:value="job.id">
+									</checkbox>
+								</view>
+							</checkbox-group>
+						</view>
+					</scroll-view>
+				</view>
+			</view>
+
 		</form>
 	</view>
 </template>
@@ -175,11 +207,6 @@
 					name: "请选择",
 					id: 0
 				}],
-				jobIndex: 0,
-				jobs: [{
-					job_name: "请选择",
-					job_id: 0
-				}],
 				//选择单位模态框参数
 				StatusBar: this.StatusBar,
 				CustomBar: this.CustomBar,
@@ -196,6 +223,11 @@
 					contentrefresh: '加载中',
 					contentnomore: '没有更多'
 				},
+				//选择职务模态框参数
+				isShowJobModal: false,
+				jobs: [],
+				modalJobs: [],
+				jobName: "",
 				//提交参数
 				para: {
 					system_org_id: "",
@@ -203,7 +235,7 @@
 					department_id: 0,
 					section_id: 0,
 					user_cn_name: "",
-					job_id: 0,
+					job_id: "",
 					username: "",
 					password: "",
 					rPassword: "",
@@ -272,7 +304,7 @@
 			});
 		},
 		methods: {
-			getOrgListData(){
+			getOrgListData() {
 				//获取组织数据
 				global.$http.post('/core/organization/orgListAll', {
 					params: {
@@ -300,7 +332,7 @@
 			onKeyInput(e) {
 				this.orgNameLike = e.target.value;
 			},
-			search: function(){
+			search: function() {
 				this.orgs = [];
 				this.getOrgListData();
 			},
@@ -349,14 +381,6 @@
 			SectionChange: function(e) {
 				this.para.section_id = this.sections[e.detail.value].id;
 				this.sIndex = e.detail.value;
-			},
-			JobChange: function(e) {
-				if (this.jobIndex != e.detail.value) {
-					this.jobIndex = e.detail.value;
-					this.para.job_id = this.jobs[e.detail.value].job_id;
-					this.isDriver = this.jobs[e.detail.value].job_name == "司机";
-					this.para.is_driver = this.isDriver ? 1 : 0;
-				}
 			},
 			SendCode: function(e) {
 				this.disabled = true;
@@ -420,21 +444,18 @@
 				this.isShowOrgModal = true;
 				this.getOrgListData();
 			},
-			hideOrgModal: function(e){
+			hideOrgModal: function(e) {
 				this.isShowOrgModal = false;
 			},
 			getOrg: function(e) {
-				if(this.para.org_id != e.org_id)
-				{
+				if (this.para.org_id != e.org_id) {
+					this.para.org_id = e.org_id;
+					this.orgName = e.org_name;
 					this.para.department_id = 0;
 					this.para.section_id = 0;
 					this.departments = [{
 						name: "请选择",
 						id: 0
-					}];
-					this.jobs = [{
-						job_name: "请选择",
-						job_id: 0
 					}];
 					this.dIndex = 0;
 					//获取部门数据
@@ -464,14 +485,18 @@
 						});
 					});
 					//获取职务数据
-					global.$http.post('/core/organization/getJobByOrg', {
+					this.para.job_id = "";
+					this.jobs = [];
+					global.$http.post('/core/orgJob/getList', {
 						params: {
 							org_id: this.para.org_id
 						},
 					}).then(res => {
 						if (res.status === "0") {
 							for (var i = 0; i < res.data.length; i++) {
-								this.jobs.push(res.data[i]);
+								var job = res.data[i];
+								job.checked = false;
+								this.jobs.push(job);
 							}
 						} else {
 							uni.showToast({
@@ -487,9 +512,48 @@
 						});
 					});
 				}
-				this.para.org_id = e.org_id;
-				this.orgName = e.org_name;
 				this.isShowOrgModal = false;
+			},
+			showJobModal: function(e) {
+				this.modalJobs = JSON.parse(JSON.stringify(this.jobs));
+				this.isShowJobModal = true;
+			},
+			hideJobModal: function(e) {
+				this.isShowJobModal = false;
+			},
+			checkboxChange: function(e) {
+				this.modalJobs.forEach(c => {
+					c.checked = false;
+					e.detail.value.forEach(x => {
+						if (c.id == x)
+							c.checked = true;
+					})
+				});
+			},
+			sureJob: function(e) {
+				this.jobs = JSON.parse(JSON.stringify(this.modalJobs));
+				this.jobs = this.modalJobs;
+				var names = [];
+				var ids = [];
+				this.jobs.forEach(c => {
+					if (c.checked == true) {
+						names.push(c.job_name);
+						ids.push(c.id);
+					}
+				});
+				if (ids.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请选择职务'
+					});
+				} else {
+					this.jobName = names.join('、');
+					this.para.job_id = ids.join(',');
+					this.isShowJobModal = false;
+					//判断是否是司机
+					this.isDriver = this.orgName == "开远市机关事务局" && names.findIndex(c => c == "司机") >= 0;
+					this.para.is_driver = this.isDriver ? 1 : 0;
+				}
 			},
 			Submit: function(e) {
 				//验证数据
@@ -528,7 +592,7 @@
 					});
 					return;
 				}
-				if (this.para.job_id <= 0) {
+				if (this.para.job_id.length <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择职务'
