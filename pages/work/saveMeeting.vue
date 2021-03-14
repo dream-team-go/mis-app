@@ -33,7 +33,7 @@
 				</picker>
 			</view> -->
 
-			<view class="cu-form-group margin-top-sm">
+			<view class="cu-form-group margin-top-xs">
 				<view class="title">容纳人数</view>
 				<input name="input" v-model="para.capacity" type="number"></input>
 			</view>
@@ -42,7 +42,7 @@
 				<input name="input" v-model="para.max_meeting_people" type="number"></input>
 			</view>
 			
-			<view class="cu-form-group margin-top-sm">
+			<view class="cu-form-group margin-top-xs">
 				<view class="title">有无电子屏</view>
 				<switch @change="SwitchIsLed" :class="para.is_led ?'checked':''" :checked="para.is_led?true:false">
 				</switch>
@@ -52,7 +52,7 @@
 				<switch @change="SwitchIsNetMeeting" :class="para.is_net_meeting ? 'checked':''"
 					:checked="para.is_net_meeting?true:false"></switch>
 			</view>
-			<view class="cu-bar bg-white margin-top-sm">
+			<view class="cu-bar bg-white margin-top-xs">
 				<view class="action">
 					会议室照片上传
 				</view>

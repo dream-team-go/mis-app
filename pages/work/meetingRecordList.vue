@@ -33,7 +33,7 @@
 					</view>
 				</view>	
 				<view class="reason-box">
-					<view class="label">会议主题：</view>
+					<view class="label">会议名称：</view>
 					<view class="info">{{record.desc}}</view>
 				</view>
 			</view>

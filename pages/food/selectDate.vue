@@ -11,12 +11,12 @@
 					<view class="text-black">
 						今日
 					</view>
-					<view class="margin-top-sm align-center">
+					<view class="margin-top-xs align-center">
 						<text class="text-red">午餐</text>
 						<text class="cuIcon-roundcheckfill text-red padding-left"
 							style="font-size: 60upx;"></text>
 					</view>
-					<view class="margin-top-sm align-center">
+					<view class="margin-top-xs align-center">
 						<span class="text-red">晚餐</span>
 						<text class="cuIcon-roundcheckfill text-red padding-left" style="font-size: 60upx;"></text>
 					</view>
@@ -207,7 +207,9 @@
 				para: {
 					dining_id: 0,
 					room_number: "",
-					building_name: ""
+					building_name: "",
+					is_net_meeting: 0,
+					is_led: 0
 				}
 			}
 		},

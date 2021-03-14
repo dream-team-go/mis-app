@@ -1,106 +1,148 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			
-			<block slot="content">{{isAdd ? '预定会议室' : '编辑预定会议室'}}</block>
+
+			<block slot="content">{{isAdd ? '会议室预定' : '编辑会议室预定'}}</block>
 		</cu-custom>
-		<form v-show="isShowBottomModal == false">
-			<view class="cu-form-group">
-				<view class="title">会议主题</view>
-				<input name="input" v-model="para.desc"></input>
-			</view>
-			
-			<view class="cu-form-group">
-				<view class="title">预定人</view>
-				<input name="input" v-model="para.user_name"></input>
-			</view>
-			<view class="cu-form-group">
-				<view class="title">手机号</view>
-				<input name="input" v-model="para.user_tel"></input>
-			</view>
-			<view class="cu-form-group">
-				<view class="title">日期</view>
-				<!-- <picker mode="date" :value="date" :start="startDate" :end="endDate" @change="DateChange"> -->
-				<picker mode="date" :value="date" :start="startDate" :end="endDate">
-					<view class="picker">
-						{{date}}
+
+		<view class="cu-bar bg-white flex padding-top padding-bottom">
+			<view class="action">
+				<text class="cuIcon-roundcheckfill text-red" style="font-size: 50upx;"></text>
+				<view class="flex-sub ">
+					<view><text>会议室：</text> <text class="text-bold">{{para.building_name}} {{para.room_number}}</text>
 					</view>
-				</picker>
+					<view class="margin-top-xs"><text>时间：</text> <text class="text-bold">{{para.ydrq}} {{para.ydsjd == "1" ? "上午":"下午"}}</text></view>
+				</view>
+			</view>
+		</view>
+
+		<form>
+			<view class="cu-form-group margin-top-xs">
+				<view class="title">会议名称</view>
+				<input name="input" placeholder="请输入" v-model="para.desc"></input>
 			</view>
 			<view class="cu-form-group">
+				<view class="title">参会人数</view>
+				<input name="input" placeholder="请输入" v-model="para.people_num" type="number"></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">主办单位</view>
+				<input name="input" placeholder="请输入" v-model="para.host_unit"></input>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">联系人</view>
+				<input name="input" placeholder="请输入" v-model="para.user_name"></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">联系电话</view>
+				<input name="input" placeholder="请输入" v-model="para.user_tel"></input>
+			</view>
+
+			<!-- <view class="cu-form-group">
 				<view class="title">时间</view>
-				<!-- <picker mode="time" :value="time" @change="TimeChange"> -->
 				<picker mode="time" :value="time">
 					<view class="picker">
 						{{time}}
 					</view>
 				</picker>
+			</view> -->
+			
+			<view class="cu-form-group margin-top-xs">
+				<view class="title">是否需要布标</view>
+				<switch @change="SwitchIsBb" :class="para.bb? 'checked':''"
+					:checked="para.bb?true:false"></switch>
 			</view>
-			<view class="cu-form-group">
-				<view class="title">会议时长</view>
-				<!-- <picker @change="ChangeHours" :value="hourIndex" :range="hours"> -->
-				<picker :value="hourIndex" :range="hours">
-					<view class="picker">
-						{{hourIndex>-1?hours[hourIndex] + "小时" : "请选择"}}
-					</view>
-				</picker>
+			<view class="cu-form-group align-start" v-show="para.bb">
+				<view class="title">布标名称</view>
+				<textarea maxlength="-1" @input="textareaInput" placeholder="请输入"></textarea>
 			</view>
-			<view class="cu-form-group">
-				<view class="title">参会人数</view>
-				<picker @change="ChangePeoples" :value="peopleIndex" :range="peoples">
-					<view class="picker">
-						{{peopleIndex>-1?peoples[peopleIndex] + "人" : "请选择"}}
-					</view>
-				</picker>
+			<view class="cu-form-group" v-show="is_led">
+				<view class="title">是否需要电子屏</view>
+				<switch @change="SwitchIsLed" :class="para.led?'checked':''" :checked="para.led?true:false">
+				</switch>
 			</view>
-			<view class="cu-form-group">
-				<view class="title">会议室</view>
-				<!-- <view class="modal-group" @tap="showBottomModal" data-target="Modal"> -->
-				<view class="modal-group">
-					<view class="picker">
-						{{ para.room_number.length > 0 ? (para.room_number + '('+para.building_name+')') : '请选择' }}
-					</view>
-				</view>
-			</view>
-			<view class="cu-form-group">
-				<view class="title">备注</view>
-				<input name="input" v-model="para.attend_leader"></input>
+			<view class="cu-form-group" v-show="is_net_meeting">
+				<view class="title">是否需要视频会议</view>
+				<switch @change="SwitchIsNetMeeting" :class="para.net_meeting? 'checked':''"
+					:checked="para.net_meeting?true:false"></switch>
 			</view>
 			
-			<view class="padding flex flex-direction">
-				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
+			<view class="cu-form-group margin-top-xs">
+				<view class="title">主席台桌子数</view>
+				<input name="input" placeholder="请输入" v-model="para.plat_table_num" type="number"></input>
 			</view>
-		</form>
-
-		<view id="meeting-list-modal" class="cu-modal bottom-modal" :class="isShowBottomModal?'show':''">
-			<view class="cu-dialog">
-				<view class="cu-bar bg-linear-blue" :style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
-					<view class="action text-white" @tap="hideBottomModal">取消</view>
-					<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择会议室</view>
-					<view class="action"></view>
+			<view class="cu-form-group">
+				<view class="title">桌子形式</view>
+				<picker @change="ChangeTableType" :value="tableTypeIndex" :range="tableTypes">
+					<view class="picker">
+						{{tableTypeIndex>-1?tableTypes[tableTypeIndex] : "请选择"}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">主席台人数</view>
+				<input name="input" placeholder="请输入" v-model="para.plat_person_num" type="number"></input>
+			</view>
+			
+			<view class="cu-form-group align-start">
+				<view class="title">席位名单</view>
+				<textarea maxlength="-1" @input="textareaBInput" placeholder="请输入"></textarea>
+			</view>
+			
+			<view class="cu-form-group margin-top-xs">
+				<view class="title">会议服务内容</view>
+				<view class="modal-group" @tap="showServiceModal()" data-target="Modal">
+					<view class="picker">
+						{{ para.services.length > 0 ? serviceName : '请选择' }}
+					</view>
 				</view>
-				
-				<view id="list-view" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
-					<view class="cu-list menu text-left">
-						<view class="cu-item arrow" v-for="meeting in meetings" :key="meeting.id" @click="getMeeting(meeting)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
-							<view class="content">
-								<view>{{meeting.number}}({{meeting.name}})</view>
-								<view class="text-somber text-df">
-									<view class="text-cut">
-										{{meeting.address}}
-									</view>
-								</view>
-							</view>
-							<view class="action">
-								<view class="text-somber text-df">容纳{{meeting.capacity}}人</view>
-								<view class="cu-tag round bg-orange">{{meeting.num > 0 ? '已被预定' : '可预订'}}</view>
-							</view>
+			</view>
+			
+			<view class="cu-form-group">
+				<view class="title">大件水数量</view>
+				<input name="input" placeholder="请输入" v-model="para.large_water_num" type="number"></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">小件水数量</view>
+				<input name="input" placeholder="请输入" v-model="para.small_water_num" type="number"></input>
+			</view>
+			
+			<view class="cu-form-group">
+				<view class="title">备注</view>
+				<input name="input" placeholder="请输入" v-model="para.attend_leader"></input>
+			</view>
+
+			<view class="padding flex flex-direction">
+				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">下一步</button>
+			</view>
+			
+			<view class="list-modal cu-modal bottom-modal" :class="isShowServiceModal?'show':''">
+				<view class="cu-dialog">
+					<view class="cu-bar bg-linear-blue"
+						:style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
+						<view class="action text-white" @tap="hideServiceModal">取消</view>
+						<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择会议服务内容
+						</view>
+						<view class="action" style="margin-right: 15upx;">
+							<view @tap="sureService">确认</view>
 						</view>
 					</view>
-					<uni-load-more :status="status" :content-text="contentText" />
+					<scroll-view scroll-y="true">
+						<view>
+							<checkbox-group @change="checkboxChange">
+								<view class="cu-form-group" v-for="service in modalServices" :key="service.dic_code">
+									<view class="title" style="color: #333333;font-size: 34upx;">{{service.dic_name}}</view>
+									<checkbox :class="service.checked?'checked':''" :checked="service.checked?true:false"
+										:value="service.dic_code">
+									</checkbox>
+								</view>
+							</checkbox-group>
+						</view>
+					</scroll-view>
 				</view>
 			</view>
-		</view>
+		</form>
 	</view>
 </template>
 
@@ -109,69 +151,6 @@
 		mapState
 	} from 'vuex';
 	import uniLoadMore from '@/colorui/components/uni-load-more.vue';
-
-	function getDate(addDay) {
-		const date = new Date();
-		if (addDay > 0) {
-			date.setDate(date.getDate() + addDay);
-		}
-		let year = date.getFullYear();
-		let month = date.getMonth() + 1;
-		let day = date.getDate();
-		month = month > 9 ? month : '0' + month;
-		day = day > 9 ? day : '0' + day;
-
-		return `${year}-${month}-${day}`;
-	}
-
-	function getTime(addMinute) {
-		const date = new Date();
-		var tmpMinute = date.getMinutes();
-		if (tmpMinute < 30) {
-			date.setMinutes(30);
-		} else if (tmpMinute > 30 && tmpMinute <= 59) {
-			date.setMinutes(60);
-		}
-
-		if (addMinute > 0) {
-			date.setMinutes(date.getMinutes() + addMinute);
-		}
-
-		let hour = date.getHours();
-		let minute = date.getMinutes();
-
-		hour = hour > 9 ? hour : '0' + hour;;
-		minute = minute > 9 ? minute : '0' + minute;
-
-		return `${hour}:${minute}`;
-	}
-
-	function getEndTime(startTime, addHour) {
-		//特殊处理IOS日期，用‘/’代替‘-’
-		startTime = startTime.replace(/-/g, '/');
-		var date = new Date(startTime);
-		date.setHours(date.getHours() + addHour);
-		let year = date.getFullYear();
-		let month = date.getMonth() + 1;
-		let day = date.getDate();
-		let hour = date.getHours();
-		let minute = date.getMinutes();
-
-		month = month > 9 ? month : '0' + month;;
-		day = day > 9 ? day : '0' + day;
-		hour = hour > 9 ? hour : '0' + hour;;
-		minute = minute > 9 ? minute : '0' + minute;
-
-		return `${year}-${month}-${day} ${hour}:${minute}`;
-	}
-	//计算两个时间相差了几个小时
-	function getIntervalHour(startDate, endDate) {
-			 startDate = new Date(startDate.replace(/-/g, '/'));
-			 endDate = new Date(endDate.replace(/-/g, '/'));
-	            var ms = endDate.getTime() - startDate.getTime();
-	            if (ms < 0) return 0;
-	            return Math.floor(ms/1000/60/60);
-	        }
 
 	export default {
 		components: {
@@ -183,56 +162,56 @@
 				StatusBar: this.StatusBar,
 				CustomBar: this.CustomBar,
 				ScreenHeight: this.ScreenHeight,
-				date: getDate(),
-				startDate: getDate(),
-				endDate: getDate(7),
-				time: getTime(),
-				hourIndex: 0,
-				hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
-				peopleIndex: 0,
-				peoples: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-					30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50
-				],
-				isShowBottomModal: false,
-				meetings: [],
-				status: 'more',
-				contentText: {
-					contentdown: '上拉加载更多',
-					contentrefresh: '加载中',
-					contentnomore: '没有更多'
-				},
-				page: 1,
-				pageSize: 100,
+				time: this.util.getTime(),
+				is_net_meeting: 0,
+				is_led: 0,
+				
+				tableTypeIndex: -1,
+				tableTypes: [],
+				tableTypeDatas: [],
+				
+				modalServices: [],
+				serviceName: "",
+				isShowServiceModal: false,
+				services: [],
+				
 				para: {
 					user_name: "",
 					user_tel: "",
-					people_num: 1,
+					people_num: "",
 					desc: "",
 					attend_leader: "",
 					meeting_id: "",
 					building_name: "",
-					room_number: ""
+					room_number: "",
+					ydrq: "",
+					ydsjd: "",
+					net_meeting: 0,
+					led: 0,
+					bb: 0,
+					bb_name: "",
+					plat_table_num: "",
+					plat_person_num: "",
+					host_unit: "",
+					table_type: "",
+					large_water_num: "",
+					small_water_num: "",
+					services: []
 				}
 			}
 		},
 		computed: {
-			...mapState(['userInfo']),
-			start_time: function(){
-				return this.date + " " + this.time;
-			},
-			end_time: function(){
-				return getEndTime(this.start_time, this.hours[this.hourIndex]);
-			}
+			...mapState(['userInfo'])
 		},
 		onLoad(option) {
 			var info = JSON.parse(decodeURIComponent(option.para));
 			this.para.meeting_id = info.meeting_id;
-			this.para.room_number = info.room_number;
 			this.para.building_name = info.building_name;
-			this.date = info.start_time.substring(0, 10);
-			this.time = info.start_time.substring(11, 16);
-			this.hourIndex = getIntervalHour(info.start_time, info.end_time) - 1;
-			
+			this.para.room_number = info.room_number;
+			this.para.ydrq = info.ydrq;
+			this.para.ydsjd = info.ydsjd;
+			this.is_net_meeting = info.is_net_meeting;
+			this.is_led = info.is_led;
 			if (info.id > 0) {
 				this.isAdd = false;
 				this.para.id = info.id;
@@ -245,53 +224,30 @@
 			} else {
 				this.para.user_name = this.userInfo.user.userCnName;
 				this.para.user_tel = this.userInfo.user.username;
-				
 			}
-		},
-		onPullDownRefresh() {
-			
-		},
-		onReachBottom() {
-			this.status = 'more';
-			this.page += 1;
-			this.getMeetingListData();
+			this.GetDic("DIC_ZZXS");
+			this.GetDic("DIC_HYFW");
 		},
 		methods: {
-			DateChange: function(e) {
-				this.date = e.detail.value;
-			},
-			TimeChange: function(e){
-				this.time = e.detail.value;
-			},
-			ChangeHours: function(e) {
-				this.hourIndex = e.detail.value;
-			},
-			ChangePeoples: function(e) {
-				this.peopleIndex = e.detail.value;
-				this.para.people_num = this.peoples[e.detail.value];
-			},
-			showBottomModal: function(e) {
-				this.page = 1;
-				this.meetings = [];
-				this.isShowBottomModal = true;
-				this.getMeetingListData();
-			},
-			hideBottomModal: function(e) {
-				this.isShowBottomModal = false;
-			},
-			getMeetingListData: function() {
-				this.status = 'loading';
-				global.$http.post('/meeting/info/meetingList', {
+			GetDic(type){
+				global.$http.post('/core/dic/get', {
 					params: {
-						start_time: this.para.start_time,
-						end_time: this.para.end_time,
-						page: this.page,
-						pageSize: this.pageSize
+						type: type
 					},
 				}).then(res => {
 					if (res.status === "0") {
-						this.status = 'noMore';
-						this.meetings = res.data.list;
+						if(type == "DIC_ZZXS"){
+							this.tableTypeDatas = res.data;
+							this.tableTypeDatas.forEach(c=>{
+								this.tableTypes.push(c.dic_name);
+							});
+						} else if(type == "DIC_HYFW"){
+							res.data.forEach(c=>{
+								var service = c;
+								service.checked = false;
+								this.services.push(service);
+							});
+						}
 					} else {
 						uni.showToast({
 							title: res.msg,
@@ -305,45 +261,85 @@
 					});
 				});
 			},
-			getMeeting: function(e) {
-				this.para.meeting_id = e.id;
-				this.para.building_name = e.name;
-				this.para.room_number = e.number;
-				this.isShowBottomModal = false;
+			TimeChange: function(e) {
+				this.time = e.detail.value;
 			},
-			Submit: function(e){
-				this.para.start_time = this.start_time + ":00";
-				this.para.end_time = this.end_time + ":00";
+			SwitchIsNetMeeting: function(e) {
+				this.para.net_meeting = e.detail.value ? 1 : 0;
+			},
+			SwitchIsLed: function(e) {
+				this.para.led = e.detail.value ? 1 : 0;
+			},
+			SwitchIsBb: function(e){
+				this.para.bb = e.detail.value ? 1 : 0;
+			},
+			textareaInput: function(e) {
+				this.bb_name = e.detail.value;
+			},
+			ChangeTableType: function(e) {
+				this.tableTypeIndex = e.detail.value;
+				this.para.table_type = this.tableTypeDatas[e.detail.value].dic_code;
+			},
+			showServiceModal: function(e) {
+				this.modalServices = JSON.parse(JSON.stringify(this.services));
+				this.isShowServiceModal = true;
+			},
+			hideServiceModal: function(e) {
+				this.isShowServiceModal = false;
+			},
+			checkboxChange: function(e) {
+				this.modalServices.forEach(c => {
+					c.checked = false;
+					e.detail.value.forEach(x => {
+						if (c.dic_code == x)
+							c.checked = true;
+					})
+				});
+			},
+			sureService: function(e) {
+				this.services = JSON.parse(JSON.stringify(this.modalServices));
+				this.services = this.modalServices;
+				var names = [];
+				this.services.forEach(c => {
+					if (c.checked == true) {
+						names.push(c.dic_name);
+						this.para.services.push(c.dic_code);
+					}
+				});
+				this.serviceName = names.join('、');
+				this.isShowServiceModal = false;
+			},
+			Submit: function(e) {
 				//验证数据
-				if(this.para.desc.length <= 0){
+				if (this.para.desc.length <= 0) {
 					uni.showToast({
 						icon: 'none',
-						title: '请填写会议主题'
+						title: '请填写会议名称'
 					});
 					return;
 				}
-				if(this.para.desc.length > 20){
+				if (this.para.desc.length > 20) {
 					uni.showToast({
 						icon: 'none',
-						title: '会议主题不超过20字'
+						title: '会议名称不超过20字'
 					});
 					return;
 				}
-				if(this.para.user_name.length <= 0){
+				if (this.para.user_name.length <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写姓名'
 					});
 					return;
 				}
-				if(this.para.user_tel.length <= 0){
+				if (this.para.user_tel.length <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请填写手机号'
 					});
 					return;
 				}
-				if(this.para.meeting_id <= 0){
+				if (this.para.meeting_id <= 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请选择会议室'
@@ -351,6 +347,7 @@
 					return;
 				}
 				
+
 				//提交数据
 				uni.showLoading({
 					title: '提交中',
@@ -365,9 +362,11 @@
 							icon: 'none',
 							title: '提交成功'
 						});
-						uni.navigateBack({delta: 2});
+						uni.navigateBack({
+							delta: 2
+						});
 						uni.redirectTo({
-							url: '/pages/meeting/index',
+							url: '/pages/meeting/index'
 						});
 					} else {
 						uni.showToast({

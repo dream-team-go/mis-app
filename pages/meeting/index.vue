@@ -75,7 +75,7 @@
 					<text class="content">{{ meetingData.status.length > 0 ? meetingData.status : '无' }}</text>
 				</view>
 				<view class="reason-box">
-					<view class="title">会议主题</view>
+					<view class="title">会议名称</view>
 					<view class="reason">{{ meetingData.status.length > 0 ? meetingData.desc : '无' }}</view>
 				</view>
 			</view>

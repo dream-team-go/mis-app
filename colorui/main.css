@@ -2344,7 +2344,8 @@ button.cuIcon.lg {
 	position: relative;
 	height: 60upx;
 	line-height: 60upx;
-	color: #777777;
+	color: #666666;
+	min-width: calc(4em + 15px);
 }
 
 .cu-form-group input {
@@ -2362,7 +2363,7 @@ button.cuIcon.lg {
 
 .cu-form-group textarea {
 	margin: 32upx 0 30upx;
-	height: 4.6em;
+	height: 2.3em;
 	width: 100%;
 	line-height: 1.2em;
 	flex: 1;

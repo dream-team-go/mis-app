@@ -27,7 +27,7 @@
 			</view>
 		</view>
 		
-		<view class="cu-bar bg-white solid-bottom margin-top-sm">
+		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				 容纳人数：
 				<text class="text-black">{{info.capacity}}</text>
@@ -41,7 +41,7 @@
 			</view>
 		</view>
 		
-		<view class="cu-bar bg-white solid-bottom margin-top-sm">
+		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				 有无电子屏：
 				<text class="text-black">{{info.is_led?"有":"无"}}</text>
@@ -55,7 +55,7 @@
 			</view>
 		</view>
 		
-		<view class="cu-bar bg-white solid-bottom margin-top-sm">
+		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				 创建时间：
 				<text class="text-black">{{info.create_time}}</text>

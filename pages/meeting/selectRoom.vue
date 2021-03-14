@@ -17,7 +17,6 @@
 				<view class="image">
 					<image :src="room.vr" mode="widthFix"></image>
 					<view class="cu-tag bg-linear-blue">容纳{{room.capacity}}人</view>
-					<!-- <view class="cu-bar bg-shadeBottom"> <text class="text-cut">我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。</text></view> -->
 				</view>
 				<view class="cu-list">
 					<view class="cu-item">
@@ -25,11 +24,6 @@
 							<view style="font-size: 15px;font-weight: 900;color: #333;">{{room.name}} {{room.number}}</view>
 							<view style="font-size: 15px;" class="text-gray text-sm flex justify-between">
 								{{room.address}}
-								<!-- <view class="text-gray text-sm">
-									<text class="cuIcon-attentionfill margin-lr-xs"></text> 10
-									<text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
-									<text class="cuIcon-messagefill margin-lr-xs"></text> 30
-								</view> -->
 							</view>
 						</view>
 					</view>
@@ -143,6 +137,8 @@
 				this.para.meeting_id = room.id;
 				this.para.room_number = room.number;
 				this.para.building_name = room.name;
+				this.para.is_net_meeting = room.is_net_meeting;
+				this.para.is_led = room.is_led;
 				uni.navigateTo({
 					url: '../meeting/selectDate?para=' + encodeURIComponent(JSON.stringify(this.para))
 				});

@@ -25,7 +25,7 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-orange"></text> 会议主题：
+				<text class="cuIcon-title text-orange"></text> 会议名称：
 				<text class="text-black">{{info.desc}}</text>
 			</view>
 		</view>
