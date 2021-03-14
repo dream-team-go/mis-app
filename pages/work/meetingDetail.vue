@@ -22,6 +22,13 @@
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
+				 地址：
+				<text class="text-black">{{info.address}}</text>
+			</view>
+		</view>
+		
+		<view class="cu-bar bg-white solid-bottom margin-top-sm">
+			<view class="action">
 				 容纳人数：
 				<text class="text-black">{{info.capacity}}</text>
 			</view>
@@ -29,12 +36,26 @@
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 地址：
-				<text class="text-black">{{info.address}}</text>
+				 最大会务员数：
+				<text class="text-black">{{info.max_meeting_people}}</text>
+			</view>
+		</view>
+		
+		<view class="cu-bar bg-white solid-bottom margin-top-sm">
+			<view class="action">
+				 有无电子屏：
+				<text class="text-black">{{info.is_led?"有":"无"}}</text>
 			</view>
 		</view>
 		
 		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				 是否视频会议：
+				<text class="text-black">{{info.is_net_meeting?"是":"否"}}</text>
+			</view>
+		</view>
+		
+		<view class="cu-bar bg-white solid-bottom margin-top-sm">
 			<view class="action">
 				 创建时间：
 				<text class="text-black">{{info.create_time}}</text>

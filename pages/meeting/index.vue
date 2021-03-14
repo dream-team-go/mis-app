@@ -185,7 +185,7 @@
 		methods: {
 			toBookMeeting: function() {
 				uni.navigateTo({
-					url: '../meeting/selectTime'
+					url: '../meeting/selectRoom'
 				});
 			}
 		}

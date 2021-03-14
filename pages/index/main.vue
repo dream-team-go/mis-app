@@ -30,7 +30,7 @@
 				</view>
 			</view>
 			<view class="ads-box">
-				通知：智慧机关上线啦！！！
+				通知：数字机关事务上线啦！！！
 			</view>
 			<view class="notice-box">
 				<view class="notice-title">
@@ -79,12 +79,12 @@ export default {
 				{
 					img: '/static/common/newIcon/meeting.png',
 					name: '会务',
-					to: '/pages/meeting/selectTime',
+					to: '/pages/meeting/selectRoom',
 				},
 				{
 					img: '/static/common/newIcon/food.png',
 					name: '订餐',
-					to: '/pages/food/selectTime',
+					to: '/pages/food/selectRoom',
 				}
 			],
 			grids: [

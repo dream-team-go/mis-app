@@ -58,8 +58,6 @@
 				buildings: [],
 				rooms: [],
 				para: {
-					start_time: "",
-					end_time: "",
 					dining_id: 0,
 					room_number: "",
 					building_name: ""
@@ -67,8 +65,7 @@
 			}
 		},
 		onLoad(option) {
-			var info = JSON.parse(decodeURIComponent(option.para));
-			this.para = info;
+			
 			//获取会议室所属办公楼房信息
 			global.$http.post('/dining/info/buildingList', {
 				params: {
@@ -106,6 +103,7 @@
 						params: {
 							page: this.page,
 							pageSize: this.pageSize,
+							is_locked: 0,
 							building_id: this.buildings[this.TabCur].id
 						},
 					}).then(res => {
@@ -148,7 +146,7 @@
 				this.para.room_number = room.number;
 				this.para.building_name = room.name;
 				uni.navigateTo({
-					url: '../food/bookFood?para=' + encodeURIComponent(JSON.stringify(this.para))
+					url: '../food/selectDate?para=' + encodeURIComponent(JSON.stringify(this.para))
 				});
 			}
 		}

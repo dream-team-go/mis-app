@@ -33,12 +33,26 @@
 				</picker>
 			</view> -->
 
-			<view class="cu-form-group">
+			<view class="cu-form-group margin-top-sm">
 				<view class="title">容纳人数</view>
 				<input name="input" v-model="para.capacity" type="number"></input>
 			</view>
-
-			<view class="cu-bar bg-white">
+			<view class="cu-form-group">
+				<view class="title">最大会务员数</view>
+				<input name="input" v-model="para.max_meeting_people" type="number"></input>
+			</view>
+			
+			<view class="cu-form-group margin-top-sm">
+				<view class="title">有无电子屏</view>
+				<switch @change="SwitchIsLed" :class="para.is_led ?'checked':''" :checked="para.is_led?true:false">
+				</switch>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">是否视频会议</view>
+				<switch @change="SwitchIsNetMeeting" :class="para.is_net_meeting ? 'checked':''"
+					:checked="para.is_net_meeting?true:false"></switch>
+			</view>
+			<view class="cu-bar bg-white margin-top-sm">
 				<view class="action">
 					会议室照片上传
 				</view>
@@ -68,7 +82,8 @@
 
 		<view class="building-list-modal cu-modal bottom-modal" :class="isShowBuldingModal?'show':''">
 			<view class="cu-dialog">
-				<view class="cu-bar bg-linear-blue" :style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
+				<view class="cu-bar bg-linear-blue"
+					:style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
 					<view class="action text-white" @tap="hideBuildingModal">取消</view>
 					<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择办公楼房</view>
 					<view class="action"></view>
@@ -76,7 +91,8 @@
 
 				<view id="list-view" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
 					<view class="cu-list menu text-left">
-						<view class="cu-item arrow" v-for="building in buildings" :key="building.id" @click="getBuilding(building)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
+						<view class="cu-item arrow" v-for="building in buildings" :key="building.id"
+							@click="getBuilding(building)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
 							<view class="content">
 								<view>{{building.name}}</view>
 								<view class="text-somber text-df">
@@ -86,8 +102,9 @@
 								</view>
 							</view>
 							<view class="action">
-								<view class="text-somber text-df">建于{{building.build_time}}</view>
-								<view class="cu-tag round bg-orange">{{BuildingStatusEnumMap.get(building.status)}}</view>
+								<!-- <view class="text-somber text-df">建于{{building.build_time}}</view> -->
+								<view class="cu-tag round bg-orange">{{BuildingStatusEnumMap.get(building.status)}}
+								</view>
 							</view>
 						</view>
 					</view>
@@ -97,7 +114,8 @@
 		</view>
 		<view class="building-list-modal cu-modal bottom-modal" :class="isShowRoomModal?'show':''">
 			<view class="cu-dialog">
-				<view class="cu-bar bg-linear-blue" :style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
+				<view class="cu-bar bg-linear-blue"
+					:style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
 					<view class="action text-white" @tap="hideRoomModal">取消</view>
 					<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择办公房间</view>
 					<view class="action"></view>
@@ -105,12 +123,14 @@
 
 				<view id="list-view" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
 					<view class="cu-list menu text-left">
-						<view class="cu-item arrow" v-for="room in rooms" :key="room.id" @click="getRoom(room)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
+						<view class="cu-item arrow" v-for="room in rooms" :key="room.id" @click="getRoom(room)"
+							style="padding-top: 10rpx;padding-bottom: 10rpx;">
 							<view class="content">
 								<view class="text-grey">{{room.number}}</view>
 							</view>
 							<view class="action">
-								<view class="cu-tag round bg-orange sm">{{BuildingStatusEnumMap.get(room.status)}}</view>
+								<view class="cu-tag round bg-orange">{{BuildingStatusEnumMap.get(room.status)}}
+								</view>
 							</view>
 						</view>
 					</view>
@@ -140,6 +160,9 @@
 				this.peopleIndex = info.capacity - 1;
 				this.para.vr = info.vr;
 				this.para.id = info.id;
+				this.para.is_led = info.is_led;
+				this.para.is_net_meeting = info.is_net_meeting;
+				this.para.max_meeting_people = info.max_meeting_people;
 				//设置辅助参数
 				this.imgList.push(this.para.vr);
 			}
@@ -152,9 +175,12 @@
 				ScreenHeight: this.ScreenHeight,
 				BuildingStatusEnumMap: misEnum.BuildingStatusEnumMap,
 				peopleIndex: 0,
-				peoples: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-					30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
-					58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85,
+				peoples: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+					27, 28, 29,
+					30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,
+					55, 56, 57,
+					58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82,
+					83, 84, 85,
 					86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100
 				],
 				isShowBuldingModal: false,
@@ -173,7 +199,10 @@
 					id: "",
 					vr: "",
 					capacity: 1,
-					office_room_id: 0
+					office_room_id: 0,
+					is_led: 0,
+					is_net_meeting: 0,
+					max_meeting_people: 1
 				},
 				building_id: 0,
 				building_name: "",
@@ -321,6 +350,12 @@
 				});
 				this.imgList.splice(e.currentTarget.dataset.index, 1);
 				this.para.vr = "";
+			},
+			SwitchIsNetMeeting: function(e) {
+				this.para.is_net_meeting = e.detail.value ? 1 : 0;
+			},
+			SwitchIsLed: function(e) {
+				this.para.is_led = e.detail.value ? 1 : 0;
 			},
 			Submit: function(e) {
 				//验证数据

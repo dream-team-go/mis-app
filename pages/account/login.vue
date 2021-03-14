@@ -2,7 +2,7 @@
 	<view class="container">
 		<view class="top-box">
 			<image src="../../static/logo.png"></image>
-			<view class="title">智慧机关</view>
+			<view class="title">数字机关事务</view>
 		</view>
 		<form>
 			<view class="cu-form-group">

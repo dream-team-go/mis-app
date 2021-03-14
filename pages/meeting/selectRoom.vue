@@ -58,8 +58,6 @@
 				buildings: [],
 				rooms: [],
 				para: {
-					start_time: "",
-					end_time: "",
 					meeting_id: 0,
 					room_number: "",
 					building_name: ""
@@ -67,8 +65,6 @@
 			}
 		},
 		onLoad(option) {
-			var info = JSON.parse(decodeURIComponent(option.para));
-			this.para = info;
 			//获取会议室所属办公楼房信息
 			global.$http.post('/meeting/info/buildingList', {
 				params: {
@@ -148,7 +144,7 @@
 				this.para.room_number = room.number;
 				this.para.building_name = room.name;
 				uni.navigateTo({
-					url: '../meeting/bookMeeting?para=' + encodeURIComponent(JSON.stringify(this.para))
+					url: '../meeting/selectDate?para=' + encodeURIComponent(JSON.stringify(this.para))
 				});
 			}
 		}

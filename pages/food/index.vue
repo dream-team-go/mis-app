@@ -185,7 +185,7 @@ export default {
 	methods: {
 		toBookfood: function() {
 			uni.navigateTo({
-				url: '../food/selectTime'
+				url: '../food/selectRoom'
 			});
 		}
 	}

@@ -180,7 +180,7 @@
 		methods: {
 			toEdit: function(e) {
 				uni.navigateTo({
-					url: '../food/selectTime?para=' + encodeURIComponent(JSON.stringify(this.info))
+					url: '../food/selectRoom?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			},
 			cancleBook: function() {
