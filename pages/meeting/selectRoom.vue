@@ -59,6 +59,10 @@
 			}
 		},
 		onLoad(option) {
+			if(option.para){
+				var info = JSON.parse(decodeURIComponent(option.para));
+				this.para = info;
+			}
 			//获取会议室所属办公楼房信息
 			global.$http.post('/meeting/info/buildingList', {
 				params: {
@@ -139,6 +143,7 @@
 				this.para.building_name = room.name;
 				this.para.is_net_meeting = room.is_net_meeting;
 				this.para.is_led = room.is_led;
+				this.para.max_meeting_people = room.max_meeting_people;
 				uni.navigateTo({
 					url: '../meeting/selectDate?para=' + encodeURIComponent(JSON.stringify(this.para))
 				});

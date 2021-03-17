@@ -18,19 +18,13 @@
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList" open-type="navigate">
 						<text class="text-color">{{ meetingData.totalCount }}</text>
-						<text class="text-lg">共预定</text>
+						<text class="text-lg">全部</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=1" open-type="navigate">
-						<text class="text-color">{{ meetingData.successCount }}</text>
-						<text class="text-lg">预定成功</text>
-					</navigator>
-				</view>
-				<view class="cu-item">
-					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=-1" open-type="navigate">
-						<text class="text-color">{{ meetingData.failCount }}</text>
-						<text class="text-lg">预定失败</text>
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=0" open-type="navigate">
+						<text class="text-color">{{ meetingData.waitCheckCount }}</text>
+						<text class="text-lg">待审批</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
@@ -40,9 +34,15 @@
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=0" open-type="navigate">
-						<text class="text-color">{{ meetingData.waitCheckCount }}</text>
-						<text class="text-lg">待审批</text>
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=-1" open-type="navigate">
+						<text class="text-color">{{ meetingData.failCount }}</text>
+						<text class="text-lg">预定失败</text>
+					</navigator>
+				</view>
+				<view class="cu-item">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=1" open-type="navigate">
+						<text class="text-color">{{ meetingData.successCount }}</text>
+						<text class="text-lg">预定成功</text>
 					</navigator>
 				</view>
 			</view>
@@ -55,31 +55,34 @@
 			</view>
 			<view class="card">
 				<view class="item">
-					<text class="title">会议室</text>
+					<text class="title">会议名称</text>
+					<text class="content text-bold">{{ meetingData.status.length > 0 ? meetingData.desc : '无' }}</text>
+				</view>
+				<view class="item">
+					<text class="title">楼房</text>
 					<text class="content">{{ meetingData.status.length > 0 ? meetingData.building_name : '无' }}</text>
 				</view>
 				<view class="item">
-					<text class="title">开始时间</text>
-					<text class="content">{{ meetingData.status.length > 0 ? meetingData.start_time : '无' }}</text>
+					<text class="title">会议室</text>
+					<text class="content">{{ meetingData.status.length > 0 ? meetingData.room_number : '无' }}</text>
 				</view>
 				<view class="item">
-					<text class="title">结束时间</text>
-					<text class="content">{{ meetingData.status.length > 0 ? meetingData.end_time : '无' }}</text>
+					<text class="title">会议日期</text>
+					<text class="content">{{ meetingData.status.length > 0 ? meetingData.ydrq : '无' }}</text>
+				</view>
+				<view class="item">
+					<text class="title">上/下午</text>
+					<text class="content">{{ meetingData.status.length > 0 ? meetingData.ydsjd : '无' }}</text>
+				</view>
+				<view class="item">
+					<text class="title">状态</text>
+					<text class="content text-food">{{ meetingData.status.length > 0 ? meetingData.status : '无' }}</text>
 				</view>
 				<view class="item">
 					<text class="title">预定时间</text>
 					<text class="content">{{ meetingData.status.length > 0 ? meetingData.create_time : '无' }}</text>
 				</view>
-				<view class="item">
-					<text class="title">状态</text>
-					<text class="content">{{ meetingData.status.length > 0 ? meetingData.status : '无' }}</text>
-				</view>
-				<view class="reason-box">
-					<view class="title">会议名称</view>
-					<view class="reason">{{ meetingData.status.length > 0 ? meetingData.desc : '无' }}</view>
-				</view>
 			</view>
-			<view class="cu-tabbar-height"></view>
 		</scroll-view>
 	</view>
 </template>
@@ -163,8 +166,8 @@
 							this.meetingData.building_name = res.data.building_name;
 							this.meetingData.room_number = res.data.room_number;
 							this.meetingData.status = misEnum.MeetingRecordEnumMap.get(res.data.status);
-							this.meetingData.start_time = res.data.start_time;
-							this.meetingData.end_time = res.data.end_time;
+							this.meetingData.ydrq = res.data.ydrq.substr(0, 10);
+							this.meetingData.ydsjd = res.data.ydsjd == "1" ? "上午" : "下午";
 							this.meetingData.create_time = res.data.create_time;
 						}
 					} else {

@@ -11,14 +11,13 @@
 					<image src="../../static/common/newIcon/car_record.png" class="title-ico"></image>
 					<text class="text-lg text-black">用车概况</text>
 				</view>
-				<!-- <view class="action"><button class="cu-btn bg-linear-blue shadow" @tap="toBookcar">预约</button></view> -->
 			</view>
 
 			<view class="cu-list grid no-border col-3">
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../car/myCarRecordList" open-type="navigate">
 						<text class="text-color">{{ carData.totalCount }}</text>
-						<text>共预约</text>
+						<text>全部</text>
 					</navigator>
 				</view>
 				<view class="cu-item">

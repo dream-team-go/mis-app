@@ -82,11 +82,13 @@
 					if (res.status === "0") {
 						this.list = [];
 						res.data.forEach(c=>{
-							if(c.job_name.length > 10)
-								c.short_job_name = c.job_name.substr(0, 9) + "...";
-							else
-								c.short_job_name = c.job_name;
-								this.list.push(c);
+							if(c.job_name){
+								if(c.job_name.length > 10)
+									c.short_job_name = c.job_name.substr(0, 9) + "...";
+								else
+									c.short_job_name = c.job_name;
+									this.list.push(c);
+							}
 						});
 						uni.hideLoading();
 					} else {

@@ -1,80 +1,54 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-
 			<block slot="content">会议预定详情</block>
 			<block slot="right">
-				<view v-show="info.status == 0" @tap="toEdit">修改</view>
+				<view v-if="record.status == 0" @tap="toEdit">修改</view>
 			</block>
 		</cu-custom>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				<image src="../../static/common/newIcon/meeting_record.png"></image>
-				<text class="text-lg text-black">预约进度</text>
-			</view>
+		<meeting-detail :record="record"></meeting-detail>
+		
+		<view class="bottom-btns-seat" v-if="record.status == 0"></view>
+		<view class="bottom-cancel-btn" v-if="record.status == 0" @click="cancleBook">
+			取消预定
 		</view>
-		<view class="bg-white padding">
-			<view class="cu-steps">
-				<view class="cu-item" :class="item.color" v-for="(item,index) in steps" :key="index">
-					<text :class="'cuIcon-' + item.cuIcon"></text> {{item.name}}
+		
+		<view class="bottom-btns-seat" v-if="record.status == 1"></view>
+		<view class="bottom-cancel-btn" v-if="record.status == 1" @click="applyEdit">
+			申请更改
+		</view>
+		
+		<view class="bottom-btns-seat" v-if="record.status == 3"></view>
+		<view class="bottom-cancel-btn" v-if="record.status == 3" @click="evaluate">
+			评价
+		</view>
+		
+		<view class="bottom-btns-seat" v-if="record.status == 2"></view>
+		<view class="bottom-cancel-btn" v-if="record.status == 2" @click="evaluateDetail">
+			评价内容
+		</view>
+		
+		<view class="cu-modal" :class="showModal?'show':''" style="z-index: auto;">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">申请更改</view>
+					<view class="action" @tap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view>
+					<view class="cu-form-group" style="text-align: left;">
+						<textarea maxlength="100" @input="fillFailReason" placeholder="申请原因"></textarea>
+					</view>
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action">
+						<button class="cu-btn line-bluelight text-green" @tap="hideModal">取消</button>
+						<button class="cu-btn bg-linear-blue margin-left" @tap="sureModal">确定</button>
+		
+					</view>
 				</view>
 			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.status == -1">
-			<view class="action">
-				失败原因：
-				<text class="text-red">{{info.fail_reason}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				会议名称：
-				<text class="text-black">{{info.desc}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				会议室：
-				<text class="text-black">{{info.room_number}}({{info.building_name}})</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				会议时间：
-				<text class="text-black">{{info.start_time}} — {{info.end_time}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				参会人数：
-				<text class="text-black">{{info.people_num}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.attend_leader != null">
-			<view class="action">
-				备注：
-				<text class="text-black">{{info.attend_leader}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				预定人：
-				<text class="text-black">{{info.user_name}}({{info.user_tel}})</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				预定时间：
-				<text class="text-black">{{info.create_time}}</text>
-			</view>
-		</view>
-
-		<!-- <view class="padding flex flex-direction" v-if="info.status == 0">
-			<button class="cu-btn bg-gradual-orange margin-tb-sm lg" @click="cancleBook">取消预定</button>
-		</view> -->
-		<view class="bottom-btns-seat" v-if="info.status == 0"></view>
-		<view class="bottom-cancel-btn" v-if="info.status == 0" @click="cancleBook">
-			取消预定
 		</view>
 	</view>
 </template>
@@ -85,61 +59,25 @@
 		data() {
 			return {
 				StatusEnumMap: misEnum.MeetingRecordEnumMap,
-				steps: [],
-				color: '',
-				info: {},
-				id: ""
+				record: {},
+				id: "",
+				showModal: false,
+				failReason: ""
 			}
 		},
 		onLoad(option) {
 			this.id = option.id;
 		},
 		onShow() {
-			this.steps.length = 0;
 			global.$http.post('/meeting/record/recordInfo', {
 				params: {
 					record_id: this.id
 				},
 			}).then(res => {
 				if (res.status === "0") {
-					this.info = res.data;
-					//设置进度步骤
-					if (this.info.status === 0) {
-						this.color = 'text-cyan';
-					} else if (this.info.status === -2) {
-						this.color = 'text-orange';
-					} else if (this.info.status === -1) {
-						this.color = 'text-red';
-					} else if (this.info.status === 1) {
-						this.color = 'text-green';
-					}
-					var isFind = false;
-					misEnum.MeetingRecordEnumMap.forEach((value, key, map) => {
-						var cuIcon = '';
-						var color = '';
-						if (!isFind || key == this.info.status) {
-							color = this.color;
-						}
-						if (key == this.info.status) {
-							isFind = true;
-						}
-						if (key === 0) {
-							cuIcon = 'usefullfill';
-						} else if (key === -2) {
-							cuIcon = 'radioboxfill';
-						} else if (key === -1) {
-							cuIcon = 'roundclosefill';
-						} else if (key === 1) {
-							cuIcon = 'roundcheckfill';
-						}
-						this.steps.push({
-							cuIcon: cuIcon,
-							name: value,
-							key: key,
-							color: color
-						})
-					});
-
+					this.record = res.data;
+					this.record.ydrq = this.record.ydrq ? this.record.ydrq.substr(0, 10) : this.record.ydrq;
+					this.record.statusDesc = this.util.getEnumStatusDesc(misEnum.MeetingRecordEnumMap, this.record.status);
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -156,8 +94,66 @@
 		methods: {
 			toEdit: function(e) {
 				uni.navigateTo({
-					url: '../meeting/selectRoom?para=' + encodeURIComponent(JSON.stringify(this.info))
+					url: '../meeting/selectRoom?para=' + encodeURIComponent(JSON.stringify(this.record))
 				});
+			},
+			evaluate: function(e){
+				uni.navigateTo({
+					url: '../meeting/meetingEvaluate?para=' + encodeURIComponent(JSON.stringify(this.record))
+				});
+			},
+			evaluateDetail: function(e){
+				uni.navigateTo({
+					url: '../meeting/meetingEvaluateDetail?para=' + encodeURIComponent(JSON.stringify(this.record))
+				});
+			},
+			applyEdit: function(e){
+				this.showModal = true;
+			},
+			hideModal: function() {
+				this.showModal = false;
+			},
+			fillFailReason: function(e) {
+				this.failReason = e.detail.value;
+			},
+			sureModal: function() {
+				if (this.failReason.length <= 0) {
+					uni.showToast({
+						title: "请填写不通过原因",
+						icon: 'none'
+					});
+					return;
+				}
+				uni.showLoading({
+					title: '提交中',
+					mask: false
+				});
+				global.$http.post('/meeting/record/meetingRecord', {
+					params: {
+						id: this.record.id,
+						sqxg_reason: failReason
+					},
+				}).then(res => {
+					uni.hideLoading();
+					if (res.status === "0") {
+						uni.showToast({
+							title: "提交成功",
+							icon: 'none'
+						});
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+				this.showModal = false;
 			},
 			cancleBook: function() {
 				uni.showModal({
@@ -174,7 +170,7 @@
 						});
 						global.$http.post('/meeting/record/cancelMyRecord', {
 							params: {
-								record_id: this.info.id
+								record_id: this.record.id
 							},
 						}).then(res => {
 							uni.hideLoading();
@@ -183,9 +179,8 @@
 									title: "取消成功",
 									icon: 'none'
 								});
-								this.info.status = -2;
-								this.steps[0].color = 'text-orange';
-								this.steps[1].color = 'text-orange';
+								this.record.status = -2;
+								this.record.statusDesc = this.util.getEnumStatusDesc(misEnum.MeetingRecordEnumMap, this.record.status);
 							} else {
 								uni.showToast({
 									title: res.msg,

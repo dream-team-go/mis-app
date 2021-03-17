@@ -8,7 +8,7 @@
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<image src="../../static/common/newIcon/food_record.png"></image>
-				<text class="text-lg text-black">预约进度</text>
+				<text class="text-lg text-black">预定进度</text>
 			</view>
 		</view>
 		<view class="bg-white padding">

@@ -2,7 +2,7 @@
 	<view class="container">
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 
-			<block slot="content">选择预定时间</block>
+			<block slot="content">选择会议日期</block>
 		</cu-custom>
 
 		<view bgColor="bg-gray">
@@ -45,6 +45,10 @@
 		onLoad(option) {
 			var info = JSON.parse(decodeURIComponent(option.para));
 			this.para = info;
+			if(!this.para.id){
+				this.para.ydrq = "";
+				this.para.ydsjd = "";
+			}
 			//获取未来12天预定情况
 			global.$http.post('/meeting/record/meetingRecord', {
 				params: {
@@ -62,9 +66,13 @@
 							date: this.util.getDate() == this.util.getDate(i) ? "今日" : this.util
 								.getMonthDate(i),
 							noonIsBook: res.data.findIndex(c => c.ydrq.substr(0, 10) == this.util.getDate(
-								i) && c.ydsjd == "1") >= 0,
+								i) && c.ydsjd == "1") >= 0
+								&& this.para.ydrq.substr(0, 10) != this.util.getDate(i) 
+								&& this.para.ydsjd != "1",
 							afternoonIsBook: res.data.findIndex(c => c.ydrq.substr(0, 10) == this.util
 								.getDate(i) && c.ydsjd == "2") >= 0
+								&& this.para.ydrq.substr(0, 10) != this.util.getDate(i) 
+								&& this.para.ydsjd != "2"
 						});
 						var tmp = this.records;
 					}

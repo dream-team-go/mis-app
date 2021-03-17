@@ -147,6 +147,17 @@ function getIntervalHour(startDate, endDate) {
 	return Math.floor(ms / 1000 / 60 / 60);
 }
 
+function getEnumStatusDesc(map, status) {
+	var statusDesc = "";
+	map.forEach((value, key, map) => {
+		if (key == status) {
+			statusDesc = value;
+			return;
+		}
+	});
+	return statusDesc;
+}
+
 module.exports = {
 	formatTime: formatTime,
 	formatLocation: formatLocation,
@@ -156,5 +167,6 @@ module.exports = {
 	getTime: getTime,
 	getEndTime: getEndTime,
 	getIntervalHour: getIntervalHour,
-	getMonthDate: getMonthDate
+	getMonthDate: getMonthDate,
+	getEnumStatusDesc: getEnumStatusDesc
 }
