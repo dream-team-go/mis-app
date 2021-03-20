@@ -5,11 +5,20 @@
 				<image src="../../static/common/newIcon/meeting_record.png"></image>
 				<text class="text-lg text-black">预定进度</text>
 			</view>
-			<view class="action right text-food">{{record.statusDesc}}</view>
+			<view class="action right text-food">{{statusDesc}}</view>
 		</view>
 		<view class="bg-white padding" v-if="record.status == -1">
 			<text>失败原因：</text>
 			<text class="text-food">{{record.fail_reason}}</text>
+		</view>
+		<view class="bg-white padding" v-if="record.sqxg_status != 0">
+			<text>申请修改原因：</text>
+			<text class="text-food">{{record.sqxg_reason}}</text>
+		</view>
+		
+		<view class="bg-white padding" style="margin-top: -40upx;" v-if="record.sqxg_status != 0">
+			<text>申请修改状态：</text>
+			<text class="text-orange">{{sqxgStatusDesc}}</text>
 		</view>
 		<!-- <view class="bg-white padding">
 			<view class="cu-steps">
@@ -122,7 +131,7 @@
 		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				会议服务内容：
-				<text class="text-black">{{record.name_list}}</text>
+				<text class="text-black">{{serviceName}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
@@ -137,6 +146,13 @@
 				<text class="text-black">{{record.small_water_num}}</text>
 			</view>
 		</view>
+		
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				会务员：
+				<text class="text-black">{{peopleName}}</text>
+			</view>
+		</view>
 
 		<view class="cu-bar bg-white solid-bottom" v-if="record.attend_leader != null">
 			<view class="action">
@@ -144,26 +160,57 @@
 				<text class="text-black">{{record.attend_leader}}</text>
 			</view>
 		</view>
+		
+		
+		
+		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				预定人：
-				<text class="text-black"></text>
+				<text class="text-black">{{record.create_user}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				预定时间：
-				<text class="text-black"></text>
+				<text class="text-black">{{record.create_time}}</text>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import misEnum from '../../common/mis-enum.js';
 	export default {
 		name: "meeting-detail",
 		props: {
 			record: {}
+		},
+		computed: {
+			serviceName: function(){
+				var nameList = [];
+				if(this.record.services){
+					for (var i = 0; i < this.record.services.length; i++) {
+						nameList.push(this.record.services[i].dic_name);
+					}
+				}
+				return nameList.join("、");
+			},
+			peopleName: function(){
+				var nameList = [];
+				if(this.record.peoples){
+					for (var i = 0; i < this.record.peoples.length; i++) {
+						nameList.push(this.record.peoples[i].xm);
+					}
+				}
+				return nameList.join("、");
+			},
+			statusDesc: function(){
+				return misEnum.MeetingRecordEnumMap.get(this.record.status);
+			},
+			sqxgStatusDesc: function(){
+				return misEnum.MeetingApplyEditEnumMap.get(this.record.sqxg_status);
+			}
 		},
 		data() {
 			return {

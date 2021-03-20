@@ -13,18 +13,18 @@
 			取消预定
 		</view>
 		
-		<view class="bottom-btns-seat" v-if="record.status == 1"></view>
-		<view class="bottom-cancel-btn" v-if="record.status == 1" @click="applyEdit">
+		<view class="bottom-btns-seat" v-if="record.status == 1 && record.sqxg_status == 0"></view>
+		<view class="bottom-cancel-btn" v-if="record.status == 1 && record.sqxg_status == 0" @click="applyEdit">
 			申请更改
 		</view>
 		
-		<view class="bottom-btns-seat" v-if="record.status == 3"></view>
-		<view class="bottom-cancel-btn" v-if="record.status == 3" @click="evaluate">
+		<view class="bottom-btns-seat" v-if="record.status == 2 && !record.fw_score"></view>
+		<view class="bottom-cancel-btn" v-if="record.status == 2 && !record.fw_score" @click="evaluate">
 			评价
 		</view>
 		
-		<view class="bottom-btns-seat" v-if="record.status == 2"></view>
-		<view class="bottom-cancel-btn" v-if="record.status == 2" @click="evaluateDetail">
+		<view class="bottom-btns-seat" v-if="record.status == 2 && record.fw_score"></view>
+		<view class="bottom-cancel-btn" v-if="record.status == 2 && record.fw_score" @click="evaluateDetail">
 			评价内容
 		</view>
 		
@@ -58,7 +58,6 @@
 	export default {
 		data() {
 			return {
-				StatusEnumMap: misEnum.MeetingRecordEnumMap,
 				record: {},
 				id: "",
 				showModal: false,
@@ -77,7 +76,6 @@
 				if (res.status === "0") {
 					this.record = res.data;
 					this.record.ydrq = this.record.ydrq ? this.record.ydrq.substr(0, 10) : this.record.ydrq;
-					this.record.statusDesc = this.util.getEnumStatusDesc(misEnum.MeetingRecordEnumMap, this.record.status);
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -119,7 +117,7 @@
 			sureModal: function() {
 				if (this.failReason.length <= 0) {
 					uni.showToast({
-						title: "请填写不通过原因",
+						title: "请填写申请修改原因",
 						icon: 'none'
 					});
 					return;
@@ -128,10 +126,11 @@
 					title: '提交中',
 					mask: false
 				});
-				global.$http.post('/meeting/record/meetingRecord', {
+				global.$http.post('/meeting/record/changSqxgStatus', {
 					params: {
 						id: this.record.id,
-						sqxg_reason: failReason
+						sqxg_status: 1,
+						sqxg_reason: this.failReason
 					},
 				}).then(res => {
 					uni.hideLoading();
@@ -140,6 +139,8 @@
 							title: "提交成功",
 							icon: 'none'
 						});
+						this.record.sqxg_status = 1;
+						this.record.sqxg_reason = this.failReason;
 					} else {
 						uni.showToast({
 							title: res.msg,
@@ -180,7 +181,6 @@
 									icon: 'none'
 								});
 								this.record.status = -2;
-								this.record.statusDesc = this.util.getEnumStatusDesc(misEnum.MeetingRecordEnumMap, this.record.status);
 							} else {
 								uni.showToast({
 									title: res.msg,

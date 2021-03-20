@@ -35,8 +35,8 @@
 						to: ''
 					},
 					{
-						img: '/static/main/gudingzichanguanli.png',
-						name: '固定资产',
+						img: '/static/common/newIcon/car_manage.png',
+						name: '用车',
 						to: ''
 					},
 					{

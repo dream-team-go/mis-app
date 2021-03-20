@@ -21,6 +21,13 @@
 				<view class="label">上/下午</view>
 				<view class="info">{{record.ydsjd == 1 ? "上午" : "下午"}}</view>
 			</view>
+			<view class="info-box" v-if="record.sqxg_status != 0">
+				<view class="label">申请修改</view>
+				<view class="info">
+					<text v-if="record.sqxg_status == 1">{{record.sqxg_reason}}</text>
+					<text v-if="record.sqxg_status != 1" class="text-orange">{{getSqxgStatus(record.sqxg_status)}}</text>
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -40,6 +47,9 @@
 		methods:{
 			getStatusStr(status) {
 				return misEnum.MeetingRecordEnumMap.get(status);
+			},
+			getSqxgStatus(status){
+				return misEnum.MeetingApplyEditEnumMap.get(status);
 			}
 		}
 	}

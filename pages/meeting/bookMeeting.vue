@@ -54,7 +54,7 @@
 			</view>
 			<view class="cu-form-group align-start" v-show="para.bb">
 				<view class="title">布标名称</view>
-				<textarea maxlength="-1" @input="textareaInput" placeholder="请输入"></textarea>
+				<textarea maxlength="-1" @input="textareaInput" v-model="para.bb_name" placeholder="请输入"></textarea>
 			</view>
 			<view class="cu-form-group" v-show="is_led">
 				<view class="title">是否需要电子屏</view>
@@ -86,7 +86,7 @@
 
 			<view class="cu-form-group align-start">
 				<view class="title">席位名单</view>
-				<textarea maxlength="-1" @input="textareaBInput" placeholder="请输入"></textarea>
+				<textarea maxlength="-1" @input="textareaBInput" v-model="para.name_list" placeholder="请输入"></textarea>
 			</view>
 
 			<view class="cu-form-group margin-top-xs">
@@ -176,7 +176,6 @@
 				services: [],
 
 				para: {
-					id: 0,
 					user_name: "",
 					user_tel: "",
 					people_num: "",
@@ -222,9 +221,29 @@
 				this.para.desc = info.desc;
 				this.para.user_name = info.user_name;
 				this.para.user_tel = info.user_tel;
+				this.para.host_unit = info.host_unit;
 				this.para.people_num = info.people_num;
-				this.peopleIndex = info.people_num - 1;
 				this.para.attend_leader = info.attend_leader;
+				this.para.led = info.led;
+				this.para.net_meeting = info.net_meeting;
+				this.para.bb = info.bb;
+				this.para.bb_name = info.bb_name;
+				this.para.name_list = info.name_list;
+				this.para.plat_table_num = info.plat_table_num;
+				this.para.plat_person_num=info.plat_person_num;
+				this.para.table_type = info.table_type;
+				this.para.large_water_num = info.large_water_num;
+				this.para.small_water_num = info.small_water_num;
+				this.para.large_water_num = info.large_water_num;
+				this.para.peoples = info.peoples;
+				if(info.services){
+					var names = [];
+					info.services.forEach(c=>{
+						this.para.services.push(c.dic_code);
+						names.push(c.dic_name);
+					});
+					this.serviceName = names.join('、');
+				}
 			} else {
 				this.para.user_name = this.userInfo.user.userCnName;
 				this.para.user_tel = this.userInfo.user.username;
@@ -242,13 +261,23 @@
 					if (res.status === "0") {
 						if (type == "DIC_ZZXS") {
 							this.tableTypeDatas = res.data;
-							this.tableTypeDatas.forEach(c => {
+							this.tableTypeDatas.forEach((c, index) => {
 								this.tableTypes.push(c.dic_name);
+								if(this.para.id){
+									if(c.dic_code == this.para.table_type)
+										this.tableTypeIndex = index;
+								}
 							});
 						} else if (type == "DIC_HYFW") {
 							res.data.forEach(c => {
 								var service = c;
 								service.checked = false;
+								if(this.para.id){
+									this.para.services.forEach(x=>{
+										if(x==c.dic_code)
+											c.checked = true;
+									});
+								}
 								this.services.push(service);
 							});
 						}
@@ -307,6 +336,7 @@
 				this.services = JSON.parse(JSON.stringify(this.modalServices));
 				this.services = this.modalServices;
 				var names = [];
+				this.para.services = [];
 				this.services.forEach(c => {
 					if (c.checked == true) {
 						names.push(c.dic_name);

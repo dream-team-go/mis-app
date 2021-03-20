@@ -23,8 +23,6 @@
 		<view class="cu-bar bg-white solid-bottom padding-top padding-bottom">
 			<view class="action" style="min-width: 150upx;margin-left: 20upx;">
 				<text class="cuIcon-title text-orange"></text> 评价：
-			</view>
-			<view class="action">
 				<text>{{message}}</text>
 			</view>
 		</view>
@@ -43,9 +41,9 @@
 		onLoad(option) {
 			if (option) {
 				var info = JSON.parse(decodeURIComponent(option.para));
-				this.serviceStarCount = fw_score;
-				this.environmentStarCount = hj_score;
-				this.message = message;
+				this.serviceStarCount = info.fw_score;
+				this.environmentStarCount = info.hj_score;
+				this.message = info.message;
 			}
 		},
 		methods: {

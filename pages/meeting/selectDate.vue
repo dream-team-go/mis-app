@@ -49,6 +49,10 @@
 				this.para.ydrq = "";
 				this.para.ydsjd = "";
 			}
+			uni.showLoading({
+				title: '加载中',
+				mask: false
+			});
 			//获取未来12天预定情况
 			global.$http.post('/meeting/record/meetingRecord', {
 				params: {
@@ -59,22 +63,25 @@
 					end_rq: this.util.getDate(this.dayNum)
 				},
 			}).then(res => {
+				uni.hideLoading();
 				if (res.status === "0") {
 					for (let i = 0; i <= this.dayNum; i++) {
-						this.records.push({
+						var record = {
 							ydrq: this.util.getDate(i),
 							date: this.util.getDate() == this.util.getDate(i) ? "今日" : this.util
 								.getMonthDate(i),
 							noonIsBook: res.data.findIndex(c => c.ydrq.substr(0, 10) == this.util.getDate(
-								i) && c.ydsjd == "1") >= 0
-								&& this.para.ydrq.substr(0, 10) != this.util.getDate(i) 
-								&& this.para.ydsjd != "1",
+								i) && c.ydsjd == "1") >= 0,
 							afternoonIsBook: res.data.findIndex(c => c.ydrq.substr(0, 10) == this.util
 								.getDate(i) && c.ydsjd == "2") >= 0
-								&& this.para.ydrq.substr(0, 10) != this.util.getDate(i) 
-								&& this.para.ydsjd != "2"
-						});
-						var tmp = this.records;
+						};
+						if(this.util.getDate(i) == this.para.ydrq.substr(0, 10)){
+							if(this.para.ydsjd == "1")
+								record.noonIsBook = false;
+							if(this.para.ydsjd == "2")
+								record.afternoonIsBook = false;
+						}
+						this.records.push(record);
 					}
 				} else {
 					uni.showToast({
@@ -83,6 +90,7 @@
 					});
 				}
 			}).catch(err => {
+				uni.hideLoading();
 				uni.showToast({
 					title: err.message,
 					icon: 'none'

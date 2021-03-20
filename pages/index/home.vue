@@ -32,12 +32,12 @@
 				</view>
 				<view :class="PageCur=='main'?'text-bluelight':'text-black'">首页</view>
 			</view>
-			<view class="action" @click="NavChange" data-cur="contacts">
+			<!-- <view class="action" @click="NavChange" data-cur="contacts">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/contacts' + [PageCur == 'contacts'?'_cur':''] + '.png'"></image>
 				</view>
 				<view :class="PageCur=='contacts'?'text-bluelight':'text-black'">通讯录</view>
-			</view>
+			</view> -->
 			<view class="action" @click="NavChange" data-cur="work" v-if="WorkPermission">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/work' + [PageCur == 'work'?'_cur':''] + '.png'"></image>

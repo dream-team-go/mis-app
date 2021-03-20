@@ -54,9 +54,17 @@
 		},
 		methods: {
 			BackPage() {
-				uni.navigateBack({
-					delta: 1
-				});
+				var curPages = getCurrentPages();
+				if(curPages.length == 1)
+				{
+					uni.reLaunch({
+						url: "../../pages/index/home"
+					});
+				}else{
+					uni.navigateBack({
+						delta: 1
+					});
+				}
 			}
 		}
 	}

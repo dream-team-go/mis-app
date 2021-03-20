@@ -242,4 +242,7 @@
 		text-align: center;
 		font-size: 48upx;
 	}
+	.cu-list.menu-avatar>.cu-item .content{
+		line-height: 1.35em;
+	}
 </style>

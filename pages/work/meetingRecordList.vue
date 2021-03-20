@@ -4,7 +4,7 @@
 			<block slot="content">会议预定记录</block>
 		</cu-custom>
 		<scroll-view scroll-x class="bg-white nav text-center fixed" :style="[{top:CustomBar + 'px'}]">
-			<view class="cu-item" :class="index==TabCur?'text-white cur':''"
+			<view class="cu-item text-sm text-black" style="margin: 0upx;" :class="index==TabCur?'text-white cur':''"
 				v-for="(item,index) in Array.from(StatusEnumMap.keys()).length" :key="index"
 				@tap="recordStatusTab(index)">
 				{{Array.from(StatusEnumMap.values())[index]}}

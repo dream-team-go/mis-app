@@ -5,13 +5,36 @@
 
 				<block slot="content">会务</block>
 			</cu-custom>
-
-			<view class="cu-bar bg-white solid-bottom margin-top">
+			
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action index-title">
+					<image src="../../static/common/newIcon/meeting_record.png" class="title-ico"></image>
+					<text class="text-lg text-black">会务负责人</text>
+				</view>
+			</view>
+			<view class="bg-white padding-top-xs padding-bottom-xs">
+				<view class="padding-xs" style="color: #333333;" v-for="item in chargePersons" :key="item.id">
+					<view class="padding-left-xs padding-right-sm" style="display: inline;display: inline-table;min-width: 190upx;">
+						<text class="cuIcon-title text-blue"></text><text>{{item.xm}}</text>
+					</view>
+					
+					<view class="padding-left-xs padding-right-sm" style="display: inline;" @tap="makePhoneCall(item.tel)">
+						<image src="../../static/common/phone.png" class="ico" style="width: 30upx;height: 30upx;vertical-align: middle;"></image>
+						<text style="vertical-align: middle;">{{item.tel}}</text>
+					</view>
+					
+					<view class="padding-left-xs" style="display: inline;" @tap="makePhoneCall(item.office_tel)">
+						<image src="../../static/common/tel.png" class="ico" style="width: 30upx;height: 30upx;vertical-align: middle;"></image>
+						<text style="vertical-align: middle;">{{item.office_tel}}</text>
+					</view>
+				</view>
+			</view>
+			
+			<view class="cu-bar bg-white solid-bottom margin-top-xs">
 				<view class="action index-title">
 					<image src="../../static/common/newIcon/meeting_record.png" class="title-ico"></image>
 					<text class="text-lg text-black">会务预定概况</text>
 				</view>
-				<!-- <view class="action"><button class="cu-btn bg-linear-blue shadow" @tap="toBookMeeting">预定</button></view> -->
 			</view>
 
 			<view class="cu-list grid no-border col-3">
@@ -47,7 +70,7 @@
 				</view>
 			</view>
 
-			<view class="cu-bar bg-white solid-bottom margin-top">
+			<view class="cu-bar bg-white solid-bottom margin-top-xs">
 				<view class="action index-title">
 					<image src="../../static/common/newIcon/meeting_clock.png" class="title-ico"></image>
 					<text class="text-lg text-black">最近预定</text>
@@ -105,7 +128,8 @@
 					start_time: '',
 					end_time: '',
 					create_time: ''
-				}
+				},
+				chargePersons: []
 			};
 		},
 		onLoad() {
@@ -184,8 +208,42 @@
 						icon: 'none'
 					});
 				});
+				//获取会务负责人信息
+				global.$http
+					.post('/chargePerson/getList', {
+						params: {
+							type: "meeting",
+							page: 1,
+							pageSize: 2
+						}
+					})
+					.then(res => {
+						if (res.status === '0') {
+							this.chargePersons = res.data.list;
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					})
+					.catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
 		},
 		methods: {
+			makePhoneCall: function(phone) {
+				uni.makePhoneCall({
+					phoneNumber: phone,
+					success: () => {
+						console.log("成功拨打电话")
+					}
+				})
+			},
 			toBookMeeting: function() {
 				uni.navigateTo({
 					url: '../meeting/selectRoom'
@@ -202,5 +260,8 @@
 		color: #3DA3F3;
 		font-size: 34upx;
 		font-weight: bold;
+	}
+	.align-center{
+		display: flex;justfy-content: center;align-items: center;
 	}
 </style>

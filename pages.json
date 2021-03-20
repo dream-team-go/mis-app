@@ -390,6 +390,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/food/navigation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

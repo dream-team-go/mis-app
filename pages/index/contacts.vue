@@ -1,6 +1,6 @@
 <template name="contacts">
 	<view>
-		<cu-custom bgColor="bg-linear-blue">
+		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="content">通讯录</block>
 		</cu-custom>
 
@@ -13,7 +13,7 @@
 				<button class="cu-btn bg-linear-blue shadow-blur round" @tap="search()">搜索</button>
 			</view>
 		</view>
-		<view style="padding-top: 100upx;padding-bottom: 100upx;">
+		<view style="padding-top: 100upx;">
 			<view class="cu-list menu text-left">
 				<view class="cu-item arrow" v-for="item in contactsData" :key="item.org_id" @click="getDetail(item)">
 					<view class="content">
@@ -29,15 +29,47 @@
 
 <script>
 	export default {
-		name: "contacts",
-		props: ['contactsData'],
+		//name: "contacts",
+		//props: ['contactsData'],
 		data() {
 			return {
-				name: ''
+				name: '',
+				contactsData: []
 			};
 		},
 		onLoad() {
-			
+			uni.showLoading({
+				title: '加载中',
+				mask: false
+			});
+			//获取行政单位数据
+			global.$http.post('/core/organization/organizationPage', {
+				params: {
+					page: 1,
+					pageSize: 10000,
+					name: ''
+				},
+			}).then(res => {
+				if (res.status === "0") {
+					let list = [];
+					for (let i = 0; i < res.data.list.length; i++) {
+						list[i] = res.data.list[i];
+					}
+					this.contactsData = list;
+					uni.hideLoading();
+				} else {
+					uni.showToast({
+						title: res.msg,
+						icon: 'none'
+					});
+				}
+			}).catch(err => {
+				uni.hideLoading();
+				uni.showToast({
+					title: err.message,
+					icon: 'none'
+				});
+			});
 		},
 		methods: {
 			onKeyInput(e) {

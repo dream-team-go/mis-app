@@ -36,6 +36,16 @@
 		onLoad(option) {
 			var info = JSON.parse(decodeURIComponent(option.para));
 			this.para = info;
+			
+			if(this.para.peoples){
+				var peopleList = [];
+				this.para.peoples.forEach(c=>{
+					peopleList.push(c.id);
+				});
+				this.para.peoples = peopleList;
+			}else{
+				this.para.peoples = [];
+			}
 			this.max_meeting_people = info.max_meeting_people;
 			//获取会务员
 			uni.showLoading({
@@ -52,6 +62,12 @@
 				if (res.status === "0") {
 					res.data.list.forEach(c => {
 						c.checked = false;
+						if(this.para.id){
+							this.para.peoples.forEach(x=>{
+								if(c.id == x)
+									c.checked = true;
+							});
+						}
 						this.meetingPeples.push(c);
 					});
 				} else {
@@ -104,12 +120,16 @@
 							icon: 'none',
 							title: '提交成功'
 						});
-						uni.navigateBack({
-							delta: 3
-						});
-						uni.redirectTo({
-							url: '/pages/meeting/index'
-						});
+						
+						if(this.para.id){
+							uni.navigateBack({
+								delta: 4
+							});
+						}else{
+							uni.reLaunch({
+								url: '/pages/meeting/index'
+							});
+						}
 					} else {
 						uni.showToast({
 							title: res.msg,

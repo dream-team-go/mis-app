@@ -81,6 +81,49 @@
 			},
 			textareaInput: function(e) {
 				this.para.message = e.detail.value;
+			},
+			Submit: function(){
+				if(this.para.hj_score < 1){
+					uni.showToast({
+						title: "请对环境评分",
+						icon: 'none'
+					});
+					return;
+				}
+				if(this.para.fw_score < 1){
+					uni.showToast({
+						title: "请对服务评分",
+						icon: 'none'
+					});
+					return;
+				}
+				uni.showLoading({
+					title: '提交中',
+					mask: false
+				});
+				global.$http.post('/meeting/record/appraised', {
+					params: this.para,
+				}).then(res => {
+					uni.hideLoading();
+					if (res.status === "0") {
+						uni.showToast({
+							title: "提交成功",
+							icon: 'none'
+						});
+						uni.navigateBack();
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
 			}
 		}
 	}

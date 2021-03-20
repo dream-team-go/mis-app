@@ -71,11 +71,11 @@ export default {
 				'/static/home/photo-5.jpg'
 			],
 			navList: [
-				{
-					img: '/static/common/newIcon/car.png',
-					name: '用车',
-					to: '/pages/car/bookCar',
-				},
+				// {
+				// 	img: '/static/common/newIcon/car.png',
+				// 	name: '用车',
+				// 	to: '/pages/car/bookCar',
+				// },
 				{
 					img: '/static/common/newIcon/meeting.png',
 					name: '会务',
@@ -84,69 +84,25 @@ export default {
 				{
 					img: '/static/common/newIcon/food.png',
 					name: '订餐',
-					to: '/pages/food/selectRoom',
+					to: '/pages/food/navigation',
 				}
 			],
 			grids: [
 				{
-					img: '/static/common/newIcon/carInfo.png',
-					name: '车辆',
-					to: '/pages/work/carList'
-				},
-				{
-					img: '/static/common/newIcon/meetingInfo.png',
-					name: '会议室',
-					to: '/pages/work/meetingList'
-				},
-				{
 					img: '/static/common/newIcon/foodInfo.png',
-					name: '包房',
-					to: '/pages/work/foodList'
+					name: '通讯录',
+					to: '/pages/index/contacts'
+				},
+				{
+					img: '/static/common/newIcon/planInfo.png',
+					name: '接待审批',
+					to: '/pages/index/plan'
 				},
 				{
 					img: '/static/common/newIcon/planInfo.png',
 					name: '规划',
 					to: '/pages/index/plan'
 				}
-				// {
-				// 	img: '/static/main/tongxunlu.png',
-				// 	name: '通讯录',
-				// 	to: '/pages/index/contacts'
-				// },
-				// {
-				// 	img: '/static/main/bangongyongfang.png',
-				// 	name: '办公用房',
-				// 	to: ''
-				// },
-				// {
-				// 	img: '/static/main/zhouzhuanfang.png',
-				// 	name: '周转房',
-				// 	to: ''
-				// },
-				// {
-				// 	img: '/static/main/gudingzichanguanli.png',
-				// 	name: '固定资产',
-				// 	to: ''
-				// },
-				// {
-				// 	img: '/static/main/jiedaishenpi.png',
-				// 	name: '接待审批',
-				// 	to: ''
-				// },{
-				// 	img: '/static/main/chebian.png',
-				// 	name: '车编',
-				// 	to: ''
-				// },
-				// {
-				// 	img: '/static/main/wuguan.png',
-				// 	name: '物管',
-				// 	to: ''
-				// },
-				// {
-				// 	img: '/static/main/caiwu.png',
-				// 	name: '财务',
-				// 	to: ''
-				// }
 			],
 			noticeList: [
 				{
@@ -253,12 +209,14 @@ export default {
 			position: absolute;
 			top: 420upx;
 			height: 160upx;
-			width: calc(100vw - 80upx);
+			/* width: calc(100vw - 80upx); */
+			width: calc(100vw - 140upx);
 			left: 50%;
 			transform: translateX(-50%);
 			display: flex;
 			justify-content: space-between;
-			padding: 15upx 85upx;
+			/* padding: 15upx 85upx; */
+			padding: 15upx 130upx;
 			background-color: #fff;
 			border-radius: 8upx;
 			box-shadow: 0px 8upx 16upx rgba(0,0,0,.15);

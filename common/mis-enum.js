@@ -2,8 +2,19 @@
 const MeetingRecordEnumMap = new Map([
 	[0, "待审批"],
 	[-2, "取消预定"],
-	[-1, "预定失败"],
-	[1, "预定成功"]
+	[-1, "驳回"],
+	[-5, "失效"],
+	[1, "预定成功"],
+	[2, "会议完成"]
+]);
+
+//会议申请修改枚举
+const MeetingApplyEditEnumMap = new Map([
+	[0, "未申请"],
+	[1, "待审批"],
+	[-1, "拒绝修改"],
+	[2, "允许修改"],
+	[3, "修改完成"]
 ]);
 
 //订餐记录枚举
@@ -83,5 +94,6 @@ export default {
 	RepairRecordEnumMap,
 	WarnStatusEnumMap,
 	LeaderBookFoodEnumMap,
-	CarTypeEnumMap
+	CarTypeEnumMap,
+	MeetingApplyEditEnumMap
 }
