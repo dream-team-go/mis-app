@@ -12,7 +12,7 @@
 					<text class="text-lg text-black">会务负责人</text>
 				</view>
 			</view>
-			<view class="bg-white padding-top-xs padding-bottom-xs">
+			<view class="bg-white padding-top-xs padding-bottom-xs text-df text-bold">
 				<view class="padding-xs" style="color: #333333;" v-for="item in chargePersons" :key="item.id">
 					<view class="padding-left-xs padding-right-sm" style="display: inline;display: inline-table;min-width: 190upx;">
 						<text class="cuIcon-title text-blue"></text><text>{{item.xm}}</text>
@@ -59,13 +59,25 @@
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=-1" open-type="navigate">
 						<text class="text-color">{{ meetingData.failCount }}</text>
-						<text class="text-lg">预定失败</text>
+						<text class="text-lg">驳回</text>
+					</navigator>
+				</view>
+				<view class="cu-item">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=-5" open-type="navigate">
+						<text class="text-color">{{ meetingData.inValidCount }}</text>
+						<text class="text-lg">失效</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=1" open-type="navigate">
 						<text class="text-color">{{ meetingData.successCount }}</text>
 						<text class="text-lg">预定成功</text>
+					</navigator>
+				</view>
+				<view class="cu-item">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=2" open-type="navigate">
+						<text class="text-color">{{ meetingData.finishCount }}</text>
+						<text class="text-lg">会议完成</text>
 					</navigator>
 				</view>
 			</view>
@@ -121,12 +133,12 @@
 					cancleCount: '',
 					failCount: '',
 					waitCheckCount: '',
+					inValidCount: '',
+					finishCount: '',
 					desc: '',
 					building_name: '',
 					room_number: '',
 					status: '',
-					start_time: '',
-					end_time: '',
 					create_time: ''
 				},
 				chargePersons: []
@@ -149,6 +161,8 @@
 						this.meetingData.cancleCount = 0;
 						this.meetingData.failCount = 0;
 						this.meetingData.waitCheckCount = 0;
+						this.meetingData.inValidCount = 0;
+						this.meetingData.finishCount = 0;
 						var totalCount = 0;
 						for (var i = 0; i < res.data.length; i++) {
 							if (res.data[i].status === -2) {
@@ -159,6 +173,10 @@
 								this.meetingData.waitCheckCount = res.data[i].total;
 							} else if (res.data[i].status === 1) {
 								this.meetingData.successCount = res.data[i].total;
+							} else if (res.data[i].status === -5) {
+								this.meetingData.inValidCount = res.data[i].total;
+							} else if (res.data[i].status === 2) {
+								this.meetingData.finishCount = res.data[i].total;
 							}
 							totalCount += res.data[i].total;
 						}
@@ -179,8 +197,7 @@
 					});
 				});
 			//获取最近预定
-			global.$http
-				.post('/meeting/record/myLatelyRecord', {
+			global.$http.post('/meeting/record/myLatelyRecord', {
 					params: {}
 				})
 				.then(res => {

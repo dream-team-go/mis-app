@@ -29,6 +29,13 @@
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
+				 保底消费：
+				<text class="text-black">{{info.bdxf}}</text>
+			</view>
+		</view>
+		
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
 				 地址：
 				<text class="text-black">{{info.address}}</text>
 			</view>

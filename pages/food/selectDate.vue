@@ -2,230 +2,85 @@
 	<view class="container">
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 
-			<block slot="content">选择预定时间</block>
+			<block slot="content">选择订餐日期</block>
 		</cu-custom>
 
 		<view bgColor="bg-gray">
 			<view class="grid text-center col-3">
-				<view class="solid padding bg-white">
+				<view class="solid padding bg-white" v-for="(record, index) in records" :key="record.date">
 					<view class="text-black">
-						今日
+						{{record.date}}
 					</view>
-					<view class="margin-top-xs align-center">
-						<text class="text-red">午餐</text>
-						<text class="cuIcon-roundcheckfill text-red padding-left"
+					<view class="margin-top-sm align-center" @tap="sureDate(record.ydrq, '1', record.noonIsBook)">
+						<text :class="record.noonIsBook?'text-red':''">上午</text>
+						<text class="padding-left" :class="record.noonIsBook?'text-red cuIcon-roundcheckfill':'cuIcon-roundcheck'"
 							style="font-size: 60upx;"></text>
 					</view>
-					<view class="margin-top-xs align-center">
-						<span class="text-red">晚餐</span>
-						<text class="cuIcon-roundcheckfill text-red padding-left" style="font-size: 60upx;"></text>
-					</view>
-				</view>
-				<view class="solid padding bg-white">
-					<view class="text-black">
-						3月13日
-					</view>
-					<view class="margin-top-sm align-center">
-						<text>午餐</text>
-						<text class="cuIcon-roundcheck text-gray padding-left"
+					<view class="margin-top-sm align-center" @tap="sureDate(record.ydrq, '2', record.afternoonIsBook)">
+						<span :class="record.afternoonIsBook?'text-red':''">下午</span>
+						<text class="padding-left" :class="record.afternoonIsBook?'text-red cuIcon-roundcheckfill':'cuIcon-roundcheck'"
 							style="font-size: 60upx;"></text>
 					</view>
-					<view class="margin-top-sm align-center">
-						<span class="text-red">晚餐</span>
-						<text class="cuIcon-roundcheckfill text-red padding-left" style="font-size: 60upx;"></text>
-					</view>
 				</view>
-				<view class="solid padding bg-white">
-					<view class="text-black">
-						3月14日
-					</view>
-					<view class="margin-top-sm align-center">
-						<text class="">午餐</text>
-						<text class="cuIcon-roundcheck text-gray padding-left"
-							style="font-size: 60upx;"></text>
-					</view>
-					<view class="margin-top-sm align-center">
-						<span>晚餐</span>
-						<text class="cuIcon-roundcheck text-gray padding-left" style="font-size: 60upx;"></text>
-					</view>
-				</view>
-			</view>
-			<view class="grid text-center col-3">
-				<view class="solid padding bg-white">
-					<view class="text-black">
-						3月15日
-					</view>
-					<view class="margin-top-sm align-center">
-						<text class="text-red">午餐</text>
-						<text class="cuIcon-roundcheckfill text-red padding-left"
-							style="font-size: 60upx;"></text>
-					</view>
-					<view class="margin-top-sm align-center">
-						<span>晚餐</span>
-						<text class="cuIcon-roundcheck text-gray padding-left" style="font-size: 60upx;"></text>
-					</view>
-				</view>
-				<view class="solid padding bg-white">
-					<view class="text-black">
-						3月16日
-					</view>
-					<view class="margin-top-sm align-center">
-						<text>午餐</text>
-						<text class="cuIcon-roundcheck text-gray padding-left"
-							style="font-size: 60upx;"></text>
-					</view>
-					<view class="margin-top-sm align-center">
-						<span class="">晚餐</span>
-						<text class="cuIcon-roundcheck text-gray padding-left" style="font-size: 60upx;"></text>
-					</view>
-				</view>
-				<view class="solid padding bg-white">
-					<view class="text-black">
-						3月17日
-					</view>
-					<view class="margin-top-sm align-center">
-						<text class="text-red">午餐</text>
-						<text class="cuIcon-roundcheckfill text-red padding-left"
-							style="font-size: 60upx;"></text>
-					</view>
-					<view class="margin-top-sm align-center">
-						<span>晚餐</span>
-						<text class="cuIcon-roundcheck text-gray padding-left" style="font-size: 60upx;"></text>
-					</view>
-				</view>
-			</view>
-			<view class="grid text-center col-3">
-				<view class="solid padding bg-white">
-					<view class="text-black">
-						3月18日
-					</view>
-					<view class="margin-top-sm align-center">
-						<text class="text-red">午餐</text>
-						<text class="cuIcon-roundcheckfill text-red padding-left"
-							style="font-size: 60upx;"></text>
-					</view>
-					<view class="margin-top-sm align-center">
-						<span>晚餐</span>
-						<text class="cuIcon-roundcheck text-gray padding-left" style="font-size: 60upx;"></text>
-					</view>
-				</view>
-				<view class="solid padding bg-white">
-					<view class="text-black">
-						3月19日
-					</view>
-					<view class="margin-top-sm align-center">
-						<text>午餐</text>
-						<text class="cuIcon-roundcheck text-gray padding-left"
-							style="font-size: 60upx;"></text>
-					</view>
-					<view class="margin-top-sm align-center">
-						<span class="text-red">晚餐</span>
-						<text class="cuIcon-roundcheckfill text-red padding-left" style="font-size: 60upx;"></text>
-					</view>
-				</view>
-				<view class="solid padding bg-white">
-					<view class="text-black">
-						3月20日
-					</view>
-					<view class="margin-top-sm align-center">
-						<text class="text-red">午餐</text>
-						<text class="cuIcon-roundcheckfill text-red padding-left"
-							style="font-size: 60upx;"></text>
-					</view>
-					<view class="margin-top-sm align-center">
-						<span>晚餐</span>
-						<text class="cuIcon-roundcheck text-gray padding-left" style="font-size: 60upx;"></text>
-					</view>
-				</view>
-			</view>
-			<view class="grid text-center col-3">
-				<view class="solid padding bg-white">
-					<view class="text-black">
-						3月21日
-					</view>
-					<view class="margin-top-sm align-center">
-						<text class="text-red">午餐</text>
-						<text class="cuIcon-roundcheckfill text-red padding-left"
-							style="font-size: 60upx;"></text>
-					</view>
-					<view class="margin-top-sm align-center">
-						<span>晚餐</span>
-						<text class="cuIcon-roundcheck text-gray padding-left" style="font-size: 60upx;"></text>
-					</view>
-				</view>
-				<view class="solid padding bg-white">
-					<view class="text-black">
-						3月22日
-					</view>
-					<view class="margin-top-sm align-center">
-						<text>午餐</text>
-						<text class="cuIcon-roundcheck text-gray padding-left"
-							style="font-size: 60upx;"></text>
-					</view>
-					<view class="margin-top-sm align-center">
-						<span class="text-red">晚餐</span>
-						<text class="cuIcon-roundcheckfill text-red padding-left" style="font-size: 60upx;"></text>
-					</view>
-				</view>
-				<view class="solid padding bg-white">
-					<view class="text-black">
-						3月23日
-					</view>
-					<view class="margin-top-sm align-center">
-						<text class="">午餐</text>
-						<text class="cuIcon-roundcheck text-gray padding-left"
-							style="font-size: 60upx;"></text>
-					</view>
-					<view class="margin-top-sm align-center">
-						<span>晚餐</span>
-						<text class="cuIcon-roundcheck text-gray padding-left" style="font-size: 60upx;"></text>
-					</view>
-				</view>
+
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import uniLoadMore from '@/colorui/components/uni-load-more.vue';
 	export default {
-		components: {
-			uniLoadMore
-		},
 		data() {
 			return {
-				page: 1,
-				pageSize: 10,
-				contentText: {
-					contentdown: '上拉加载更多',
-					contentrefresh: '加载中',
-					contentnomore: '没有更多'
-				},
-				TabCur: 0,
-				buildings: [],
-				rooms: [],
+				dayNum: 11,
+				start_rq: this.util.getDate(),
+				records: [],
 				para: {
 					dining_id: 0,
 					room_number: "",
-					building_name: "",
-					is_net_meeting: 0,
-					is_led: 0
+					building_name: ""
 				}
 			}
 		},
 		onLoad(option) {
 			var info = JSON.parse(decodeURIComponent(option.para));
 			this.para = info;
+			if(!this.para.id){
+				this.para.ydrq = "";
+				this.para.ydsjd = "";
+			}
+			uni.showLoading({
+				title: '加载中',
+				mask: false
+			});
 			//获取未来12天预定情况
-			global.$http.post('/dining/info/buildingList', {
+			global.$http.post('/dining/record/diningRecord', {
 				params: {
-					page: 1,
-					pageSize: 1000
+					dining_id: this.para.dining_id,
+					start_rq: this.start_rq,
+					end_rq: this.util.getDate(this.dayNum)
 				},
 			}).then(res => {
+				uni.hideLoading();
 				if (res.status === "0") {
-					this.buildings = res.data;
-					this.loadData();
+					for (let i = 0; i <= this.dayNum; i++) {
+						var record = {
+							ydrq: this.util.getDate(i),
+							date: this.util.getDate() == this.util.getDate(i) ? "今日" : this.util
+								.getMonthDate(i),
+							noonIsBook: res.data.findIndex(c => c.ydrq.substr(0, 10) == this.util.getDate(
+								i) && c.ydsjd == "1") >= 0,
+							afternoonIsBook: res.data.findIndex(c => c.ydrq.substr(0, 10) == this.util
+								.getDate(i) && c.ydsjd == "2") >= 0
+						};
+						if(this.util.getDate(i) == this.para.ydrq.substr(0, 10)){
+							if(this.para.ydsjd == "1")
+								record.noonIsBook = false;
+							if(this.para.ydsjd == "2")
+								record.afternoonIsBook = false;
+						}
+						this.records.push(record);
+					}
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -233,70 +88,28 @@
 					});
 				}
 			}).catch(err => {
+				uni.hideLoading();
 				uni.showToast({
 					title: err.message,
 					icon: 'none'
 				});
 			});
 		},
-		onReachBottom() {
-			if (this.status !== "noMore") {
-				this.status = 'more';
-				this.loadData();
-			}
-		},
 		methods: {
-			loadData() {
-				if (this.buildings.length > 0) {
-					this.status = 'loading';
-					global.$http.post('/dining/info/diningList', {
-						params: {
-							page: this.page,
-							pageSize: this.pageSize,
-							building_id: this.buildings[this.TabCur].id
-						},
-					}).then(res => {
-						if (res.status === "0") {
-							if (res.data.totlePage <= this.page) {
-								this.status = 'noMore';
-							} else {
-								this.status = "more";
-							}
-							if (this.page === 1) {
-								this.rooms = res.data.list;
-							} else {
-								res.data.list.forEach(c => {
-									this.rooms.push(c);
-								});
-							}
-							this.page++;
-						} else {
-							uni.showToast({
-								title: res.msg,
-								icon: 'none'
-							});
-						}
-					}).catch(err => {
-						uni.showToast({
-							title: err.message,
-							icon: 'none'
-						});
+			sureDate: function(ydrq, ydsjd, isBook) {
+				if(isBook)
+				{
+					uni.showToast({
+						title: "已被预定",
+						icon: 'none'
+					});
+				}else{
+					this.para.ydrq = ydrq;
+					this.para.ydsjd = ydsjd;
+					uni.navigateTo({
+						url: '../food/bookFood?para=' + encodeURIComponent(JSON.stringify(this.para))
 					});
 				}
-			},
-			buildingTab: function(index) {
-				this.TabCur = index;
-				this.page = 1;
-				this.rooms = [];
-				this.loadData();
-			},
-			roomDetail: function(room) {
-				this.para.dining_id = room.id;
-				this.para.room_number = room.number;
-				this.para.building_name = room.name;
-				uni.navigateTo({
-					url: '../food/bookFood?para=' + encodeURIComponent(JSON.stringify(this.para))
-				});
 			}
 		}
 	}

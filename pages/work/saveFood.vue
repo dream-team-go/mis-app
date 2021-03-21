@@ -23,17 +23,17 @@
 					</view>
 				</view>
 			</view>
-
+			
+			<view class="cu-form-group">
+				<view class="title">保底消费</view>
+				<input name="input" type="number" v-model="para.bdxf"></input>
+			</view>
 			<view class="cu-form-group">
 				<view class="title">容纳人数</view>
-				<picker @change="ChangePeoples" :value="peopleIndex" :range="peoples">
-					<view class="picker">
-						{{peopleIndex>-1?peoples[peopleIndex] + "人" : "请选择"}}
-					</view>
-				</picker>
+				<input name="input" type="number" v-model="para.capacity"></input>
 			</view>
 
-			<view class="cu-bar bg-white">
+			<view class="cu-bar bg-white margin-top-xs">
 				<view class="action">
 					包房照片上传
 				</view>
@@ -81,7 +81,6 @@
 								</view>
 							</view>
 							<view class="action">
-								<view class="text-somber text-df">建于{{building.build_time}}</view>
 								<view class="cu-tag round bg-orange">{{BuildingStatusEnumMap.get(building.status)}}</view>
 							</view>
 						</view>
@@ -132,9 +131,9 @@
 				this.room_name = info.number;
 				this.para.office_room_id = info.office_room_id;
 				this.para.capacity = info.capacity;
-				this.peopleIndex = info.capacity - 1;
 				this.para.vr = info.vr;
 				this.para.id = info.id;
+				this.para.bdxf = info.bdxf;
 				//设置辅助参数
 				this.imgList.push(this.para.vr);
 			}
@@ -146,10 +145,6 @@
 				CustomBar: this.CustomBar,
 				ScreenHeight: this.ScreenHeight,
 				BuildingStatusEnumMap: misEnum.BuildingStatusEnumMap,
-				peopleIndex: 0,
-				peoples: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-					30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50
-				],
 				isShowBuldingModal: false,
 				buildings: [],
 				isShowRoomModal: false,
@@ -166,7 +161,8 @@
 					id: "",
 					vr: "",
 					capacity: 1,
-					office_room_id: 0
+					office_room_id: 0,
+					bdxf:""
 				},
 				building_id: 0,
 				building_name: "",
@@ -223,10 +219,6 @@
 						icon: 'none'
 					});
 				});
-			},
-			ChangePeoples: function(e) {
-				this.peopleIndex = e.detail.value;
-				this.para.capacity = this.peoples[e.detail.value];
 			},
 			showBuldingModal: function(e) {
 				this.page = 1;

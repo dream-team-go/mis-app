@@ -12,7 +12,7 @@
 			</view>
 		</scroll-view>
 		
-		<view class="cu-card case no-card margin-top" v-for="room in rooms" :key="room.id" @click="roomDetail(room)">
+		<view class="cu-card case no-card margin-top-sm" v-for="room in rooms" :key="room.id" @click="roomDetail(room)">
 			<view class="cu-item shadow">
 				<view class="image">
 					<image :src="room.vr" mode="widthFix"></image>

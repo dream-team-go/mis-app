@@ -120,6 +120,23 @@ function getTime(addMinute) {
 	return `${hour}:${minute}`;
 }
 
+function getCurrentTime(addMinute) {
+	const date = new Date();
+	var tmpMinute = date.getMinutes();
+
+	if (addMinute > 0) {
+		date.setMinutes(date.getMinutes() + addMinute);
+	}
+
+	let hour = date.getHours();
+	let minute = date.getMinutes();
+
+	hour = hour > 9 ? hour : '0' + hour;;
+	minute = minute > 9 ? minute : '0' + minute;
+
+	return `${hour}:${minute}`;
+}
+
 function getEndTime(startTime, addHour) {
 	//特殊处理IOS日期，用‘/’代替‘-’
 	startTime = startTime.replace(/-/g, '/');
@@ -168,5 +185,6 @@ module.exports = {
 	getEndTime: getEndTime,
 	getIntervalHour: getIntervalHour,
 	getMonthDate: getMonthDate,
-	getEnumStatusDesc: getEnumStatusDesc
+	getEnumStatusDesc: getEnumStatusDesc,
+	getCurrentTime: getCurrentTime
 }

@@ -22,8 +22,19 @@ const FoodRecordEnumMap = new Map([
 	[0, "待确认"],
 	[-2, "取消预定"],
 	[-1, "驳回"],
-	[1, "已确认"]
+	[-5, "失效"],
+	[1, "已确认"],
+	[2, "订餐完成"]
 ]);
+
+//订餐菜单状态
+const FoodMenuEnumMap = new Map([
+	[0, "不需要菜单"],
+	[1, "菜单待上传"],
+	[2, "上传成功"],
+	[3, "确认菜单"]
+]);
+
 
 //用车申请枚举
 const UseCarRecordEnumMap = new Map([
@@ -95,5 +106,6 @@ export default {
 	WarnStatusEnumMap,
 	LeaderBookFoodEnumMap,
 	CarTypeEnumMap,
-	MeetingApplyEditEnumMap
+	MeetingApplyEditEnumMap,
+	FoodMenuEnumMap
 }

@@ -1,104 +1,35 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			
-			<block slot="content">包房预定详情</block>
-			<block slot="right"><view v-show="info.status == 0" @tap="toEdit">修改</view></block>
+			<block slot="content">桌餐预定详情</block>
+			<block slot="right"><view v-if="info.status == 0" @tap="toEdit">修改</view></block>
+			<block slot="right"><view v-if="info.status == 1 && info.cd_status == 2" @tap="uploadMenuDetail">确认菜单</view></block>
+			<block slot="right"><view v-if="info.status == 1 && info.cd_status > 2" @tap="uploadMenuDetailWork">菜单详情</view></block>
 		</cu-custom>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				<image src="../../static/common/newIcon/food_record.png"></image>
-				<text class="text-lg text-black">预定进度</text>
-			</view>
-		</view>
-		<view class="bg-white padding">
-			<view class="cu-steps">
-				<view class="cu-item" :class="item.color" v-for="(item,index) in steps" :key="index">
-					<text :class="'cuIcon-' + item.cuIcon"></text> {{item.name}}
-				</view>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.status == -1">
-			<view class="action">
-				失败原因：
-				<text class="text-red">{{info.fail_reason}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				订餐原由：
-				<text class="text-black">{{info.desc}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				包房：
-				<text class="text-black">{{info.room_number}}({{info.building_name}})</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				用餐时间：
-				<text class="text-black">{{info.start_time}} — {{info.end_time}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				上菜时间：
-				<text class="text-black">{{info.meal_time}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				用餐人数：
-				<text class="text-black">{{info.people_num}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				清真人数：
-				<text class="text-black">{{info.has_hz}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.meal_spec != null">
-			<view class="action">
-				用餐标准：
-				<text class="text-black">{{info.meal_spec}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				接待对象：
-				<text class="text-black">{{info.receive_people}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.lender != null">
-			<view class="action">
-				陪同领导：
-				<text class="text-black">{{info.lender}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="info.meal_request != null">
-			<view class="action">
-				特殊要求：
-				<text class="text-black">{{info.meal_request}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				预定人：
-				<text class="text-black">{{info.user_name}}({{info.user_tel}})</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				预定时间：
-				<text class="text-black">{{info.create_time}}</text>
-			</view>
-		</view>
-		<view class="bottom-btns-seat" v-if="info.status == 0"></view>
-		<view class="bottom-cancel-btn" v-if="info.status == 0" @click="cancleBook">
+		<food-detail :info="info"></food-detail>
+		<view class="bottom-btns-seat" v-if="info.status == 0 || isCanCancel"></view>
+		<view class="bottom-cancel-btn" v-if="info.status == 0 || isCanCancel" @click="cancleBook">
 			取消预定
+		</view>
+		<!-- 
+		<view class="bottom-btns-seat" v-if="info.status == 1 && info.cd_status == 2"></view>
+		<view class="bottom-cancel-btn" v-if="info.status == 1 && info.cd_status == 2" @click="uploadMenuDetail">
+			确认菜单
+		</view>
+		
+		<view class="bottom-btns-seat" v-if="info.cd_status > 2"></view>
+		<view class="bottom-cancel-btn" v-if="info.cd_status > 2" @click="uploadMenuDetailWork">
+			菜单详情
+		</view> -->
+		
+		<view class="bottom-btns-seat" v-if="info.status == 2 && !info.fw_score"></view>
+		<view class="bottom-cancel-btn" v-if="info.status == 2 && !info.fw_score" @click="evaluate">
+			评价
+		</view>
+		
+		<view class="bottom-btns-seat" v-if="info.status == 2 && info.fw_score"></view>
+		<view class="bottom-cancel-btn" v-if="info.status == 2 && info.fw_score" @click="evaluateDetail">
+			评价内容
 		</view>
 	</view>
 </template>
@@ -109,9 +40,11 @@
 		data() {
 			return {
 				StatusEnumMap: misEnum.FoodRecordEnumMap,
-				steps: [],
-				color: '',
-				info: {},
+				isCanCancel: false,
+				info: {
+					meal_time: "",
+					ydrq: ""
+				},
 				id: ""
 			}
 		},
@@ -119,7 +52,6 @@
 			this.id = option.id;
 		},
 		onShow() {
-			this.steps.length = 0;
 			global.$http.post('/dining/record/recordInfo', {
 				params: {
 					record_id: this.id
@@ -127,43 +59,8 @@
 			}).then(res => {
 				if (res.status === "0") {
 					this.info = res.data;
-					//设置进度步骤
-					if (this.info.status === 0) {
-						this.color = 'text-cyan';
-					} else if (this.info.status === -2) {
-						this.color = 'text-orange';
-					} else if (this.info.status === -1) {
-						this.color = 'text-red';
-					} else if (this.info.status === 1) {
-						this.color = 'text-green';
-					}
-					var isFind = false;
-					misEnum.FoodRecordEnumMap.forEach((value, key, map) => {
-						var cuIcon = '';
-						var color = '';
-						if (!isFind || key == this.info.status) {
-							color = this.color;
-						}
-						if (key == this.info.status) {
-							isFind = true;
-						}
-						if (key === 0) {
-							cuIcon = 'usefullfill';
-						} else if (key === -2) {
-							cuIcon = 'radioboxfill';
-						} else if (key === -1) {
-							cuIcon = 'roundclosefill';
-						} else if (key === 1) {
-							cuIcon = 'roundcheckfill';
-						}
-						this.steps.push({
-							cuIcon: cuIcon,
-							name: value,
-							key: key,
-							color: color
-						})
-					});
-
+					//判断是否能取消订单
+					this.isCanCancelFood();
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -178,12 +75,48 @@
 			});
 		},
 		methods: {
+			isCanCancelFood(){
+				if(this.info.ydsjd == "1"){
+					this.isCanCancel = this.info.status == 1 && this.util.getCurrentTime() <= "11:00";
+				} else if(this.info.ydsjd == "2"){
+					this.isCanCancel = this.info.status == 1 && this.util.getCurrentTime() <= "17:00";
+				}
+				return this.isCanCancel;
+			},
 			toEdit: function(e) {
 				uni.navigateTo({
 					url: '../food/selectRoom?para=' + encodeURIComponent(JSON.stringify(this.info))
 				});
 			},
+			evaluate: function(e){
+				uni.navigateTo({
+					url: '../food/foodEvaluate?para=' + encodeURIComponent(JSON.stringify(this.info))
+				});
+			},
+			evaluateDetail: function(e){
+				uni.navigateTo({
+					url: '../food/foodEvaluateDetail?para=' + encodeURIComponent(JSON.stringify(this.info))
+				});
+			},
+			uploadMenuDetail: function(){
+				uni.navigateTo({
+					url: '../food/uploadFoodMenuDetail?para=' + encodeURIComponent(JSON.stringify(this.info))
+				});
+			},
+			uploadMenuDetailWork: function(){
+				uni.navigateTo({
+					url: '../work/uploadFoodMenuDetail?para=' + encodeURIComponent(JSON.stringify(this.info))
+				});
+			},
 			cancleBook: function() {
+				if(!this.isCanCancelFood())
+				{
+					uni.showToast({
+						icon: 'none',
+						title: this.info.ydsjd == "2" ? "17:00前才能取消订单" : "11:00前才能取消订单"
+					});
+					return;
+				}
 				uni.showModal({
 					title: '提示',
 					content: '确定取消预定？',
@@ -208,8 +141,6 @@
 									icon: 'none'
 								});
 								this.info.status = -2;
-								this.steps[0].color = 'text-orange';
-								this.steps[1].color = 'text-orange';
 							} else {
 								uni.showToast({
 									title: res.msg,

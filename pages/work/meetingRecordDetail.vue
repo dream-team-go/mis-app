@@ -18,8 +18,8 @@
 			<view class="pass" @click="allowEdit">允许修改</view>
 		</view>
 		
-		<view class="bottom-btns-seat" v-if="record.status == 1 && (record.sqxg_status == 0 || record.sqxg_status == 3)"></view>
-		<view class="bottom-btns" v-if="record.status == 1 && (record.sqxg_status == 0 || record.sqxg_status == 3)">
+		<view class="bottom-btns-seat" v-if="record.status == 1 && (record.sqxg_status == 0 || record.sqxg_status == 3 || record.sqxg_status == 3)"></view>
+		<view class="bottom-btns" v-if="record.status == 1 && (record.sqxg_status == 0 || record.sqxg_status == 3 || record.sqxg_status == -1)">
 			<view class="bottom-cancel-btn" @click="finish">会议完成</view>
 		</view>
 		

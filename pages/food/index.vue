@@ -5,32 +5,49 @@
 				
 				<block slot="content">订餐</block>
 			</cu-custom>
+			
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action index-title">
+					<image src="../../static/common/newIcon/meeting_record.png" class="title-ico"></image>
+					<text class="text-lg text-black">会务负责人</text>
+				</view>
+			</view>
+			<view class="bg-white padding-top-xs padding-bottom-xs text-df text-bold">
+				<view class="padding-xs" style="color: #333333;" v-for="item in chargePersons" :key="item.id">
+					<view class="padding-left-xs padding-right-sm" style="display: inline;display: inline-table;min-width: 190upx;">
+						<text class="cuIcon-title text-blue"></text><text>{{item.xm}}</text>
+					</view>
+					
+					<view class="padding-left-xs padding-right-xl" style="display: inline;" @tap="makePhoneCall(item.tel)">
+						<image src="../../static/common/phone.png" class="ico" style="width: 30upx;height: 30upx;vertical-align: middle;"></image>
+						<text style="vertical-align: middle;">{{item.tel}}</text>
+					</view>
+					
+					<view class="padding-left-xs" style="display: inline;" @tap="makePhoneCall(item.office_tel)">
+						<image src="../../static/common/tel.png" class="ico" style="width: 30upx;height: 30upx;vertical-align: middle;"></image>
+						<text style="vertical-align: middle;">{{item.office_tel}}</text>
+					</view>
+				</view>
+			</view>
 
-			<view class="cu-bar bg-white solid-bottom margin-top">
+			<view class="cu-bar bg-white solid-bottom margin-top-xs">
 				<view class="action index-title">
 					<image src="../../static/common/newIcon/food_record.png" class="title-ico"></image>
 					<text class="text-lg text-black">订餐概况</text>
 				</view>
-				<!-- <view class="action"><button class="cu-btn bg-linear-blue shadow" @tap="toBookfood">预定</button></view> -->
 			</view>
 
 			<view class="cu-list grid no-border col-3">
 				<view class="cu-item">
 					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList" open-type="navigate">
 						<text class="text-color">{{ foodData.totalCount }}</text>
-						<text>共预定</text>
+						<text>全部</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=1" open-type="navigate">
-						<text class="text-color">{{ foodData.successCount }}</text>
-						<text>已确认</text>
-					</navigator>
-				</view>
-				<view class="cu-item">
-					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=-1" open-type="navigate">
-						<text class="text-color">{{ foodData.failCount }}</text>
-						<text>驳回</text>
+					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=0" open-type="navigate">
+						<text class="text-color">{{ foodData.waitCheckCount }}</text>
+						<text>待确认</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
@@ -40,14 +57,32 @@
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=0" open-type="navigate">
-						<text class="text-color">{{ foodData.waitCheckCount }}</text>
-						<text>待确认</text>
+					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=-1" open-type="navigate">
+						<text class="text-color">{{ foodData.failCount }}</text>
+						<text>驳回</text>
+					</navigator>
+				</view>
+				<view class="cu-item">
+					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=-5" open-type="navigate">
+						<text class="text-color">{{ foodData.inValidCount }}</text>
+						<text>失效</text>
+					</navigator>
+				</view>
+				<view class="cu-item">
+					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=1" open-type="navigate">
+						<text class="text-color">{{ foodData.successCount }}</text>
+						<text>已确认</text>
+					</navigator>
+				</view>
+				<view class="cu-item">
+					<navigator hover-class="navigator-hover" url="../food/myFoodRecordList?status=2" open-type="navigate">
+						<text class="text-color">{{ foodData.finishCount }}</text>
+						<text>订餐完成</text>
 					</navigator>
 				</view>
 			</view>
 
-			<view class="cu-bar bg-white solid-bottom margin-top">
+			<view class="cu-bar bg-white solid-bottom margin-top-xs">
 				<view class="action index-title">
 					<image src="../../static/common/newIcon/food_clock.png" class="title-ico"></image>
 					<text class="text-lg text-black">最近预定</text>
@@ -55,31 +90,38 @@
 			</view>
 			<view class="card">
 				<view class="item">
+					<text class="title">订餐原由</text>
+					<text class="content text-bold">{{ record.status.length > 0 ? record.desc : '无' }}</text>
+				</view>
+				<view class="item">
+					<text class="title">楼房</text>
+					<text class="content">{{ record.status.length > 0 ? record.building_name : '无' }}</text>
+				</view>
+				<view class="item">
 					<text class="title">包房</text>
-					<text class="content">{{ foodData.status.length > 0 ? foodData.building_name + '(' + foodData.room_number + ')' : '无' }}</text>
+					<text class="content">{{ record.status.length > 0 ? record.room_number : '无' }}</text>
 				</view>
 				<view class="item">
-					<text class="title">开始时间</text>
-					<text class="content">{{ foodData.status.length > 0 ? foodData.start_time : '无' }}</text>
+					<text class="title">用餐日期</text>
+					<text class="content">{{ record.status.length > 0 ? record.ydrq : '无' }}</text>
 				</view>
 				<view class="item">
-					<text class="title">结束时间</text>
-					<text class="content">{{ foodData.status.length > 0 ? foodData.end_time : '无' }}</text>
+					<text class="title">午/晚餐</text>
+					<text class="content">{{ record.status.length > 0 ? record.ydsjd : '无' }}</text>
 				</view>
 				<view class="item">
-					<text class="title">预定时间</text>
-					<text class="content">{{ foodData.status.length > 0 ? foodData.create_time : '无' }}</text>
+					<text class="title">上菜时间</text>
+					<text class="content">{{ record.status.length > 0 ? record.meal_time : '无' }}</text>
 				</view>
 				<view class="item">
 					<text class="title">状态</text>
-					<text class="content">{{ foodData.status.length > 0 ? foodData.status : '无' }}</text>
+					<text class="content text-food">{{ record.status.length > 0 ? record.status : '无' }}</text>
 				</view>
-				<view class="reason-box">
-					<view class="title">订餐原由</view>
-					<view class="reason">{{ foodData.status.length > 0 ? foodData.desc : '无' }}</view>
+				<view class="item" v-if="record.status.length > 0 && record.cd_status != 0">
+					<text class="title">菜单状态</text>
+					<text class="content text-orange">{{ record.status.length > 0 ? record.cd_status : '无' }}</text>
 				</view>
 			</view>
-			<view class="cu-tabbar-height"></view>
 		</scroll-view>
 	</view>
 </template>
@@ -95,14 +137,13 @@ export default {
 				cancleCount: '',
 				failCount: '',
 				waitCheckCount: '',
-				desc: '',
-				building_name: '',
-				room_number: '',
-				status: '',
-				start_time: '',
-				end_time: '',
-				create_time: ''
-			}
+				inValidCount: '',
+				finishCount: ''
+			},
+			record:{
+				status: ''
+			},
+			chargePersons: []
 		};
 	},
 	onLoad() {
@@ -122,6 +163,8 @@ export default {
 					this.foodData.cancleCount = 0;
 					this.foodData.failCount = 0;
 					this.foodData.waitCheckCount = 0;
+					this.foodData.inValidCount = 0;
+					this.foodData.finishCount = 0;
 					var totalCount = 0;
 					for (var i = 0; i < res.data.length; i++) {
 						if (res.data[i].status === -2) {
@@ -132,6 +175,10 @@ export default {
 							this.foodData.waitCheckCount = res.data[i].total;
 						} else if (res.data[i].status === 1) {
 							this.foodData.successCount = res.data[i].total;
+						} else if (res.data[i].status === -5) {
+							this.foodData.inValidCount = res.data[i].total;
+						} else if (res.data[i].status === 2) {
+							this.foodData.finishCount = res.data[i].total;
 						}
 						totalCount += res.data[i].total;
 					}
@@ -159,14 +206,39 @@ export default {
 			.then(res => {
 				if (res.status === '0') {
 					if (res.data) {
-						this.foodData.desc = res.data.desc;
-						this.foodData.building_name = res.data.building_name;
-						this.foodData.room_number = res.data.room_number;
-						this.foodData.status = misEnum.FoodRecordEnumMap.get(res.data.status);
-						this.foodData.start_time = res.data.start_time;
-						this.foodData.end_time = res.data.end_time;
-						this.foodData.create_time = res.data.create_time;
+						this.record = res.data;
+						this.record.status = misEnum.FoodRecordEnumMap.get(res.data.status);
+						this.record.meal_time = res.data.meal_time.substring(11, 16);
+						this.record.cd_status = misEnum.FoodMenuEnumMap.get(res.data.cd_status);
+						this.record.ydrq = res.data.ydrq.substring(0, 10);
+						this.record.ydsjd = res.data.ydsjd == "1" ? "午餐" : "晚餐";
 					}
+				} else {
+					uni.showToast({
+						title: res.msg,
+						icon: 'none'
+					});
+				}
+			})
+			.catch(err => {
+				uni.hideLoading();
+				uni.showToast({
+					title: err.message,
+					icon: 'none'
+				});
+			});
+		//获取订餐负责人信息
+		global.$http
+			.post('/chargePerson/getList', {
+				params: {
+					type: "dining",
+					page: 1,
+					pageSize: 2
+				}
+			})
+			.then(res => {
+				if (res.status === '0') {
+					this.chargePersons = res.data.list;
 				} else {
 					uni.showToast({
 						title: res.msg,
