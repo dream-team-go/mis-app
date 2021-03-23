@@ -33,8 +33,9 @@
 				通知：数字机关事务上线啦！！！
 			</view>
 			<view class="notice-box">
-				<view class="notice-title">
-					<image class="notice-title-img" src="/static/common/newIcon/track.png" mode=""></image>我的足迹
+				<view class="notice-title text-bold">
+					<!-- <image class="notice-title-img" src="/static/common/newIcon/track.png" mode=""></image> -->
+					我的足迹
 				</view>
 				<view class="notice-main">
 					<view class="notice-item" v-for="(item, index) in noticeList" :key="index" @click="goPage(item)">
@@ -105,12 +106,12 @@ export default {
 				}
 			],
 			noticeList: [
-				{
-					img: '/static/common/newIcon/car_record.png',
-					title: '我的用车',
-					desc: '统计用车信息',
-					to: '/pages/car/index'
-				},
+				// {
+				// 	img: '/static/common/newIcon/car_record.png',
+				// 	title: '我的用车',
+				// 	desc: '统计用车信息',
+				// 	to: '/pages/car/index'
+				// },
 				{
 					img: '/static/common/newIcon/meeting_record.png',
 					title: '我的会务',
@@ -121,6 +122,12 @@ export default {
 					img: '/static/common/newIcon/food_record.png',
 					title: '我的订餐',
 					desc: '统计订餐信息',
+					to: '/pages/food/index'
+				},
+				{
+					img: '/static/common/newIcon/food_record.png',
+					title: '我的接待',
+					desc: '统计接待信息',
 					to: '/pages/food/index'
 				},
 				{
@@ -289,12 +296,12 @@ export default {
 			background-color: #fff;
 			
 			.notice-title {
-				padding: 20upx;
-				font-size: 32upx;
-				color: #777777;
+				padding: 20upx 40upx;
+				font-size: 34upx;
+				color: #000000;
 				display: flex;
 				align-items: center;
-				border-bottom: 1upx solid #ddd;
+				/* border-bottom: 1upx solid #ddd; */
 				
 				.notice-title-img {
 					height: 50upx;
@@ -308,32 +315,12 @@ export default {
 				flex-wrap: wrap;
 				position: relative;
 				
-				&::before {
-					content: '';
-					height: 1upx;
-					width: 100%;
-					background-color: #ddd;
-					position: absolute;
-					top: 50%;
-					transform: translateY(-50%);
-				}
-				
-				&::after {
-					content: '';
-					width: 1upx;
-					height: 100%;
-					background-color: #ddd;
-					position: absolute;
-					left: 50%;
-					transform: translateX(-50%);
-				}
-				
 				.notice-item {
 					width: 50%;
-					height: 160upx;
+					height: 120upx;
 					display: flex;
 					align-items: center;
-					padding: 32upx 40upx;
+					padding: 20upx 40upx;
 					
 					.notice-item-img {
 						height: 70upx;

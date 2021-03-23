@@ -4,10 +4,10 @@
 			<cu-custom bgColor="bg-linear-blue">
 				<block slot="content">工作台</block>
 			</cu-custom>
-			<view class="cu-bar bg-white solid-bottom margin-top" v-if="carCuIconListPermission.length > 0">
+			<!-- <view class="cu-bar bg-white" v-if="carCuIconListPermission.length > 0">
 				<view class="action index-title">
 					<image class="title-ico" src="../../static/common/newIcon/car_record.png"></image>
-					<text class="text-lg text-black">用车管理</text>
+					<text class="text-lg text-black text-bold">用车管理</text>
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']" v-if="carCuIconListPermission.length > 0">
@@ -23,10 +23,10 @@
 				</view>
 			</view>
 			
-			<view class="cu-bar bg-white solid-bottom margin-top" v-if="maintainCuIconListPermission.length > 0">
+			<view class="cu-bar bg-white margin-top-xs" v-if="maintainCuIconListPermission.length > 0">
 				<view class="action index-title">
 					<image class="title-ico" src="../../static/common/newIcon/car_repair.png"></image>
-					<text class="text-lg text-black">车辆维修</text>
+					<text class="text-lg text-black text-bold">车辆维修</text>
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']" v-if="maintainCuIconListPermission.length > 0">
@@ -40,12 +40,12 @@
 					</view>
 					<text class="cu-tag-text">{{item.name}}</text>
 				</view>
-			</view>
+			</view> -->
 			
-			<view class="cu-bar bg-white solid-bottom margin-top" v-if="meetingCuIconListPermission.length > 0">
+			<view class="cu-bar bg-white margin-top-xs" v-if="meetingCuIconListPermission.length > 0">
 				<view class="action index-title">
 					<image class="title-ico" src="../../static/common/newIcon/meeting_record.png"></image>
-					<text class="text-lg text-black">会务管理</text>
+					<text class="text-lg text-black text-bold">会务管理</text>
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']" v-if="meetingCuIconListPermission.length > 0">
@@ -62,10 +62,10 @@
 				</view>
 			</view>
 			
-			<view class="cu-bar bg-white solid-bottom margin-top" v-if="foodCuIconListPermission.length > 0">
+			<view class="cu-bar bg-white margin-top-xs" v-if="foodCuIconListPermission.length > 0">
 				<view class="action index-title">
 					<image class="title-ico" src="../../static/common/newIcon/food_record.png"></image> 
-					<text class="text-lg text-black">订餐管理</text>
+					<text class="text-lg text-black text-bold">订餐管理</text>
 				</view>
 			</view>
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']" v-if="foodCuIconListPermission.length > 0">
@@ -249,16 +249,17 @@
 					url: "../work/leaderBookFoodList",
 					icoSrc: "../../static/common/newIcon/workFoodRecordInfo.png",
 					permissionKey: "dining_lead:manage"
-				},
-				{
-				 	cuIcon: 'picfill',
-				 	color: 'yellow',
-				 	badge: 0,
-				 	name: '我的工作餐',
-					url: "../work/myLeaderBookFoodList",
-					icoSrc: "../../static/common/newIcon/workFoodInfo.png",
-					permissionKey: "dining_lead:order"
 				}
+				// ,
+				// {
+				//  	cuIcon: 'picfill',
+				//  	color: 'yellow',
+				//  	badge: 0,
+				//  	name: '我的工作餐',
+				// 	url: "../food/myLeaderBookFoodList",
+				// 	icoSrc: "../../static/common/newIcon/workFoodInfo.png",
+				// 	permissionKey: "dining_lead:order"
+				// }
 				// {
 				// 	cuIcon: 'picfill',
 				// 	color: 'yellow',

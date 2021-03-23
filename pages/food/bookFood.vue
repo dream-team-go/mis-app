@@ -258,17 +258,4 @@
 </script>
 
 <style>
-	#dining-list-modal {
-		z-index: 10000;
-	}
-
-	#dining-list-modal .cu-dialog {
-		height: 100vh;
-	}
-
-	#dining-list-modal.cu-modal.show #list-view {
-		overflow-x: hidden;
-		overflow-y: scroll;
-		pointer-events: auto;
-	}
 </style>

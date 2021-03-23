@@ -6,13 +6,28 @@
 				<block slot="content">会务</block>
 			</cu-custom>
 			
-			<view class="cu-bar bg-white solid-bottom">
+			<view class="cu-bar bg-white">
 				<view class="action index-title">
 					<image src="../../static/common/newIcon/meeting_record.png" class="title-ico"></image>
-					<text class="text-lg text-black">会务负责人</text>
+					<text class="text-lg text-black text-bold">会务负责人</text>
 				</view>
 			</view>
-			<view class="bg-white padding-top-xs padding-bottom-xs text-df text-bold">
+			
+			<view class="bg-white">
+				<view style="color: #333333;height: 60upx;" v-for="item in chargePersons" :key="item.id">
+					<text class="manager-xm">{{item.xm}}</text>
+					<text class="manager-tel" @tap="makePhoneCall(item.tel)">
+						<image src="../../static/common/phone.png" class="ico" style="width: 30upx;height: 30upx;vertical-align: middle;"></image>
+						<text style="vertical-align: middle;">{{item.tel}}</text>
+					</text>
+					<text class="manager-office-tel" @tap="makePhoneCall(item.office_tel)">
+						<image src="../../static/common/tel.png" class="ico" style="width: 30upx;height: 30upx;vertical-align: middle;"></image>
+						<text style="vertical-align: middle;">{{item.office_tel}}</text>
+					</text>
+				</view>
+			</view>
+			
+			<!-- <view class="bg-white padding-top-xs padding-bottom-xs text-df text-bold">
 				<view class="padding-xs" style="color: #333333;" v-for="item in chargePersons" :key="item.id">
 					<view class="padding-left-xs padding-right-sm" style="display: inline;display: inline-table;min-width: 190upx;">
 						<text class="cuIcon-title text-blue"></text><text>{{item.xm}}</text>
@@ -28,12 +43,12 @@
 						<text style="vertical-align: middle;">{{item.office_tel}}</text>
 					</view>
 				</view>
-			</view>
+			</view> -->
 			
-			<view class="cu-bar bg-white solid-bottom margin-top-xs">
+			<view class="cu-bar bg-white margin-top-xs">
 				<view class="action index-title">
 					<image src="../../static/common/newIcon/meeting_record.png" class="title-ico"></image>
-					<text class="text-lg text-black">会务预定概况</text>
+					<text class="text-lg text-black text-bold">会务预定概况</text>
 				</view>
 			</view>
 
@@ -82,16 +97,16 @@
 				</view>
 			</view>
 
-			<view class="cu-bar bg-white solid-bottom margin-top-xs">
+			<view class="cu-bar bg-white margin-top-xs">
 				<view class="action index-title">
 					<image src="../../static/common/newIcon/meeting_clock.png" class="title-ico"></image>
-					<text class="text-lg text-black">最近预定</text>
+					<text class="text-lg text-black text-bold">最近预定</text>
 				</view>
 			</view>
-			<view class="card">
+			<view class="card padding-left padding-right padding-bottom bg-white">
 				<view class="item">
 					<text class="title">会议名称</text>
-					<text class="content text-bold">{{ meetingData.status.length > 0 ? meetingData.desc : '无' }}</text>
+					<text class="content">{{ meetingData.status.length > 0 ? meetingData.desc : '无' }}</text>
 				</view>
 				<view class="item">
 					<text class="title">楼房</text>
@@ -280,5 +295,22 @@
 	}
 	.align-center{
 		display: flex;justfy-content: center;align-items: center;
+	}
+	.card .item{
+		line-height: 60upx;height: 60upx;
+		display: flow-root;
+	}
+	
+	.manager-xm{
+		position: absolute;
+		left: 65upx;
+	}
+	.manager-tel{
+		position: absolute;
+		left: 200upx;
+	}
+	.manager-office-tel{
+		position: absolute;
+		left: 480upx;
 	}
 </style>

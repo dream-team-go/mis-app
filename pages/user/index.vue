@@ -40,12 +40,12 @@
 			</view>
 			
 			<view class="cu-list menu margin-top">
-				<navigator class="cu-item arrow" hover-class="none" url="/pages/car/index" open-type="navigate">
+				<!-- <navigator class="cu-item arrow" hover-class="none" url="/pages/car/index" open-type="navigate">
 					<view class="content">
 						<image src="../../static/common/newIcon/car_record.png" class="ico"></image>
 						<text class="text-black">我的用车</text>
 					</view>
-				</navigator>
+				</navigator> -->
 				<navigator class="cu-item arrow" hover-class="none" url="/pages/meeting/index" open-type="navigate">
 					<view class="content">
 						<image src="../../static/common/newIcon/meeting_record.png" class="ico"></image>
@@ -56,6 +56,12 @@
 					<view class="content">
 						<image src="../../static/common/newIcon/food_record.png" class="ico"></image>
 						<text class="text-black">我的订餐</text>
+					</view>
+				</navigator>
+				<navigator class="cu-item arrow" hover-class="none" url="/pages/food/myLeaderBookFoodList" open-type="navigate" v-if="this.userInfo.key.includes('dining_lead:order')">
+					<view class="content">
+						<image src="../../static/common/newIcon/food_record.png" class="ico"></image>
+						<text class="text-black">我的工作餐</text>
 					</view>
 				</navigator>
 			</view>

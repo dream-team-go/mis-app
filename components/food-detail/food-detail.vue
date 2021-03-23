@@ -21,7 +21,7 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="info.status == -1">
 			<view class="action">
-				失败原因：
+				驳回原因：
 				<text class="text-red">{{info.fail_reason}}</text>
 			</view>
 		</view>

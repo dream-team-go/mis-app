@@ -35,7 +35,7 @@
 			菜单详情
 		</view>
  -->
-		<view class="cu-modal" :class="showModal?'show':''">
+		<view class="cu-modal" style="z-index: auto;" :class="showModal?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
 					<view class="content">驳回</view>
@@ -244,7 +244,7 @@
 									title: "提交成功",
 									icon: 'none'
 								});
-								this.record.status = 2;
+								this.info.status = 2;
 							} else {
 								uni.showToast({
 									title: res.msg,

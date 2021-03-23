@@ -77,9 +77,9 @@
 		methods: {
 			isCanCancelFood(){
 				if(this.info.ydsjd == "1"){
-					this.isCanCancel = this.info.status == 1 && this.util.getCurrentTime() <= "11:00";
+					this.isCanCancel = this.info.status == 1 && (this.info.ydrq.substring(0, 10) > this.util.getDate() || (this.info.ydrq.substring(0, 10) == this.util.getDate() && this.util.getCurrentTime() <= "11:00"));
 				} else if(this.info.ydsjd == "2"){
-					this.isCanCancel = this.info.status == 1 && this.util.getCurrentTime() <= "17:00";
+					this.isCanCancel = this.info.status == 1 && (this.info.ydrq.substring(0, 10) > this.util.getDate() || (this.info.ydrq.substring(0, 10) == this.util.getDate() && this.util.getCurrentTime() <= "17:00"));
 				}
 				return this.isCanCancel;
 			},
@@ -109,7 +109,7 @@
 				});
 			},
 			cancleBook: function() {
-				if(!this.isCanCancelFood())
+				if(this.info.status == 1 && !this.isCanCancelFood())
 				{
 					uni.showToast({
 						icon: 'none',

@@ -1465,7 +1465,7 @@ button.cuIcon.lg {
 }
 
 .cu-list.grid.no-border {
-	padding: 20upx 10upx
+	padding: 10upx 10upx
 }
 
 .cu-list.grid.col-3>.cu-item:nth-child(3n):after,
@@ -3111,6 +3111,14 @@ scroll-view.cu-steps .cu-item {
 	margin-left: 50upx;
 }
 
+.margin-left-xxl {
+	margin-left: 60upx;
+}
+
+.margin-left-xxxl {
+	margin-left: 70upx;
+}
+
 .margin-lr-xs {
 	margin-left: 10upx;
 	margin-right: 10upx;
@@ -3263,6 +3271,14 @@ scroll-view.cu-steps .cu-item {
 
 .padding-left-xl {
 	padding-left: 50upx;
+}
+
+.padding-left-xxl {
+	padding-left: 60upx;
+}
+
+.padding-left-xxxl{
+	padding-left: 80upx;
 }
 
 .padding-lr-xs {
@@ -3781,6 +3797,10 @@ scroll-view.cu-steps .cu-item {
 
 .text-sm {
 	font-size: 26upx;
+}
+
+.text-sd {
+	font-size: 28upx;
 }
 
 .text-df {

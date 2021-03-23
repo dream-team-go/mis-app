@@ -3,7 +3,17 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="content">订餐</block>
 		</cu-custom>
-
+		
+		<view class="bg-white">
+			<view class="text-bold text-black text-lg padding">
+				<text>温馨提示</text>
+			</view>
+			<view class="padding-left-xxxl padding-bottom">
+				<text>午餐11:30 — 13:00</text>
+				<text class="padding-left-xl">晚餐17:30 — 19:00</text>
+			</view>
+		</view>
+		
 		<view class="cu-card">
 			<view class="cu-item bg-img shadow-blur" :style="[{backgroundImage:'url('+item.img+')'}]"
 				@tap="goPage(item)" v-for="(item,index) in permissionList" :key="index">
@@ -31,7 +41,7 @@
 					{
 						title: '工作餐',
 						img: 'https://image.weilanwl.com/color2.0/plugin/wdh2236.jpg',
-						url: '../plugin/animation',
+						url: '/pages/food/saveLeaderBook',
 						permissionKey: "dining_lead:order"
 					},
 					{

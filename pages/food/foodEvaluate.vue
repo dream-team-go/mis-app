@@ -130,7 +130,7 @@
 					title: '提交中',
 					mask: false
 				});
-				global.$http.post('/dinging/record/appraised', {
+				global.$http.post('/dining/record/appraised', {
 					params: this.para,
 				}).then(res => {
 					uni.hideLoading();

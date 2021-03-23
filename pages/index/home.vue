@@ -145,7 +145,8 @@
 			}
 			//设置工作台权限
 			if(this.userInfo.key.includes("dining:manage") || this.userInfo.key.includes("dining:list") || 
-			this.userInfo.key.includes("dining_lead:order") || this.userInfo.key.includes("dining_lead:manage") ||
+			// this.userInfo.key.includes("dining_lead:order") || 
+			this.userInfo.key.includes("dining_lead:manage") ||
 			this.userInfo.key.includes("meeting:manage") || this.userInfo.key.includes("meeting:list") ||
 			this.userInfo.key.includes("use_car:sp") || this.userInfo.key.includes("fix_car:jzsp") ||
 			this.userInfo.key.includes("car:manage") || this.userInfo.key.includes("driver:manage") ||

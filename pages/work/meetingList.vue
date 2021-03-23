@@ -7,7 +7,7 @@
 		</cu-custom>
 		
 		<scroll-view scroll-x class="bg-white nav text-center">
-			<view class="cu-item" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in buildings.length"
+			<view class="cu-item text-black" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in buildings.length"
 			 :key="index" @tap="buildingTab(index)">
 				{{buildings[index].name}}
 			</view>

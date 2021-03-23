@@ -1,39 +1,23 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			
+		
 			<block slot="content">工作餐记录</block>
 		</cu-custom>
 		
-		<view class="bg-white p10">
-			<view class="small-card-detial"  v-for="record in records" :key="record.id" @click="recordDetail(record)" >
-				<view class="title-box bg-linear-blue">
-					<text class="id">{{record.dining_date.substring(0,10)}}</text>
-					<text class="cu-tag round bg-orange status">{{getStatusStr(record.type)}}</text>
-					<!-- <image src="../../static/common/next.png" class="arrow"></image> -->
-				</view>
-				<view class="info-box">
-					<text class="label">用餐领导：</text>
-					<text class="info">{{record.lead}}</text>
-				</view>
-				<view class="info-box">
-					<text class="label">用餐人数：</text>
-					<text class="info">{{record.num}}人</text>
-				</view>
-				<view class="info-box">
-					<view class="label">订餐人：</view>
-					<view class="info">{{record.user_cn_name}}（{{record.tel_no}}）</view>
-				</view>
-				<view class="info-box">
-					<view class="label">订餐时间：</view>
-					<view class="info">{{record.create_time}}</view>
-				</view>
-				<view class="reason-box">
-					<view class="label">用餐要求：</view>
-					<view class="info">{{record.desc}}</view>
-				</view>
+		<scroll-view scroll-x class="bg-white nav text-center fixed" :style="[{top:CustomBar + 'px'}]">
+			<view class="cu-item text-sm text-black" style="margin: 0upx;" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length"
+			 :key="index" @tap="recordStatusTab(index)">
+				{{Array.from(StatusEnumMap.values())[index]}}
+			</view>
+		</scroll-view>
+		
+		<view style="margin-top: 100upx;">
+			<view v-for="record in records" :key="record.id" @click="recordDetail(record)">
+				<leader-food-item :record="record"></leader-food-item>
 			</view>
 		</view>
+		
 		<uni-load-more :status="status" :content-text="contentText" />
 	</view>
 </template>
@@ -46,15 +30,31 @@
 			uniLoadMore
 		},
 		onLoad(option) {
-			this.page = 1;
-			this.records = [];
-			this.loadData();
+			if (option.status) {
+				var index = 0;
+				misEnum.LeaderFoodEnumMap.forEach((value, key, map) => {
+					if (key == option.status) {
+						this.TabCur = index;
+						return;
+					}
+					index++;
+				});
+				this.recordStatus = option.status;
+			} else {
+				this.recordStatus = Array.from(misEnum.LeaderFoodEnumMap.keys())[0];
+			}
+		},
+		onShow() {
+			this.recordStatusTab(this.TabCur);
 		},
 		data() {
 			return {
 				page: 1,
 				pageSize: 10,
+				recordStatus: "",
 				status: 'more',
+				StatusEnumMap: misEnum.LeaderFoodEnumMap,
+				TabCur: 0,
 				contentText: {
 					contentdown: '上拉加载更多',
 					contentrefresh: '加载中',
@@ -106,12 +106,16 @@
 					});
 				});
 			},
-			getStatusStr(status) {
-				return misEnum.LeaderBookFoodEnumMap.get(status);
+			recordStatusTab: function(index) {
+				this.TabCur = index;
+				this.recordStatus = Array.from(this.StatusEnumMap.keys())[index];
+				this.page = 1;
+				this.records = [];
+				this.loadData();
 			},
 			recordDetail: function(record) {
 				uni.navigateTo({
-					url: "../work/leaderBookFoodDetail?para=" + encodeURIComponent(JSON.stringify(record))
+					url: "../work/leaderBookFoodDetail?id=" + record.id
 				});
 			}
 		}

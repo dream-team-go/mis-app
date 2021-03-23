@@ -38,11 +38,6 @@
 						img: '/static/common/newIcon/car_manage.png',
 						name: '用车',
 						to: ''
-					},
-					{
-						img: '/static/main/jiedaishenpi.png',
-						name: '接待审批',
-						to: ''
 					},{
 						img: '/static/main/chebian.png',
 						name: '车编',

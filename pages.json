@@ -280,15 +280,15 @@
 			"style": {}
 		},
 		{
-			"path": "pages/work/myLeaderBookFoodList",
+			"path": "pages/food/myLeaderBookFoodList",
 			"style": {}
 		},
 		{
-			"path": "pages/work/myLeaderBookFoodDetail",
+			"path": "pages/food/myLeaderBookFoodDetail",
 			"style": {}
 		},
 		{
-			"path": "pages/work/saveLeaderBook",
+			"path": "pages/food/saveLeaderBook",
 			"style": {}
 		},
 		{
@@ -437,6 +437,15 @@
         }
         ,{
             "path" : "pages/food/foodEvaluateDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/food/recommendDishes",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

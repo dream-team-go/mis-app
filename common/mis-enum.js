@@ -35,6 +35,13 @@ const FoodMenuEnumMap = new Map([
 	[3, "确认菜单"]
 ]);
 
+//领导订餐状态
+const LeaderFoodEnumMap = new Map([
+	[0, "待确认"],
+	[1, "已确认"],
+	[-1, "取消预定"]
+])
+
 
 //用车申请枚举
 const UseCarRecordEnumMap = new Map([
@@ -107,5 +114,6 @@ export default {
 	LeaderBookFoodEnumMap,
 	CarTypeEnumMap,
 	MeetingApplyEditEnumMap,
-	FoodMenuEnumMap
+	FoodMenuEnumMap,
+	LeaderFoodEnumMap
 }
