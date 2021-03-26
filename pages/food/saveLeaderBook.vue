@@ -20,7 +20,7 @@
 			
 			<view class="cu-form-group margin-top-xs">
 				<view class="title">用餐日期</view>
-				<picker mode="date" :value="mealDate" :start="startDate" :end="endDate" @change="MealTimeChange">
+				<picker mode="date" :value="mealDate" :start="startDate" :end="endDate" @change="DateChange">
 					<view class="picker">
 						{{mealDate}}
 					</view>
@@ -99,6 +99,9 @@
 			}
 		},
 		methods: {
+			DateChange: function(e){
+				this.mealDate = e.detail.value;
+			},
 			MealTimeChange: function(e) {
 				this.mealTime = e.detail.value;
 			},

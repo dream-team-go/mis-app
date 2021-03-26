@@ -9,7 +9,7 @@
 					<view class="content padding-tb-sm">
 						<view>
 							<!-- :style="'background-image:url(' + userInfo.user.head_img + ')'" -->
-							<view class="margin-left ">
+							<view class="margin-left">
 								<image src="../../static/common/user.png" class="heard"></image>
 							</view>
 							<text class="text-bold text-xl ml20">{{userInfo?userInfo.user.userCnName:""}}</text>
@@ -21,7 +21,7 @@
 				</view>
 			</view>
 
-			<view class="cu-list menu margin-top">
+			<view class="cu-list menu">
 				<navigator class="cu-item arrow" hover-class="none" url="../user/warnList" open-type="navigate">
 					<view class="content">
 						<image src="../../static/common/newIcon/message_record.png" class="ico"></image>
@@ -35,6 +35,15 @@
 					<view class="content">
 						<image src="../../static/common/newIcon/sign.png" class="ico"></image>
 						<text class="text-black">电子签名</text>
+					</view>
+				</navigator>
+			</view>
+			
+			<view class="cu-list menu margin-top">
+				<navigator class="cu-item arrow" hover-class="none" url="../reception/myReceptionList" open-type="navigate">
+					<view class="content">
+						<image src="../../static/common/newIcon/reception.png" class="ico"></image>
+						<text class="text-black">我的接待</text>
 					</view>
 				</navigator>
 			</view>
@@ -60,7 +69,7 @@
 				</navigator>
 				<navigator class="cu-item arrow" hover-class="none" url="/pages/food/myLeaderBookFoodList" open-type="navigate" v-if="this.userInfo.key.includes('dining_lead:order')">
 					<view class="content">
-						<image src="../../static/common/newIcon/food_record.png" class="ico"></image>
+						<image src="../../static/common/newIcon/leaderFood.png" class="ico"></image>
 						<text class="text-black">我的工作餐</text>
 					</view>
 				</navigator>
@@ -176,5 +185,9 @@
 		width: 46upx !important;
 		height: 46upx !important;
 		margin: 0 25upx 0 5upx !important;
+	}
+	
+	.cu-list+.cu-list {
+	    margin-top: 20upx;
 	}
 </style>

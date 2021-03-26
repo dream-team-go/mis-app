@@ -94,6 +94,7 @@ const LeaderBookFoodEnumMap = new Map([
 	[2, "晚餐"]
 ]);
 
+//车辆类型
 const CarTypeEnumMap = new Map([
 	[0, "小轿车"],
 	[1, "越野车"],
@@ -101,6 +102,27 @@ const CarTypeEnumMap = new Map([
 	[3, "中型客车"],
 	[4, "大型客车"],
 	[5, "其它"]
+]);
+
+//接待状态枚举
+const ReceptionTypeEnumMap = new Map([
+	[1, "公务"],
+	[2, "商务"]
+]);
+
+//接待依据枚举
+const ReceptionGistEnumMap = new Map([
+	[1, "来文"],
+	[2, "函号"],
+	[3, "电话"]
+]);
+
+//接待状态枚举
+const ReceptionStatusEnumMap = new Map([
+	[0, "待审批"],
+	[-2, "取消"],
+	[-1, "驳回"],
+	[1, "审批通过"]
 ]);
 
 export default { 
@@ -115,5 +137,8 @@ export default {
 	CarTypeEnumMap,
 	MeetingApplyEditEnumMap,
 	FoodMenuEnumMap,
-	LeaderFoodEnumMap
+	LeaderFoodEnumMap,
+	ReceptionGistEnumMap,
+	ReceptionTypeEnumMap,
+	ReceptionStatusEnumMap
 }

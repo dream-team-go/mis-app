@@ -34,26 +34,26 @@
 			return {
 				list: [{
 						title: '桌餐',
-						img: 'https://image.weilanwl.com/color2.0/plugin/sylb2244.jpg',
+						img: '/static/food/zhuocan.png',
 						url: '/pages/food/selectRoom',
 						permissionKey: ""
 					},
 					{
 						title: '工作餐',
-						img: 'https://image.weilanwl.com/color2.0/plugin/wdh2236.jpg',
+						img: '/static/food/gongzuocan.png',
 						url: '/pages/food/saveLeaderBook',
 						permissionKey: "dining_lead:order"
 					},
 					{
 						title: '自助餐',
-						img: 'https://image.weilanwl.com/color2.0/plugin/qpct2148.jpg',
-						url: '../plugin/drawer',
+						img: '/static/food/zizhucan.png',
+						url: '',
 						permissionKey: ""
 					},
 					{
 						title: '外卖',
-						img: 'https://image.weilanwl.com/color2.0/plugin/qpczdh2307.jpg',
-						url: '../plugin/verticalnav',
+						img: '/static/food/waimai.png',
+						url: '',
 						permissionKey: ""
 					}
 				]
@@ -96,8 +96,8 @@
 		color: #fff;
 		padding: 90upx 60upx;
 		font-size: 40upx;
-		font-weight: 300;
-		transform: skew(-10deg, 0deg);
+		/* font-weight: 300; */
+		/* transform: skew(-10deg, 0deg); */
 		position: relative;
 		text-shadow: 0px 0px 6upx rgba(0, 0, 0, 0.3);
 		height: 140upx;
@@ -112,7 +112,7 @@
 		background-color: #fff;
 		display: block;
 		top: 60upx;
-		left: 50upx;
+		left: 62upx;
 		transform: skew(10deg, 0deg);
 	}
 

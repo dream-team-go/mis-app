@@ -45,7 +45,8 @@
 			if(option.para){
 				var info = JSON.parse(decodeURIComponent(option.para));
 				this.para = info;
-				this.selectedCpList = info.tjcps;
+				if(this.para.id)
+					this.selectedCpList = info.tjcps;
 			}
 			//获取推荐菜品
 			uni.showLoading({

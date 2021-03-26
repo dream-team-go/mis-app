@@ -90,14 +90,14 @@ export default {
 			],
 			grids: [
 				{
-					img: '/static/common/newIcon/foodInfo.png',
+					img: '/static/common/newIcon/contactsInfo.png',
 					name: '通讯录',
 					to: '/pages/index/contacts'
 				},
 				{
-					img: '/static/common/newIcon/planInfo.png',
-					name: '接待审批',
-					to: '/pages/index/plan'
+					img: '/static/common/newIcon/receptionInfo.png',
+					name: '接待申请',
+					to: '/pages/reception/saveReception'
 				},
 				{
 					img: '/static/common/newIcon/planInfo.png',
@@ -125,10 +125,10 @@ export default {
 					to: '/pages/food/index'
 				},
 				{
-					img: '/static/common/newIcon/food_record.png',
+					img: '/static/common/newIcon/reception.png',
 					title: '我的接待',
 					desc: '统计接待信息',
-					to: '/pages/food/index'
+					to: '/pages/reception/myReceptionList'
 				},
 				{
 					img: '/static/common/newIcon/message_record.png',

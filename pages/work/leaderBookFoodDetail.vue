@@ -5,10 +5,10 @@
 			<block slot="content">工作餐详情</block>
 		</cu-custom>
 		
-		<leader-food-detail :info="info"></leader-food-detail>
+		<leader-food-detail :record="record"></leader-food-detail>
 		
-		<view class="bottom-btns-seat" v-if="info.status == 0"></view>
-		<view class="bottom-cancel-btn" v-if="info.status == 0" @click="sureBook">
+		<view class="bottom-btns-seat" v-if="record.status == 0"></view>
+		<view class="bottom-cancel-btn" v-if="record.status == 0" @click="sureBook">
 			确认预定
 		</view>
 	</view>
@@ -19,7 +19,7 @@
 	export default {
 		data() {
 			return {
-				info: {},
+				record: {},
 				id: ""
 			}
 		},
@@ -33,7 +33,7 @@
 				},
 			}).then(res => {
 				if (res.status === "0") {
-					this.info = res.data;
+					this.record = res.data;
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -63,7 +63,7 @@
 						});
 						global.$http.post('/dining/lead/sureRecord', {
 							params: {
-								id: this.info.id
+								id: this.record.id
 							},
 						}).then(res => {
 							if (res.status === "0") {
@@ -71,7 +71,7 @@
 									title: "提交成功",
 									icon: 'none'
 								});
-								this.info.status = 1;
+								this.record.status = 1;
 							} else {
 								uni.showToast({
 									title: res.msg,

@@ -3,14 +3,14 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="content">工作餐详情</block>
 			<block slot="right">
-				<view v-show="info.status == 0 || isCanCancel" @tap="toSaveLeaderBook">修改</view>
+				<view v-show="record.status == 0 || isCanCancel" @tap="toSaveLeaderBook">修改</view>
 			</block>
 		</cu-custom>
 
-		<leader-food-detail :info="info"></leader-food-detail>
+		<leader-food-detail :record="record"></leader-food-detail>
 
-		<view class="bottom-btns-seat" v-if="info.status == 0 || isCanCancel"></view>
-		<view class="bottom-cancel-btn" v-if="info.status == 0 || isCanCancel" @click="cancleBook">
+		<view class="bottom-btns-seat" v-if="record.status == 0 || isCanCancel"></view>
+		<view class="bottom-cancel-btn" v-if="record.status == 0 || isCanCancel" @click="cancleBook">
 			取消预定
 		</view>
 	</view>
@@ -21,7 +21,7 @@
 	export default {
 		data() {
 			return {
-				info: {},
+				record: {},
 				id: ""
 			}
 		},
@@ -35,7 +35,7 @@
 				},
 			}).then(res => {
 				if (res.status === "0") {
-					this.info = res.data;
+					this.record = res.data;
 				} else {
 					uni.showToast({
 						title: res.msg,
@@ -52,13 +52,13 @@
 		computed: {
 			isCanCancel: function() {
 				var isCanCancel = false;
-				if (this.info.dining_date) {
-					if (this.info.dining_date.substring(0, 10) > this.util.getDate()) {
+				if (this.record.dining_date) {
+					if (this.record.dining_date.substring(0, 10) > this.util.getDate()) {
 						isCanCancel = true;
-					} else if (this.info.dining_date.substring(0, 10) == this.util.getDate()) {
-						if (this.info.type == "1")
+					} else if (this.record.dining_date.substring(0, 10) == this.util.getDate()) {
+						if (this.record.type == "1")
 							isCanCancel = this.util.getCurrentTime() <= '13:00';
-						else if (this.info.type == "2")
+						else if (this.record.type == "2")
 							isCanCancel = this.util.getCurrentTime() <= '19:00';
 					}
 				}
@@ -81,7 +81,7 @@
 						});
 						global.$http.post('/dining/lead/cancel', {
 							params: {
-								id: this.info.id
+								id: this.record.id
 							},
 						}).then(res => {
 							if (res.status === "0") {
@@ -89,7 +89,7 @@
 									title: "取消成功",
 									icon: 'none'
 								});
-								this.info.status = -1;
+								this.record.status = -1;
 							} else {
 								uni.showToast({
 									title: res.msg,
@@ -109,7 +109,7 @@
 			},
 			toSaveLeaderBook: function(e) {
 				uni.navigateTo({
-					url: '../food/saveLeaderBook?para=' + encodeURIComponent(JSON.stringify(this.info))
+					url: '../food/saveLeaderBook?para=' + encodeURIComponent(JSON.stringify(this.record))
 				});
 			}
 		}

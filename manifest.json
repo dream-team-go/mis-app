@@ -44,7 +44,8 @@
                     "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
-                ]
+                ],
+                "autoSdkPermissions" : false
             },
             /* ios打包配置 */
             "ios" : {
@@ -88,7 +89,23 @@
             }
         },
         "nvueLaunchMode" : "fast",
-        "compilerVersion" : 3
+        "compilerVersion" : 3,
+        "nativePlugins" : {
+            "Aq-fileSelect" : {
+                "__plugin_info__" : {
+                    "name" : "android文件选择，多格式，多选",
+                    "description" : "支持多种格式同时选择，支持多选",
+                    "platforms" : "Android",
+                    "url" : "https://ext.dcloud.net.cn/plugin?id=2624",
+                    "android_package_name" : "uni.UNI3C0082A",
+                    "ios_bundle_id" : "com.mis.zhjg",
+                    "isCloud" : true,
+                    "bought" : 1,
+                    "pid" : "2624",
+                    "parameters" : {}
+                }
+            }
+        }
     },
     /* 快应用特有相关 */
     "quickapp" : {},

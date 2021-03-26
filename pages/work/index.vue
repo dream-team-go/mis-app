@@ -82,6 +82,26 @@
 					</view>
 				</view>
 			</view>
+			
+			<view class="cu-bar bg-white margin-top-xs" v-if="receptionCuIconListPermission.length > 0">
+				<view class="action index-title">
+					<image class="title-ico" src="../../static/common/newIcon/reception.png"></image>
+					<text class="text-lg text-black text-bold">接待管理</text>
+				</view>
+			</view>
+			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']" v-if="receptionCuIconListPermission.length > 0">
+				<view hover-class="navigator-hover" class="cu-item" v-for="(item,index) in receptionCuIconListPermission" :key="index" @tap="navigateTo(item.url)">
+					<view >
+						<image :src="item.icoSrc" class="item-ico">
+						<view class="cu-tag badge" v-if="item.badge!=0">
+							<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
+						</view>
+						</image>
+					</view>
+					
+					<text class="cu-tag-text">{{item.name}}</text>
+				</view>
+			</view>
 			<!-- <image src="../../static/common/car-info.png"></image> -->
 			<view class="cu-tabbar-height"></view>
 		</scroll-view>
@@ -268,7 +288,24 @@
 				// 	icoSrc: "../../static/common/tongji.png",
 				//	permissionKey: ""
 				// }
-				]
+				],
+				receptionCuIconList: [{
+					cuIcon: 'cardboardfill',
+					color: 'red',
+					badge: 0,
+					name: '接待审批',
+					url: "../reception/receptionList",
+					icoSrc: "../../static/common/newIcon/meetingInfo.png",
+					permissionKey: "reception:sp"
+				}, {
+					cuIcon: 'cardboardfill',
+					color: 'red',
+					badge: 0,
+					name: '接待任务',
+					url: "../reception/receptionTaskList",
+					icoSrc: "../../static/common/newIcon/receptionTaskInfo.png",
+					permissionKey: "reception:rw"
+				}]
 			};
 		},
 		computed: {
@@ -308,7 +345,16 @@
 					}
 				}
 				return list;
-			}
+			},
+			receptionCuIconListPermission: function(){
+				var list = [];
+				for (var i = 0; i < this.receptionCuIconList.length; i++) {
+					if(this.userInfo.key.includes(this.receptionCuIconList[i].permissionKey)){
+						list.push(this.receptionCuIconList[i]);
+					}
+				}
+				return list;
+			},
 		},
 		onLoad() {
 			
