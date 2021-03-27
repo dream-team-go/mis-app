@@ -120,7 +120,7 @@
 					meal_spec: "",
 					room_number: "",
 					has_hz: 0,
-					cd_status: "",
+					cd_status: 0,
 					meal_request: ""
 				}
 			}

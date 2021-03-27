@@ -40,15 +40,6 @@
 			</view>
 			
 			<view class="cu-list menu margin-top">
-				<navigator class="cu-item arrow" hover-class="none" url="../reception/myReceptionList" open-type="navigate">
-					<view class="content">
-						<image src="../../static/common/newIcon/reception.png" class="ico"></image>
-						<text class="text-black">我的接待</text>
-					</view>
-				</navigator>
-			</view>
-			
-			<view class="cu-list menu margin-top">
 				<!-- <navigator class="cu-item arrow" hover-class="none" url="/pages/car/index" open-type="navigate">
 					<view class="content">
 						<image src="../../static/common/newIcon/car_record.png" class="ico"></image>
@@ -71,6 +62,15 @@
 					<view class="content">
 						<image src="../../static/common/newIcon/leaderFood.png" class="ico"></image>
 						<text class="text-black">我的工作餐</text>
+					</view>
+				</navigator>
+			</view>
+			
+			<view class="cu-list menu margin-top">
+				<navigator class="cu-item arrow" hover-class="none" url="../reception/myReceptionList" open-type="navigate">
+					<view class="content">
+						<image src="../../static/common/newIcon/reception.png" class="ico"></image>
+						<text class="text-black">我的接待</text>
 					</view>
 				</navigator>
 			</view>

@@ -8,7 +8,7 @@
 			<view class="action right text-food">{{statusDesc}}</view>
 		</view>
 		<view class="bg-white padding" v-if="record.status == -1">
-			<text>失败原因：</text>
+			<text>驳回原因：</text>
 			<text class="text-food">{{record.fail_reason}}</text>
 		</view>
 		<view class="bg-white padding" v-if="record.sqxg_status != 0">

@@ -295,7 +295,7 @@
 					badge: 0,
 					name: '接待审批',
 					url: "../reception/receptionList",
-					icoSrc: "../../static/common/newIcon/meetingInfo.png",
+					icoSrc: "../../static/common/newIcon/receptionInfo.png",
 					permissionKey: "reception:sp"
 				}, {
 					cuIcon: 'cardboardfill',
@@ -304,7 +304,7 @@
 					name: '接待任务',
 					url: "../reception/receptionTaskList",
 					icoSrc: "../../static/common/newIcon/receptionTaskInfo.png",
-					permissionKey: "reception:rw"
+					permissionKey: "reception:task"
 				}]
 			};
 		},

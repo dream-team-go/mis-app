@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="content">桌餐预定详情</block>
 			<block slot="right"><view v-if="info.status == 1 && info.cd_status == 1" @tap="uploadMenu">上传菜单</view></block>
-			<block slot="right"><view v-if="info.status == 1 && info.cd_status > 1" @tap="uploadMenuDetail">菜单详情</view></block>
+			<block slot="right"><view v-if="info.status != 1 && info.cd_status > 1" @tap="uploadMenuDetail">菜单详情</view></block>
 		</cu-custom>
 		
 		<food-detail :info="info"></food-detail>

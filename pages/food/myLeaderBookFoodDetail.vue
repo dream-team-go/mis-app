@@ -3,14 +3,14 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="content">工作餐详情</block>
 			<block slot="right">
-				<view v-show="record.status == 0 || isCanCancel" @tap="toSaveLeaderBook">修改</view>
+				<view v-show="record.status == 0 || record.status == 1" @tap="toSaveLeaderBook">修改</view>
 			</block>
 		</cu-custom>
 
 		<leader-food-detail :record="record"></leader-food-detail>
 
-		<view class="bottom-btns-seat" v-if="record.status == 0 || isCanCancel"></view>
-		<view class="bottom-cancel-btn" v-if="record.status == 0 || isCanCancel" @click="cancleBook">
+		<view class="bottom-btns-seat" v-if="record.status == 0 || record.status == 1"></view>
+		<view class="bottom-cancel-btn" v-if="record.status == 0 || record.status == 1" @click="cancleBook">
 			取消预定
 		</view>
 	</view>
