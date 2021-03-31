@@ -40,7 +40,7 @@
 				<text class="text-black">{{getTypeStr(record.jd_type)}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom margin-top-xs">
+		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				拟接待日期：
 				<text class="text-black">{{record.jd_date ? record.jd_date.substring(0,10) : ""}}</text>
@@ -54,7 +54,7 @@
 			</view>
 		</view>
 
-		<view class="cu-bar bg-white solid-bottom">
+		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				接待依据：
 				<text class="text-black">{{getJdyjTypeStr(record.jdyj_type)}}</text>
@@ -65,6 +65,19 @@
 			<view class="action">
 				文件：
 				<text class="text-blue" @tap="downLoadfile(record.jdyj_fj)">{{record.jdyj_fj_name}}</text>
+			</view>
+		</view>
+		
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				联系人：
+				<text class="text-black">{{record.lxr_xm}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				联系电话：
+				<text class="text-black">{{record.lxr_tel}}</text>
 			</view>
 		</view>
 
@@ -87,22 +100,21 @@
 			</view>
 		</view>
 		
-		<view class="cu-bar bg-white solid-bottom margin-top-xs">
+		<view class="cu-bar bg-white margin-top-xs">
 			<view class="action">
 				接待员：
-				<text class="text-black">{{getJdUserNames(record.jd_users)}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				联系人：
-				<text class="text-black">{{record.lxr_xm}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				联系电话：
-				<text class="text-black">{{record.lxr_tel}}</text>
+		<view class="bg-white padding-bottom">
+			<view class="cu-bar bg-white" style="min-height: 50upx;" v-for="item in record.jd_users" :key="item.user_id">
+				<view class="action">
+					<text class="text-black" style="position: absolute;left: 156upx;">{{item.user_cn_name}}</text>
+					<text style="position: absolute;left: 360upx;" @tap="makePhoneCall(item.tel_no)">
+						<image src="../../static/common/phone.png" class="ico"
+							style="width: 30upx;height: 30upx;vertical-align: middle;"></image>
+						<text class="text-black" style="vertical-align: middle;">{{item.tel_no}}</text>
+					</text>
+				</view>
 			</view>
 		</view>
 

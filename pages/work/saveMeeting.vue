@@ -396,7 +396,6 @@
 					return;
 				}
 
-
 				//提交数据
 				uni.showLoading({
 					title: '提交中',
