@@ -78,46 +78,52 @@
 				</view>
 			</view>
 
-			<view class="cu-bar bg-white margin-top-xs">
-				<view class="action index-title">
-					<image src="../../static/common/newIcon/food_clock.png" class="title-ico"></image>
-					<text class="text-lg text-black text-bold">最近预定</text>
+			<view @tap="toDetail()">
+				<view class="cu-bar bg-white margin-top-xs">
+					<view class="action index-title">
+						<image src="../../static/common/newIcon/food_clock.png" class="title-ico"></image>
+						<text class="text-lg text-black text-bold">最近预定</text>
+					</view>
+					<view class="action index-title right" style="margin-right: 50upx;">
+						<text class="text-lg text-blue" v-if="status == 2 && !fw_score">进行评价</text>
+					</view>
+				</view>
+				<view class="card padding-left padding-right padding-bottom bg-white">
+					<view class="item">
+						<text class="title">订餐原由</text>
+						<text class="content text-bold">{{ record.status.length > 0 ? record.desc : '无' }}</text>
+					</view>
+					<view class="item">
+						<text class="title">楼房</text>
+						<text class="content">{{ record.status.length > 0 ? record.building_name : '无' }}</text>
+					</view>
+					<view class="item">
+						<text class="title">包房</text>
+						<text class="content">{{ record.status.length > 0 ? record.room_number : '无' }}</text>
+					</view>
+					<view class="item">
+						<text class="title">用餐日期</text>
+						<text class="content">{{ record.status.length > 0 ? record.ydrq : '无' }}</text>
+					</view>
+					<view class="item">
+						<text class="title">午/晚餐</text>
+						<text class="content">{{ record.status.length > 0 ? record.ydsjd : '无' }}</text>
+					</view>
+					<view class="item">
+						<text class="title">上菜时间</text>
+						<text class="content">{{ record.status.length > 0 ? record.meal_time : '无' }}</text>
+					</view>
+					<view class="item">
+						<text class="title">状态</text>
+						<text class="content text-food">{{ record.status.length > 0 ? record.status : '无' }}</text>
+					</view>
+					<view class="item" v-if="record.status.length > 0 && record.cd_status != 0">
+						<text class="title">菜单状态</text>
+						<text class="content text-orange">{{ record.status.length > 0 ? record.cd_status : '无' }}</text>
+					</view>
 				</view>
 			</view>
-			<view class="card padding-left padding-right padding-bottom bg-white">
-				<view class="item">
-					<text class="title">订餐原由</text>
-					<text class="content text-bold">{{ record.status.length > 0 ? record.desc : '无' }}</text>
-				</view>
-				<view class="item">
-					<text class="title">楼房</text>
-					<text class="content">{{ record.status.length > 0 ? record.building_name : '无' }}</text>
-				</view>
-				<view class="item">
-					<text class="title">包房</text>
-					<text class="content">{{ record.status.length > 0 ? record.room_number : '无' }}</text>
-				</view>
-				<view class="item">
-					<text class="title">用餐日期</text>
-					<text class="content">{{ record.status.length > 0 ? record.ydrq : '无' }}</text>
-				</view>
-				<view class="item">
-					<text class="title">午/晚餐</text>
-					<text class="content">{{ record.status.length > 0 ? record.ydsjd : '无' }}</text>
-				</view>
-				<view class="item">
-					<text class="title">上菜时间</text>
-					<text class="content">{{ record.status.length > 0 ? record.meal_time : '无' }}</text>
-				</view>
-				<view class="item">
-					<text class="title">状态</text>
-					<text class="content text-food">{{ record.status.length > 0 ? record.status : '无' }}</text>
-				</view>
-				<view class="item" v-if="record.status.length > 0 && record.cd_status != 0">
-					<text class="title">菜单状态</text>
-					<text class="content text-orange">{{ record.status.length > 0 ? record.cd_status : '无' }}</text>
-				</view>
-			</view>
+			
 		</scroll-view>
 	</view>
 </template>
@@ -137,12 +143,18 @@ export default {
 				finishCount: ''
 			},
 			record:{
-				status: ''
+				status: '',
+				id: ''
 			},
+			fw_score: '',
+			status: '',
 			chargePersons: []
 		};
 	},
 	onLoad() {
+		
+	},
+	onShow() {
 		uni.showLoading({
 			title: '加载中',
 			mask: false
@@ -202,6 +214,8 @@ export default {
 			.then(res => {
 				if (res.status === '0') {
 					if (res.data) {
+						this.fw_score = res.data.fw_score;
+						this.status = res.data.status;
 						this.record = res.data;
 						this.record.status = misEnum.FoodRecordEnumMap.get(res.data.status);
 						this.record.meal_time = res.data.meal_time.substring(11, 16);
@@ -254,6 +268,19 @@ export default {
 		toBookfood: function() {
 			uni.navigateTo({
 				url: '../food/selectRoom'
+			});
+		},
+		makePhoneCall: function(phone) {
+			uni.makePhoneCall({
+				phoneNumber: phone,
+				success: () => {
+					console.log("成功拨打电话")
+				}
+			})
+		},
+		toDetail: function(id){
+			uni.navigateTo({
+				url: '../food/foodRecordDetail?id=' + this.record.id
 			});
 		}
 	}

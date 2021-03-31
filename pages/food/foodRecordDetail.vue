@@ -4,7 +4,7 @@
 			<block slot="content">桌餐预定详情</block>
 			<block slot="right"><view v-if="info.status == 0" @tap="toEdit">修改</view></block>
 			<block slot="right"><view v-if="info.status == 1 && info.cd_status == 2" @tap="uploadMenuDetail">确认菜单</view></block>
-			<block slot="right"><view v-if="info.status != 1 && info.cd_status > 1" @tap="uploadMenuDetailWork">菜单详情</view></block>
+			<block slot="right"><view v-if="(info.status == 1 && info.cd_status > 2) || (info.status != 1 && info.cd_status > 1)" @tap="uploadMenuDetailWork">菜单详情</view></block>
 		</cu-custom>
 		<food-detail :info="info"></food-detail>
 		<view class="bottom-btns-seat" v-if="info.status == 0 || isCanCancel"></view>

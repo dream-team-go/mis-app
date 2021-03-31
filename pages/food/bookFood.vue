@@ -17,25 +17,12 @@
 		
 		<form>
 			<view class="cu-form-group margin-top-xs">
-				<view class="title">订餐原由</view>
+				<view class="title title-required">订餐原由</view>
 				<input name="input" v-model="para.desc"></input>
 			</view>
-			<view class="cu-form-group">
-				<view class="title">订餐单位</view>
-				<input name="input" v-model="para.order_org"></input>
-			</view>
 			
 			<view class="cu-form-group">
-				<view class="title">联系人</view>
-				<input name="input" v-model="para.user_name"></input>
-			</view>
-			<view class="cu-form-group">
-				<view class="title">联系方式</view>
-				<input name="input" v-model="para.user_tel"></input>
-			</view>
-			
-			<view class="cu-form-group margin-top-xs">
-				<view class="title">上菜时间</view>
+				<view class="title title-required">上菜时间</view>
 				<picker mode="time" :value="mealTime" @change="MealTimeChange">
 					<view class="picker">
 						{{mealTime}}
@@ -43,10 +30,24 @@
 				</picker>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">用餐人数</view>
+				<view class="title title-required">用餐人数</view>
 				<input name="input" placeholder="请输入" v-model="para.people_num" type="number"></input>
 			</view>
+			
 			<view class="cu-form-group">
+				<view class="title title-required">联系人</view>
+				<input name="input" v-model="para.user_name"></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title title-required">联系方式</view>
+				<input name="input" v-model="para.user_tel"></input>
+			</view>
+			
+			<view class="cu-form-group margin-top-xs">
+				<view class="title">订餐单位</view>
+				<input name="input" v-model="para.order_org"></input>
+			</view>
+			<view class="cu-form-group ">
 				<view class="title">清真人数</view>
 				<input name="input" placeholder="请输入" v-model="para.has_hz" type="number"></input>
 			</view>
@@ -99,6 +100,7 @@
 				CustomBar: this.CustomBar,
 				ScreenHeight: this.ScreenHeight,
 				mealTime: "",
+				capacity: 0,
 				status: 'more',
 				contentText: {
 					contentdown: '上拉加载更多',
@@ -138,6 +140,7 @@
 			this.para.room_number = info.room_number;
 			this.para.ydrq = info.ydrq;
 			this.para.ydsjd = info.ydsjd;
+			this.capacity = info.capacity;
 			if (info.id > 0) {
 				this.isAdd = false;
 				this.para.id = info.id;
@@ -156,9 +159,9 @@
 				this.para.cd_status = info.cd_status;
 			} else {
 				if(this.para.ydsjd == "1")
-					this.mealTime = "12:00"
+					this.mealTime = "12:00";
 				if(this.para.ydsjd == "2")
-					this.mealTime = "18:00"
+					this.mealTime = "18:00";
 				this.para.user_name = this.userInfo.user.userCnName;
 				this.para.user_tel = this.userInfo.user.username;
 			}
@@ -205,6 +208,13 @@
 					uni.showToast({
 						icon: 'none',
 						title: '请填写用餐人数'
+					});
+					return;
+				}
+				if (this.para.people_num > this.capacity) {
+					uni.showToast({
+						icon: 'none',
+						title: '该包房用餐人数不能超过' + this.capacity + '人'
 					});
 					return;
 				}

@@ -6,11 +6,11 @@
 
 		<form>
 			<view class="cu-form-group">
-				<view class="title">用餐领导</view>
+				<view class="title title-required">用餐领导</view>
 				<input name="input" v-model="para.lead"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">用餐人数</view>
+				<view class="title title-required">用餐人数</view>
 				<picker @change="ChangePeoples" :value="peopleIndex" :range="peoples">
 					<view class="picker">
 						{{peopleIndex>-1?peoples[peopleIndex] + "人" : "请选择"}}
@@ -18,8 +18,8 @@
 				</picker>
 			</view>
 			
-			<view class="cu-form-group margin-top-xs">
-				<view class="title">用餐日期</view>
+			<view class="cu-form-group">
+				<view class="title title-required">用餐日期</view>
 				<picker mode="date" :value="mealDate" :start="startDate" :end="endDate" @change="DateChange">
 					<view class="picker">
 						{{mealDate}}
@@ -28,7 +28,7 @@
 			</view>
 			
 			<view class="cu-form-group">
-				<view class="title">午/晚餐</view>
+				<view class="title title-required">午/晚餐</view>
 				<picker @change="ChangeType" :value="typeIndex" :range="types">
 					<view class="picker">
 						{{typeIndex>-1?types[typeIndex] : "请选择"}}
@@ -36,14 +36,14 @@
 				</picker>
 			</view>
 			<view class="cu-form-group" v-if="typeIndex > 0">
-				<view class="title">用餐时间</view>
+				<view class="title title-required">用餐时间</view>
 				<picker mode="time" :value="mealTime" @change="MealTimeChange">
 					<view class="picker">
 						{{mealTime}}
 					</view>
 				</picker>
 			</view>
-			<view class="cu-form-group">
+			<view class="cu-form-group margin-top-xs">
 				<view class="title">用餐要求</view>
 				<input name="input" v-model="para.desc"></input>
 			</view>
@@ -82,7 +82,7 @@
 				mealTime: this.util.getTime(),
 				mealDate: this.util.getDate(),
 				startDate: this.util.getDate(0),
-				endDate: this.util.getDate(4),
+				endDate: this.util.getDate(1),
 				para: {
 					lead: "",
 					num: 1,

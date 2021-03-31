@@ -12,12 +12,12 @@
 						{{record.date}}
 					</view>
 					<view class="margin-top-sm align-center" @tap="sureDate(record.ydrq, '1', record.noonIsBook)">
-						<text :class="record.noonIsBook?'text-red':''">上午</text>
+						<text :class="record.noonIsBook?'text-red':''">午餐</text>
 						<text class="padding-left" :class="record.noonIsBook?'text-red cuIcon-roundcheckfill':'cuIcon-roundcheck'"
 							style="font-size: 60upx;"></text>
 					</view>
 					<view class="margin-top-sm align-center" @tap="sureDate(record.ydrq, '2', record.afternoonIsBook)">
-						<span :class="record.afternoonIsBook?'text-red':''">下午</span>
+						<span :class="record.afternoonIsBook?'text-red':''">晚餐</span>
 						<text class="padding-left" :class="record.afternoonIsBook?'text-red cuIcon-roundcheckfill':'cuIcon-roundcheck'"
 							style="font-size: 60upx;"></text>
 					</view>

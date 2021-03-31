@@ -5,28 +5,30 @@
 
 				<block slot="content">会务</block>
 			</cu-custom>
-			
+
 			<view class="cu-bar bg-white">
 				<view class="action index-title">
 					<image src="../../static/common/newIcon/meeting_record.png" class="title-ico"></image>
 					<text class="text-lg text-black text-bold">会务负责人</text>
 				</view>
 			</view>
-			
+
 			<view class="bg-white">
 				<view style="color: #333333;height: 60upx;" v-for="item in chargePersons" :key="item.id">
 					<text class="manager-xm">{{item.xm}}</text>
 					<text class="manager-tel" @tap="makePhoneCall(item.tel)">
-						<image src="../../static/common/phone.png" class="ico" style="width: 30upx;height: 30upx;vertical-align: middle;"></image>
+						<image src="../../static/common/phone.png" class="ico"
+							style="width: 30upx;height: 30upx;vertical-align: middle;"></image>
 						<text style="vertical-align: middle;">{{item.tel}}</text>
 					</text>
 					<text class="manager-office-tel" @tap="makePhoneCall(item.office_tel)">
-						<image src="../../static/common/tel.png" class="ico" style="width: 30upx;height: 30upx;vertical-align: middle;"></image>
+						<image src="../../static/common/tel.png" class="ico"
+							style="width: 30upx;height: 30upx;vertical-align: middle;"></image>
 						<text style="vertical-align: middle;">{{item.office_tel}}</text>
 					</text>
 				</view>
 			</view>
-			
+
 			<!-- <view class="bg-white padding-top-xs padding-bottom-xs text-df text-bold">
 				<view class="padding-xs" style="color: #333333;" v-for="item in chargePersons" :key="item.id">
 					<view class="padding-left-xs padding-right-sm" style="display: inline;display: inline-table;min-width: 190upx;">
@@ -44,7 +46,7 @@
 					</view>
 				</view>
 			</view> -->
-			
+
 			<view class="cu-bar bg-white margin-top-xs">
 				<view class="action index-title">
 					<image src="../../static/common/newIcon/meeting_record.png" class="title-ico"></image>
@@ -60,77 +62,89 @@
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=0" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=0"
+						open-type="navigate">
 						<text class="text-color">{{ meetingData.waitCheckCount }}</text>
 						<text class="text-lg">待审批</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=-2" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=-2"
+						open-type="navigate">
 						<text class="text-color">{{ meetingData.cancleCount }}</text>
 						<text class="text-lg">取消预定</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=-1" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=-1"
+						open-type="navigate">
 						<text class="text-color">{{ meetingData.failCount }}</text>
 						<text class="text-lg">驳回</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=-5" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=-5"
+						open-type="navigate">
 						<text class="text-color">{{ meetingData.inValidCount }}</text>
 						<text class="text-lg">失效</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=1" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=1"
+						open-type="navigate">
 						<text class="text-color">{{ meetingData.successCount }}</text>
 						<text class="text-lg">预定成功</text>
 					</navigator>
 				</view>
 				<view class="cu-item">
-					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=2" open-type="navigate">
+					<navigator hover-class="navigator-hover" url="../meeting/myMeetingRecordList?status=2"
+						open-type="navigate">
 						<text class="text-color">{{ meetingData.finishCount }}</text>
 						<text class="text-lg">会议完成</text>
 					</navigator>
 				</view>
 			</view>
-
-			<view class="cu-bar bg-white margin-top-xs">
-				<view class="action index-title">
-					<image src="../../static/common/newIcon/meeting_clock.png" class="title-ico"></image>
-					<text class="text-lg text-black text-bold">最近预定</text>
+			<view @tap="toDetail()">
+				<view class="cu-bar bg-white margin-top-xs">
+					<view class="action index-title">
+						<image src="../../static/common/newIcon/meeting_clock.png" class="title-ico"></image>
+						<text class="text-lg text-black text-bold">最近预定</text>
+					</view>
+					<view class="action index-title right" style="margin-right: 50upx;">
+						<text class="text-lg text-blue" v-if="record.status == 2 && !record.fw_score">进行评价</text>
+					</view>
 				</view>
-			</view>
-			<view class="card padding-left padding-right padding-bottom bg-white">
-				<view class="item">
-					<text class="title">会议名称</text>
-					<text class="content">{{ meetingData.status.length > 0 ? meetingData.desc : '无' }}</text>
-				</view>
-				<view class="item">
-					<text class="title">楼房</text>
-					<text class="content">{{ meetingData.status.length > 0 ? meetingData.building_name : '无' }}</text>
-				</view>
-				<view class="item">
-					<text class="title">会议室</text>
-					<text class="content">{{ meetingData.status.length > 0 ? meetingData.room_number : '无' }}</text>
-				</view>
-				<view class="item">
-					<text class="title">会议日期</text>
-					<text class="content">{{ meetingData.status.length > 0 ? meetingData.ydrq : '无' }}</text>
-				</view>
-				<view class="item">
-					<text class="title">上/下午</text>
-					<text class="content">{{ meetingData.status.length > 0 ? meetingData.ydsjd : '无' }}</text>
-				</view>
-				<view class="item">
-					<text class="title">状态</text>
-					<text class="content text-food">{{ meetingData.status.length > 0 ? meetingData.status : '无' }}</text>
-				</view>
-				<view class="item">
-					<text class="title">预定时间</text>
-					<text class="content">{{ meetingData.status.length > 0 ? meetingData.create_time : '无' }}</text>
+				<view class="card padding-left padding-right padding-bottom bg-white">
+					<view class="item">
+						<text class="title">会议名称</text>
+						<text class="content">{{ meetingData.status.length > 0 ? meetingData.desc : '无' }}</text>
+					</view>
+					<view class="item">
+						<text class="title">楼房</text>
+						<text
+							class="content">{{ meetingData.status.length > 0 ? meetingData.building_name : '无' }}</text>
+					</view>
+					<view class="item">
+						<text class="title">会议室</text>
+						<text class="content">{{ meetingData.status.length > 0 ? meetingData.room_number : '无' }}</text>
+					</view>
+					<view class="item">
+						<text class="title">会议日期</text>
+						<text class="content">{{ meetingData.status.length > 0 ? meetingData.ydrq : '无' }}</text>
+					</view>
+					<view class="item">
+						<text class="title">上/下午</text>
+						<text class="content">{{ meetingData.status.length > 0 ? meetingData.ydsjd : '无' }}</text>
+					</view>
+					<view class="item">
+						<text class="title">状态</text>
+						<text
+							class="content text-food">{{ meetingData.status.length > 0 ? meetingData.status : '无' }}</text>
+					</view>
+					<view class="item">
+						<text class="title">预定时间</text>
+						<text class="content">{{ meetingData.status.length > 0 ? meetingData.create_time : '无' }}</text>
+					</view>
 				</view>
 			</view>
 		</scroll-view>
@@ -154,12 +168,17 @@
 					building_name: '',
 					room_number: '',
 					status: '',
-					create_time: ''
+					create_time: '',
+					fw_score: ''
 				},
+				record: {},
 				chargePersons: []
 			};
 		},
 		onLoad() {
+
+		},
+		onShow() {
 			uni.showLoading({
 				title: '加载中',
 				mask: false
@@ -218,6 +237,7 @@
 				.then(res => {
 					if (res.status === '0') {
 						if (res.data) {
+							this.record = res.data;
 							this.meetingData.desc = res.data.desc;
 							this.meetingData.building_name = res.data.building_name;
 							this.meetingData.room_number = res.data.room_number;
@@ -240,32 +260,32 @@
 						icon: 'none'
 					});
 				});
-				//获取会务负责人信息
-				global.$http
-					.post('/chargePerson/getList', {
-						params: {
-							type: "meeting",
-							page: 1,
-							pageSize: 2
-						}
-					})
-					.then(res => {
-						if (res.status === '0') {
-							this.chargePersons = res.data.list;
-						} else {
-							uni.showToast({
-								title: res.msg,
-								icon: 'none'
-							});
-						}
-					})
-					.catch(err => {
-						uni.hideLoading();
+			//获取会务负责人信息
+			global.$http
+				.post('/chargePerson/getList', {
+					params: {
+						type: "meeting",
+						page: 1,
+						pageSize: 2
+					}
+				})
+				.then(res => {
+					if (res.status === '0') {
+						this.chargePersons = res.data.list;
+					} else {
 						uni.showToast({
-							title: err.message,
+							title: res.msg,
 							icon: 'none'
 						});
+					}
+				})
+				.catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
 					});
+				});
 		},
 		methods: {
 			makePhoneCall: function(phone) {
@@ -280,6 +300,11 @@
 				uni.navigateTo({
 					url: '../meeting/selectRoom'
 				});
+			},
+			toDetail: function(id) {
+				uni.navigateTo({
+					url: '../meeting/meetingRecordDetail?id=' + this.record.id
+				});
 			}
 		}
 	};
@@ -293,23 +318,30 @@
 		font-size: 34upx;
 		font-weight: bold;
 	}
-	.align-center{
-		display: flex;justfy-content: center;align-items: center;
+
+	.align-center {
+		display: flex;
+		justfy-content: center;
+		align-items: center;
 	}
-	.card .item{
-		line-height: 60upx;height: 60upx;
+
+	.card .item {
+		line-height: 60upx;
+		height: 60upx;
 		display: flow-root;
 	}
-	
-	.manager-xm{
+
+	.manager-xm {
 		position: absolute;
 		left: 65upx;
 	}
-	.manager-tel{
+
+	.manager-tel {
 		position: absolute;
 		left: 200upx;
 	}
-	.manager-office-tel{
+
+	.manager-office-tel {
 		position: absolute;
 		left: 480upx;
 	}

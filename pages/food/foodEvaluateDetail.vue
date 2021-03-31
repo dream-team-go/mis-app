@@ -31,7 +31,7 @@
 		<view class="cu-bar bg-white solid-bottom padding-top padding-bottom">
 			<view class="action" style="margin-left: 30upx;">
 				<text class="cuIcon-title text-orange"></text> 评价：
-				<text style="margin-left: 20upx;">{{message}}</text>
+				<text style="margin-left: 20upx;">{{message ? message : '无'}}</text>
 			</view>
 		</view>
 	</view>

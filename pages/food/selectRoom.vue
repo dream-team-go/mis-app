@@ -127,6 +127,7 @@
 				this.para.dining_id = room.id;
 				this.para.room_number = room.number;
 				this.para.building_name = room.name;
+				this.para.capacity = room.capacity;
 				uni.navigateTo({
 					url: '../food/selectDate?para=' + encodeURIComponent(JSON.stringify(this.para))
 				});

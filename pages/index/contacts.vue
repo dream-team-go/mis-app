@@ -1,7 +1,7 @@
 <template name="contacts">
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="content">通讯录</block>
+			<block slot="content">电话簿</block>
 		</cu-custom>
 
 		<view class="cu-bar bg-white search fixed" :style="[{top:CustomBar + 'px'}]">

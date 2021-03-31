@@ -36,7 +36,7 @@
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/contacts' + [PageCur == 'contacts'?'_cur':''] + '.png'"></image>
 				</view>
-				<view :class="PageCur=='contacts'?'text-bluelight':'text-black'">通讯录</view>
+				<view :class="PageCur=='contacts'?'text-bluelight':'text-black'">电话簿</view>
 			</view> -->
 			<view class="action" @click="NavChange" data-cur="work" v-if="WorkPermission">
 				<view class='cuIcon-cu-image'>

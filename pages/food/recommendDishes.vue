@@ -55,6 +55,7 @@
 			});
 			global.$http.post('/dining/tjcp/getList', {
 				params: {
+					locked: 0,
 					page: 1,
 					pageSize: 1000
 				},

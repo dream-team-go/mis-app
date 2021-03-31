@@ -59,6 +59,12 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
+				开始时间：
+				<text class="text-black">{{record.start_time ? record.start_time.substring(11,16) : ''}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
 				参会人数：
 				<text class="text-black">{{record.people_num}}</text>
 			</view>

@@ -15,7 +15,7 @@
 			</view>
 			<view class="info-box">
 				<text class="label">用餐日期</text>
-				<text class="info">{{record.ydrq}}</text>
+				<text class="info">{{record.ydrq ? record.ydrq.substring(0, 10) : ''}}</text>
 			</view>
 			<view class="info-box">
 				<view class="label">午/晚餐</view>

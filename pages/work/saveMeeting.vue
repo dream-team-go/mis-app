@@ -7,7 +7,7 @@
 
 		<form>
 			<view class="cu-form-group">
-				<view class="title">办公楼房</view>
+				<view class="title title-required">办公楼房</view>
 				<view class="modal-group" @tap="showBuldingModal" data-target="Modal">
 					<view class="picker">
 						{{ building_name.length > 0 ? building_name : '请选择' }}
@@ -16,7 +16,7 @@
 			</view>
 
 			<view class="cu-form-group" v-show="building_id > 0">
-				<view class="title">办公房间</view>
+				<view class="title title-required">办公房间</view>
 				<view class="modal-group" @tap="showRoomModal" data-target="Modal">
 					<view class="picker">
 						{{ room_name.length > 0 ? room_name : '请选择' }}
@@ -33,12 +33,12 @@
 				</picker>
 			</view> -->
 
-			<view class="cu-form-group margin-top-xs">
-				<view class="title">容纳人数</view>
+			<view class="cu-form-group">
+				<view class="title title-required">容纳人数</view>
 				<input name="input" v-model="para.capacity" type="number"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">最大会务员数</view>
+				<view class="title title-required">最大会务员数</view>
 				<input name="input" v-model="para.max_meeting_people" type="number"></input>
 			</view>
 			
@@ -54,7 +54,7 @@
 			</view>
 			<view class="cu-bar bg-white margin-top-xs">
 				<view class="action">
-					会议室照片上传
+					<view class="title title-required">会议室照片上传</view>
 				</view>
 				<view class="action">
 					{{imgList.length}}/1
@@ -373,11 +373,25 @@
 					});
 					return;
 				}
-
-				if (this.para.vr <= 0) {
+				if (!this.para.capacity || this.para.capacity <= 0) {
 					uni.showToast({
 						icon: 'none',
-						title: '请选择会议室照片'
+						title: '容纳人数必须大于0'
+					});
+					return;
+				}
+				if (!this.para.max_meeting_people || this.para.max_meeting_people <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '最大会务员数必须大于0'
+					});
+					return;
+				}
+
+				if (this.para.vr.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请上传会议室照片'
 					});
 					return;
 				}

@@ -2,6 +2,7 @@
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			<block slot="content">会议预定详情</block>
+			<block slot="right"><view v-if="record.status == 0 || record.status == 1" @tap="setMeetingPeople">设置会务员</view></block>
 		</cu-custom>
 
 		<meeting-detail :record="record"></meeting-detail>
@@ -86,13 +87,17 @@
 				showModal: false,
 				showEditModal: false,
 				failReason: "",
-				editReson: ""
+				editReson: "",
+				id: ""
 			}
 		},
 		onLoad(option) {
+			this.id = option.id;
+		},
+		onShow() {
 			global.$http.post('/meeting/record/recordInfo', {
 				params: {
-					record_id: option.id
+					record_id: this.id
 				},
 			}).then(res => {
 				if (res.status === "0") {
@@ -307,6 +312,11 @@
 					},
 					fail: () => {},
 					complete: () => {}
+				});
+			},
+			setMeetingPeople: function(){
+				uni.navigateTo({
+					url: '../meeting/setMeetingPeople?para=' + encodeURIComponent(JSON.stringify(this.record))
 				});
 			}
 		}

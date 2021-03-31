@@ -6,16 +6,16 @@
 
 		<form>
 			<view class="cu-form-group">
-				<view class="title">接待对象</view>
+				<view class="title title-required">接待对象</view>
 				<input name="input" v-model="para.jd_object"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">接待事由</view>
+				<view class="title title-required">接待事由</view>
 				<input name="input" v-model="para.jd_reason"></input>
 			</view>
 
 			<view class="cu-form-group">
-				<view class="title">接待类型</view>
+				<view class="title title-required">接待类型</view>
 				<picker @change="ChangeType" :value="typeIndex" :range="types">
 					<view class="picker">
 						{{typeIndex>-1?types[typeIndex] : "请选择"}}
@@ -24,7 +24,7 @@
 			</view>
 
 			<view class="cu-form-group margin-top-xs">
-				<view class="title">拟接待日期</view>
+				<view class="title title-required">拟接待日期</view>
 				<picker mode="date" :value="para.jd_date" :start="startDate" :end="endDate" @change="DateChange">
 					<view class="picker">
 						{{para.jd_date}}
@@ -32,26 +32,26 @@
 				</picker>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">拟人数</view>
+				<view class="title title-required">拟人数</view>
 				<input name="input" placeholder="请输入" v-model="para.jd_num" type="number"></input>
 			</view>
 			<view class="cu-form-group solid-bottom">
-				<view class="title">接待依据</view>
+				<view class="title title-required">接待依据</view>
 				<picker @change="ChangeGist" :value="gistIndex" :range="gists">
 					<view class="picker">
 						{{gistIndex>-1?gists[gistIndex] : "请选择"}}
 					</view>
 				</picker>
 			</view>
-			<view class="cu-bar bg-white" v-if="para.jdyj_type == 1 || para.jdyj_type == 2">
+			<view class="cu-bar bg-white">
 				<view class="action">
-					文件上传
+					<view class="title title-required">{{ para.jdyj_type != 3 ? '文件上传' : '文件上传(情况说明)'}}</view>
 				</view>
 				<view class="action">
 					{{imgList.length}}/1
 				</view>
 			</view>
-			<view class="cu-form-group" v-if="para.jdyj_type == 1 || para.jdyj_type == 2">
+			<view class="cu-form-group">
 				<view class="grid col-1 grid-square flex-sub" style="max-width: 200upx;">
 					<view class="bg-img" v-for="(item,index) in imgList" :key="index" :data-url="imgList[index]">
 						<image :src="imgList[index]" mode="aspectFill"></image>
@@ -67,6 +67,15 @@
 			</view>
 
 			<view class="cu-form-group margin-top-xs">
+				<view class="title title-required">联系人</view>
+				<input name="input" v-model="para.lxr_xm"></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title title-required">联系方式</view>
+				<input name="input" v-model="para.lxr_tel"></input>
+			</view>
+
+			<view class="cu-form-group margin-top-xs">
 				<view class="title">用餐地点</view>
 				<input name="input" v-model="para.jdap_dining"></input>
 			</view>
@@ -79,16 +88,6 @@
 				<input name="input" v-model="para.jdap_other"></input>
 			</view>
 
-			<view class="cu-form-group margin-top-xs">
-				<view class="title">联系人</view>
-				<input name="input" v-model="para.lxr_xm"></input>
-			</view>
-			<view class="cu-form-group">
-				<view class="title">联系方式</view>
-				<input name="input" v-model="para.lxr_tel"></input>
-			</view>
-
-
 			<view class="padding flex flex-direction">
 				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
@@ -98,6 +97,7 @@
 
 <script>
 	var fileSelect = uni.requireNativePlugin("Aq-fileSelect");
+	var iOSFileSelect = uni.requireNativePlugin('YangChuan-YCiOSFileSelect'); 
 	import misEnum from '../../common/mis-enum.js';
 	import {
 		mapState
@@ -164,7 +164,7 @@
 				//设置
 				this.typeIndex = info.jd_type;
 				this.gistIndex = info.jdyj_type;
-				if (info.jdyj_fj.length > 0) {
+				if (info.jdyj_fj && info.jdyj_fj.length > 0) {
 					var img = this.getFileImg(info.jdyj_fj_name);
 					if (img.length > 0)
 						this.imgList.push(img);
@@ -199,61 +199,115 @@
 				this.para.jdyj_type = e.detail.value;
 			},
 			ChooseImage: function() {
-				fileSelect.openFile({
-					'model': "", //"media"和"folder" //不填默认media  
-					'size': '1', //选择总数量
-					'type': ['pdf','word','ppt'] //image,xls,word,ppt,pdf,mp3,mp4,zip,rar  不填默认全部
-				}, (ret) => {
-					if(ret.data.length <= 0)
-					{
-						uni.showToast({
-							icon: 'none',
-							title: '未选中任何文件'
-						});
-						return;
-					}
-					var fileName = ret.data[0].name;
-					var img = this.getFileImg(fileName);
-					if (img.length <= 0) {
-						uni.showToast({
-							icon: 'none',
-							title: '文件格式错误'
-						});
-						return;
-					}
-					//上传文件
-					uni.showLoading({
-						title: '上传文件中',
-						mask: false
-					});
-					global.$http.upload('/oos/upload', {
-						name: 'file',
-						filePath:  'file://'+ret.data[0].path
-					}).then(res => {
-						uni.hideLoading();
-						if (res.status === "0") {
-							this.imgList.push(img);
-							this.para.jdyj_fj_name = ret.data[0].name;
-							this.para.jdyj_fj = res.data;
+				let platform = ''; 
+				uni.getSystemInfo({ 
+				    success:function(res){ platform = res.platform; } 
+				    }) 
+				if(platform == 'ios'){ 
+				   
+				    // apple document-types 文件类型参数 https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html 
+				    // 文件类型参数
+				    let params = { "document-types":["public.text","public.zip","public.data","com.adobe.pdf", "com.microsoft.word.doc","com.adobe.postscript", "com.microsoft.excel.xls","com.adobe.encapsulated- postscript", "com.microsoft.powerpoint.ppt","com.adobe.photoshop- image", "com.microsoft.word.rtf","com.microsoft.advanced- systems-format", "com.microsoft.advanced- stream-redirector"], "isBase64":0 } 
+				    iOSFileSelect.show(params, result => { 
+				        let status = parseInt(result.status); 
+				        // 状态200选取成功
+				        if(status == 200){ 
+				            let url = result.url; 
+				            uni.downloadFile({ url:url, success:function(res){ 
+				                if(res.statusCode == 200){ 
+				                    // filePath 可用于 uni.uploadFile 上传的路径
+				                    let filePath = res.tempFilePath; 
+									//上传文件
+									uni.showLoading({
+										title: '上传文件中',
+										mask: false
+									});
+									global.$http.upload('/oos/upload', {
+										name: 'file',
+										filePath: ret.data[0].path
+									}).then(res => {
+										uni.hideLoading();
+										if (res.status === "0") {
+											this.imgList.push(img);
+											this.para.jdyj_fj_name = ret.data[0].name;
+											this.para.jdyj_fj = res.data;
+											uni.showToast({
+												icon: 'none',
+												title: '上传成功'
+											});
+										} else {
+											uni.showToast({
+												title: res.msg,
+												icon: 'none'
+											});
+										}
+									}).catch(err => {
+										uni.hideLoading();
+										uni.showToast({
+											title: err.message,
+											icon: 'none'
+										});
+									});
+				                } 
+				            } 
+				        }); 
+				    }}); 
+				}else{
+					fileSelect.openFile({
+						'model': "", //"media"和"folder" //不填默认media  
+						'size': '1', //选择总数量
+						'type': ['pdf','word','ppt'] //image,xls,word,ppt,pdf,mp3,mp4,zip,rar  不填默认全部
+					}, (ret) => {
+						if(ret.data.length <= 0)
+						{
 							uni.showToast({
 								icon: 'none',
-								title: '上传成功'
+								title: '未选中任何文件'
 							});
-						} else {
+							return;
+						}
+						var fileName = ret.data[0].name;
+						var img = this.getFileImg(fileName);
+						if (img.length <= 0) {
 							uni.showToast({
-								title: res.msg,
+								icon: 'none',
+								title: '文件格式错误'
+							});
+							return;
+						}
+						//上传文件
+						uni.showLoading({
+							title: '上传文件中',
+							mask: false
+						});
+						global.$http.upload('/oos/upload', {
+							name: 'file',
+							filePath:  'file://'+ret.data[0].path
+						}).then(res => {
+							uni.hideLoading();
+							if (res.status === "0") {
+								this.imgList.push(img);
+								this.para.jdyj_fj_name = ret.data[0].name;
+								this.para.jdyj_fj = res.data;
+								uni.showToast({
+									icon: 'none',
+									title: '上传成功'
+								});
+							} else {
+								uni.showToast({
+									title: res.msg,
+									icon: 'none'
+								});
+							}
+						}).catch(err => {
+							uni.hideLoading();
+							uni.showToast({
+								title: err.message,
 								icon: 'none'
 							});
-						}
-					}).catch(err => {
-						uni.hideLoading();
-						uni.showToast({
-							title: err.message,
-							icon: 'none'
 						});
 					});
-				});
-				
+				}
 			},
 			DelImg: function(e) {
 				global.$http.post('/oos/delete', {
@@ -309,15 +363,26 @@
 					});
 					return;
 				}
-				if (this.para.jdyj_type == 1 || this.para.jdyj_type == 2) {
-					if (this.para.jdyj_fj.length <= 0) {
-						uni.showToast({
-							icon: 'none',
-							title: '请上传接待依据文件'
-						});
-						return;
-					}
-					this.para.jdyj_fj_name
+				if (this.para.jdyj_fj.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请上传接待依据文件'
+					});
+					return;
+				}
+				if (this.para.lxr_xm.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写联系人'
+					});
+					return;
+				}
+				if (this.para.lxr_tel.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写联系方式'
+					});
+					return;
 				}
 				//提交数据
 				uni.showLoading({

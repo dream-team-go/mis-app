@@ -7,7 +7,7 @@
 
 		<form>
 			<view class="cu-form-group">
-				<view class="title">食堂楼房</view>
+				<view class="title title-required">食堂楼房</view>
 				<view class="modal-group" @tap="showBuldingModal" data-target="Modal">
 					<view class="picker">
 						{{ building_name.length > 0 ? building_name : '请选择' }}
@@ -16,7 +16,7 @@
 			</view>
 
 			<view class="cu-form-group" v-show="building_id > 0">
-				<view class="title">包房房间</view>
+				<view class="title title-required">包房房间</view>
 				<view class="modal-group" @tap="showRoomModal" data-target="Modal">
 					<view class="picker">
 						{{ room_name.length > 0 ? room_name : '请选择' }}
@@ -25,17 +25,17 @@
 			</view>
 			
 			<view class="cu-form-group">
-				<view class="title">保底消费</view>
+				<view class="title title-required">保底消费</view>
 				<input name="input" type="number" v-model="para.bdxf"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">容纳人数</view>
+				<view class="title title-required">容纳人数</view>
 				<input name="input" type="number" v-model="para.capacity"></input>
 			</view>
 
 			<view class="cu-bar bg-white margin-top-xs">
 				<view class="action">
-					包房照片上传
+					<view class="title title-required">包房照片上传</view>
 				</view>
 				<view class="action">
 					{{imgList.length}}/1
@@ -320,6 +320,27 @@
 					uni.showToast({
 						icon: 'none',
 						title: '请选择包房房间'
+					});
+					return;
+				}
+				if (!this.para.bdxf || this.para.bdxf <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '保底消费必须大于0'
+					});
+					return;
+				}
+				if (!this.para.capacity || this.para.capacity <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '容纳人数必须大于0'
+					});
+					return;
+				}
+				if (!this.para.vr || this.para.vr.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请上传包房照片'
 					});
 					return;
 				}

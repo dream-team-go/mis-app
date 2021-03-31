@@ -104,6 +104,20 @@
                     "pid" : "2624",
                     "parameters" : {}
                 }
+            },
+            "YangChuan-YCiOSFileSelect" : {
+                "__plugin_info__" : {
+                    "name" : "ios-uniapp 文件选取word,pdf,xls等文件",
+                    "description" : "uniapp iOS文件选取 iOS选取text,pdf,word,doc,xls,ppt",
+                    "platforms" : "iOS",
+                    "url" : "https://ext.dcloud.net.cn/plugin?id=1311",
+                    "android_package_name" : "uni.UNI3C0082A",
+                    "ios_bundle_id" : "com.mis.zhjg",
+                    "isCloud" : true,
+                    "bought" : 1,
+                    "pid" : "1311",
+                    "parameters" : {}
+                }
             }
         }
     },

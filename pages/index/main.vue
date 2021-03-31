@@ -91,7 +91,7 @@ export default {
 			grids: [
 				{
 					img: '/static/common/newIcon/contactsInfo.png',
-					name: '通讯录',
+					name: '电话簿',
 					to: '/pages/index/contacts'
 				},
 				{

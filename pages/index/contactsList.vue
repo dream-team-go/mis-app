@@ -70,7 +70,7 @@
 					title: '加载中',
 					mask: false
 				});
-				//获取通讯录数据
+				//获取电话簿数据
 				global.$http.post('/core/addressBook/appOrderWeight', {
 					params: {
 						department_id: this.departId,

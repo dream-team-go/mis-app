@@ -131,7 +131,9 @@
 				},
 			}).then(res => {
 				if (res.status === "0") {
-					this.history = res.data;
+					res.data.forEach(c=>{
+						this.history.push(c.spr_advise);
+					});
 				} else {
 					uni.showToast({
 						title: res.msg,

@@ -116,14 +116,17 @@ function handleCode({ data, statusCode, config }) {
 			if(data.code){
 				if(data.code === "401")
 				{
-					if(getToken()){
-						clearToken();
-						uni.reLaunch({
-							url: "../index/index"
-						});
-						return Promise.reject({ statusCode, message: '身份过期' });
-					}
-					return Promise.reject({ statusCode, message: '身份过期' });
+					// if(getToken()){
+					// 	clearToken();
+					// 	uni.reLaunch({
+					// 		url: "../index/index"
+					// 	});
+					// 	return Promise.reject({ statusCode, message: '身份过期' });
+					// }
+					uni.reLaunch({
+						url: "../index/index"
+					});
+					return Promise.reject({ statusCode, message: '重新授权中' });
 				}else if(data.code === "403"){
 					return Promise.reject({ statusCode, message: '未授权' });
 				}

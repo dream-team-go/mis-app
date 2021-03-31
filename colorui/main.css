@@ -2345,7 +2345,13 @@ button.cuIcon.lg {
 	height: 60upx;
 	line-height: 60upx;
 	color: #666666;
-	min-width: calc(4em + 15px);
+	min-width: calc(4em + 21px);
+}
+
+.title-required.title::before {
+	content: '*';
+	color: red;
+	vertical-align: -webkit-baseline-middle;
 }
 
 .cu-form-group input {

@@ -18,24 +18,28 @@
 
 		<form>
 			<view class="cu-form-group margin-top-xs">
-				<view class="title">会议名称</view>
+				<view class="title title-required">会议名称</view>
 				<input name="input" placeholder="请输入" v-model="para.desc"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">参会人数</view>
+				<view class="title title-required">参会人数</view>
 				<input name="input" placeholder="请输入" v-model="para.people_num" type="number"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">主办单位</view>
-				<input name="input" placeholder="请输入" v-model="para.host_unit"></input>
+				<view class="title title-required">开始时间</view>
+				<picker mode="time" :value="startTime" @change="StartTimeChange">
+					<view class="picker">
+						{{startTime}}
+					</view>
+				</picker>
 			</view>
 
 			<view class="cu-form-group">
-				<view class="title">联系人</view>
+				<view class="title title-required">联系人</view>
 				<input name="input" placeholder="请输入" v-model="para.user_name"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">联系电话</view>
+				<view class="title title-required">联系电话</view>
 				<input name="input" placeholder="请输入" v-model="para.user_tel"></input>
 			</view>
 
@@ -49,6 +53,10 @@
 			</view> -->
 
 			<view class="cu-form-group margin-top-xs">
+				<view class="title">主办单位</view>
+				<input name="input" placeholder="请输入" v-model="para.host_unit"></input>
+			</view>
+			<view class="cu-form-group">
 				<view class="title">是否需要布标</view>
 				<switch @change="SwitchIsBb" :class="para.bb? 'checked':''" :checked="para.bb?true:false"></switch>
 			</view>
@@ -165,6 +173,7 @@
 				time: this.util.getTime(),
 				is_net_meeting: 0,
 				is_led: 0,
+				startTime: '',
 
 				tableTypeIndex: -1,
 				tableTypes: [],
@@ -186,6 +195,7 @@
 					room_number: "",
 					ydrq: "",
 					ydsjd: "",
+					start_time: "",
 					net_meeting: 0,
 					led: 0,
 					bb: 0,
@@ -203,7 +213,10 @@
 			}
 		},
 		computed: {
-			...mapState(['userInfo'])
+			...mapState(['userInfo']),
+			start_time: function() {
+				return this.para.ydrq + " " + this.startTime + ":00";
+			}
 		},
 		onLoad(option) {
 			var info = JSON.parse(decodeURIComponent(option.para));
@@ -225,6 +238,7 @@
 				this.para.people_num = info.people_num;
 				this.para.attend_leader = info.attend_leader;
 				this.para.led = info.led;
+				this.startTime = info.start_time.substring(11, 16);
 				this.para.net_meeting = info.net_meeting;
 				this.para.bb = info.bb;
 				this.para.bb_name = info.bb_name;
@@ -245,6 +259,10 @@
 					this.serviceName = names.join('、');
 				}
 			} else {
+				if(this.para.ydsjd == "1")
+					this.startTime = "09:00";
+				if(this.para.ydsjd == "2")
+					this.startTime = "14:00";
 				this.para.user_name = this.userInfo.user.userCnName;
 				this.para.user_tel = this.userInfo.user.username;
 			}
@@ -346,7 +364,11 @@
 				this.serviceName = names.join('、');
 				this.isShowServiceModal = false;
 			},
+			StartTimeChange: function(e) {
+				this.startTime = e.detail.value;
+			},
 			Submit: function(e) {
+				this.para.start_time = this.start_time;
 				//验证数据
 				if (this.para.desc.length <= 0) {
 					uni.showToast({

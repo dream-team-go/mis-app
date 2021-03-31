@@ -29,11 +29,8 @@
 			</view>
 		</view>
 
-		<view class="cu-form-group align-start cu-bar" style="padding-left: 0upx;">
-			<view class="title action">
-				<text class="cuIcon-title text-orange"></text>评价：
-			</view>
-			<textarea maxlength="-1" @input="textareaInput" placeholder="请输入"></textarea>
+		<view class="cu-form-group cu-bar margin-top-xs">
+			<textarea maxlength="-1" @input="textareaInput" placeholder="评价内容"></textarea>
 		</view>
 
 		<view class="padding flex flex-direction">

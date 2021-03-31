@@ -516,6 +516,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/meeting/setMeetingPeople",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

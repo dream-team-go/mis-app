@@ -34,7 +34,7 @@
 		},
 		onLoad(option) {
 			this.car_number = option.car_number;
-			//获取通讯录数据
+			//获取电话簿数据
 			global.$http.post('/car/repair/getRepairList', {
 				params: {
 					car_id: option.car_id,
