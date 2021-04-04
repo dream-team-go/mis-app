@@ -41,6 +41,14 @@
 				<view class="title title-required">最大会务员数</view>
 				<input name="input" v-model="para.max_meeting_people" type="number"></input>
 			</view>
+			<view class="cu-form-group">
+				<view class="title title-required">桌子形式</view>
+				<view class="modal-group" @tap="showJobModal()" data-target="Modal">
+					<view class="picker">
+						{{ para.tables.length > 0 ? jobName : '请选择' }}
+					</view>
+				</view>
+			</view>
 			
 			<view class="cu-form-group margin-top-xs">
 				<view class="title">有无电子屏</view>
@@ -78,66 +86,93 @@
 			<view class="padding flex flex-direction">
 				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
-		</form>
-
-		<view class="building-list-modal cu-modal bottom-modal" :class="isShowBuldingModal?'show':''">
-			<view class="cu-dialog">
-				<view class="cu-bar bg-linear-blue"
-					:style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
-					<view class="action text-white" @tap="hideBuildingModal">取消</view>
-					<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择办公楼房</view>
-					<view class="action"></view>
-				</view>
-
-				<view id="list-view" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
-					<view class="cu-list menu text-left">
-						<view class="cu-item arrow" v-for="building in buildings" :key="building.id"
-							@click="getBuilding(building)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
-							<view class="content">
-								<view>{{building.name}}</view>
-								<view class="text-somber text-df">
-									<view class="text-cut">
-										{{building.address}}
+			
+			<view class="building-list-modal cu-modal bottom-modal" :class="isShowBuldingModal?'show':''">
+				<view class="cu-dialog">
+					<view class="cu-bar bg-linear-blue"
+						:style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
+						<view class="action text-white" @tap="hideBuildingModal">取消</view>
+						<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择办公楼房</view>
+						<view class="action"></view>
+					</view>
+			
+					<view id="list-view" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
+						<view class="cu-list menu text-left">
+							<view class="cu-item arrow" v-for="building in buildings" :key="building.id"
+								@click="getBuilding(building)" style="padding-top: 10rpx;padding-bottom: 10rpx;">
+								<view class="content">
+									<view>{{building.name}}</view>
+									<view class="text-somber text-df">
+										<view class="text-cut">
+											{{building.address}}
+										</view>
+									</view>
+								</view>
+								<view class="action">
+									<!-- <view class="text-somber text-df">建于{{building.build_time}}</view> -->
+									<view class="cu-tag round bg-orange">{{BuildingStatusEnumMap.get(building.status)}}
 									</view>
 								</view>
 							</view>
-							<view class="action">
-								<!-- <view class="text-somber text-df">建于{{building.build_time}}</view> -->
-								<view class="cu-tag round bg-orange">{{BuildingStatusEnumMap.get(building.status)}}
+						</view>
+						<uni-load-more :status="status" :content-text="contentText" />
+					</view>
+				</view>
+			</view>
+			<view class="building-list-modal cu-modal bottom-modal" :class="isShowRoomModal?'show':''">
+				<view class="cu-dialog">
+					<view class="cu-bar bg-linear-blue"
+						:style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
+						<view class="action text-white" @tap="hideRoomModal">取消</view>
+						<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择办公房间</view>
+						<view class="action"></view>
+					</view>
+			
+					<view id="list-view" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
+						<view class="cu-list menu text-left">
+							<view class="cu-item arrow" v-for="room in rooms" :key="room.id" @click="getRoom(room)"
+								style="padding-top: 10rpx;padding-bottom: 10rpx;">
+								<view class="content">
+									<view class="text-grey">{{room.number}}</view>
+								</view>
+								<view class="action">
+									<view class="cu-tag round bg-orange">{{BuildingStatusEnumMap.get(room.status)}}
+									</view>
 								</view>
 							</view>
 						</view>
+						<uni-load-more :status="status" :content-text="contentText" />
 					</view>
-					<uni-load-more :status="status" :content-text="contentText" />
 				</view>
 			</view>
-		</view>
-		<view class="building-list-modal cu-modal bottom-modal" :class="isShowRoomModal?'show':''">
-			<view class="cu-dialog">
-				<view class="cu-bar bg-linear-blue"
-					:style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
-					<view class="action text-white" @tap="hideRoomModal">取消</view>
-					<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择办公房间</view>
-					<view class="action"></view>
-				</view>
-
-				<view id="list-view" :style="[{height:(ScreenHeight-CustomBar) + 'px'}]">
-					<view class="cu-list menu text-left">
-						<view class="cu-item arrow" v-for="room in rooms" :key="room.id" @click="getRoom(room)"
-							style="padding-top: 10rpx;padding-bottom: 10rpx;">
-							<view class="content">
-								<view class="text-grey">{{room.number}}</view>
-							</view>
-							<view class="action">
-								<view class="cu-tag round bg-orange">{{BuildingStatusEnumMap.get(room.status)}}
-								</view>
-							</view>
+			
+			<view class="list-modal cu-modal bottom-modal" :class="isShowJobModal?'show':''">
+				<view class="cu-dialog">
+					<view class="cu-bar bg-linear-blue"
+						:style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
+						<view class="action text-white" @tap="hideJobModal">取消</view>
+						<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择职务
+						</view>
+						<view class="action" style="margin-right: 15upx;">
+							<view @tap="sureJob">确认</view>
 						</view>
 					</view>
-					<uni-load-more :status="status" :content-text="contentText" />
+					<scroll-view scroll-y="true">
+						<view>
+							<checkbox-group @change="checkboxChange">
+								<view class="cu-form-group" v-for="job in modalJobs" :key="job.dic_code">
+									<view class="title" style="color: #333333;font-size: 34upx;">{{job.dic_name}}</view>
+									<checkbox :class="job.checked?'checked':''" :checked="job.checked?true:false"
+										:value="job.dic_code">
+									</checkbox>
+								</view>
+							</checkbox-group>
+						</view>
+					</scroll-view>
 				</view>
 			</view>
-		</view>
+		</form>
+		
 	</view>
 </template>
 
@@ -165,7 +200,14 @@
 				this.para.max_meeting_people = info.max_meeting_people;
 				//设置辅助参数
 				this.imgList.push(this.para.vr);
+				var tableNames = [];
+				info.tables.forEach(c=>{
+					tableNames.push(c.dic_name);
+					this.para.tables.push(c.dic_code);
+				});
+				this.jobName = tableNames.join("、");
 			}
+			this.GetDic("DIC_ZZXS");
 		},
 		data() {
 			return {
@@ -187,6 +229,12 @@
 				buildings: [],
 				isShowRoomModal: false,
 				rooms: [],
+				
+				isShowJobModal: false,
+				jobs: [],
+				modalJobs: [],
+				jobName: "",
+				
 				page: 1,
 				pageSize: 100,
 				status: 'more',
@@ -196,13 +244,13 @@
 					contentnomore: '没有更多'
 				},
 				para: {
-					id: "",
 					vr: "",
 					capacity: 1,
 					office_room_id: 0,
 					is_led: 0,
 					is_net_meeting: 0,
-					max_meeting_people: 1
+					max_meeting_people: 1,
+					tables:[]
 				},
 				building_id: 0,
 				building_name: "",
@@ -211,6 +259,37 @@
 			}
 		},
 		methods: {
+			GetDic(type) {
+				global.$http.post('/core/dic/get', {
+					params: {
+						type: type
+					},
+				}).then(res => {
+					if (res.status === "0") {
+						for (var i = 0; i < res.data.length; i++) {
+							var job = res.data[i];
+							job.checked = false;
+							this.para.tables.forEach(c=>{
+								if(c == job.dic_code){
+									job.checked = true;
+									return;
+								}
+							})
+							this.jobs.push(job);
+						}
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+			},
 			getBuildingListData() {
 				this.status = 'loading';
 				global.$http.post('/office/building/buildingJson', {
@@ -296,6 +375,44 @@
 			},
 			hideRoomModal: function(e) {
 				this.isShowRoomModal = false;
+			},
+			showJobModal: function(e) {
+				this.modalJobs = JSON.parse(JSON.stringify(this.jobs));
+				this.isShowJobModal = true;
+			},
+			hideJobModal: function(e) {
+				this.isShowJobModal = false;
+			},
+			checkboxChange: function(e) {
+				this.modalJobs.forEach(c => {
+					c.checked = false;
+					e.detail.value.forEach(x => {
+						if (c.dic_code == x)
+							c.checked = true;
+					})
+				});
+			},
+			sureJob: function(e) {
+				this.jobs = JSON.parse(JSON.stringify(this.modalJobs));
+				this.jobs = this.modalJobs;
+				var names = [];
+				var ids = [];
+				this.jobs.forEach(c => {
+					if (c.checked == true) {
+						names.push(c.dic_name);
+						ids.push(c.dic_code);
+					}
+				});
+				if (ids.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请选择桌子形式'
+					});
+				} else {
+					this.jobName = names.join('、');
+					this.para.tables = ids;
+					this.isShowJobModal = false;
+				}
 			},
 			ChooseImage: function() {
 				uni.chooseImage({
@@ -387,6 +504,14 @@
 					});
 					return;
 				}
+				
+				if(this.para.tables.length <= 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请选择桌子形式'
+					});
+					return;
+				}
 
 				if (this.para.vr.length <= 0) {
 					uni.showToast({
@@ -402,7 +527,10 @@
 					mask: false
 				});
 				global.$http.post('/meeting/info/save', {
-					params: this.para,
+					header:{
+						ContentType: 'text/plain'
+					},
+					data: JSON.stringify(this.para)
 				}).then(res => {
 					uni.hideLoading();
 					if (res.status === "0") {

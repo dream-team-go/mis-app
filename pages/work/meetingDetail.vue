@@ -41,6 +41,13 @@
 			</view>
 		</view>
 		
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				 桌子形式：
+				<text class="text-black">{{getTablesDesc()}}</text>
+			</view>
+		</view>
+		
 		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				 有无电子屏：
@@ -114,6 +121,15 @@
 			});
 		},
 		methods: {
+			getTablesDesc: function(){
+				var tableNameList = [];
+				if(this.info.tables){
+					this.info.tables.forEach(c=>{
+						tableNameList.push(c.dic_name);
+					});
+				}
+				return tableNameList.join("、");
+			},
 			toEdit: function(e){
 				uni.navigateTo({
 					url: '../work/saveMeeting?para=' + encodeURIComponent(JSON.stringify(this.info))

@@ -125,6 +125,12 @@ const ReceptionStatusEnumMap = new Map([
 	[1, "审批通过"]
 ]);
 
+//包房类型枚举
+const FoodTypeEnumMap = new Map([
+	[1, "包房"],
+	[2, "自助餐厅"]
+]);
+
 export default { 
     MeetingRecordEnumMap,
 	FoodRecordEnumMap,
@@ -140,5 +146,6 @@ export default {
 	LeaderFoodEnumMap,
 	ReceptionGistEnumMap,
 	ReceptionTypeEnumMap,
-	ReceptionStatusEnumMap
+	ReceptionStatusEnumMap,
+	FoodTypeEnumMap
 }

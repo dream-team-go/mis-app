@@ -29,7 +29,14 @@
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 保底消费：
+				 包房类型：
+				<text class="text-black">{{getTypeDesc(info.dining_type)}}</text>
+			</view>
+		</view>
+		
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				 {{info.dining_type == 2?'人均':''}}保底消费：
 				<text class="text-black">{{info.bdxf}}</text>
 			</view>
 		</view>
@@ -59,6 +66,7 @@
 </template>
 
 <script>
+	import misEnum from '../../common/mis-enum.js';
 	import {
 		mapState
 	} from 'vuex';
@@ -100,6 +108,9 @@
 			});
 		},
 		methods: {
+			getTypeDesc: function(type){
+				return misEnum.FoodTypeEnumMap.get(type);
+			},
 			toEdit: function(e){
 				uni.navigateTo({
 					url: '../work/saveFood?para=' + encodeURIComponent(JSON.stringify(this.info))

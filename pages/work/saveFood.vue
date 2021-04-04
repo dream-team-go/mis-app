@@ -25,7 +25,16 @@
 			</view>
 			
 			<view class="cu-form-group">
-				<view class="title title-required">保底消费</view>
+				<view class="title title-required">包房类型</view>
+				<picker @change="ChangeFoodType" :value="foodTypeIndex" :range="foodTypes">
+					<view class="picker">
+						{{foodTypeIndex>-1?foodTypes[foodTypeIndex] : "请选择"}}
+					</view>
+				</picker>
+			</view>
+			
+			<view class="cu-form-group">
+				<view class="title title-required">{{para.dining_type == 2?'人均保底消费':'保底消费'}}</view>
 				<input name="input" type="number" v-model="para.bdxf"></input>
 			</view>
 			<view class="cu-form-group">
@@ -134,7 +143,9 @@
 				this.para.vr = info.vr;
 				this.para.id = info.id;
 				this.para.bdxf = info.bdxf;
+				this.para.dining_type = info.dining_type;
 				//设置辅助参数
+				this.foodTypeIndex = info.dining_type;
 				this.imgList.push(this.para.vr);
 			}
 		},
@@ -157,18 +168,31 @@
 					contentrefresh: '加载中',
 					contentnomore: '没有更多'
 				},
+				
+				foodTypeIndex: 0,
+				
 				para: {
 					id: "",
 					vr: "",
 					capacity: 1,
 					office_room_id: 0,
-					bdxf:""
+					bdxf:"",
+					dining_type: 0
 				},
 				building_id: 0,
 				building_name: "",
 				room_name: "",
 				imgList: []
 			}
+		},
+		computed: {
+			foodTypes: function() {
+				var types = ["请选择"];
+				misEnum.FoodTypeEnumMap.forEach(c => {
+					types.push(c);
+				});
+				return types;
+			},
 		},
 		methods: {
 			getBuildingListData() {
@@ -219,6 +243,10 @@
 						icon: 'none'
 					});
 				});
+			},
+			ChangeFoodType: function(e) {
+				this.foodTypeIndex = e.detail.value;
+				this.para.dining_type = e.detail.value;
 			},
 			showBuldingModal: function(e) {
 				this.page = 1;
@@ -320,6 +348,13 @@
 					uni.showToast({
 						icon: 'none',
 						title: '请选择包房房间'
+					});
+					return;
+				}
+				if(this.para.dining_type <= 0){
+					uni.showToast({
+						icon: 'none',
+						title: '请选择包房类型'
 					});
 					return;
 				}

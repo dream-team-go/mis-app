@@ -76,10 +76,6 @@
 			</view>
 
 			<view class="cu-form-group margin-top-xs">
-				<view class="title">主席台桌子数</view>
-				<input name="input" placeholder="请输入" v-model="para.plat_table_num" type="number"></input>
-			</view>
-			<view class="cu-form-group">
 				<view class="title">桌子形式</view>
 				<picker @change="ChangeTableType" :value="tableTypeIndex" :range="tableTypes">
 					<view class="picker">
@@ -87,7 +83,11 @@
 					</view>
 				</picker>
 			</view>
-			<view class="cu-form-group">
+			<view class="cu-form-group" v-if="para.table_type == '1'">
+				<view class="title">主席台桌子数</view>
+				<input name="input" placeholder="请输入" v-model="para.plat_table_num" type="number"></input>
+			</view>
+			<view class="cu-form-group" v-if="para.table_type == '1'">
 				<view class="title">主席台人数</view>
 				<input name="input" placeholder="请输入" v-model="para.plat_person_num" type="number"></input>
 			</view>
@@ -183,6 +183,8 @@
 				serviceName: "",
 				isShowServiceModal: false,
 				services: [],
+				
+				tableCodes: [],
 
 				para: {
 					user_name: "",
@@ -228,6 +230,8 @@
 			this.para.max_meeting_people = info.max_meeting_people;
 			this.is_net_meeting = info.is_net_meeting;
 			this.is_led = info.is_led;
+			if(info.dice_code)
+				this.tableCodes = info.dice_code.split("、");
 			if (info.id > 0) {
 				this.isAdd = false;
 				this.para.id = info.id;
@@ -265,6 +269,30 @@
 					this.startTime = "14:00";
 				this.para.user_name = this.userInfo.user.userCnName;
 				this.para.user_tel = this.userInfo.user.username;
+				//获取最近预定
+				global.$http
+					.post('/meeting/record/myLatelyRecord', {
+						params: {}
+					})
+					.then(res => {
+						if (res.status === '0') {
+							if (res.data) {
+								this.para.host_unit = res.data.host_unit;
+							}
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					})
+					.catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
 			}
 			this.GetDic("DIC_ZZXS");
 			this.GetDic("DIC_HYFW");
@@ -280,11 +308,20 @@
 						if (type == "DIC_ZZXS") {
 							this.tableTypeDatas = res.data;
 							this.tableTypeDatas.forEach((c, index) => {
-								this.tableTypes.push(c.dic_name);
-								if(this.para.id){
-									if(c.dic_code == this.para.table_type)
-										this.tableTypeIndex = index;
-								}
+								this.tableCodes.forEach(x=>{
+									if(x==c.dic_code){
+										this.tableTypes.push(c.dic_name);
+										if(this.tableCodes.length == 1){
+											this.tableTypeIndex = 0;
+											this.para.table_type = c.dic_code;
+										}else{
+											if(this.para.id){
+												if(c.dic_code == this.para.table_type)
+													this.tableTypeIndex = index;
+											}
+										}
+									}
+								});
 							});
 						} else if (type == "DIC_HYFW") {
 							res.data.forEach(c => {
@@ -411,6 +448,11 @@
 						title: '请填写布标名称'
 					});
 					return;
+				}
+				if(this.para.table_type != "1")
+				{
+					this.para.plat_person_num = 0;
+					this.para.plat_table_num = 0;
 				}
 				//下一步
 				uni.navigateTo({

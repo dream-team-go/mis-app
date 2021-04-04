@@ -144,6 +144,7 @@
 				this.para.is_net_meeting = room.is_net_meeting;
 				this.para.is_led = room.is_led;
 				this.para.max_meeting_people = room.max_meeting_people;
+				this.para.dice_code = room.dice_code;
 				uni.navigateTo({
 					url: '../meeting/selectDate?para=' + encodeURIComponent(JSON.stringify(this.para))
 				});

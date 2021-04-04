@@ -53,7 +53,7 @@
 			</view>
 
 			<view class="cu-form-group">
-				<view class="title">餐标（总费）</view>
+				<view class="title">餐标{{dining_type == 2?'(人均)':'(总费)'}}</view>
 				<input name="input" v-model="para.meal_spec" type="number"></input>
 			</view>
 			<view class="cu-form-group">
@@ -101,6 +101,7 @@
 				ScreenHeight: this.ScreenHeight,
 				mealTime: "",
 				capacity: 0,
+				dining_type: 1,
 				status: 'more',
 				contentText: {
 					contentdown: '上拉加载更多',
@@ -141,6 +142,7 @@
 			this.para.ydrq = info.ydrq;
 			this.para.ydsjd = info.ydsjd;
 			this.capacity = info.capacity;
+			this.dining_type = info.dining_type;
 			if (info.id > 0) {
 				this.isAdd = false;
 				this.para.id = info.id;
