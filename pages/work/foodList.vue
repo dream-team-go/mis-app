@@ -6,14 +6,16 @@
 			<block slot="right"><view v-if="HasOperateKey" @tap="toAdd">新增</view></block>
 		</cu-custom>
 		
-		<scroll-view scroll-x class="bg-white nav text-center">
+		<scroll-view scroll-x class="bg-white nav text-center fixed" :style="[{top:CustomBar + 'px'}]">
 			<view class="cu-item text-black" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in buildings.length"
 			 :key="index" @tap="buildingTab(index)">
 				{{buildings[index].name}}
 			</view>
 		</scroll-view>
-		<view v-for="room in rooms" :key="room.id" @click="roomDetail(room)">
-			<food-room-item :room="room"></food-room-item>
+		<view style="margin-top: 100upx;">
+			<view v-for="room in rooms" :key="room.id" @click="roomDetail(room)">
+				<food-room-item :room="room"></food-room-item>
+			</view>
 		</view>
 		
 	</view>

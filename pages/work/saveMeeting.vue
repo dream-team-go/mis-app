@@ -151,7 +151,7 @@
 					<view class="cu-bar bg-linear-blue"
 						:style="[{'padding-top':StatusBar + 'px'},{height:CustomBar + 'px'}]">
 						<view class="action text-white" @tap="hideJobModal">取消</view>
-						<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择职务
+						<view class="action text-white text-lg" style="text-align: center;margin-right: 15px;">选择桌子形式
 						</view>
 						<view class="action" style="margin-right: 15upx;">
 							<view @tap="sureJob">确认</view>

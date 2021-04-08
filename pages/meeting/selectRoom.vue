@@ -5,25 +5,27 @@
 			<block slot="content">选择会议室</block>
 		</cu-custom>
 		
-		<scroll-view scroll-x class="bg-white nav text-center">
+		<scroll-view scroll-x class="bg-white nav text-center fixed" :style="[{top:CustomBar + 'px'}]">
 			<view class="cu-item text-black" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in buildings.length"
 			 :key="index" @tap="buildingTab(index)">
 				{{buildings[index].name}}
 			</view>
 		</scroll-view>
 		
-		<view class="cu-card case no-card margin-top-sm" v-for="room in rooms" :key="room.id" @click="roomDetail(room)">
-			<view class="cu-item shadow">
-				<view class="image">
-					<image :src="room.vr" mode="widthFix"></image>
-					<view class="cu-tag bg-linear-blue">容纳{{room.capacity}}人</view>
-				</view>
-				<view class="cu-list">
-					<view class="cu-item">
-						<view class="content flex-sub" style="padding: 15px;">
-							<view style="font-size: 15px;font-weight: 900;color: #333;">{{room.name}} {{room.number}}</view>
-							<view style="font-size: 15px;" class="text-gray text-sm flex justify-between">
-								{{room.address}}
+		<view style="margin-top: 100upx;">
+			<view class="cu-card case no-card margin-top-sm" v-for="room in rooms" :key="room.id" @click="roomDetail(room)">
+				<view class="cu-item shadow">
+					<view class="image">
+						<image :src="room.vr" mode="widthFix"></image>
+						<view class="cu-tag bg-linear-blue">容纳{{room.capacity}}人</view>
+					</view>
+					<view class="cu-list">
+						<view class="cu-item">
+							<view class="content flex-sub" style="padding: 15px;">
+								<view style="font-size: 15px;font-weight: 900;color: #333;">{{room.name}} {{room.number}}</view>
+								<view style="font-size: 15px;" class="text-gray text-sm flex justify-between">
+									{{room.address}}
+								</view>
 							</view>
 						</view>
 					</view>

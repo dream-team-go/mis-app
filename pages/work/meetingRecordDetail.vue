@@ -284,6 +284,10 @@
 					confirmText: '确定',
 					success: res => {
 						if (res.cancel) return;
+						uni.showLoading({
+							title: '提交中',
+							mask: false
+						});
 						global.$http.post('/meeting/record/finishRecord', {
 							params: {
 								record_id: this.record.id

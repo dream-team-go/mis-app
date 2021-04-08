@@ -223,7 +223,7 @@
 					cuIcon: 'cardboardfill',
 					color: 'red',
 					badge: 0,
-					name: '会议室信息',
+					name: '会议室',
 					url: "../work/meetingList",
 					icoSrc: "../../static/common/newIcon/meetingInfo.png",
 					permissionKey: "meeting:manage"
@@ -249,7 +249,7 @@
 					cuIcon: 'cardboardfill',
 					color: 'red',
 					badge: 0,
-					name: '包房信息',
+					name: '包房',
 					url: "../work/foodList",
 					icoSrc: "../../static/common/newIcon/foodInfo.png",
 					permissionKey: "dining:manage"

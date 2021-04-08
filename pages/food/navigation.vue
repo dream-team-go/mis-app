@@ -33,7 +33,7 @@
 		data() {
 			return {
 				list: [{
-						title: '桌餐',
+						title: '订餐',
 						img: '/static/food/zhuocan.png',
 						url: '/pages/food/selectRoom',
 						permissionKey: ""
@@ -44,12 +44,12 @@
 						url: '/pages/food/saveLeaderBook',
 						permissionKey: "dining_lead:order"
 					},
-					{
-						title: '自助餐',
-						img: '/static/food/zizhucan.png',
-						url: '',
-						permissionKey: ""
-					},
+					// {
+					// 	title: '自助餐',
+					// 	img: '/static/food/zizhucan.png',
+					// 	url: '',
+					// 	permissionKey: ""
+					// },
 					{
 						title: '外卖',
 						img: '/static/food/waimai.png',

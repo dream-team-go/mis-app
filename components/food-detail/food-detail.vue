@@ -44,27 +44,7 @@
 				<text class="text-black">{{info.room_number}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				订餐单位：
-				<text class="text-black">{{info.order_org}}</text>
-			</view>
-		</view>
-		
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				联系人：
-				<text class="text-black">{{info.user_name}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				联系电话：
-				<text class="text-black">{{info.user_tel}}</text>
-			</view>
-		</view>
-		
-		<view class="cu-bar bg-white solid-bottom margin-top-xs">
+		<view class="cu-bar bg-white solid-bottom ">
 			<view class="action">
 				用餐日期：
 				<text class="text-black">{{ydrqShort}}</text>
@@ -86,6 +66,25 @@
 			<view class="action">
 				用餐人数：
 				<text class="text-black">{{info.people_num}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				联系人：
+				<text class="text-black">{{info.user_name}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				联系电话：
+				<text class="text-black">{{info.user_tel}}</text>
+			</view>
+		</view>
+		
+		<view class="cu-bar bg-white solid-bottom margin-top-xs">
+			<view class="action">
+				订餐单位：
+				<text class="text-black">{{info.order_org}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">

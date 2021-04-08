@@ -6,31 +6,26 @@
 			<block slot="right"><view v-if="HasOperateKey" @tap="toAdd">新增</view></block>
 		</cu-custom>
 		
-		<scroll-view scroll-x class="bg-white nav text-center">
+		<scroll-view scroll-x class="bg-white nav text-center fixed" :style="[{top:CustomBar + 'px'}]">
 			<view class="cu-item text-black" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in buildings.length"
 			 :key="index" @tap="buildingTab(index)">
 				{{buildings[index].name}}
 			</view>
 		</scroll-view>
-		
-		<view class="cu-card case no-card margin-top-sm" v-for="room in rooms" :key="room.id" @click="roomDetail(room)">
-			<view class="cu-item shadow">
-				<view class="image">
-					<image :src="room.vr" mode="widthFix"></image>
-					<view class="cu-tag bg-linear-blue">容纳{{room.capacity}}人</view>
-					<!-- <view class="cu-bar bg-shadeBottom"> <text class="text-cut">我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。</text></view> -->
-				</view>
-				<view class="cu-list">
-					<view class="cu-item">
-						<view class="content flex-sub" style="padding: 15px;">
-							<view style="font-size: 15px;font-weight: 900;color: #333;">{{room.name}} {{room.number}}</view>
-							<view style="font-size: 15px;" class="text-gray text-sm flex justify-between">
-								{{room.address}}
-								<!-- <view class="text-gray text-sm">
-									<text class="cuIcon-attentionfill margin-lr-xs"></text> 10
-									<text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
-									<text class="cuIcon-messagefill margin-lr-xs"></text> 30
-								</view> -->
+		<view style="margin-top: 100upx;">
+			<view class="cu-card case no-card margin-top-sm" v-for="room in rooms" :key="room.id" @click="roomDetail(room)">
+				<view class="cu-item shadow">
+					<view class="image">
+						<image :src="room.vr" mode="widthFix"></image>
+						<view class="cu-tag bg-linear-blue">容纳{{room.capacity}}人</view>
+					</view>
+					<view class="cu-list">
+						<view class="cu-item">
+							<view class="content flex-sub" style="padding: 15px;">
+								<view style="font-size: 15px;font-weight: 900;color: #333;">{{room.name}} {{room.number}}</view>
+								<view style="font-size: 15px;" class="text-gray text-sm flex justify-between">
+									{{room.address}}
+								</view>
 							</view>
 						</view>
 					</view>

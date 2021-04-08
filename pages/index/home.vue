@@ -126,6 +126,10 @@
 		computed: {
 			...mapState(['userInfo'])
 		},
+		onShow() {
+			if (this.PageCur === "user")
+				this.getUnReadMsg();
+		},
 		onLoad() {
 			//设置权限
 			if(this.userInfo.key.includes("use_car:apply")){
@@ -164,6 +168,32 @@
 			this.loadData();
 		},
 		methods: {
+			getUnReadMsg(){
+				uni.showLoading({
+					title: '加载中',
+					mask: false
+				});
+				//获取未读消息数量
+				global.$http.post('/core/warn/getNoReadCount', {
+					params: {},
+				}).then(res => {
+					if (res.status === "0") {
+						this.userData.msgCount = res.data;
+						uni.hideLoading();
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+			},
 			loadData() {
 				if(this.PageCur === "car"){
 					uni.showLoading({
@@ -390,30 +420,8 @@
 						});
 					});
 				}else if (this.PageCur === "user") {
-					uni.showLoading({
-						title: '加载中',
-						mask: false
-					});
 					//获取未读消息数量
-					global.$http.post('/core/warn/getNoReadCount', {
-						params: {},
-					}).then(res => {
-						if (res.status === "0") {
-							this.userData.msgCount = res.data;
-							uni.hideLoading();
-						} else {
-							uni.showToast({
-								title: res.msg,
-								icon: 'none'
-							});
-						}
-					}).catch(err => {
-						uni.hideLoading();
-						uni.showToast({
-							title: err.message,
-							icon: 'none'
-						});
-					});
+					this.getUnReadMsg();
 				}else if (this.PageCur === "contacts") {
 					uni.showLoading({
 						title: '加载中',
