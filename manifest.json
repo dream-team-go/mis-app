@@ -1,7 +1,7 @@
 {
-    "name" : "数字机关事务",
+    "name" : "开远机关事务",
     "appid" : "__UNI__3C0082A",
-    "description" : "",
+    "description" : "开远数字机关事务",
     "versionName" : "1.1.0",
     "versionCode" : 110,
     "transformPx" : false,

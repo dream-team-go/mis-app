@@ -76,6 +76,8 @@
 				if (res.status === "0") {
 					this.record = res.data;
 					this.record.ydrq = this.record.ydrq ? this.record.ydrq.substr(0, 10) : this.record.ydrq;
+					//判断是否能编辑
+					this.record.is_can_edit = true;
 				} else {
 					uni.showToast({
 						title: res.msg,

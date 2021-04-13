@@ -1,6 +1,30 @@
 <template>
 	<view>
-		<view class="cu-bar bg-white solid-bottom">
+		
+		<view class="cu-bar bg-white">
+			<view class="text-blue" style="margin-left: 70upx;" @tap="toFileList()">
+				<text class="cuIcon-file text-bold"></text>
+				<text class="text-lg">会议材料</text>
+			</view>
+			<view class="text-blue" @tap="toOrgList()">
+				<text class="cuIcon-home text-bold"></text>
+				<text class="text-lg">参会单位</text>
+			</view>
+			
+			<view class="text-blue" style="margin-right: 70upx;" @tap="toSignList()">
+				<text class="cuIcon-text text-bold"></text>
+				<text class="text-lg">签到记录</text>
+			</view>
+		</view>
+		
+		<view class="cu-bar bg-white solid-bottom margin-top-xs" v-if="record.meeting_pwd">
+			<view class="action">
+				会议密码：
+				<text class="text-black text-bold">{{record.meeting_pwd}}</text>
+			</view>
+		</view>
+		
+		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				<image src="../../static/common/newIcon/meeting_record.png"></image>
 				<text class="text-lg text-black">预定进度</text>
@@ -220,7 +244,24 @@
 		},
 		data() {
 			return {
-			};
+			}
+		},
+		methods: {
+			toFileList: function(){
+				uni.navigateTo({
+					url: '../meeting/meetingFile?meeting_record_id=' + this.record.id + '&is_can_edit=' + (this.record.is_can_edit == true && (this.record.status == 0 || this.record.status == 1))
+				});
+			},
+			toOrgList: function(){
+				uni.navigateTo({
+					url: '../meeting/meetingOrg?meeting_record_id=' + this.record.id + '&is_can_edit=' + (this.record.is_can_edit == true && (this.record.status == 0 || this.record.status == 1))
+				});
+			},
+			toSignList: function(){
+				uni.navigateTo({
+					url: '../meeting/signRecord?meeting_record_id=' + this.record.id
+				});
+			}
 		}
 	}
 </script>

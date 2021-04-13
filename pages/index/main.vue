@@ -80,7 +80,7 @@ export default {
 				{
 					img: '/static/common/newIcon/meeting.png',
 					name: '会务',
-					to: '/pages/meeting/selectRoom',
+					to: '/pages/meeting/navigation',
 				},
 				{
 					img: '/static/common/newIcon/food.png',

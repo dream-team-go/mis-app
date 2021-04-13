@@ -123,7 +123,7 @@
 						
 						if(this.para.id){
 							uni.navigateBack({
-								delta: 4
+								delta: 5
 							});
 						}else{
 							uni.reLaunch({

@@ -137,6 +137,8 @@
 						});
 						this.record.status = status;
 						this.record.fail_reason = this.failReason;
+						if(this.record.status == 1)
+							this.record.meeting_pwd = res.msg;
 					} else {
 						uni.showToast({
 							title: res.msg,
