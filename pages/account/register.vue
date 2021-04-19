@@ -20,11 +20,17 @@
 
 			<view class="cu-form-group">
 				<view class="title">所属单位</view>
-				<view class="modal-group" @tap="showOrgModal()" data-target="Modal">
+				<!-- <view class="modal-group" @tap="showOrgModal()" data-target="Modal">
+					<view class="picker">
+						{{ para.org_id ? orgName : '请选择' }}
+					</view>
+				</view> -->
+				<view class="modal-group" @tap="selectOrg()">
 					<view class="picker">
 						{{ para.org_id ? orgName : '请选择' }}
 					</view>
 				</view>
+				
 			</view>
 
 			<view class="cu-form-group" v-show="para.org_id">
@@ -52,7 +58,13 @@
 
 			<view class="cu-form-group" v-show="para.org_id">
 				<view class="title">职位</view>
-				<view class="modal-group" @tap="showJobModal()" data-target="Modal">
+				<!-- <view class="modal-group" @tap="showJobModal()" data-target="Modal">
+					<view class="picker">
+						{{ para.job_id.length > 0 ? jobName : '请选择' }}
+					</view>
+				</view> -->
+				
+				<view class="modal-group" @tap="selectJob()">
 					<view class="picker">
 						{{ para.job_id.length > 0 ? jobName : '请选择' }}
 					</view>
@@ -335,6 +347,16 @@
 			search: function() {
 				this.orgs = [];
 				this.getOrgListData();
+			},
+			selectOrg: function(){
+				uni.navigateTo({
+					url: "../account/selectOrg"
+				})
+			},
+			selectJob: function(){
+				uni.navigateTo({
+					url: "../account/selectJob"
+				})
 			},
 			SysOrganizationChange: function(e) {
 				this.para.system_org_id = this.sysOrganizations[e.detail.value].org_id;

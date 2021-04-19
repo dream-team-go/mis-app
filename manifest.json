@@ -1,5 +1,5 @@
 {
-    "name" : "开远机关事务",
+    "name" : "开远数字机关事务",
     "appid" : "__UNI__3C0082A",
     "description" : "开远数字机关事务",
     "versionName" : "1.1.0",
@@ -86,6 +86,9 @@
                         "spotlight@3x" : "unpackage/res/icons/120x120.png"
                     }
                 }
+            },
+            "splashscreen" : {
+                "androidStyle" : "common"
             }
         },
         "nvueLaunchMode" : "fast",

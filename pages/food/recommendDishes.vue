@@ -1,18 +1,19 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="content">食堂推荐</block>
+			<block slot="content">今日菜品推荐</block>
 		</cu-custom>
 		<scroll-view scroll-y class="page bg-gray">
 			<view class="nav-list">
 				<navigator hover-class="none" class="nav-li" :style="[{backgroundImage:'url('+item.cp_img+')'}]" :class="'bg-'+item.color"
 				 v-for="(item,index) in cpList" :key="item.id" @tap="tapCheckbox(item.id)">
 					<text :class="item.isCheck ? 'cuIcon-squarecheckfill':'cuIcon-square'" class="lg text-linear-blue" ></text>
+					<view class="bg-white">炒洋芋丝</view>
 				</navigator>
 			</view>
 			<form>
 				<view class="cu-form-group">
-					<textarea maxlength="-1" v-model="para.cp_advise" @input="textareaInput" placeholder="菜品建议"></textarea>
+					<textarea maxlength="-1" v-model="para.cp_advise" @input="textareaInput" placeholder="烹饪建议"></textarea>
 				</view>
 				
 				<view class="padding flex flex-direction">

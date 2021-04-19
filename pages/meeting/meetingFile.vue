@@ -18,7 +18,7 @@
 			<view class="text-bold text-black text-lg padding">
 				<text>温馨提示</text>
 			</view>
-			<view class="padding-left-xxxl padding-bottom">
+			<view class="padding-left-xxxl padding-bottom" style="font-size: 40upx;color: blueviolet;">
 				<text>红色文件为内部资料，请勿转载</text>
 			</view>
 		</view>

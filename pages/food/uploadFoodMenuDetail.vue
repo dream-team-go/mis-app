@@ -1,12 +1,12 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="content">确认菜单</block>
+			<block slot="content">查看菜单</block>
 		</cu-custom>
 		<image :src="cd_img" style="width: 100%;height: 1000upx;"></image>
 		<form>
 			<view class="cu-form-group">
-				<textarea maxlength="-1" @input="textareaInput" placeholder="菜单建议"></textarea>
+				<textarea maxlength="-1" @input="textareaInput" placeholder="菜单修改意见"></textarea>
 			</view>
 			
 			<view class="padding flex flex-direction">

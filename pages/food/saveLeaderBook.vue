@@ -44,8 +44,8 @@
 				</picker>
 			</view>
 			<view class="cu-form-group margin-top-xs">
-				<view class="title">用餐要求</view>
-				<input name="input" v-model="para.desc"></input>
+				<view class="title">备注</view>
+				<input name="input" v-model="para.desc" placeholder="口味、偏好等要求"></input>
 			</view>
 			<view class="padding flex flex-direction">
 				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">下一步</button>

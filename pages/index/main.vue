@@ -30,7 +30,7 @@
 				</view>
 			</view>
 			<view class="ads-box">
-				通知：数字机关事务上线啦！！！
+				通知：开远数字机关事务上线啦！！！
 			</view>
 			<view class="notice-box">
 				<view class="notice-title text-bold">
