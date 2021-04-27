@@ -10,19 +10,33 @@
 				<view class="flex-sub ">
 					<view><text>包房：</text> <text class="text-bold">{{para.building_name}} {{para.room_number}}</text>
 					</view>
-					<view class="margin-top-xs"><text>时间：</text> <text class="text-bold">{{para.ydrq}} {{para.ydsjd == "1" ? "上午":"下午"}}</text></view>
+					<view class="margin-top-xs"><text>时间：</text> <text class="text-bold">{{para.ydrq}}({{GetWeekDay(para.ydrq)}}) {{para.ydsjd == "1" ? "上午":"下午"}}</text></view>
 				</view>
 			</view>
 		</view>
 		
 		<form>
-			<view class="cu-form-group margin-top-xs">
+			<!-- <view class="cu-form-group margin-top-xs">
 				<view class="title title-required">订餐原由</view>
 				<input name="input" v-model="para.desc"></input>
+			</view> -->
+			
+			<view class="cu-form-group margin-top-xs">
+				<view class="title title-required">订餐原由</view>
+				<picker @change="ChangeBookReason" :value="bookReasonIndex" :range="bookReasons">
+					<view class="picker">
+						{{para.desc.length > 0?para.desc : "请选择"}}
+					</view>
+				</picker>
 			</view>
 			
 			<view class="cu-form-group">
-				<view class="title title-required">上菜时间</view>
+				<view class="title title-required">订餐单位</view>
+				<input name="input" v-model="para.order_org" placeholder="请输入" :disabled="para.desc == '个人'"></input>
+			</view>
+			
+			<view class="cu-form-group">
+				<view class="title title-required">用餐时间</view>
 				<picker mode="time" :value="mealTime" @change="MealTimeChange">
 					<view class="picker">
 						{{mealTime}}
@@ -44,16 +58,12 @@
 			</view>
 			
 			<view class="cu-form-group margin-top-xs">
-				<view class="title">订餐单位</view>
-				<input name="input" v-model="para.order_org"></input>
-			</view>
-			<view class="cu-form-group ">
 				<view class="title">清真人数</view>
 				<input name="input" placeholder="请输入" v-model="para.has_hz" type="number"></input>
 			</view>
 
 			<view class="cu-form-group">
-				<view class="title">餐标{{dining_type == 2?'(人均)':'(总费)'}}</view>
+				<view class="title">餐标(人均)</view>
 				<input name="input" v-model="para.meal_spec" type="number"></input>
 			</view>
 			<view class="cu-form-group">
@@ -110,6 +120,10 @@
 				},
 				page: 1,
 				pageSize: 100,
+				
+				bookReasons: ["公务","商务","工作餐","个人"],
+				bookReasonIndex: 0,
+				
 				para: {
 					desc: "",
 					user_name: "",
@@ -159,6 +173,7 @@
 				this.para.order_org = info.order_org;
 				this.para.meal_request = info.meal_request;
 				this.para.cd_status = info.cd_status;
+				this.SetOrg();
 			} else {
 				if(this.para.ydsjd == "1")
 					this.mealTime = "12:00";
@@ -169,11 +184,27 @@
 			}
 		},
 		methods: {
+			SetOrg(){
+				if(this.para.desc == '个人')
+				{
+					this.para.order_org = this.para.desc;
+				}else if(this.para.order_org == '个人'){
+					this.para.order_org = '';
+				}
+			},
+			GetWeekDay: function(e){
+				return this.util.getWeekDay(new Date(e));
+			},
 			MealTimeChange: function(e) {
 				this.mealTime = e.detail.value;
 			},
 			SwitchIsLed: function(e) {
 				this.para.cd_status = e.detail.value ? 1 : 0;
+			},
+			ChangeBookReason: function(e){
+				this.bookReasonIndex = e.detail.value;
+				this.para.desc = this.bookReasons[e.detail.value];
+				this.SetOrg();
 			},
 			Submit: function(e) {
 				this.para.meal_time = this.meal_time;
@@ -181,14 +212,21 @@
 				if (this.para.desc.length <= 0) {
 					uni.showToast({
 						icon: 'none',
-						title: '请填写订餐原由'
+						title: '请选择订餐原由'
 					});
 					return;
 				}
-				if (this.para.desc.length > 20) {
+				// if (this.para.desc.length > 20) {
+				// 	uni.showToast({
+				// 		icon: 'none',
+				// 		title: '订餐原由不超过20字'
+				// 	});
+				// 	return;
+				// }
+				if (!this.para.order_org || this.para.order_org.length <= 0) {
 					uni.showToast({
 						icon: 'none',
-						title: '订餐原由不超过20字'
+						title: '请填写订餐单位'
 					});
 					return;
 				}

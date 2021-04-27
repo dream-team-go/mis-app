@@ -6,6 +6,10 @@
 				<text class="status text-food">{{getStatusStr(record.status)}}</text>
 			</view>
 			<view class="info-box">
+				<text class="label">订餐单位</text>
+				<text class="info">{{record.order_org}}</text>
+			</view>
+			<view class="info-box">
 				<text class="label">楼房</text>
 				<text class="info">{{record.building_name}}</text>
 			</view>
@@ -15,7 +19,7 @@
 			</view>
 			<view class="info-box">
 				<text class="label">用餐日期</text>
-				<text class="info">{{record.ydrq ? record.ydrq.substring(0, 10) : ''}}</text>
+				<text class="info">{{record.ydrq ? record.ydrq.substring(0, 10) + '(' + GetWeekDay(record.ydrq) + ')' : ''}}</text>
 			</view>
 			<view class="info-box">
 				<view class="label">午/晚餐</view>
@@ -49,6 +53,9 @@
 			},
 			getSqxgStatus(status){
 				return misEnum.FoodMenuEnumMap.get(status);
+			},
+			GetWeekDay: function(e){
+				return this.util.getWeekDay(new Date(e));
 			}
 		}
 	}

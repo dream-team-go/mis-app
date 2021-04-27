@@ -34,7 +34,7 @@
 			</view>
 			
 			<view class="cu-form-group">
-				<view class="title title-required">{{para.dining_type == 2?'人均保底消费':'保底消费'}}</view>
+				<view class="title title-required">人均保底消费</view>
 				<input name="input" type="number" v-model="para.bdxf"></input>
 			</view>
 			<view class="cu-form-group">
@@ -361,7 +361,7 @@
 				if (!this.para.bdxf || this.para.bdxf <= 0) {
 					uni.showToast({
 						icon: 'none',
-						title: '保底消费必须大于0'
+						title: '人均保底消费必须大于0'
 					});
 					return;
 				}

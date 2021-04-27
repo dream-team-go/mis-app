@@ -11,6 +11,9 @@
 					<view class="text-black">
 						{{record.date}}
 					</view>
+					<view class="text-cyan text-sm">
+						({{record.week}})
+					</view>
 					<view class="margin-top-sm align-center" @tap="sureDate(record.ydrq, '1', record.noonIsBook)">
 						<text :class="record.noonIsBook?'text-red':''">午餐</text>
 						<text class="padding-left" :class="record.noonIsBook?'text-red cuIcon-roundcheckfill':'cuIcon-roundcheck'"
@@ -68,6 +71,7 @@
 							ydrq: this.util.getDate(i),
 							date: this.util.getDate() == this.util.getDate(i) ? "今日" : this.util
 								.getMonthDate(i),
+							week: this.util.getWeekDay(new Date(this.util.getDate(i))),
 							noonIsBook: res.data.findIndex(c => c.ydrq.substr(0, 10) == this.util.getDate(
 								i) && c.ydsjd == "1") >= 0,
 							afternoonIsBook: res.data.findIndex(c => c.ydrq.substr(0, 10) == this.util

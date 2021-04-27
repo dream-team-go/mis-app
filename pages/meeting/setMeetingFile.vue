@@ -8,7 +8,7 @@
 			<view class="text-bold text-black text-lg padding">
 				<text>温馨提示</text>
 			</view>
-			<view class="padding-left-xxxl padding-bottom">
+			<view class="padding-left-xxxl padding-bottom" style="font-size: 40upx;color: blueviolet;">
 				<text>红色文件为内部资料，请勿转载</text>
 			</view>
 		</view>
@@ -26,8 +26,8 @@
 
 		<view class="bottom-btns-seat"></view>
 		<view class="bottom-btns">
-			<view class="cancel" @click="upload()">上传文件</view>
-			<view class="pass" @click="uploadPrivate()">上传私密文件</view>
+			<view class="cancel" @click="upload()">上传资料</view>
+			<view class="pass" @click="uploadPrivate()">上传内部资料</view>
 		</view>
 	</view>
 </template>
@@ -153,9 +153,9 @@
 						}
 						var fileName = ret.data[0].name;
 						
-						//上传文件
+						//上传资料
 						uni.showLoading({
-							title: '上传文件中',
+							title: '上传资料中',
 							mask: false
 						});
 						global.$http.upload('/oos/upload', {

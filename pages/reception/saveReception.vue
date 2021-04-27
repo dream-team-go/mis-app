@@ -6,12 +6,12 @@
 
 		<form>
 			<view class="cu-form-group">
-				<view class="title title-required">接待对象</view>
-				<input name="input" v-model="para.jd_object"></input>
+				<view class="title title-required">接待对象(单位)</view>
+				<input name="input" v-model="para.jd_object" placeholder="请输入"></input>
 			</view>
 			<view class="cu-form-group">
 				<view class="title title-required">接待事由</view>
-				<input name="input" v-model="para.jd_reason"></input>
+				<input name="input" v-model="para.jd_reason" placeholder="请输入"></input>
 			</view>
 
 			<view class="cu-form-group">
@@ -76,11 +76,11 @@
 			</view>
 
 			<view class="cu-form-group margin-top-xs">
-				<view class="title">用餐地点</view>
+				<view class="title">用餐地点建议</view>
 				<input name="input" v-model="para.jdap_dining"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">住宿安排</view>
+				<view class="title">住宿安排建议</view>
 				<input name="input" v-model="para.jdap_hotel"></input>
 			</view>
 			<view class="cu-form-group">
@@ -275,9 +275,9 @@
 							});
 							return;
 						}
-						//上传文件
+						//上传资料
 						uni.showLoading({
-							title: '上传文件中',
+							title: '上传资料中',
 							mask: false
 						});
 						global.$http.upload('/oos/upload', {
@@ -331,7 +331,7 @@
 				if (this.para.jd_object.length <= 0) {
 					uni.showToast({
 						icon: 'none',
-						title: '请填写接待对象'
+						title: '请填写接待对象(单位)'
 					});
 					return;
 				}

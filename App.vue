@@ -1,5 +1,5 @@
 <script>
-	import Vue from 'vue'
+	import Vue from 'vue';
 	export default {
 		onLaunch: function() {
 			uni.getSystemInfo({
@@ -13,18 +13,20 @@
 						Vue.prototype.CustomBar = e.statusBarHeight + 45;
 					};
 					// #endif
-			
+
 					// #ifdef MP-WEIXIN
 					Vue.prototype.StatusBar = e.statusBarHeight;
 					let custom = wx.getMenuButtonBoundingClientRect();
 					Vue.prototype.Custom = custom;
 					Vue.prototype.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
 					// #endif		
-			
+
 					// #ifdef MP-ALIPAY
 					Vue.prototype.StatusBar = e.statusBarHeight;
 					Vue.prototype.CustomBar = e.statusBarHeight + e.titleBarHeight;
 					// #endif
+					getApp().CheckVersion(e);
+
 				}
 			})
 
@@ -106,10 +108,73 @@
 			]
 		},
 		onShow: function() {
+			getApp().CheckVersion();
 			console.log('App Show')
 		},
 		onHide: function() {
 			console.log('App Hide')
+		},
+		methods: {
+			CheckVersion(e) {
+				//#ifdef APP-PLUS  
+				var req = { //升级检测数据
+					"appid": plus.runtime.appid,
+					"os": plus.os.name
+				};
+				global.$http.post('/core/version/getInfo', {
+					params: req,
+				}).then(res => {
+					console.log(res.status)
+					if (res.status === "0") {
+						if(res.data.version > plus.runtime.version){
+							// 整包更新
+							if (res.data.type === 1) {
+								uni.showModal({ //提醒用户更新  
+									title: "更新提示",
+									content: res.data.desc,
+									showCancel: false,
+									success: (re) => {
+										if (re.confirm) {
+											plus.runtime.openURL(res.data.url);
+										}
+									}
+								})
+							}
+							// 热更新
+							else if (res.data.type === 2) {
+								uni.downloadFile({
+									url: res.data.url,
+									success: (downloadResult) => {
+										if (downloadResult.statusCode === 200) {
+											plus.runtime.install(downloadResult.tempFilePath, {
+												force: false
+											}, function() {
+												console.log('install success...');
+												plus.runtime.restart();
+											}, function(e) {
+												console.error('install fail...');
+											});
+										}
+									}
+								});
+							} else{
+								
+							}
+						}
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
+				});
+				//#endif
+			}
 		}
 	}
 </script>

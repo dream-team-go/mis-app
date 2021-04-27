@@ -11,7 +11,7 @@
 						<view class="content flex-sub" style="padding: 15px;">
 							<view>
 								<text style="font-size: 15px;font-weight: 900;color: #333;">{{room.name}} {{room.number}}</text>
-								<text class="text-orange text-df" style="float: right;">{{room.dining_type && room.dining_type == 2 ? '人均' : ''}}保底消费￥{{room.bdxf}}</text>
+								<text class="text-orange text-df" style="float: right;">人均保底消费￥{{room.bdxf}}</text>
 							</view>
 							<view style="font-size: 15px;" class="text-gray text-sm flex justify-between">
 								{{room.address}}

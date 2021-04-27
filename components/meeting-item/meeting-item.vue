@@ -15,14 +15,14 @@
 			</view>
 			<view class="info-box">
 				<text class="label">会议日期</text>
-				<text class="info">{{record.ydrq ? record.ydrq.substring(0, 10) : ''}}</text>
+				<text class="info">{{record.ydrq ? record.ydrq.substring(0, 10) : ''}}({{GetWeekDay(record.ydrq)}})</text>
 			</view>
 			<view class="info-box">
 				<view class="label">上/下午</view>
 				<view class="info">{{record.ydsjd == 1 ? "上午" : "下午"}}</view>
 			</view>
 			<view class="info-box">
-				<text class="label">开始时间</text>
+				<text class="label">会议时间</text>
 				<text class="info">{{record.start_time ? record.start_time.substring(11, 16) : ''}}</text>
 			</view>
 			<view class="info-box" v-if="record.sqxg_status != 0">
@@ -54,6 +54,9 @@
 			},
 			getSqxgStatus(status){
 				return misEnum.MeetingApplyEditEnumMap.get(status);
+			},
+			GetWeekDay: function(e){
+				return this.util.getWeekDay(new Date(e));
 			}
 		}
 	}

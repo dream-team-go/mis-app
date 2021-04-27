@@ -34,6 +34,12 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
+				订餐单位：
+				<text class="text-black">{{info.order_org}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
 				楼房：
 				<text class="text-black">{{info.building_name}}</text>
 			</view>
@@ -47,7 +53,7 @@
 		<view class="cu-bar bg-white solid-bottom ">
 			<view class="action">
 				用餐日期：
-				<text class="text-black">{{ydrqShort}}</text>
+				<text class="text-black">{{ydrqShort}}({{GetWeekDay(ydrqShort)}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
@@ -58,7 +64,7 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				上菜时间：
+				用餐时间：
 				<text class="text-black">{{mealTime}}</text>
 			</view>
 		</view>
@@ -83,23 +89,17 @@
 		
 		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
-				订餐单位：
-				<text class="text-black">{{info.order_org}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
 				清真人数：
 				<text class="text-black">{{info.has_hz}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom margin-top-xs" v-if="info.meal_spec != null">
+		<view class="cu-bar bg-white solid-bottom" v-if="info.meal_spec != null">
 			<view class="action">
-				用餐标准：
+				餐标(人均)：
 				<text class="text-black">{{info.meal_spec}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom">
+		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				接待对象：
 				<text class="text-black">{{info.receive_people}}</text>
@@ -117,7 +117,7 @@
 				<text class="text-black">{{info.meal_request}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom">
+		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				预定人：
 				<text class="text-black">{{info.create_user}}</text>
@@ -156,6 +156,11 @@
 			},
 			ydrqShort: function(){
 				return this.info.ydrq.substring(0, 10);
+			}
+		},
+		methods:{
+			GetWeekDay: function(e){
+				return this.util.getWeekDay(new Date(e));
 			}
 		}
 	}

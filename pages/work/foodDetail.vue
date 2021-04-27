@@ -36,7 +36,7 @@
 		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 {{info.dining_type == 2?'人均':''}}保底消费：
+				 人均保底消费：
 				<text class="text-black">{{info.bdxf}}</text>
 			</view>
 		</view>

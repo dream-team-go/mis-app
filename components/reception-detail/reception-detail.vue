@@ -83,13 +83,13 @@
 
 		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
-				用餐地点：
+				用餐地点建议：
 				<text class="text-black">{{record.jdap_dining}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				住宿安排：
+				住宿安排建议：
 				<text class="text-black">{{record.jdap_hotel}}</text>
 			</view>
 		</view>

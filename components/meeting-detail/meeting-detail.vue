@@ -72,7 +72,7 @@
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				会议日期：
-				<text class="text-black">{{record.ydrq}}</text>
+				<text class="text-black">{{record.ydrq}}({{GetWeekDay(record.ydrq)}})</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
@@ -83,7 +83,7 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				开始时间：
+				会议时间：
 				<text class="text-black">{{record.start_time ? record.start_time.substring(11,16) : ''}}</text>
 			</view>
 		</view>
@@ -166,13 +166,13 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				大件水数量：
+				瓶装水550ml(件)：
 				<text class="text-black">{{record.large_water_num}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				小件水数量：
+				瓶装水350ml(件)：
 				<text class="text-black">{{record.small_water_num}}</text>
 			</view>
 		</view>
@@ -191,10 +191,7 @@
 			</view>
 		</view>
 		
-		
-		
-		
-		<view class="cu-bar bg-white solid-bottom">
+		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				预定人：
 				<text class="text-black">{{record.create_user}}</text>
@@ -247,6 +244,9 @@
 			}
 		},
 		methods: {
+			GetWeekDay: function(e){
+				return this.util.getWeekDay(new Date(e));
+			},
 			toFileList: function(){
 				uni.navigateTo({
 					url: '../meeting/meetingFile?meeting_record_id=' + this.record.id + '&is_can_edit=' + (this.record.is_can_edit == true && (this.record.status == 0 || this.record.status == 1))

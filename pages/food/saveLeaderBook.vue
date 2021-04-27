@@ -55,6 +55,9 @@
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex';
 	export default {
 		onLoad(option) {
 			if (option.para) {
@@ -71,6 +74,8 @@
 				this.peopleIndex = info.num - 1;
 				this.mealDate = info.dining_date.substring(0, 10);
 				this.mealTime = info.dining_date.substring(11, 16);
+			}else{
+				this.para.lead = this.userInfo.user.userCnName;
 			}
 		},
 		data() {
@@ -94,6 +99,7 @@
 			}
 		},
 		computed: {
+			...mapState(['userInfo']),
 			dining_date: function() {
 				return this.mealDate + " " + this.mealTime + ":00";
 			}

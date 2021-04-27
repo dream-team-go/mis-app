@@ -8,7 +8,7 @@
 				<navigator hover-class="none" class="nav-li" :style="[{backgroundImage:'url('+item.cp_img+')'}]" :class="'bg-'+item.color"
 				 v-for="(item,index) in cpList" :key="item.id" @tap="tapCheckbox(item.id)">
 					<text :class="item.isCheck ? 'cuIcon-squarecheckfill':'cuIcon-square'" class="lg text-linear-blue" ></text>
-					<view class="bg-white">炒洋芋丝</view>
+					<view class="text-linear-blue title">{{item.cp_name}}</view>
 				</navigator>
 			</view>
 			<form>
@@ -166,7 +166,16 @@
 	
 	.nav-li uni-text{
 		right: 10upx;
-		bottom: 10upx;
+		bottom: 6upx;
 		top: unset;
+		color: #5affdb;
+	}
+	
+	.nav-li .title{
+		position: absolute;
+		left: 10upx;
+		bottom: 14upx;
+		top: unset;
+		color: #5affdb;
 	}
 </style>

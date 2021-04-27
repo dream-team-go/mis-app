@@ -23,7 +23,7 @@
 					{{record.ydsjd == 1 ? "上午" : "下午"}}
 				</view>
 				<view class="met-card-content-item">
-					<view class="met-card-content-item-title">开始时间：</view>
+					<view class="met-card-content-item-title">会议时间：</view>
 					{{record.start_time.substring(11,16)}}
 				</view>
 				<view class="met-card-content-item">

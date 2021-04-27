@@ -40,23 +40,29 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				 用餐要求：
+				 备注：
 				<text class="text-black">{{record.desc}}</text>
 			</view>
 		</view>
 		
 		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
-				 菜品建议：
-				<text class="text-black">{{record.cp_advise}}</text>
+				 选择菜品：
+				<text class="text-black">{{getCpStr(record.tjcps)}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				 烹饪建议：
+				<text class="text-black">{{record.cp_advise ? record.cp_advise : '无'}}</text>
 			</view>
 		</view>
 		
-		<view class="cu-bar bg-white solid-bottom">
+		<!-- <view class="cu-bar bg-white solid-bottom">
 			<view class="action" style="display: inline-block;">
 				<image v-for="item in record.tjcps" :key="item.id" :src="item.cp_img" style="width: 218upx;height: 218upx;"></image>
 			</view>
-		</view>
+		</view> -->
 		
 		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
@@ -91,6 +97,14 @@
 			},
 			getStatusStr(status) {
 				return misEnum.LeaderFoodEnumMap.get(status);
+			},
+			getCpStr(tjcps){
+				if(!tjcps || tjcps.length == 0) return '无';
+				var list = [];
+				tjcps.forEach(c=>{
+					list.push(c.cp_name);
+				});
+				return list.join("、");
 			}
 		}
 	}

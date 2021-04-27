@@ -11,7 +11,7 @@
 				<view class="flex-sub ">
 					<view><text>会议室：</text> <text class="text-bold">{{para.building_name}} {{para.room_number}}</text>
 					</view>
-					<view class="margin-top-xs"><text>时间：</text> <text class="text-bold">{{para.ydrq}} {{para.ydsjd == "1" ? "上午":"下午"}}</text></view>
+					<view class="margin-top-xs"><text>时间：</text> <text class="text-bold">{{para.ydrq}}({{GetWeekDay(para.ydrq)}}) {{para.ydsjd == "1" ? "上午":"下午"}}</text></view>
 				</view>
 			</view>
 		</view>
@@ -22,11 +22,15 @@
 				<input name="input" placeholder="请输入" v-model="para.desc"></input>
 			</view>
 			<view class="cu-form-group">
+				<view class="title title-required">主办单位</view>
+				<input name="input" placeholder="请输入" v-model="para.host_unit"></input>
+			</view>
+			<view class="cu-form-group">
 				<view class="title title-required">参会人数</view>
 				<input name="input" placeholder="请输入" v-model="para.people_num" type="number"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title title-required">开始时间</view>
+				<view class="title title-required">会议时间</view>
 				<picker mode="time" :value="startTime" @change="StartTimeChange">
 					<view class="picker">
 						{{startTime}}
@@ -53,10 +57,6 @@
 			</view> -->
 
 			<view class="cu-form-group margin-top-xs">
-				<view class="title">主办单位</view>
-				<input name="input" placeholder="请输入" v-model="para.host_unit"></input>
-			</view>
-			<view class="cu-form-group">
 				<view class="title">是否需要布标</view>
 				<switch @change="SwitchIsBb" :class="para.bb? 'checked':''" :checked="para.bb?true:false"></switch>
 			</view>
@@ -107,11 +107,11 @@
 			</view>
 
 			<view class="cu-form-group">
-				<view class="title">大件水数量</view>
+				<view class="title">瓶装水550ml(件)</view>
 				<input name="input" placeholder="请输入" v-model="para.large_water_num" type="number"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">小件水数量</view>
+				<view class="title">瓶装水350ml(件)</view>
 				<input name="input" placeholder="请输入" v-model="para.small_water_num" type="number"></input>
 			</view>
 
@@ -121,7 +121,7 @@
 			</view>
 
 			<view class="padding flex flex-direction">
-				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">下一步</button>
+				<button class="cu-btn bg-linear-blue margin-tb-sm lg" @click="Submit">提交</button>
 			</view>
 
 			<view class="list-modal cu-modal bottom-modal" :class="isShowServiceModal?'show':''">
@@ -210,7 +210,9 @@
 					small_water_num: 0,
 					name_list: "",
 					services: [],
-					max_meeting_people: 0
+					max_meeting_people: 0,
+					
+					peoples:[]
 				}
 			}
 		},
@@ -349,6 +351,9 @@
 					});
 				});
 			},
+			GetWeekDay: function(e){
+				return this.util.getWeekDay(new Date(e));
+			},
 			TimeChange: function(e) {
 				this.time = e.detail.value;
 			},
@@ -405,6 +410,11 @@
 				this.startTime = e.detail.value;
 			},
 			Submit: function(e) {
+				//提交数据
+				uni.showLoading({
+					title: '提交中',
+					mask: false
+				});
 				this.para.start_time = this.start_time;
 				//验证数据
 				if (this.para.desc.length <= 0) {
@@ -418,6 +428,13 @@
 					uni.showToast({
 						icon: 'none',
 						title: '会议名称不超过20字'
+					});
+					return;
+				}
+				if (!this.para.host_unit || this.para.host_unit.length <= 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写主办单位'
 					});
 					return;
 				}
@@ -455,8 +472,43 @@
 					this.para.plat_table_num = 0;
 				}
 				//下一步
-				uni.navigateTo({
-					url: '../meeting/selectMeetingPeople?para=' + encodeURIComponent(JSON.stringify(this.para))
+				// uni.navigateTo({
+				// 	url: '../meeting/selectMeetingPeople?para=' + encodeURIComponent(JSON.stringify(this.para))
+				// });
+				global.$http.post('/meeting/record/saveRecord', {
+					header:{
+						ContentType: 'text/plain'
+					},
+					data: JSON.stringify(this.para)
+				}).then(res => {
+					uni.hideLoading();
+					if (res.status === "0") {
+						uni.showToast({
+							icon: 'none',
+							title: '提交成功'
+						});
+						
+						if(this.para.id){
+							uni.navigateBack({
+								delta: 4
+							});
+						}else{
+							uni.reLaunch({
+								url: '/pages/meeting/index'
+							});
+						}
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					uni.hideLoading();
+					uni.showToast({
+						title: err.message,
+						icon: 'none'
+					});
 				});
 			}
 		}

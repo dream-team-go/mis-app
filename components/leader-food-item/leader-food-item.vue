@@ -22,18 +22,6 @@
 				<view class="label">用餐时间：</view>
 				<view class="info">{{record.dining_date.substring(11,16)}}</view>
 			</view>
-			<!-- <view class="info-box">
-				<view class="label">订餐人：</view>
-				<view class="info">{{record.user_cn_name}}</view>
-			</view> -->
-			<!-- <view class="info-box">
-				<view class="label">订餐时间：</view>
-				<view class="info">{{record.create_time}}</view>
-			</view> -->
-			<!-- <view class="info-box">
-				<view class="label">用餐要求：</view>
-				<view class="info">{{record.desc}}</view>
-			</view> -->
 		</view>
 	</view>
 </template>

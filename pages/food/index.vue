@@ -110,7 +110,7 @@
 						<text class="content">{{ record.status.length > 0 ? record.ydsjd : '无' }}</text>
 					</view>
 					<view class="item">
-						<text class="title">上菜时间</text>
+						<text class="title">用餐时间</text>
 						<text class="content">{{ record.status.length > 0 ? record.meal_time : '无' }}</text>
 					</view>
 					<view class="item">

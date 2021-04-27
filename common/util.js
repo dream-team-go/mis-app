@@ -175,6 +175,18 @@ function getEnumStatusDesc(map, status) {
 	return statusDesc;
 }
 
+function getWeekDay(date){
+				var week;
+				if(date.getDay()==0) week="星期日"
+				if(date.getDay()==1) week="星期一"
+				if(date.getDay()==2) week="星期二"
+				if(date.getDay()==3) week="星期三"
+				if(date.getDay()==4) week="星期四"
+				if(date.getDay()==5) week="星期五"
+				if(date.getDay()==6) week="星期六"
+				return week;
+			}
+
 module.exports = {
 	formatTime: formatTime,
 	formatLocation: formatLocation,
@@ -186,5 +198,6 @@ module.exports = {
 	getIntervalHour: getIntervalHour,
 	getMonthDate: getMonthDate,
 	getEnumStatusDesc: getEnumStatusDesc,
-	getCurrentTime: getCurrentTime
+	getCurrentTime: getCurrentTime,
+	getWeekDay: getWeekDay
 }
