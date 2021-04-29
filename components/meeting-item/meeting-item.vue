@@ -6,6 +6,10 @@
 				<text class="status text-food">{{getStatusStr(record.status)}}</text>
 			</view>
 			<view class="info-box">
+				<text class="label">主办单位</text>
+				<text class="info">{{record.host_unit}}</text>
+			</view>
+			<view class="info-box">
 				<text class="label">楼房</text>
 				<text class="info">{{record.building_name}}</text>
 			</view>

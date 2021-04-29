@@ -6,8 +6,8 @@
 
 		<reception-detail :record="record"></reception-detail>
 
-		<view class="bottom-btns-seat" v-if="record.sp_status == 0"></view>
-		<view class="bottom-btns" v-if="record.sp_status == 0">
+		<view class="bottom-btns-seat" v-if="record.fg_sp_status == 0"></view>
+		<view class="bottom-btns" v-if="record.fg_sp_status == 0">
 			<view class="cancel" @click="verifyFail">驳回</view>
 			<view class="pass" @click="verifySuccess">进行审批</view>
 		</view>
@@ -78,7 +78,7 @@
 					title: '提交中',
 					mask: false
 				});
-				global.$http.post('/reception/spBtg', {
+				global.$http.post('/reception/fgSpBtg', {
 					params: {
 						id: this.record.id,
 						status: status,
@@ -92,7 +92,7 @@
 							icon: 'none'
 						});
 						this.record.status = status;
-						this.record.sp_status = -1;
+						this.record.fg_sp_status = -1;
 						this.record.fail_reason = failReason;
 					} else {
 						uni.showToast({
@@ -110,7 +110,7 @@
 			},
 			verifySuccess: function() {
 				uni.navigateTo({
-					url: '../reception/approverReception?para=' + encodeURIComponent(JSON.stringify(this.record))
+					url: '../reception/subApproverReception?para=' + encodeURIComponent(JSON.stringify(this.record))
 				});
 				// uni.showModal({
 				// 	title: '提示',

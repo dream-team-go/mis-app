@@ -4,7 +4,7 @@
 		<car v-if="PageCur=='car'" :carData="carData"></car>
 		<meeting v-if="PageCur=='meeting'" :meetingData="meetingData"></meeting>
 		<food v-if="PageCur=='food'" :foodData="foodData"></food>
-		<main-page v-if="PageCur=='main'"></main-page>
+		<main-page v-if="PageCur=='main'" :mainData="mainData"></main-page>
 		<user v-if="PageCur=='user'" :userData="userData"></user>
 		<work v-if="PageCur=='work'"></work>
 		<view class="cu-bar tabbar bg-white shadow foot">
@@ -120,6 +120,10 @@
 				contactsData:[],
 				userData:{
 					msgCount: 0
+				},
+				mainData:{
+					imgs:[],
+					inform: ""
 				}
 			}
 		},
@@ -150,7 +154,7 @@
 			//设置工作台权限
 			if(this.userInfo.key.includes("dining:manage") || this.userInfo.key.includes("dining:list") || 
 			// this.userInfo.key.includes("dining_lead:order") || 
-			this.userInfo.key.includes("dining_lead:manage") ||
+			this.userInfo.key.includes("dining_lead:manage") || this.userInfo.key.includes("reception:fgsp") ||
 			this.userInfo.key.includes("reception:sp") || this.userInfo.key.includes("reception:task") ||
 			this.userInfo.key.includes("meeting:manage") || this.userInfo.key.includes("meeting:list") ||
 			this.userInfo.key.includes("use_car:sp") || this.userInfo.key.includes("fix_car:jzsp") ||
@@ -455,6 +459,71 @@
 							icon: 'none'
 						});
 					});
+				}else if (this.PageCur === "main") {
+					this.mainData.imgs = [
+						'/static/home/photo-1.jpg',
+						'/static/home/photo-2.jpg',
+						'/static/home/photo-3.jpg',
+						'/static/home/photo-4.jpg',
+						'/static/home/photo-5.jpg'
+					];
+					this.mainData.inform = "通知：开远数字机关事务上线啦！！！";
+					//获取轮播图数据
+					// global.$http.post('/core/organization/organizationPage', {
+					// 	params: {
+					// 		page: 1,
+					// 		pageSize: 10000,
+					// 		name: ''
+					// 	},
+					// }).then(res => {
+					// 	if (res.status === "0") {
+					// 		let list = [];
+					// 		for (let i = 0; i < res.data.list.length; i++) {
+					// 			list[i] = res.data.list[i];
+					// 		}
+					// 		this.contactsData = list;
+					// 		uni.hideLoading();
+					// 	} else {
+					// 		uni.showToast({
+					// 			title: res.msg,
+					// 			icon: 'none'
+					// 		});
+					// 	}
+					// }).catch(err => {
+					// 	uni.hideLoading();
+					// 	uni.showToast({
+					// 		title: err.message,
+					// 		icon: 'none'
+					// 	});
+					// });
+					// //获取通知数据
+					// global.$http.post('/core/organization/organizationPage', {
+					// 	params: {
+					// 		page: 1,
+					// 		pageSize: 10000,
+					// 		name: ''
+					// 	},
+					// }).then(res => {
+					// 	if (res.status === "0") {
+					// 		let list = [];
+					// 		for (let i = 0; i < res.data.list.length; i++) {
+					// 			list[i] = res.data.list[i];
+					// 		}
+					// 		this.contactsData = list;
+					// 		uni.hideLoading();
+					// 	} else {
+					// 		uni.showToast({
+					// 			title: res.msg,
+					// 			icon: 'none'
+					// 		});
+					// 	}
+					// }).catch(err => {
+					// 	uni.hideLoading();
+					// 	uni.showToast({
+					// 		title: err.message,
+					// 		icon: 'none'
+					// 	});
+					// });
 				}
 			},
 			NavChange: function(e) {

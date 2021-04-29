@@ -7,15 +7,33 @@
 			</view>
 			<view class="action right text-food">{{getStatusStr(record.status)}}</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="record.status == 1">
+		<view class="cu-bar bg-white solid-bottom" v-if="record.status != -1 && record.sp_status == 1">
 			<view class="action">
-				审批意见：
+				主要领导审批意见：
 				<text class="text-red">{{record.spr_advise}}</text>
 			</view>
 		</view>
-		<view class="cu-bar bg-white solid-bottom" v-if="record.status == 1">
-			<image :src="record.spr_sign" style="width: 100%;height: 300upx;"></image>
+		<view class="cu-bar bg-white solid-bottom" v-if="record.status != -1 && record.sp_status == 1">
+			<view class="action">
+				主要领导审批日期：
+				<text class="text-red">{{record.sp_date.substring(0, 10)}}</text>
+			</view>
 		</view>
+		<view class="cu-bar bg-white solid-bottom" v-if="record.status != -1 && record.fg_sp_status == 1">
+			<view class="action">
+				分管领导审批意见：
+				<text class="text-red">{{record.fg_spr_advise}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom" v-if="record.status != -1 && record.fg_sp_status == 1">
+			<view class="action">
+				分管领导审批日期：
+				<text class="text-red">{{record.fg_sp_date.substring(0, 10)}}</text>
+			</view>
+		</view>
+		<!-- <view class="cu-bar bg-white solid-bottom" v-if="record.status == 1">
+			<image :src="record.spr_sign" style="width: 100%;height: 300upx;"></image>
+		</view> -->
 		<view class="cu-bar bg-white solid-bottom" v-if="record.status == -1">
 			<view class="action">
 				驳回原因：
@@ -51,6 +69,13 @@
 			<view class="action">
 				拟人数：
 				<text class="text-black">{{record.jd_num}}</text>
+			</view>
+		</view>
+
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				备注：
+				<text class="text-black">{{record.bz}}</text>
 			</view>
 		</view>
 

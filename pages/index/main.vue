@@ -2,7 +2,7 @@
 	<view>
 		<view class="main-page">
 			<swiper class="swiper" indicator-dots indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#fff" circular autoplay :interval="3000" :duration="500" @change="change">
-				<swiper-item v-for="(item, index) in imgs" :key="index">
+				<swiper-item v-for="(item, index) in mainData.imgs" :key="index">
 					<view class="swiper-item">
 						<image class="swiper-img" mode="aspectFill" :src="item"></image>
 					</view>
@@ -30,7 +30,7 @@
 				</view>
 			</view>
 			<view class="ads-box">
-				通知：开远数字机关事务上线啦！！！
+				{{mainData.inform}}
 			</view>
 			<view class="notice-box">
 				<view class="notice-title text-bold">
@@ -61,6 +61,7 @@
 <script >
 export default {
 	name: 'mainPage',
+	props: ['mainData'],
 	data() {
 		return {
 			current: 0,

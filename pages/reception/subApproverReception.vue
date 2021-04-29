@@ -38,14 +38,14 @@
 		 @touchcancel='cancel' @longtap='tap' disable-scroll='true' @error='error'>
 		</canvas>
 		
-		<view class="cu-form-group margin-top-xs">
+		<!-- <view class="cu-form-group margin-top-xs">
 			<view class="title text-bold" style="color: #333333;">接待员</view>
 			<view class="modal-group" @tap="showJobModal()" data-target="Modal">
 				<view class="picker">
 					{{ para.jd_users.length > 0 ? jobName : '请选择' }}
 				</view>
 			</view>
-		</view>
+		</view> -->
 		
 		<view class="bottom-btns-seat"></view>
 		<view class="bottom-btns">
@@ -112,7 +112,6 @@
 					id: "",
 					spr_advise: "",
 					spr_sign: "",
-					jd_users:[],
 					sp_date: this.util.getDate()
 				}
 			}
@@ -135,14 +134,14 @@
 			content.setLineJoin('round');
 			
 			//获取审批意见历史记录
-			global.$http.post('/reception/getAdviseHistory', {
+			global.$http.post('/reception/getFgAdviseHistory', {
 				params: {
 					
 				},
 			}).then(res => {
 				if (res.status === "0") {
 					res.data.forEach(c=>{
-						this.history.push(c.spr_advise);
+						this.history.push(c.fg_spr_advise);
 					});
 				} else {
 					uni.showToast({
@@ -157,31 +156,7 @@
 					icon: 'none'
 				});
 			});
-			//获取接待员数据
-			global.$http.post('/reception/getJdUsers', {
-				params: {
-					
-				},
-			}).then(res => {
-				if (res.status === "0") {
-					for (var i = 0; i < res.data.length; i++) {
-						var job = res.data[i];
-						job.checked = false;
-						this.jobs.push(job);
-					}
-				} else {
-					uni.showToast({
-						title: res.msg,
-						icon: 'none'
-					});
-				}
-			}).catch(err => {
-				uni.hideLoading();
-				uni.showToast({
-					title: err.message,
-					icon: 'none'
-				});
-			});
+			
 		},
 		methods: {
 			DateChange: function(e){
@@ -208,14 +183,6 @@
 					});
 					return;
 				}
-				if(this.para.jd_users.length <= 0){
-					uni.showToast({
-						icon: 'none',
-						title: '请选择接待员'
-					});
-					return;
-				}
-				
 				uni.canvasGetImageData({
 					canvasId: 'firstCanvas',
 					x: 0,
@@ -240,11 +207,8 @@
 						}).then(res => {
 							if (res.status === "0") {
 								_that.para.spr_sign = res.data;
-								global.$http.post('/reception/spTg', {
-									header:{
-										ContentType: 'text/plain'
-									},
-									data: JSON.stringify(_that.para)
+								global.$http.post('/reception/fgSpTg', {
+									params: _that.para
 								}).then(re => {
 									if (re.status === "0") {
 										uni.navigateBack({

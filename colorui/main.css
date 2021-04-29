@@ -793,6 +793,12 @@ button.cuIcon.lg {
 	height: 32upx;
 }
 
+.cu-tag.sd {
+	font-size: 26upx;
+	padding: 0upx 12upx;
+	height: 42upx;
+}
+
 .cu-capsule {
 	display: inline-flex;
 	vertical-align: middle;

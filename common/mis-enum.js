@@ -121,6 +121,7 @@ const ReceptionGistEnumMap = new Map([
 const ReceptionStatusEnumMap = new Map([
 	[0, "待审批"],
 	[-2, "取消"],
+	[3, "审批中"],
 	[-1, "驳回"],
 	[1, "审批通过"]
 ]);

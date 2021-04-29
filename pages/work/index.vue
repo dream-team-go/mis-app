@@ -236,14 +236,15 @@
 					icoSrc: "../../static/common/newIcon/meetingRecordInfo.png",
 					permissionKey: "meeting:list"
 				}, 
-				// {
-				// 	cuIcon: 'picfill',
-				// 	color: 'yellow',
-				// 	badge: 0,
-				// 	name: '会议统计',
-				// 	icoSrc: "../../static/common/tongji.png",
-				//	permissionKey: ""
-				// }
+				{
+					cuIcon: 'cardboardfill',
+					color: 'yellow',
+					badge: 0,
+					name: '会议汇总展示',
+					url: "../meeting/summaryDisplay",
+					icoSrc: "../../static/common/newIcon/carDispatchInfo.png",
+					permissionKey: "meeting:list"
+				}
 				],
 				foodCuIconList: [{
 					cuIcon: 'cardboardfill',
@@ -262,6 +263,14 @@
 					icoSrc: "../../static/common/newIcon/foodRecordInfo.png",
 					permissionKey: "dining:list"
 				}, {
+					cuIcon: 'cardboardfill',
+					color: 'red',
+					badge: 0,
+					name: '订餐汇总展示',
+					url: "../food/summaryDisplay",
+					icoSrc: "../../static/common/newIcon/carDispatchInfo.png",
+					permissionKey: "dining:list"
+				},{
 					cuIcon: 'picfill',
 					color: 'yellow',
 					badge: 0,
@@ -293,10 +302,18 @@
 					cuIcon: 'cardboardfill',
 					color: 'red',
 					badge: 0,
-					name: '接待审批',
+					name: '主要领导审批',
 					url: "../reception/receptionList",
 					icoSrc: "../../static/common/newIcon/receptionInfo.png",
 					permissionKey: "reception:sp"
+				}, {
+					cuIcon: 'cardboardfill',
+					color: 'red',
+					badge: 0,
+					name: '分管领导审批',
+					url: "../reception/subReceptionList",
+					icoSrc: "../../static/common/newIcon/receptionInfo.png",
+					permissionKey: "reception:fgsp"
 				}, {
 					cuIcon: 'cardboardfill',
 					color: 'red',
@@ -305,6 +322,14 @@
 					url: "../reception/receptionTaskList",
 					icoSrc: "../../static/common/newIcon/receptionTaskInfo.png",
 					permissionKey: "reception:task"
+				}, {
+					cuIcon: 'cardboardfill',
+					color: 'red',
+					badge: 0,
+					name: '接待汇总展示',
+					url: "../reception/summaryDisplay",
+					icoSrc: "../../static/common/newIcon/carDispatchInfo.png",
+					permissionKey: "reception:sp"
 				}]
 			};
 		},

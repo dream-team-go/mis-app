@@ -54,7 +54,13 @@
 		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				会议名称：
-				<text class="text-black text-bold">{{record.desc}}</text>
+				<text class="text-black">{{record.desc}}</text>
+			</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				主办单位：
+				<text class="text-black">{{record.host_unit}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">

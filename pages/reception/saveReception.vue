@@ -35,6 +35,10 @@
 				<view class="title title-required">拟人数</view>
 				<input name="input" placeholder="请输入" v-model="para.jd_num" type="number"></input>
 			</view>
+			<view class="cu-form-group">
+				<view class="title">备注</view>
+				<input name="input" placeholder="请输入" v-model="para.bz"></input>
+			</view>
 			<view class="cu-form-group solid-bottom">
 				<view class="title title-required">接待依据</view>
 				<picker @change="ChangeGist" :value="gistIndex" :range="gists">
@@ -123,7 +127,8 @@
 					jdap_hotel: "",
 					jdap_other: "",
 					jd_type: 0,
-					jdyj_fj_name: ""
+					jdyj_fj_name: "",
+					bz: ""
 				}
 			}
 		},
@@ -161,6 +166,7 @@
 				this.para.jdap_other = info.jdap_other;
 				this.para.jd_type = info.jd_type;
 				this.para.jdyj_fj_name = info.jdyj_fj_name;
+				this.para.bz = info.bz;
 				//设置
 				this.typeIndex = info.jd_type;
 				this.gistIndex = info.jdyj_type;

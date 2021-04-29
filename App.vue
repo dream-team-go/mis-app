@@ -126,7 +126,7 @@
 				}).then(res => {
 					console.log(res.status)
 					if (res.status === "0") {
-						if(res.data.version > plus.runtime.version){
+						if(res.data && res.data.version > plus.runtime.version){
 							// 整包更新
 							if (res.data.type === 1) {
 								uni.showModal({ //提醒用户更新  
