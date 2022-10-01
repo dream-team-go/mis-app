@@ -102,6 +102,21 @@ export default {
 				},
 				{
 					img: '/static/common/newIcon/planInfo.png',
+					name: '精后勤',
+					to: '/pages/index/plan'
+				},
+				{
+					img: '/static/common/newIcon/contactsInfo.png',
+					name: '失物招领',
+					to: '/pages/index/contacts'
+				},
+				{
+					img: '/static/common/newIcon/receptionInfo.png',
+					name: '寻物启事',
+					to: '/pages/reception/saveReception'
+				},
+				{
+					img: '/static/common/newIcon/planInfo.png',
 					name: '规划',
 					to: '/pages/index/plan'
 				}
