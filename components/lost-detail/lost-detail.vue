@@ -38,7 +38,7 @@
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
+			<view class="action" @tap="makePhoneCall(record.tel)">
 				联系电话：
 				<text class="text-black">{{record.tel}}</text>
 			</view>
@@ -82,7 +82,7 @@
 <script>
 	import misEnum from '../../common/mis-enum.js';
 	export default {
-		name: "meeting-detail",
+		name: "lost-detail",
 		props: {
 			record: {}
 		},
@@ -96,7 +96,14 @@
 			}
 		},
 		methods: {
-			
+			makePhoneCall: function(phone) {
+				uni.makePhoneCall({
+					phoneNumber: phone,
+					success: () => {
+						console.log("成功拨打电话")
+					}
+				})
+			}
 		}
 	}
 </script>
