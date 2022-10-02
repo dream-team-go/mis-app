@@ -132,6 +132,18 @@ const FoodTypeEnumMap = new Map([
 	[2, "自助餐厅"]
 ]);
 
+//失物招领状态枚举
+const LostStatusEnumMap = new Map([
+	[0, "待领取"],
+	[1, "已领取"]
+]);
+
+//寻物启事状态枚举
+const FindStatusEnumMap = new Map([
+	[0, "待寻找"],
+	[1, "已找到"]
+]);
+
 export default { 
     MeetingRecordEnumMap,
 	FoodRecordEnumMap,
@@ -148,5 +160,7 @@ export default {
 	ReceptionGistEnumMap,
 	ReceptionTypeEnumMap,
 	ReceptionStatusEnumMap,
-	FoodTypeEnumMap
+	FoodTypeEnumMap,
+	LostStatusEnumMap,
+	FindStatusEnumMap
 }
