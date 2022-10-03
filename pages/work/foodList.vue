@@ -17,7 +17,7 @@
 				<food-room-item :room="room"></food-room-item>
 			</view>
 		</view>
-		
+		<uni-load-more :status="status" :content-text="contentText" />
 	</view>
 </template>
 
@@ -41,6 +41,7 @@
 				},
 				TabCur: 0,
 				buildings: [],
+				status: 'more',
 				rooms: []
 			}
 		},
@@ -77,9 +78,16 @@
 		onShow() {
 			this.buildingTab(this.TabCur);
 		},
+		onReachBottom() {
+			if (this.status !== "noMore") {
+				this.status = 'more';
+				this.loadData();
+			}
+		},
 		methods: {
 			loadData(){
 				if(this.buildings.length > 0){
+					this.status = 'loading';
 					global.$http.post('/dining/info/diningList', {
 						params: {
 							page: this.page,

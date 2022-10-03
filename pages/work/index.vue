@@ -102,6 +102,29 @@
 					<text class="cu-tag-text">{{item.name}}</text>
 				</view>
 			</view>
+			
+			<view class="cu-bar bg-white margin-top-xs" v-if="lostFindCuIconListPermission.length > 0">
+				<view class="action index-title">
+					<image class="title-ico" src="../../static/common/newIcon/reception.png"></image>
+					<text class="text-lg text-black text-bold">丢丢管理</text>
+				</view>
+			</view>
+			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']" v-if="lostFindCuIconListPermission.length > 0">
+				<view hover-class="navigator-hover" class="cu-item" v-for="(item,index) in lostFindCuIconListPermission" :key="index" @tap="navigateTo(item.url)">
+					<view >
+						<image :src="item.icoSrc" class="item-ico">
+						<view class="cu-tag badge" v-if="item.badge!=0">
+							<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
+						</view>
+						</image>
+					</view>
+					
+					<text class="cu-tag-text">{{item.name}}</text>
+				</view>
+			</view>
+			
+			
+			
 			<!-- <image src="../../static/common/car-info.png"></image> -->
 			<view class="cu-tabbar-height"></view>
 		</scroll-view>
@@ -244,8 +267,7 @@
 					url: "../meeting/summaryDisplay",
 					icoSrc: "../../static/common/newIcon/carDispatchInfo.png",
 					permissionKey: "meeting:list"
-				}
-				],
+				}],
 				foodCuIconList: [{
 					cuIcon: 'cardboardfill',
 					color: 'red',
@@ -330,6 +352,23 @@
 					url: "../reception/summaryDisplay",
 					icoSrc: "../../static/common/newIcon/carDispatchInfo.png",
 					permissionKey: "reception:sp"
+				}],
+				lostFindCuIconList: [{
+					cuIcon: 'cardboardfill',
+					color: 'red',
+					badge: 0,
+					name: '失物招领',
+					url: "../work/lostList",
+					icoSrc: "../../static/common/newIcon/meetingInfo.png",
+					permissionKey: "lost:manage"
+				}, {
+					cuIcon: 'cardboardfill',
+					color: 'red',
+					badge: 0,
+					name: '寻物启事',
+					url: "../work/findList",
+					icoSrc: "../../static/common/newIcon/meetingRecordInfo.png",
+					permissionKey: "find:manage"
 				}]
 			};
 		},
@@ -377,6 +416,16 @@
 					if(this.userInfo.key.includes(this.receptionCuIconList[i].permissionKey)){
 						list.push(this.receptionCuIconList[i]);
 					}
+				}
+				return list;
+			},
+			lostFindCuIconListPermission: function(){
+				var list = [];
+				for (var i = 0; i < this.lostFindCuIconList.length; i++) {
+					// if(this.userInfo.key.includes(this.lostFindCuIconList[i].permissionKey)){
+					// 	list.push(this.lostFindCuIconList[i]);
+					// }
+					list.push(this.lostFindCuIconList[i]);
 				}
 				return list;
 			},

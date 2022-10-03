@@ -32,6 +32,8 @@
 				</view>
 			</view>
 		</view>
+		
+		<uni-load-more :status="status" :content-text="contentText" />
 	</view>
 </template>
 
@@ -54,6 +56,7 @@
 					contentnomore: '没有更多'
 				},
 				TabCur: 0,
+				status: 'more',
 				buildings: [],
 				rooms: []
 			}

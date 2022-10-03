@@ -19,9 +19,10 @@
 			<view class="pass" @click="allowEdit">允许修改</view>
 		</view>
 		
-		<view class="bottom-btns-seat" v-if="record.status == 1 && (record.sqxg_status == 0 || record.sqxg_status == 3 || record.sqxg_status == 3)"></view>
+		<view class="bottom-btns-seat" v-if="record.status == 1 && (record.sqxg_status == 0 || record.sqxg_status == 3 || record.sqxg_status == -1)"></view>
 		<view class="bottom-btns" v-if="record.status == 1 && (record.sqxg_status == 0 || record.sqxg_status == 3 || record.sqxg_status == -1)">
-			<view class="bottom-cancel-btn" @click="finish">会议完成</view>
+			<view class="cancel" @click="cancleBook">取消预定</view>
+			<view class="pass" @click="finish">会议完成</view>
 		</view>
 		
 		<view class="bottom-btns-seat" v-if="record.status == 2 && record.fw_score"></view>
@@ -302,6 +303,49 @@
 									icon: 'none'
 								});
 								this.record.status = 2;
+							} else {
+								uni.showToast({
+									title: res.msg,
+									icon: 'none'
+								});
+							}
+						}).catch(err => {
+							uni.hideLoading();
+							uni.showToast({
+								title: err.message,
+								icon: 'none'
+							});
+						});
+					},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
+			cancleBook: function() {
+				uni.showModal({
+					title: '提示',
+					content: '确定取消预定？',
+					showCancel: true,
+					cancelText: '取消',
+					confirmText: '确定',
+					success: res => {
+						if (res.cancel) return;
+						uni.showLoading({
+							title: '提交中',
+							mask: false
+						});
+						global.$http.post('/meeting/record/cancelMyRecord', {
+							params: {
+								record_id: this.record.id
+							},
+						}).then(res => {
+							uni.hideLoading();
+							if (res.status === "0") {
+								uni.showToast({
+									title: "取消成功",
+									icon: 'none'
+								});
+								this.record.status = -2;
 							} else {
 								uni.showToast({
 									title: res.msg,
