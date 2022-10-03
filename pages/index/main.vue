@@ -108,7 +108,7 @@ export default {
 				{
 					img: '/static/common/newIcon/contactsInfo.png',
 					name: '失物招领',
-					to: '/pages/index/contacts'
+					to: '/pages/lost/allLostList'
 				},
 				{
 					img: '/static/common/newIcon/receptionInfo.png',
@@ -145,6 +145,12 @@ export default {
 					title: '我的接待',
 					desc: '统计接待信息',
 					to: '/pages/reception/myReceptionList'
+				},
+				{
+					img: '/static/common/newIcon/reception.png',
+					title: '我的失物招领',
+					desc: '失物招领信息',
+					to: '/pages/lost/myLostList'
 				},
 				{
 					img: '/static/common/newIcon/message_record.png',

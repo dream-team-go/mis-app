@@ -3,7 +3,7 @@
 		<view class="cu-card case no-card margin-top-sm">
 			<view class="cu-item shadow">
 				<view class="image">
-					<image :src="record.img_url" mode="widthFix"></image>
+					<image :src="record.img_url" mode="widthFix" style="height: 300upx;"></image>
 					<view class="cu-tag bg-linear-blue">{{getRecordStatus(record.status)}}</view>
 				</view>
 				<view class="cu-list">
