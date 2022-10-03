@@ -116,7 +116,6 @@
 					contentnomore: '没有更多'
 				},
 				para: {
-					id: "",
 					thing_info: "",
 					get_place: "",
 					receive_place: "",

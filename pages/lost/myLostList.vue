@@ -3,6 +3,7 @@
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			
 			<block slot="content">我的失物招领</block>
+			<block slot="right"><view @tap="toAdd">新增</view></block>
 		</cu-custom>
 		
 		<scroll-view scroll-x class="bg-white nav text-center fixed" :style="[{top:CustomBar + 'px'}]">
@@ -16,7 +17,7 @@
 				<lost-item :record="record"></lost-item>
 			</view>
 		</view>
-		s
+		
 		<uni-load-more :status="status" :content-text="contentText" />
 	</view>
 </template>
@@ -109,6 +110,11 @@
 			recordDetail: function(record){
 				uni.navigateTo({
 					url: "../lost/myLostDetail?id=" + record.id
+				});
+			},
+			toAdd: function(record){
+				uni.navigateTo({
+					url: "../lost/saveLost"
 				});
 			}
 		}

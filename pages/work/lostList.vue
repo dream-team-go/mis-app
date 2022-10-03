@@ -17,7 +17,7 @@
 				<lost-item :record="record"></lost-item>
 			</view>
 		</view>
-		s
+		
 		<uni-load-more :status="status" :content-text="contentText" />
 	</view>
 </template>
