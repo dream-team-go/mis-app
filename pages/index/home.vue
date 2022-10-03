@@ -123,7 +123,7 @@
 				},
 				mainData:{
 					imgs:[],
-					inform: ""
+					informs: []
 				}
 			}
 		},
@@ -460,70 +460,69 @@
 						});
 					});
 				}else if (this.PageCur === "main") {
-					this.mainData.imgs = [
-						'/static/home/photo-1.jpg',
-						'/static/home/photo-2.jpg',
-						'/static/home/photo-3.jpg',
-						'/static/home/photo-4.jpg',
-						'/static/home/photo-5.jpg'
-					];
-					this.mainData.inform = "通知：开远数字机关事务上线啦！！！";
 					//获取轮播图数据
-					// global.$http.post('/core/organization/organizationPage', {
-					// 	params: {
-					// 		page: 1,
-					// 		pageSize: 10000,
-					// 		name: ''
-					// 	},
-					// }).then(res => {
-					// 	if (res.status === "0") {
-					// 		let list = [];
-					// 		for (let i = 0; i < res.data.list.length; i++) {
-					// 			list[i] = res.data.list[i];
-					// 		}
-					// 		this.contactsData = list;
-					// 		uni.hideLoading();
-					// 	} else {
-					// 		uni.showToast({
-					// 			title: res.msg,
-					// 			icon: 'none'
-					// 		});
-					// 	}
-					// }).catch(err => {
-					// 	uni.hideLoading();
-					// 	uni.showToast({
-					// 		title: err.message,
-					// 		icon: 'none'
-					// 	});
-					// });
-					// //获取通知数据
-					// global.$http.post('/core/organization/organizationPage', {
-					// 	params: {
-					// 		page: 1,
-					// 		pageSize: 10000,
-					// 		name: ''
-					// 	},
-					// }).then(res => {
-					// 	if (res.status === "0") {
-					// 		let list = [];
-					// 		for (let i = 0; i < res.data.list.length; i++) {
-					// 			list[i] = res.data.list[i];
-					// 		}
-					// 		this.contactsData = list;
-					// 		uni.hideLoading();
-					// 	} else {
-					// 		uni.showToast({
-					// 			title: res.msg,
-					// 			icon: 'none'
-					// 		});
-					// 	}
-					// }).catch(err => {
-					// 	uni.hideLoading();
-					// 	uni.showToast({
-					// 		title: err.message,
-					// 		icon: 'none'
-					// 	});
-					// });
+					global.$http.post('/core/setting/getListByType', {
+						params: {
+							appid: this.AppId,
+							limit: 5,
+							type: 1
+						},
+					}).then(res => {
+						if (res.status === "0") {
+							if(!res.data || res.data.length == 0){
+								this.mainData.imgs = [
+									'/static/home/photo-1.jpg',
+									'/static/home/photo-2.jpg',
+									'/static/home/photo-3.jpg',
+									'/static/home/photo-4.jpg',
+									'/static/home/photo-5.jpg'
+								];
+							}else{
+								res.data.forEach(c=>{
+									this.mainData.imgs.push(c.url);
+								});
+							}
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.hideLoading();
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
+					//获取通知数据
+					global.$http.post('/core/setting/getListByType', {
+						params: {
+							appid: this.AppId,
+							limit: 5,
+							type: 2
+						},
+					}).then(res => {
+						if (res.status === "0") {
+							if(!res.data || res.data.length == 0){
+								this.mainData.informs = ["通知：开远数字机关事务上线啦！！！"];
+							}else{
+								res.data.forEach(c=>{
+									this.mainData.informs.push(c.msg);
+								});
+							}
+						} else {
+							uni.showToast({
+								title: res.msg,
+								icon: 'none'
+							});
+						}
+					}).catch(err => {
+						uni.showToast({
+							title: err.message,
+							icon: 'none'
+						});
+					});
 				}
 			},
 			NavChange: function(e) {

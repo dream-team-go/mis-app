@@ -25,6 +25,10 @@
 					Vue.prototype.StatusBar = e.statusBarHeight;
 					Vue.prototype.CustomBar = e.statusBarHeight + e.titleBarHeight;
 					// #endif
+					
+					//#ifdef APP-PLUS  
+					Vue.prototype.AppId = plus.runtime.appid;
+					// #endif
 					getApp().CheckVersion(e);
 
 				}
@@ -130,7 +134,7 @@
 							// 整包更新
 							if (res.data.type === 1) {
 								uni.showModal({ //提醒用户更新  
-									title: "更新提示",
+									title: "APP更新提示",
 									content: res.data.desc,
 									showCancel: false,
 									success: (re) => {

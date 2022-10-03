@@ -30,7 +30,15 @@
 				</view>
 			</view>
 			<view class="ads-box">
-				{{mainData.inform}}
+				<swiper class="swiper" style="width: unset;height: 44upx;" indicator-dots indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#fff" circular autoplay :interval="4000" :duration="1000">
+					<swiper-item v-for="(item, index) in mainData.informs" :key="index">
+						<view class="swiper-item">
+							{{item}}
+						</view>
+					</swiper-item>
+				</swiper>
+				
+				
 			</view>
 			<view class="notice-box">
 				<view class="notice-title text-bold">
@@ -71,6 +79,11 @@ export default {
 				'/static/home/photo-3.jpg',
 				'/static/home/photo-4.jpg',
 				'/static/home/photo-5.jpg'
+			],
+			informs:[
+				'附件两款都是风景绿卡的附件两款都是风景绿卡的撒撒',
+				'发的撒娇发送大附件看过附件两款都是风景绿卡的撒',
+				'给肌肤抵抗力嘎嘎嘎附件两款都是风景绿卡的撒附件两款都是风景绿卡的撒'
 			],
 			navList: [
 				// {
