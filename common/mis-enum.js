@@ -140,7 +140,7 @@ const LostStatusEnumMap = new Map([
 
 //寻物启事状态枚举
 const FindStatusEnumMap = new Map([
-	[0, "待寻找"],
+	[0, "未找到"],
 	[1, "已找到"]
 ]);
 

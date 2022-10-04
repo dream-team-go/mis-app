@@ -126,7 +126,7 @@ export default {
 				{
 					img: '/static/common/newIcon/receptionInfo.png',
 					name: '寻物启事',
-					to: '/pages/reception/saveReception'
+					to: '/pages/find/allFindList'
 				},
 				{
 					img: '/static/common/newIcon/planInfo.png',
@@ -156,7 +156,7 @@ export default {
 				{
 					img: '/static/common/newIcon/reception.png',
 					title: '我的接待',
-					desc: '统计接待信息',
+					desc: '接待信息',
 					to: '/pages/reception/myReceptionList'
 				},
 				{
@@ -164,6 +164,12 @@ export default {
 					title: '我的失物招领',
 					desc: '失物招领信息',
 					to: '/pages/lost/myLostList'
+				},
+				{
+					img: '/static/common/newIcon/reception.png',
+					title: '我的寻物启事',
+					desc: '寻物启事信息',
+					to: '/pages/find/myFindList'
 				},
 				{
 					img: '/static/common/newIcon/message_record.png',

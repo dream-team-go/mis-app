@@ -109,12 +109,12 @@
 			},
 			recordDetail: function(record){
 				uni.navigateTo({
-					url: "../find/allfindDetail?id=" + record.id
+					url: "../find/allFindDetail?id=" + record.id
 				});
 			},
 			toAdd: function(record){
 				uni.navigateTo({
-					url: "../find/savefind"
+					url: "../find/saveFind"
 				});
 			}
 		}

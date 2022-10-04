@@ -28,13 +28,7 @@
 		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				物品信息：
-				<text class="text-black">{{record.thing_info_name}}</text>
-			</view>
-		</view>
-		<view class="cu-bar bg-white solid-bottom">
-			<view class="action">
-				拾获地点：
-				<text class="text-black">{{record.get_place}}</text>
+				<text class="text-black">{{record.thing_info}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
@@ -45,15 +39,15 @@
 		</view>
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				领取地点：
-				<text class="text-black">{{record.receive_place}}</text>
+				遗失地点：
+				<text class="text-black">{{record.lost_place}}</text>
 			</view>
 		</view>
 
 		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				发布人：
-				<text class="text-black">{{record.create_user}}</text>
+				<text class="text-black">{{record.create_user_name}}</text>
 			</view>
 		</view>
 
@@ -66,13 +60,13 @@
 		
 		<view class="cu-bar bg-white solid-bottom margin-top-xs" v-if="record.status != 0">
 			<view class="action">
-				领取操作人：
-				<text class="text-black">{{record.update_user}}</text>
+				找到操作人：
+				<text class="text-black">{{record.update_user_name}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="record.status != 0">
 			<view class="action">
-				领取操作时间：
+				找到操作时间：
 				<text class="text-black">{{record.update_time}}</text>
 			</view>
 		</view>

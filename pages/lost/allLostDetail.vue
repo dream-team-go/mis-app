@@ -9,7 +9,7 @@
 		<!-- <view class="bottom-btns-seat" v-if="record.status == 0"></view>
 		<view class="bottom-btns" v-if="record.status == 0">
 			<view class="cancel" @click="del">删除</view>
-			<view class="pass" @click="receive">领取</view>
+			<view class="pass" @click="receive">已领取</view>
 		</view> -->
 
 	</view>

@@ -53,7 +53,7 @@
 		<view class="cu-bar bg-white solid-bottom margin-top-xs">
 			<view class="action">
 				发布人：
-				<text class="text-black">{{record.create_user}}</text>
+				<text class="text-black">{{record.create_user_name}}</text>
 			</view>
 		</view>
 
@@ -67,7 +67,7 @@
 		<view class="cu-bar bg-white solid-bottom margin-top-xs" v-if="record.status != 0">
 			<view class="action">
 				领取操作人：
-				<text class="text-black">{{record.update_user}}</text>
+				<text class="text-black">{{record.update_user_name}}</text>
 			</view>
 		</view>
 		<view class="cu-bar bg-white solid-bottom" v-if="record.status != 0">

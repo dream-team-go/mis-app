@@ -2,7 +2,7 @@
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
 			
-			<block slot="content">失物招领</block>
+			<block slot="content">寻物启事</block>
 			<!-- <block slot="right"><view v-if="HasOperateKey" @tap="toAdd">新增</view></block> -->
 		</cu-custom>
 		
@@ -14,7 +14,7 @@
 		</scroll-view>
 		<view style="margin-top: 100upx;">
 			<view v-for="record in records" :key="record.id" @click="recordDetail(record)">
-				<lost-item :record="record"></lost-item>
+				<find-item :record="record"></find-item>
 			</view>
 		</view>
 		
@@ -36,7 +36,7 @@
 			return {
 				page: 1,
 				pageSize: 10,
-				StatusEnumMap: misEnum.LostStatusEnumMap,
+				StatusEnumMap: misEnum.FindStatusEnumMap,
 				recordStatus: "",
 				status: 'more',
 				contentText: {
@@ -66,7 +66,7 @@
 		methods: {
 			loadData(){
 				this.status = 'loading';
-				global.$http.post('/thing/lost/getAllList', {
+				global.$http.post('/thing/find/getAllList', {
 					params: {
 						page: this.page,
 						pageSize: this.pageSize,
@@ -109,7 +109,7 @@
 			},
 			recordDetail: function(record){
 				uni.navigateTo({
-					url: "../work/lostDetail?id=" + record.id
+					url: "../work/findDetail?id=" + record.id
 				});
 			}
 		}

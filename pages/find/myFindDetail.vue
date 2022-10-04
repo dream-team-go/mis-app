@@ -10,7 +10,7 @@
 		<view class="bottom-btns-seat" v-if="record.status == 0"></view>
 		<view class="bottom-btns" v-if="record.status == 0">
 			<view class="cancel" @click="del">删除</view>
-			<view class="pass" @click="receive">领取</view>
+			<view class="pass" @click="receive">已找到</view>
 		</view>
 
 	</view>
@@ -60,7 +60,7 @@
 			receive: function() {
 				uni.showModal({
 					title: '提示',
-					content: '确定已领取？',
+					content: '确定已找到？',
 					showCancel: true,
 					cancelText: '取消',
 					confirmText: '确定',
@@ -92,7 +92,7 @@
 					title: '提交中',
 					mask: false
 				});
-				global.$http.post('/thing/find/receive', {
+				global.$http.post('/thing/find/findThing', {
 					params: {
 						id: this.record.id
 					},
@@ -152,7 +152,7 @@
 			},
 			toEdit: function(e){
 				uni.navigateTo({
-					url: '../find/savefind?para=' + encodeURIComponent(JSON.stringify(this.record))
+					url: '../find/saveFind?para=' + encodeURIComponent(JSON.stringify(this.record))
 				});
 			}
 		}

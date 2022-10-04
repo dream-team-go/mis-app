@@ -76,6 +76,22 @@
 			</view>
 			
 			<view class="cu-list menu margin-top">
+				<navigator class="cu-item arrow" hover-class="none" url="../lost/myLostList" open-type="navigate">
+					<view class="content">
+						<image src="../../static/common/newIcon/reception.png" class="ico"></image>
+						<text class="text-black">我的失物招领</text>
+					</view>
+				</navigator>
+				<navigator class="cu-item arrow" hover-class="none" url="../find/myFindList" open-type="navigate">
+					<view class="content">
+						<image src="../../static/common/newIcon/reception.png" class="ico"></image>
+						<text class="text-black">我的寻物启事</text>
+					</view>
+				</navigator>
+			</view>
+			
+			
+			<view class="cu-list menu margin-top">
 				<navigator class="cu-item arrow" hover-class="none" url="../user/editPassword" open-type="navigate">
 					<view class="content">
 						<image src="../../static/common/newIcon/edit_password.png" class="ico"></image>

@@ -1,15 +1,15 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="content">失物招领详情</block>
+			<block slot="content">寻物启事详情</block>
 		</cu-custom>
 
-		<lost-detail :record="record"></lost-detail>
+		<find-detail :record="record"></find-detail>
 
 		<view class="bottom-btns-seat" v-if="record.status == 0"></view>
 		<view class="bottom-btns" v-if="record.status == 0">
 			<view class="cancel" @click="del">删除</view>
-			<view class="pass" @click="receive">领取</view>
+			<view class="pass" @click="receive">已找到</view>
 		</view>
 
 	</view>
@@ -20,7 +20,7 @@
 	export default {
 		data() {
 			return {
-				StatusEnumMap: misEnum.LostStatusEnumMap,
+				StatusEnumMap: misEnum.FindStatusEnumMap,
 				record: {},
 				id: ""
 			}
@@ -33,7 +33,7 @@
 		},
 		methods: {
 			loadData: function(){
-				global.$http.post('/thing/lost/getInfo', {
+				global.$http.post('/thing/find/getInfo', {
 					params: {
 						id: this.id
 					},
@@ -59,7 +59,7 @@
 			receive: function() {
 				uni.showModal({
 					title: '提示',
-					content: '确定已领取？',
+					content: '确定已找到？',
 					showCancel: true,
 					cancelText: '取消',
 					confirmText: '确定',
@@ -91,7 +91,7 @@
 					title: '提交中',
 					mask: false
 				});
-				global.$http.post('/thing/lost/receive', {
+				global.$http.post('/thing/find/findThing', {
 					params: {
 						id: this.record.id
 					},
@@ -123,7 +123,7 @@
 					title: '提交中',
 					mask: false
 				});
-				global.$http.post('/thing/lost/delete', {
+				global.$http.post('/thing/find/delete', {
 					params: {
 						id: this.record.id
 					},

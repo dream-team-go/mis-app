@@ -9,7 +9,7 @@
 		
 			<view class="cu-bar bg-white margin-top-xs">
 				<view class="action">
-					<view class="title title-required">照片上传</view>
+					<view class="title">照片上传</view>
 				</view>
 				<view class="action">
 					{{para.imgs.length}}/4
@@ -32,27 +32,17 @@
 			
 			<view class="cu-form-group">
 				<view class="title title-required">物品信息</view>
-				<picker @change="ChangeThings" :value="thingIndex" :range="things">
-					<view class="picker">
-						{{thingIndex>-1?things[thingIndex] : "请选择"}}
-					</view>
-				</picker>
+				<input name="input" v-model="para.thing_info" ></input>
 			</view>
 
-			<view class="cu-form-group">
-				<view class="title title-required">拾取地点</view>
-				<input name="input" v-model="para.get_place" ></input>
-			</view>
-			
-			
 			<view class="cu-form-group">
 				<view class="title title-required">联系电话</view>
 				<input name="input" v-model="para.tel" ></input>
 			</view>
 			
 			<view class="cu-form-group">
-				<view class="title title-required">领取地点</view>
-				<input name="input" v-model="para.receive_place" ></input>
+				<view class="title">遗失地点</view>
+				<input name="input" v-model="para.lost_place" ></input>
 			</view>
 
 			<view class="padding flex flex-direction">
@@ -79,9 +69,8 @@
 				var info = JSON.parse(decodeURIComponent(option.para));
 				this.isAdd = false;
 				this.para.id = info.id;
-				this.para.get_place = info.get_place;
 				this.para.tel = info.tel;
-				this.para.receive_place = info.receive_place;
+				this.para.lost_place = info.lost_place;
 				this.para.thing_info = info.thing_info;
 				//设置照片
 				for (let s of info.imgs) {
@@ -91,7 +80,6 @@
 			else{
 				this.para.tel = this.userInfo.user.username;
 			}
-			this.GetDic("DIC_LOST_THING");
 		},
 		computed: {
 			...mapState(['userInfo'])
@@ -103,10 +91,6 @@
 				CustomBar: this.CustomBar,
 				ScreenHeight: this.ScreenHeight,
 				
-				thingIndex: -1,
-				thingCodes:[],
-				things: [],
-				
 				page: 1,
 				pageSize: 100,
 				status: 'more',
@@ -117,41 +101,14 @@
 				},
 				para: {
 					thing_info: "",
-					get_place: "",
-					receive_place: "",
+					lost_place: "",
 					tel: "",
 					imgs: []
 				}
 			}
 		},
 		methods: {
-			GetDic(type) {
-				global.$http.post('/core/dic/get', {
-					params: {
-						type: type
-					},
-				}).then(res => {
-					if (res.status === "0") {
-						for (var i = 0; i < res.data.length; i++) {
-							var thing = res.data[i];
-							this.things.push(thing.dic_name);
-							this.thingCodes.push(thing.dic_code);
-							if(thing.dic_code == this.para.thing_info)
-								this.thingIndex = i;
-						}
-					} else {
-						uni.showToast({
-							title: res.msg,
-							icon: 'none'
-						});
-					}
-				}).catch(err => {
-					uni.showToast({
-						title: err.message,
-						icon: 'none'
-					});
-				});
-			},
+			
 			ChangeThings: function(e) {
 				this.thingIndex = e.detail.value;
 				this.para.thing_info = this.thingCodes[e.detail.value];
@@ -210,24 +167,17 @@
 			},
 			Submit: function(e) {
 				//验证数据
-				if (this.para.imgs.length <= 0) {
-					uni.showToast({
-						icon: 'none',
-						title: '请上传照片'
-					});
-					return;
-				}
+				// if (this.para.imgs.length <= 0) {
+				// 	uni.showToast({
+				// 		icon: 'none',
+				// 		title: '请上传照片'
+				// 	});
+				// 	return;
+				// }
 				if (!this.para.thing_info) {
 					uni.showToast({
 						icon: 'none',
-						title: '请选择物品信息'
-					});
-					return;
-				}
-				if (!this.para.get_place) {
-					uni.showToast({
-						icon: 'none',
-						title: '拾取地点必填'
+						title: '请填写物品信息'
 					});
 					return;
 				}
@@ -235,13 +185,6 @@
 					uni.showToast({
 						icon: 'none',
 						title: '联系电话必填'
-					});
-					return;
-				}
-				if (this.para.receive_place <= 0) {
-					uni.showToast({
-						icon: 'none',
-						title: '领取地点必填'
 					});
 					return;
 				}
