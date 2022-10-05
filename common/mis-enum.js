@@ -144,6 +144,13 @@ const FindStatusEnumMap = new Map([
 	[1, "已找到"]
 ]);
 
+//精后勤状态枚举
+const FixStatusEnumMap = new Map([
+	[0, "待处理"],
+	[1, "已处理"],
+	[2, "暂缓处理"]
+]);
+
 export default { 
     MeetingRecordEnumMap,
 	FoodRecordEnumMap,
@@ -162,5 +169,6 @@ export default {
 	ReceptionStatusEnumMap,
 	FoodTypeEnumMap,
 	LostStatusEnumMap,
-	FindStatusEnumMap
+	FindStatusEnumMap,
+	FixStatusEnumMap
 }

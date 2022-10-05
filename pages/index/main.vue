@@ -116,7 +116,7 @@ export default {
 				{
 					img: '/static/common/newIcon/planInfo.png',
 					name: '精后勤',
-					to: '/pages/index/plan'
+					to: '/pages/fix/allFixList'
 				},
 				{
 					img: '/static/common/newIcon/contactsInfo.png',
@@ -172,11 +172,17 @@ export default {
 					to: '/pages/find/myFindList'
 				},
 				{
-					img: '/static/common/newIcon/message_record.png',
-					title: '我的消息',
-					desc: '接收消息记录',
-					to: '/pages/user/warnList'
-				}
+					img: '/static/common/newIcon/reception.png',
+					title: '我的精后勤',
+					desc: '精后勤信息',
+					to: '/pages/fix/myFixList'
+				},
+				// {
+				// 	img: '/static/common/newIcon/message_record.png',
+				// 	title: '我的消息',
+				// 	desc: '接收消息记录',
+				// 	to: '/pages/user/warnList'
+				// }
 			]
 		}
 	},

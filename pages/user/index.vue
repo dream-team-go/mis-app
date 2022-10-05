@@ -88,6 +88,12 @@
 						<text class="text-black">我的寻物启事</text>
 					</view>
 				</navigator>
+				<navigator class="cu-item arrow" hover-class="none" url="../fix/myFixList" open-type="navigate">
+					<view class="content">
+						<image src="../../static/common/newIcon/reception.png" class="ico"></image>
+						<text class="text-black">我的精后勤</text>
+					</view>
+				</navigator>
 			</view>
 			
 			
