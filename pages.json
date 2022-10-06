@@ -858,6 +858,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/work/fixDeal",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom"

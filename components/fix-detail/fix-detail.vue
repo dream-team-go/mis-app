@@ -30,13 +30,6 @@
 			</view>
 		</view>
 		
-		<view class="cu-bar bg-white solid-bottom" v-if="status == 2">
-			<view class="action">
-				暂缓处理原因：
-				<text class="text-black">{{record.not_deal_reason}}</text>
-			</view>
-		</view>
-		
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				联系人：
@@ -49,8 +42,7 @@
 				<text class="text-black">{{record.tel}}</text>
 			</view>
 		</view>
-
-		<view class="cu-bar bg-white solid-bottom margin-top-xs">
+		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				发布人：
 				<text class="text-black">{{record.create_user_name}}</text>
@@ -77,10 +69,22 @@
 			</view>
 		</view>
 		
-		<scroll-view scroll-x="true" v-if="record.status == 1 && record.delImgs && record.delImgs.length > 0">
-			<view class="cu-bar bg-white solid-bottom margin-top-xs">
-				<view class="action" v-for="img in record.delImgs" :key="img.id">
-					处理结果：
+		
+		<view class="cu-bar bg-white solid-bottom" v-if="record.status == 2">
+			<view class="action">
+				暂缓处理原因：
+				<text class="text-black">{{record.not_deal_reason}}</text>
+			</view>
+		</view>
+		
+		<view class="cu-bar bg-white solid-bottom" v-if="record.status == 1">
+			<view class="action">
+				<text class="text-lg text-black">处理结果：</text>
+			</view>
+		</view>
+		<scroll-view scroll-x="true" v-if="record.status == 1">
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action" v-for="img in record.dealImgs" :key="img.id">
 					<image :src="img.img_url" style="width: 400upx;height: 400upx;"></image>
 				</view>
 			</view>

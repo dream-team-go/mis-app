@@ -124,6 +124,26 @@
 			</view>
 			
 			
+			<view class="cu-bar bg-white margin-top-xs" v-if="fixCuIconListPermission.length > 0">
+				<view class="action index-title">
+					<image class="title-ico" src="../../static/common/newIcon/reception.png"></image>
+					<text class="text-lg text-black text-bold">精后勤管理</text>
+				</view>
+			</view>
+			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']" v-if="fixCuIconListPermission.length > 0">
+				<view hover-class="navigator-hover" class="cu-item" v-for="(item,index) in fixCuIconListPermission" :key="index" @tap="navigateTo(item.url)">
+					<view >
+						<image :src="item.icoSrc" class="item-ico">
+						<view class="cu-tag badge" v-if="item.badge!=0">
+							<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
+						</view>
+						</image>
+					</view>
+					
+					<text class="cu-tag-text">{{item.name}}</text>
+				</view>
+			</view>
+			
 			
 			<!-- <image src="../../static/common/car-info.png"></image> -->
 			<view class="cu-tabbar-height"></view>
@@ -369,6 +389,15 @@
 					url: "../work/findList",
 					icoSrc: "../../static/common/newIcon/meetingRecordInfo.png",
 					permissionKey: "find:manage"
+				}],
+				fixCuIconList: [{
+					cuIcon: 'cardboardfill',
+					color: 'red',
+					badge: 0,
+					name: '精后勤',
+					url: "../work/fixList",
+					icoSrc: "../../static/common/newIcon/meetingInfo.png",
+					permissionKey: "lost:manage"
 				}]
 			};
 		},
@@ -426,6 +455,16 @@
 					// 	list.push(this.lostFindCuIconList[i]);
 					// }
 					list.push(this.lostFindCuIconList[i]);
+				}
+				return list;
+			},
+			fixCuIconListPermission: function(){
+				var list = [];
+				for (var i = 0; i < this.fixCuIconList.length; i++) {
+					// if(this.userInfo.key.includes(this.fixCuIconList[i].permissionKey)){
+					// 	list.push(this.fixCuIconList[i]);
+					// }
+					list.push(this.fixCuIconList[i]);
 				}
 				return list;
 			},

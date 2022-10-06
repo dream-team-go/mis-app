@@ -1,17 +1,41 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-linear-blue" :isBack="true">
-			<block slot="content">失物招领详情</block>
+			<block slot="content">精后勤详情</block>
 		</cu-custom>
 
-		<lost-detail :record="record"></lost-detail>
+		<fix-detail :record="record"></fix-detail>
 
 		<view class="bottom-btns-seat" v-if="record.status == 0"></view>
 		<view class="bottom-btns" v-if="record.status == 0">
-			<view class="cancel" @click="del">删除</view>
-			<view class="pass" @click="receive">已领取</view>
+			<view class="cancel" @click="notDeal">暂缓处理</view>
+			<view class="pass" @click="deal">已处理</view>
 		</view>
-
+		
+		
+		<view class="cu-modal" :class="showModal?'show':''" style="z-index: auto;">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">暂缓处理</view>
+					<view class="action" @tap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view>
+					<view class="cu-form-group" style="text-align: left;">
+						<textarea maxlength="100" @input="fillReason" placeholder="暂缓处理原因"></textarea>
+					</view>
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action">
+						<button class="cu-btn line-bluelight text-green" @tap="hideModal">取消</button>
+						<button class="cu-btn bg-linear-blue margin-left" @tap="sureModal">确定</button>
+		
+					</view>
+				</view>
+			</view>
+		</view>
+		
 	</view>
 </template>
 
@@ -20,8 +44,10 @@
 	export default {
 		data() {
 			return {
-				StatusEnumMap: misEnum.LostStatusEnumMap,
+				StatusEnumMap: misEnum.FixStatusEnumMap,
+				showModal: false,
 				record: {},
+				not_deal_reason: "",
 				id: ""
 			}
 		},
@@ -33,7 +59,7 @@
 		},
 		methods: {
 			loadData: function(){
-				global.$http.post('/thing/lost/getInfo', {
+				global.$http.post('/thing/service/getInfo', {
 					params: {
 						id: this.id
 					},
@@ -56,76 +82,40 @@
 					});
 				});
 			},
-			receive: function() {
-				uni.showModal({
-					title: '提示',
-					content: '确定已领取？',
-					showCancel: true,
-					cancelText: '取消',
-					confirmText: '确定',
-					success: res => {
-						if (res.cancel) return;
-						this.excuteRecevie();
-					},
-					fail: () => {},
-					complete: () => {}
-				});
+			notDeal: function() {
+				this.showModal = true;
 			},
-			del: function() {
-				uni.showModal({
-					title: '提示',
-					content: '确定删除？',
-					showCancel: true,
-					cancelText: '取消',
-					confirmText: '确定',
-					success: res => {
-						if (res.cancel) return;
-						this.excuteDelete();
-					},
-					fail: () => {},
-					complete: () => {}
-				});
+			fillReason: function(e) {
+				this.not_deal_reason = e.detail.value;
 			},
-			excuteRecevie() {
-				uni.showLoading({
-					title: '提交中',
-					mask: false
-				});
-				global.$http.post('/thing/lost/receive', {
-					params: {
-						id: this.record.id
-					},
-				}).then(res => {
-					uni.hideLoading();
-					if (res.status === "0") {
-						uni.showToast({
-							title: "提交成功",
-							icon: 'none'
-						});
-						this.record.status = 1;
-						this.loadData();
-					} else {
-						uni.showToast({
-							title: res.msg,
-							icon: 'none'
-						});
-					}
-				}).catch(err => {
-					uni.hideLoading();
+			sureModal: function() {
+				if (this.not_deal_reason.length <= 0) {
 					uni.showToast({
-						title: err.message,
+						title: "请填写暂缓处理原因",
 						icon: 'none'
 					});
+					return;
+				}
+				this.excuteNotDel();
+				this.showModal = false;
+			},
+			hideModal: function() {
+				this.showModal = false;
+			},
+			deal: function() {
+				uni.navigateTo({
+					url: "../work/fixDeal?id=" + this.record.id
 				});
 			},
-			excuteDelete() {
+			excuteNotDel: function() {
 				uni.showLoading({
 					title: '提交中',
 					mask: false
 				});
-				global.$http.post('/thing/lost/delete', {
+				global.$http.post('/thing/service/notDeal', {
 					params: {
-						id: this.record.id
+						id: this.record.id,
+						not_deal_reason: this.not_deal_reason
 					},
 				}).then(res => {
 					uni.hideLoading();
@@ -148,7 +138,7 @@
 						icon: 'none'
 					});
 				});
-			}
+			},
 		}
 	}
 </script>
