@@ -78,19 +78,19 @@
 			<view class="cu-list menu margin-top">
 				<navigator class="cu-item arrow" hover-class="none" url="../lost/myLostList" open-type="navigate">
 					<view class="content">
-						<image src="../../static/common/newIcon/reception.png" class="ico"></image>
+						<image src="../../static/common/newIcon/lost_record.png" class="ico"></image>
 						<text class="text-black">我的失物招领</text>
 					</view>
 				</navigator>
 				<navigator class="cu-item arrow" hover-class="none" url="../find/myFindList" open-type="navigate">
 					<view class="content">
-						<image src="../../static/common/newIcon/reception.png" class="ico"></image>
+						<image src="../../static/common/newIcon/find_record.png" class="ico"></image>
 						<text class="text-black">我的寻物启事</text>
 					</view>
 				</navigator>
 				<navigator class="cu-item arrow" hover-class="none" url="../fix/myFixList" open-type="navigate">
 					<view class="content">
-						<image src="../../static/common/newIcon/reception.png" class="ico"></image>
+						<image src="../../static/common/newIcon/fix_record.png" class="ico"></image>
 						<text class="text-black">我的精后勤</text>
 					</view>
 				</navigator>

@@ -114,19 +114,19 @@ export default {
 					to: '/pages/reception/saveReception'
 				},
 				{
-					img: '/static/common/newIcon/planInfo.png',
-					name: '精后勤',
-					to: '/pages/fix/allFixList'
-				},
-				{
-					img: '/static/common/newIcon/contactsInfo.png',
+					img: '/static/common/newIcon/lost.png',
 					name: '失物招领',
 					to: '/pages/lost/allLostList'
 				},
 				{
-					img: '/static/common/newIcon/receptionInfo.png',
+					img: '/static/common/newIcon/find.png',
 					name: '寻物启事',
 					to: '/pages/find/allFindList'
+				},
+				{
+					img: '/static/common/newIcon/fix.png',
+					name: '精后勤',
+					to: '/pages/fix/allFixList'
 				},
 				{
 					img: '/static/common/newIcon/planInfo.png',
@@ -160,19 +160,19 @@ export default {
 					to: '/pages/reception/myReceptionList'
 				},
 				{
-					img: '/static/common/newIcon/reception.png',
+					img: '/static/common/newIcon/lost_record.png',
 					title: '我的失物招领',
 					desc: '失物招领信息',
 					to: '/pages/lost/myLostList'
 				},
 				{
-					img: '/static/common/newIcon/reception.png',
+					img: '/static/common/newIcon/find_record.png',
 					title: '我的寻物启事',
 					desc: '寻物启事信息',
 					to: '/pages/find/myFindList'
 				},
 				{
-					img: '/static/common/newIcon/reception.png',
+					img: '/static/common/newIcon/fix_record.png',
 					title: '我的精后勤',
 					desc: '精后勤信息',
 					to: '/pages/fix/myFixList'

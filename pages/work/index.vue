@@ -105,7 +105,7 @@
 			
 			<view class="cu-bar bg-white margin-top-xs" v-if="lostFindCuIconListPermission.length > 0">
 				<view class="action index-title">
-					<image class="title-ico" src="../../static/common/newIcon/reception.png"></image>
+					<image class="title-ico" src="../../static/common/newIcon/lost_record.png"></image>
 					<text class="text-lg text-black text-bold">丢丢管理</text>
 				</view>
 			</view>
@@ -126,7 +126,7 @@
 			
 			<view class="cu-bar bg-white margin-top-xs" v-if="fixCuIconListPermission.length > 0">
 				<view class="action index-title">
-					<image class="title-ico" src="../../static/common/newIcon/reception.png"></image>
+					<image class="title-ico" src="../../static/common/newIcon/fix_record.png"></image>
 					<text class="text-lg text-black text-bold">精后勤管理</text>
 				</view>
 			</view>
@@ -379,7 +379,7 @@
 					badge: 0,
 					name: '失物招领',
 					url: "../work/lostList",
-					icoSrc: "../../static/common/newIcon/meetingInfo.png",
+					icoSrc: "../../static/common/newIcon/lost.png",
 					permissionKey: "lost:manage"
 				}, {
 					cuIcon: 'cardboardfill',
@@ -387,7 +387,7 @@
 					badge: 0,
 					name: '寻物启事',
 					url: "../work/findList",
-					icoSrc: "../../static/common/newIcon/meetingRecordInfo.png",
+					icoSrc: "../../static/common/newIcon/find.png",
 					permissionKey: "find:manage"
 				}],
 				fixCuIconList: [{
@@ -396,7 +396,7 @@
 					badge: 0,
 					name: '精后勤',
 					url: "../work/fixList",
-					icoSrc: "../../static/common/newIcon/meetingInfo.png",
+					icoSrc: "../../static/common/newIcon/fix.png",
 					permissionKey: "lost:manage"
 				}]
 			};

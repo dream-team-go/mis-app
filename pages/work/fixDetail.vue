@@ -6,9 +6,13 @@
 
 		<fix-detail :record="record"></fix-detail>
 
-		<view class="bottom-btns-seat" v-if="record.status == 0"></view>
+		<view class="bottom-btns-seat" v-if="record.status == 0 || record.status == 2"></view>
 		<view class="bottom-btns" v-if="record.status == 0">
 			<view class="cancel" @click="notDeal">暂缓处理</view>
+			<view class="pass" @click="deal">已处理</view>
+		</view>
+		
+		<view class="bottom-cancel-btn" v-if="record.status == 2">
 			<view class="pass" @click="deal">已处理</view>
 		</view>
 		
