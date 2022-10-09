@@ -16,7 +16,7 @@
 			</view>
 		</view>
 		
-		<scroll-view scroll-x class="bg-white nav text-center fixed" :style="[{top:(CustomBar + 170) + 'upx'}]">
+		<scroll-view scroll-x class="bg-white nav text-center fixed" style="margin-top: 248upx;">
 			<view class="cu-item text-sm text-black" style="margin: 0upx;" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length"
 			 :key="index" @tap="recordStatusTab(index)">
 				{{Array.from(StatusEnumMap.values())[index]}}

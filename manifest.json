@@ -2,8 +2,8 @@
     "name" : "开远数字机关事务",
     "appid" : "__UNI__3C0082A",
     "description" : "开远数字机关事务",
-    "versionName" : "1.1.2",
-    "versionCode" : 112,
+    "versionName" : "1.2",
+    "versionCode" : 120,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -49,7 +49,8 @@
             },
             /* ios打包配置 */
             "ios" : {
-                "idfa" : false
+                "idfa" : false,
+                "dSYMs" : false
             },
             /* SDK配置 */
             "sdkConfigs" : {
@@ -105,6 +106,20 @@
                     "isCloud" : true,
                     "bought" : 1,
                     "pid" : "1311",
+                    "parameters" : {}
+                }
+            },
+            "Aq-ChooseFile" : {
+                "__plugin_info__" : {
+                    "name" : "文件选择，支持自定义路径，自定义筛选类型，多选",
+                    "description" : "支持android 11（30）文件选择，支持自定义路径",
+                    "platforms" : "Android",
+                    "url" : "https://ext.dcloud.net.cn/plugin?id=5263",
+                    "android_package_name" : "uni.UNI3C0082A",
+                    "ios_bundle_id" : "com.mis.zhjg",
+                    "isCloud" : true,
+                    "bought" : 1,
+                    "pid" : "5263",
                     "parameters" : {}
                 }
             }
