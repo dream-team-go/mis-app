@@ -166,30 +166,39 @@
 							title: '上传图片中',
 							mask: false
 						});
-						global.$http.upload('/oos/upload', {
-							name: 'file',
-							filePath: res.tempFilePaths[0]
-						}).then(res => {
-							uni.hideLoading();
-							if (res.status === "0") {
-								this.para.imgs.push(res.data);
-								uni.showToast({
-									icon: 'none',
-									title: '上传成功'
-								});
-							} else {
-								uni.showToast({
-									title: res.msg,
-									icon: 'none'
-								});
-							}
-						}).catch(err => {
-							uni.hideLoading();
-							uni.showToast({
-								title: err.message,
-								icon: 'none'
-							});
+						//压缩图片
+						uni.compressImage({
+						  src: res.tempFilePaths[0],
+						  quality: 50,
+						  success: res => {
+							  //上传图片
+							  global.$http.upload('/oos/upload', {
+							  	name: 'file',
+							  	filePath: res.tempFilePath
+							  }).then(res => {
+							  	uni.hideLoading();
+							  	if (res.status === "0") {
+							  		this.para.imgs.push(res.data);
+							  		uni.showToast({
+							  			icon: 'none',
+							  			title: '上传成功'
+							  		});
+							  	} else {
+							  		uni.showToast({
+							  			title: res.msg,
+							  			icon: 'none'
+							  		});
+							  	}
+							  }).catch(err => {
+							  	uni.hideLoading();
+							  	uni.showToast({
+							  		title: err.message,
+							  		icon: 'none'
+							  	});
+							  });
+						  }
 						});
+						
 					}
 				});
 			},
