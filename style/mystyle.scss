@@ -282,8 +282,10 @@
 			width: 100%;
 			padding: 10upx 10upx 0upx 0upx;
 			.label {
-				line-height: 48upx;
+				float: left;
+				margin-right: 4upx;
 				font-size: 32upx;
+				width: 160upx;
 				color: #777777;
 			}
 			.info {

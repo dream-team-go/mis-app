@@ -334,7 +334,7 @@
 							title: '提交中',
 							mask: false
 						});
-						global.$http.post('/meeting/record/cancelMyRecord', {
+						global.$http.post('/meeting/record/cancelRecord', {
 							params: {
 								record_id: this.record.id
 							},

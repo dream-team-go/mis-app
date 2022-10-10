@@ -9,7 +9,7 @@
 				<text class="label">联系电话</text>
 				<text class="info">{{record.tel}}</text>
 			</view>
-			<view class="info-box">
+			<view class="reason-box">
 				<text class="label">遗失地点</text>
 				<text class="info">{{record.lost_place}}</text>
 			</view>
@@ -40,6 +40,7 @@
 		}
 	}
 </script>
+
 
 <style lang="scss" scoped>
 	@import "style/mystyle.scss";

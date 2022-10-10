@@ -6,7 +6,7 @@
 			<block slot="right"><view @tap="toAdd">新增</view></block>
 		</cu-custom>
 		
-		<view class="cu-bar bg-white search fixed" :style="[{top:CustomBar + 'px'}]">
+		<view class="cu-bar bg-white search fixed"  style="min-height: 50px;height: 50px;" :style="[{top:CustomBar + 'px'}]">
 			<view class="search-form round">
 				<text class="cuIcon-search"></text>
 				<input type="text" placeholder="请输入搜索关键字" @input="onKeyInput" confirm-type="search"></input>
@@ -15,14 +15,13 @@
 				<button class="cu-btn bg-linear-blue shadow-blur round" @tap="search()">搜索</button>
 			</view>
 		</view>
-		
-		<scroll-view scroll-x class="bg-white nav text-center fixed" style="margin-top: 248upx;">
-			<view class="cu-item text-sm text-black" style="margin: 0upx;" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length"
-			 :key="index" @tap="recordStatusTab(index)">
-				{{Array.from(StatusEnumMap.values())[index]}}
-			</view>
-		</scroll-view>
-		<view style="margin-top: 196upx;">
+			<scroll-view scroll-x class="bg-white nav text-center fixed" :style="[{top: (CustomBar + 50) + 'px'}]">
+				<view class="cu-item text-sm text-black" style="margin: 0upx;" :class="index==TabCur?'text-white cur':''" v-for="(item,index) in Array.from(StatusEnumMap.keys()).length"
+				 :key="index" @tap="recordStatusTab(index)">
+					{{Array.from(StatusEnumMap.values())[index]}}
+				</view>
+			</scroll-view>
+		<view style="margin-top: 194upx;">
 			<view v-for="record in records" :key="record.id" @click="recordDetail(record)">
 				<lost-item :record="record"></lost-item>
 			</view>

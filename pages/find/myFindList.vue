@@ -12,7 +12,7 @@
 				{{Array.from(StatusEnumMap.values())[index]}}
 			</view>
 		</scroll-view>
-		<view style="margin-top: 100upx;">
+		<view class="dashed-right" style="margin-top: 100upx;">
 			<view v-for="record in records" :key="record.id" @click="recordDetail(record)">
 				<find-item :record="record"></find-item>
 			</view>
@@ -121,6 +121,7 @@
 	}
 </script>
 
-<style>
 
+<style lang="scss" scoped>
+	@import "style/mystyle.scss";
 </style>
