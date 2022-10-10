@@ -100,7 +100,7 @@
 </template>
 
 <script>
-	var fileSelect = uni.requireNativePlugin("Aq-fileSelect");
+	var AfDocument = uni.requireNativePlugin("Aq-ChooseFile");
 	var iOSFileSelect = uni.requireNativePlugin('YangChuan-YCiOSFileSelect'); 
 	import misEnum from '../../common/mis-enum.js';
 	import {
@@ -259,20 +259,29 @@
 				        }); 
 				    }}); 
 				}else{
-					fileSelect.openFile({
-						'model': "", //"media"和"folder" //不填默认media  
-						'size': '1', //选择总数量
-						'type': ['pdf','word','ppt'] //image,xls,word,ppt,pdf,mp3,mp4,zip,rar  不填默认全部
-					}, (ret) => {
-						if(ret.data.length <= 0)
-						{
+					AfDocument.openMode({
+						size: '1', //选择总数量
+						
+						isDown: true, //是否下钻（true 筛选当前目录以下的所有文件，fales 只筛选当前目录文件） 
+						types: [{
+							name: 'pdf',
+							value: ["pdf"]
+						},{
+							name: 'word',
+							value: ["doc","docx"]
+						},{
+							name: 'ppt',
+							value: ["wps"]
+						}]
+					}, (res) => {
+						if (res.code != "success") {
 							uni.showToast({
 								icon: 'none',
 								title: '未选中任何文件'
 							});
 							return;
 						}
-						var fileName = ret.data[0].name;
+						var fileName = res.res[0].name;
 						var img = this.getFileImg(fileName);
 						if (img.length <= 0) {
 							uni.showToast({
@@ -288,12 +297,12 @@
 						});
 						global.$http.upload('/oos/upload', {
 							name: 'file',
-							filePath:  'file://'+ret.data[0].path
+							filePath: 'file:///' + res.res[0].path
 						}).then(res => {
 							uni.hideLoading();
 							if (res.status === "0") {
 								this.imgList.push(img);
-								this.para.jdyj_fj_name = ret.data[0].name;
+								this.para.jdyj_fj_name = fileName;
 								this.para.jdyj_fj = res.data;
 								uni.showToast({
 									icon: 'none',
