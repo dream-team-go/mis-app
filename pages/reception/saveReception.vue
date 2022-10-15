@@ -215,7 +215,15 @@
 				    // 文件类型参数
 				    let params = { "document-types":["public.text","public.zip","public.data","com.adobe.pdf", "com.microsoft.word.doc","com.adobe.postscript", "com.microsoft.excel.xls","com.adobe.encapsulated- postscript", "com.microsoft.powerpoint.ppt","com.adobe.photoshop- image", "com.microsoft.word.rtf","com.microsoft.advanced- systems-format", "com.microsoft.advanced- stream-redirector"], "isBase64":0 } 
 				    iOSFileSelect.show(params, result => { 
+						//上传文件
+						uni.showLoading({
+							title: '上传文件中',
+							mask: false
+						});
 				        let status = parseInt(result.status); 
+						let img = this.getFileImg(result.lastName);
+						let para = this.para;
+						let imgList = this.imgList;
 				        // 状态200选取成功
 				        if(status == 200){ 
 				            let url = result.url; 
@@ -223,20 +231,15 @@
 				                if(res.statusCode == 200){ 
 				                    // filePath 可用于 uni.uploadFile 上传的路径
 				                    let filePath = res.tempFilePath; 
-									//上传文件
-									uni.showLoading({
-										title: '上传文件中',
-										mask: false
-									});
 									global.$http.upload('/oos/upload', {
 										name: 'file',
-										filePath: ret.data[0].path
+										filePath: filePath
 									}).then(res => {
 										uni.hideLoading();
 										if (res.status === "0") {
-											this.imgList.push(img);
-											this.para.jdyj_fj_name = ret.data[0].name;
-											this.para.jdyj_fj = res.data;
+											imgList.push(img);
+											para.jdyj_fj_name = result.lastName;
+											para.jdyj_fj = res.data;
 											uni.showToast({
 												icon: 'none',
 												title: '上传成功'
