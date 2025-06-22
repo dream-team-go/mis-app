@@ -162,7 +162,9 @@
 			this.userInfo.key.includes("use_car:list") || this.userInfo.key.includes("use_car:dispatch") ||
 			this.userInfo.key.includes("fix_car:list") || this.userInfo.key.includes("fix_car:zzsp") ||
 			this.userInfo.key.includes("fix_car:zrsp") || this.userInfo.key.includes("fix_car:shop") ||
-			this.userInfo.key.includes("use_car:driver") || this.userInfo.key.includes("fix_car:apply")){
+			this.userInfo.key.includes("use_car:driver") || this.userInfo.key.includes("fix_car:apply")||
+			this.userInfo.key.includes("service:manage") || this.userInfo.key.includes("lost:manage") ||
+			this.userInfo.key.includes("find:manage")){
 				this.WorkPermission = true;
 				if(!this.PageCur)
 					this.PageCur = "work";
@@ -505,7 +507,7 @@
 					}).then(res => {
 						if (res.status === "0") {
 							if(!res.data || res.data.length == 0){
-								this.mainData.informs = ["通知：开远数字机关事务上线啦！！！"];
+								this.mainData.informs = ["主办单位：开远市机关事务局"];
 							}else{
 								res.data.forEach(c=>{
 									this.mainData.informs.push(c.msg);

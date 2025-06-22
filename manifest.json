@@ -2,8 +2,8 @@
     "name" : "开远数字机关事务",
     "appid" : "__UNI__3C0082A",
     "description" : "开远数字机关事务",
-    "versionName" : "1.2",
-    "versionCode" : 120,
+    "versionName" : "1.31",
+    "versionCode" : 131,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -144,5 +144,6 @@
     "mp-toutiao" : {
         "usingComponents" : true
     },
-    "vueVersion" : "2"
+    "vueVersion" : "2",
+    "sassImplementationName" : "node-sass"
 }
