@@ -30,7 +30,7 @@
 				</view>
 			</view>
 			<view class="ads-box">
-				<swiper class="swiper" style="width: unset;height: 44upx;" indicator-dots indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#fff" circular autoplay :interval="4000" :duration="1000">
+				<swiper class="swiper" style="width: unset;height: 44upx;font-size: 30upx;" indicator-dots indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#fff" circular autoplay :interval="3000" :duration="1000">
 					<swiper-item v-for="(item, index) in mainData.informs" :key="index">
 						<view class="swiper-item">
 							{{item}}

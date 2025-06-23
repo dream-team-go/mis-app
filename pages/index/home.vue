@@ -507,7 +507,7 @@
 					}).then(res => {
 						if (res.status === "0") {
 							if(!res.data || res.data.length == 0){
-								this.mainData.informs = ["主办单位：开远市机关事务局"];
+								this.mainData.informs = ["主办单位：开远市机关事务局", "“指尖上的形式主义”投诉建议电话：0873-7231999"];
 							}else{
 								res.data.forEach(c=>{
 									this.mainData.informs.push(c.msg);
